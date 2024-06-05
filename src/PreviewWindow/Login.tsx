@@ -16,7 +16,7 @@ import { setLogIn } from '../slices/logInPage';
 import { RootState } from '../app/store';
 
 const LoginForm = () => {
-
+  var md5 = require('md5');
   const dispatch = useDispatch()
   const [displayPassword, setDisplayPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -99,7 +99,7 @@ const LoginForm = () => {
       setLoading(true);
       const request = {
         username: userName,
-        password: passWord,
+        password: md5(password),
         privilege,
       };
 
