@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
-import { Button, Card, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
-// import { Link } from "gatsby"
+import React, { useState } from 'react';
+import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { PRIVILIGES_TYPE, PrivilegeType } from '../commonConstant';
-import { showError, showSuccess } from '../components/Swal';
+import { PRIVILIGES_TYPE, PrivilegeType, THEMEEDITOR, THEMEPUBLISHER } from '../commonConstant';
+import { showError } from '../components/Swal';
 import { useDispatch, useSelector } from 'react-redux';
-import Select from "react-select"
+import Select from "react-select";
 import { getAuthorizedLogin } from '../apicalls';
 import Loader from '../Loader';
 import { HandleAPIError } from '../commonFunction';
 import { setLogIn } from '../slices/logInPage';
 import { RootState } from '../app/store';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-  var md5 = require('md5');
-  const dispatch = useDispatch()
+  const md5 = require('md5');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [displayPassword, setDisplayPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -30,70 +31,14 @@ const LoginForm = () => {
     }).required("Privilege Type is required"),
   });
 
-  // const getData = useSelector((state) => state)
   const getData = useSelector((state: RootState) => state.logIn);
 
-  // const handleSubmit = async (values: any) => {
-  //   const { username, password, previligesType } = values;
-
-  //   let userName = username.trim();
-  //   let passWord = password.trim();
-  //   let privilege = previligesType.value;
-
-  //   try {
-  //     setLoading(true);
-  //     const request = {
-  //       username: userName,
-  //       password: passWord,
-  //       privilege,
-  //     };
-
-  //     const response = await getAuthorizedLogin(request);
-  //     if (response.status === 0) {
-  //       dispatch(setLogIn(privilege, userName));
-  //     } else {
-  //       showError("Error", response?.statusMessage);
-  //     }
-  //   } catch (error) {
-  //     HandleAPIError(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  // const handleSubmit = async (values: any) => {
-  //   const { username, password, previligesType } = values;
-
-  //   let userName = username.trim();
-  //   let passWord = password.trim();
-  //   let privilege = previligesType.value;
-
-  //   try {
-  //     setLoading(true);
-  //     const request = {
-  //       username: userName,
-  //       password: passWord,
-  //       privilege,
-  //     };
-
-  //     const response = await getAuthorizedLogin(request);
-  //     if (response.status === 0) {
-  //       dispatch(setLogIn({ privilege, userName }));
-  //     } else {
-  //       showError("Error", response?.statusMessage);
-  //     }
-  //   } catch (error) {
-  //     HandleAPIError(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  
   const handleSubmit = async (values: any) => {
     const { username, password, previligesType } = values;
 
-    let userName = username.trim();
-    let passWord = password.trim();
-    let privilege = previligesType.value;
+    const userName = username.trim();
+    const passWord = password.trim();
+    const privilege = previligesType.value;
 
     try {
       setLoading(true);
@@ -106,6 +51,13 @@ const LoginForm = () => {
       const response = await getAuthorizedLogin(request);
       if (response.status === 0) {
         dispatch(setLogIn({ privilege, userName }));
+        if (privilege === THEMEEDITOR) {
+          navigate('/editor-dashboard', { replace: true });
+        } else if (privilege === THEMEPUBLISHER) {
+          navigate('/publisher-dashboard', { replace: true });
+        } else {
+          showError("Error", "Invalid privilege type");
+        }
       } else {
         showError("Error", response?.statusMessage);
       }
@@ -218,7 +170,7 @@ const LoginForm = () => {
         </Form>
       </section>
     </>
-  )
+  );
 }
 
-export default LoginForm
+export default LoginForm;

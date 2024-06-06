@@ -9,14 +9,8 @@ import Login from './PreviewWindow/Login';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './app/store';
-// import router from './routing';
+import { router } from './router';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />
-  },
-])
 
 
 const root = ReactDOM.createRoot(
