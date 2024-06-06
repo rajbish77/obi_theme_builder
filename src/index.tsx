@@ -9,19 +9,8 @@ import Login from './PreviewWindow/Login';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './app/store';
-import PublisherListing from './PreviewWindow/PublishRequest';
-// import router from './routing';
+import { router } from './router';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />
-  },
-  {
-    path: "/publish-request",
-    element: <PublisherListing />
-  }
-])
 
 
 const root = ReactDOM.createRoot(
