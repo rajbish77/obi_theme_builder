@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Button, Card, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
-// import { Link } from "gatsby"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from 'formik';
@@ -30,63 +29,8 @@ const LoginForm = () => {
     }).required("Privilege Type is required"),
   });
 
-  // const getData = useSelector((state) => state)
   const getData = useSelector((state: RootState) => state.logIn);
 
-  // const handleSubmit = async (values: any) => {
-  //   const { username, password, previligesType } = values;
-
-  //   let userName = username.trim();
-  //   let passWord = password.trim();
-  //   let privilege = previligesType.value;
-
-  //   try {
-  //     setLoading(true);
-  //     const request = {
-  //       username: userName,
-  //       password: passWord,
-  //       privilege,
-  //     };
-
-  //     const response = await getAuthorizedLogin(request);
-  //     if (response.status === 0) {
-  //       dispatch(setLogIn(privilege, userName));
-  //     } else {
-  //       showError("Error", response?.statusMessage);
-  //     }
-  //   } catch (error) {
-  //     HandleAPIError(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  // const handleSubmit = async (values: any) => {
-  //   const { username, password, previligesType } = values;
-
-  //   let userName = username.trim();
-  //   let passWord = password.trim();
-  //   let privilege = previligesType.value;
-
-  //   try {
-  //     setLoading(true);
-  //     const request = {
-  //       username: userName,
-  //       password: passWord,
-  //       privilege,
-  //     };
-
-  //     const response = await getAuthorizedLogin(request);
-  //     if (response.status === 0) {
-  //       dispatch(setLogIn({ privilege, userName }));
-  //     } else {
-  //       showError("Error", response?.statusMessage);
-  //     }
-  //   } catch (error) {
-  //     HandleAPIError(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
   
   const handleSubmit = async (values: any) => {
     const { username, password, previligesType } = values;
