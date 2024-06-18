@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react"
-import { makeStyles } from "@mui/material/styles"
+import { makeStyles, Theme } from "@mui/material/styles"
 import Layout from "../components/Layout"
 // import MainWindow from "src/components/MainWindow"
 import ThemeConfigDrawer from "../components/ThemeConfigDrawer"
@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import PublisherListing from "../PreviewWindow/Publisher/index";
 import { getEditorLoginStatus, getPublisherLoginStatus } from "../commonFunction";
 
-const useStyles: any = makeStyles(theme => ({
+const useStyles: any = makeStyles((theme: Theme) => ({
   appRoot: {
     display: "flex",
     height: "100vh",
@@ -58,7 +58,7 @@ const IndexPage = () => {
     return (
       <>
         <div className={classes.headerNavAndMain}>
-          <Header className={classes.header} />
+          <Header  />
           <div className={classes.navAndMain}>
             <main className={`${classes.main}`}>
               <PublisherListing />
@@ -75,7 +75,7 @@ const IndexPage = () => {
       <div className={classes.appRoot}>
       <ErrorBoundary>
         <div className={classes.headerNavAndMain}>
-          <Header className={classes.header} />
+          <Header />
           <div className={classes.navAndMain}>
             <main className={classes.main}>
               {/* <MainWindow /> */}
