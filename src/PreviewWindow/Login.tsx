@@ -22,7 +22,7 @@ const LoginForm = () => {
   const md5 = require('md5');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const user = useAppSelector(userName);
+  const user = useAppSelector((state) => state.logIn.userName);
   const [displayPassword, setDisplayPassword] = useState(false);
   const loading = useAppSelector((state) => state.logIn.loading);
   const getError = useAppSelector((state) => state.logIn.error);
@@ -55,11 +55,11 @@ const LoginForm = () => {
     console.log(loginData);
 
     try {
-      const response = await dispatch(login(loginData)).unwrap();
+      await dispatch(login(loginData.username)).unwrap();
       if (privilege === THEMEEDITOR) {
         // navigate('/editor-dashboard', { replace: true });
       } else if (privilege === THEMEPUBLISHER) {
-        // navigate('/publisher-dashboard', { replace: true });
+        navigate('/publisher-dashboard', { replace: true });
       } else {
         showError("Error", "Invalid privilege type");
       }
