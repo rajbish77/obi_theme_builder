@@ -12,7 +12,7 @@ const initialState = {
 };
 
 const loginWork = createSlice({
-  name: "loginWork",
+  name: "Login Auth",
   initialState,
   reducers: {
     setLogIn: (state, action) => {

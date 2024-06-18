@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
 // import { Link } from "gatsby"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -13,15 +13,21 @@ import { getAuthorizedLogin } from '../apicalls';
 import Loader from '../Loader';
 import { HandleAPIError } from '../commonFunction';
 import { setLogIn } from '../slices/logInPage';
+import { login, clearAuth, auth, userName } from "../slices/logIn-slice"
 import { RootState } from '../app/store';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 const LoginForm = () => {
   const md5 = require('md5');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const user = useAppSelector(userName);
   const [displayPassword, setDisplayPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const loading = useAppSelector((state) => state.logIn.loading);
+  const getError = useAppSelector((state) => state.logIn.error);
+
+  console.log(user)
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -32,96 +38,34 @@ const LoginForm = () => {
     }).required("Privilege Type is required"),
   });
 
-  const getData = useSelector((state: RootState) => state.logIn);
 
-  // const handleSubmit = async (values: any) => {
-  //   const { username, password, previligesType } = values;
-
-  //   let userName = username.trim();
-  //   let passWord = password.trim();
-  //   let privilege = previligesType.value;
-
-  //   try {
-  //     setLoading(true);
-  //     const request = {
-  //       username: userName,
-  //       password: passWord,
-  //       privilege,
-  //     };
-
-  //     const response = await getAuthorizedLogin(request);
-  //     if (response.status === 0) {
-  //       dispatch(setLogIn(privilege, userName));
-  //     } else {
-  //       showError("Error", response?.statusMessage);
-  //     }
-  //   } catch (error) {
-  //     HandleAPIError(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  // const handleSubmit = async (values: any) => {
-  //   const { username, password, previligesType } = values;
-
-  //   let userName = username.trim();
-  //   let passWord = password.trim();
-  //   let privilege = previligesType.value;
-
-  //   try {
-  //     setLoading(true);
-  //     const request = {
-  //       username: userName,
-  //       password: passWord,
-  //       privilege,
-  //     };
-
-  //     const response = await getAuthorizedLogin(request);
-  //     if (response.status === 0) {
-  //       dispatch(setLogIn({ privilege, userName }));
-  //     } else {
-  //       showError("Error", response?.statusMessage);
-  //     }
-  //   } catch (error) {
-  //     HandleAPIError(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  
   const handleSubmit = async (values: any) => {
     const { username, password, previligesType } = values;
 
     const userName = username.trim();
     const passWord = password.trim();
-    const privilege = previligesType.value;
+    const privilege = previligesType?.value;
+
+    const loginData = {
+      username: userName,
+      password: md5(passWord),
+      privilege,
+    };
+
+    console.log(loginData);
 
     try {
-      setLoading(true);
-      const request = {
-        username: userName,
-        password: md5(password),
-        privilege,
-      };
-
-      const response = await getAuthorizedLogin(request);
-      if (response.status === 0) {
-        dispatch(setLogIn({ privilege, userName }));
-        if (privilege === THEMEEDITOR) {
-          navigate('/editor-dashboard', { replace: true });
-        } else if (privilege === THEMEPUBLISHER) {
-          navigate('/publisher-dashboard', { replace: true });
-        } else {
-          showError("Error", "Invalid privilege type");
-        }
+      const response = await dispatch(login(loginData)).unwrap();
+      if (privilege === THEMEEDITOR) {
+        // navigate('/editor-dashboard', { replace: true });
+      } else if (privilege === THEMEPUBLISHER) {
+        // navigate('/publisher-dashboard', { replace: true });
       } else {
-        showError("Error", response?.statusMessage);
+        showError("Error", "Invalid privilege type");
       }
     } catch (error) {
-      HandleAPIError(error);
-    } finally {
-      setLoading(false);
-    }
+      showError("Error:", "error");
+    };
   };
 
   const formik = useFormik({

@@ -6,7 +6,7 @@ export async function getaffiliates(data: any) {
     username: VIPER_CONST.alwaysOnUsername,
     sessionid: VIPER_CONST.alwaysOnSessionid,
     failstatus: 0,
-    request: data,
+    request: "data",
   };
 
   console.log(`Request For ${VIPER_CONST.base_url}getaffiliates`, body);
