@@ -82,30 +82,30 @@ export async function getPublishRequests() {
   }
 }
 
-export async function getAuthorizedLogin(data: LoginRequest) {
-  let body = {
-    username: VIPER_CONST.alwaysOnUsername,
-    sessionid: VIPER_CONST.alwaysOnSessionid,
-    failstatus: 0,
-    request: data,
-  };
+// export async function getAuthorizedLogin(data: LoginRequest) {
+//   let body = {
+//     username: VIPER_CONST.alwaysOnUsername,
+//     sessionid: VIPER_CONST.alwaysOnSessionid,
+//     failstatus: 0,
+//     request: data,
+//   };
 
-  console.log(`Request For ${VIPER_CONST.base_url}getauthorizedlogin`, body);
+//   console.log(`Request For ${VIPER_CONST.base_url}getauthorizedlogin`, body);
 
-  try {
-    const response = fetch(`${VIPER_CONST.base_url}getauthorizedlogin`, {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
+//   try {
+//     const response = fetch(`${VIPER_CONST.base_url}getauthorizedlogin`, {
+//       method: "POST",
+//       body: JSON.stringify(body),
+//     });
 
-    const responseData = (await response).json();
-    console.log(
-      `Response For ${VIPER_CONST.base_url}getauthorizedlogin`,
-      await responseData
-    );
+//     const responseData = (await response).json();
+//     console.log(
+//       `Response For ${VIPER_CONST.base_url}getauthorizedlogin`,
+//       await responseData
+//     );
 
-    return responseData;
-  } catch (error) {
-    return error;
-  }
-}
+//     return responseData;
+//   } catch (error) {
+//     return error;
+//   }
+// }

@@ -29,11 +29,14 @@ const login = createAsyncThunk(
         statusMessage: string;
         data: Auth;
       }>("getauthorizedlogin", data);
+
       if (response.status !== 0) {
         throw new Error(response.statusMessage);
       }
+
       return response.data;
     } catch (error: any) {
+      console.error("Login failed:", error);
       return thunkApi.rejectWithValue(error.message);
     }
   }

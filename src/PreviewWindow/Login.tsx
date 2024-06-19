@@ -9,7 +9,7 @@ import { PRIVILIGES_TYPE, PrivilegeType, THEMEEDITOR, THEMEPUBLISHER } from '../
 import { showError } from '../components/Swal';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from "react-select";
-import { getAuthorizedLogin } from '../apicalls';
+// import { getAuthorizedLogin } from '../apicalls';
 import Loader from '../Loader';
 import { HandleAPIError } from '../commonFunction';
 import { setLogIn } from '../slices/logInPage';
@@ -57,7 +57,7 @@ const LoginForm = () => {
     try {
       await dispatch(login(loginData.username)).unwrap();
       if (privilege === THEMEEDITOR) {
-        // navigate('/editor-dashboard', { replace: true });
+        navigate('/editor-dashboard', { replace: true });
       } else if (privilege === THEMEPUBLISHER) {
         navigate('/publisher-dashboard', { replace: true });
       } else {
