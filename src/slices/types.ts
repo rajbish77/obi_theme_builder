@@ -62,6 +62,7 @@ export type Auth = {
   userName: string;
   loading: boolean;
   error: string | null;
+  privilege: string
 };
 
 export type SavedTheme = {

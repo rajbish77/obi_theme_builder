@@ -1,24 +1,24 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { AppError } from "../errors/app-errors";
 import { store } from "../app/store";
 import { VIPER_CONST, VIPER_URL } from "../commonConstant";
 import { router } from "../router";
-import { parseISO } from "date-fns";
+import { showError } from "../components/Swal";
 
 const appAxios = axios.create({
   baseURL: VIPER_URL,
 });
 
-// appAxios.interceptors.request.use((conf) => {
-//   const user = store.getState().logIn; // Access the entire logIn state
-//   if (user.auth) {
-//     conf.headers = {
-//       ...conf.headers,
-//       Authorization: `Bearer ${user.tokens?.accessTokens}`, // Corrected access to tokens
-//     } as any;
-//   }
-//   return conf;
-// });
+appAxios.interceptors.request.use((conf) => {
+  const user = store.getState().logIn; // Access the entire logIn state
+  if (user.auth) {
+    conf.headers = {
+      ...conf.headers,
+      // Authorization: `Bearer ${logIn}`,
+    } as any;
+  }
+  return conf;
+});
 appAxios.interceptors.response.use(
   (resp) => {
     if (resp.status === 401) {
@@ -42,58 +42,23 @@ appAxios.interceptors.response.use(
   }
 );
 
-export const _post = async <T>(url: string, data: any) => {
-  let body = {
-    username: VIPER_CONST.alwaysOnUsername,
-    sessionid: VIPER_CONST.alwaysOnSessionid,
-    failstatus: 0,
-    request: data,
-  };
-
-  console.log(`Request For ${VIPER_CONST.base_url}getauthorizedlogin`, body);
-
+export const _post = async <T>(api: string, data: any, headers: any = null) => {
   try {
-    const response = fetch(`${VIPER_CONST.base_url}getauthorizedlogin`, {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
-
-    const responseData = (await response).json();
-    console.log(
-      `Response For ${VIPER_CONST.base_url}getauthorizedlogin`,
-      await responseData
-    );
-
-    return responseData;
+    let response: AxiosResponse<T, any>;
+    if (headers) {
+      response = await appAxios.post<T>(api, data, {
+        headers,
+      });
+    } else {
+      response = await appAxios.post<T>(api, data);
+    }
+    if (response.status === 200 || response.status === 201) {
+      return response.data;
+    } else {
+      throw new AppError(response.status, response.statusText, response.data);
+    }
   } catch (error) {
-    console.log(error);
-  }
-};
-
-export const _get = async <T>(api: string, data: any) => {
-  let body = {
-    username: VIPER_CONST.alwaysOnUsername,
-    sessionid: VIPER_CONST.alwaysOnSessionid,
-    failstatus: 0,
-    request: {},
-  };
-
-  console.log(`Request For ${VIPER_CONST.base_url}getpublishrequests`, body);
-  try {
-    const response = fetch(`${VIPER_CONST.base_url}getpublishrequests`, {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
-
-    const responseData = (await response).json();
-    console.log(
-      `Response For ${VIPER_CONST.base_url}getpublishrequests`,
-      await responseData
-    );
-
-    return responseData;
-  } catch (error) {
-    return error;
+    console.error(error);
   }
 };
 

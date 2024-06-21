@@ -1,4 +1,4 @@
-import {  Auth } from "../slices/types";
+import { Auth } from "../slices/types";
 import * as BaseApi from "./base-api";
 
 class AuthApiService {
@@ -6,22 +6,22 @@ class AuthApiService {
 
   /**
    * Login user
-   * @param userEmail
+   * @param auth
    * @param password
    * @param themeOption
    * @param userName
    * @returns Token
    */
   public async login(
-    userEmail: string,
+    auth: boolean,
     password: string,
-    themeOption: string,
+    // themeOption: string,
     userName: string
   ): Promise<Auth> {
     return BaseApi._post(this.url("signin"), {
-      userEmail,
+      auth,
       password,
-      themeOption,
+      // themeOption,
       userName,
     });
   }

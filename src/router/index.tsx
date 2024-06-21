@@ -22,12 +22,12 @@ export const router = createBrowserRouter([
             path: "/publisher-dashboard",
             element: <PublisherListing />,
           },
+          // {
+          //   path: "/publisher-dashboard",
+          //   element: <PublisherListing />,
+          // },
         ],
       },
-      // {
-      //   path: "/login",
-      //   element: <LoginForm />,
-      // },
     ],
   },
 ]);

@@ -1,19 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from "react"
-import { makeStyles } from "@mui/material/styles"
-import Layout from "../components/Layout"
-// import MainWindow from "src/components/MainWindow"
-import ThemeConfigDrawer from "../components/ThemeConfigDrawer"
-import ErrorBoundary from "../components/ErrorBoundary"
+import React, { useEffect } from "react";
+import { makeStyles, Theme } from "@mui/material/styles";
+import Layout from "../components/Layout";
+import ErrorBoundary from "../components/ErrorBoundary";
 import Header from "../components/Header";
 import LoginForm from "../PreviewWindow/Login";
+import { useSelector, useDispatch } from "react-redux";
+import PublisherListing from "../PreviewWindow/Publisher";
+// import EditorDashboard from "../PreviewWindow/EditorDashboard"; // Assuming you have this component
 import { AuthState } from "../slices/types";
-import { useSelector } from "react-redux";
-import { useDispatch } from 'react-redux';
-import PublisherListing from "../PreviewWindow/Publisher/index";
 import { getEditorLoginStatus, getPublisherLoginStatus } from "../commonFunction";
 
-const useStyles: any = makeStyles(theme => ({
+const useStyles: any = makeStyles((theme: Theme) => ({
   appRoot: {
     display: "flex",
     height: "100vh",
@@ -37,68 +35,58 @@ const useStyles: any = makeStyles(theme => ({
     flexDirection: "column",
   },
   header: {
-    // backgroundColor: "#000000",
     [theme.breakpoints.up("md")]: {
       position: "static",
     },
   },
-}))
+}));
 
 const IndexPage = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   const auth = useSelector((state: AuthState) => state.auth);
   const dispatch = useDispatch();
 
-  console.log(auth)
+  useEffect(() => {}, [dispatch]);
 
-   useEffect(() => {
-    }, [dispatch])
+  const Publisher = () => (
+    <div className={classes.headerNavAndMain}>
+      <Header />
+      <div className={classes.navAndMain}>
+        <main className={`${classes.main}`}>
+          <PublisherListing />
+        </main>
+      </div>
+      <div className="footer-class"></div>
+    </div>
+  );
 
-  const Publisher = () => {
-    return (
-      <>
-        <div className={classes.headerNavAndMain}>
-          <Header className={classes.header} />
-          <div className={classes.navAndMain}>
-            <main className={`${classes.main}`}>
-              <PublisherListing />
-            </main>
-          </div>
-          <div className="footer-class"></div>
-        </div>
-      </>
-    );
-  }
-
-  const Editor = () => {
-    return (
-      <div className={classes.appRoot}>
+  const Editor = () => (
+    <div className={classes.appRoot}>
       <ErrorBoundary>
         <div className={classes.headerNavAndMain}>
-          <Header className={classes.header} />
+          <Header />
           <div className={classes.navAndMain}>
             <main className={classes.main}>
-              {/* <MainWindow /> */}
+              {/* <EditorDashboard />  */}
             </main>
           </div>
         </div>
-        <ThemeConfigDrawer />
       </ErrorBoundary>
     </div>
-    );
-  }
+  );
 
   return (
     <>
-      {(auth.auth === true) ?
-        (<Layout>
-          {getPublisherLoginStatus(auth) && Publisher()}
-          {getEditorLoginStatus(auth) && Editor()}
-        </Layout>)
-        : <LoginForm />
-      }
+      {auth.auth ? (
+        <Layout>
+          {getPublisherLoginStatus(auth) && <Publisher />}
+          {getEditorLoginStatus(auth) && <Editor />}
+        </Layout>
+      ) : (
+        <LoginForm />
+      )}
     </>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;

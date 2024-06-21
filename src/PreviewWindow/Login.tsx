@@ -13,7 +13,7 @@ import { getAuthorizedLogin } from '../apicalls';
 import Loader from '../Loader';
 import { HandleAPIError } from '../commonFunction';
 import { setLogIn } from '../slices/logInPage';
-import { login, clearAuth, auth, userName } from "../slices/logIn-slice"
+import { login, clearAuth, auth, userName, publisher, editor } from "../slices/logIn-slice"
 import { RootState } from '../app/store';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from "../app/hooks";
@@ -22,12 +22,11 @@ const LoginForm = () => {
   const md5 = require('md5');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const user = useAppSelector(userName);
+  const authData = useAppSelector(auth);
   const [displayPassword, setDisplayPassword] = useState(false);
   const loading = useAppSelector((state) => state.logIn.loading);
-  const getError = useAppSelector((state) => state.logIn.error);
-
-  console.log(user)
+  const publisherData = useAppSelector(publisher);
+  const editorData = useAppSelector(editor);
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -38,34 +37,38 @@ const LoginForm = () => {
     }).required("Privilege Type is required"),
   });
 
-
   const handleSubmit = async (values: any) => {
     const { username, password, previligesType } = values;
 
-    const userName = username.trim();
-    const passWord = password.trim();
-    const privilege = previligesType?.value;
-
-    const loginData = {
-      username: userName,
-      password: md5(passWord),
-      privilege,
-    };
-
-    console.log(loginData);
+    let userName = username.trim();
+    let passWord = password.trim();
+    let privilege = previligesType.value;
 
     try {
-      const response = await dispatch(login(loginData)).unwrap();
-      if (privilege === THEMEEDITOR) {
-        // navigate('/editor-dashboard', { replace: true });
-      } else if (privilege === THEMEPUBLISHER) {
-        // navigate('/publisher-dashboard', { replace: true });
+      const request = {
+        username: userName,
+        password: md5(passWord),
+        privilege,
+      };
+
+      const response = await getAuthorizedLogin(request);
+      if (response.status === 2) {
+        dispatch(login(userName));
+        dispatch(login(privilege));
       } else {
-        showError("Error", "Invalid privilege type");
+        showError("Error", response?.statusMessage);
+      };
+      
+      if (publisherData === "Y") {
+        navigate('/publisher-dashboard', { replace: true });
+      } else if (editorData === "Y") {
+        navigate('/editor-dashboard', { replace: true });
+      } else {
+        navigate('/');
       }
     } catch (error) {
-      showError("Error:", "error");
-    };
+      HandleAPIError(error);
+    }
   };
 
   const formik = useFormik({

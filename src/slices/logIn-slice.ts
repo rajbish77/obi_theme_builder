@@ -15,6 +15,7 @@ const initialState: Auth = {
   userName: "",
   loading: false,
   error: null,
+  privilege: "",
 };
 
 const login = createAsyncThunk(
@@ -29,6 +30,13 @@ const login = createAsyncThunk(
         statusMessage: string;
         data: Auth;
       }>("getauthorizedlogin", data);
+
+      if (!response) {
+        throw new Error("No response from API");
+      }
+
+      console.log('Login response:', response);
+      
       if (response.status !== 0) {
         throw new Error(response.statusMessage);
       }
@@ -38,14 +46,6 @@ const login = createAsyncThunk(
     }
   }
 );
-
-const fetchUser = createAsyncThunk("auth/fetchUser", async (_, thunkApi) => {
-  try {
-    return thunkApi.fulfillWithValue(await UserApi.getCurrent());
-  } catch (error) {
-    return thunkApi.rejectWithValue(error);
-  }
-});
 
 const loginSlice = createSlice({
   name: "Login auth",
@@ -58,35 +58,21 @@ const loginSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       state.loading = false;
       state.auth = true;
-      state.editor = action.payload.editor;
-      state.publisher = action.payload.publisher;
+      state.editor = action.payload.privilege === "THEMEEDITOR" ? "Y" : "N";
+      state.publisher = action.payload.privilege === "THEMEPUBLISHER" ? "Y" : "N";
       state.userName = action.payload.userName;
     });
     builder.addCase(login.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload as string;
     });
-
-    // builder.addCase(fetchUser.pending, (state, action) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(fetchUser.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.auth = action.payload.auth;
-    //   state.editor = action.payload.editor;
-    //   state.publisher = action.payload.publisher;
-    //   state.userName = action.payload.userName;
-    // });
-    // builder.addCase(fetchUser.rejected, (state, action) => {
-    //   state.loading = false;
-    // });
   },
   reducers: {
     clearAuth: (state) => initialState,
   },
 });
 
-export { login, fetchUser };
+export { login };
 
 export const auth = (state: RootState) => state.logIn.auth;
 export const userName = (state: RootState) => state.logIn.userName;
