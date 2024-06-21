@@ -1,7 +1,7 @@
 import React from "react"
 import Drawer from "@mui/material/Drawer"
 import Grid from "@mui/material/Grid"
-import { makeStyles, useTheme } from "@mui/material/styles"
+import { ThemeOptions, makeStyles, useTheme } from "@mui/material/styles"
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector, useDispatch } from "react-redux"
 import { AuthState } from "../slices/types"
@@ -43,7 +43,7 @@ const ThemeConfigDrawer = () => {
   const open = useSelector((state: AuthState) => state.themeConfigOpen)
   const dispatch = useDispatch()
 
-  const theme = useTheme()
+  const theme = useTheme<ThemeOptions>()
   const permanent = useMediaQuery(theme.breakpoints.up("sm"))
 
   return (

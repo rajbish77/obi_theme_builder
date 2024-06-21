@@ -32,7 +32,7 @@ const useStyles:any = makeStyles((theme: Theme) =>
  * The base TextField input for selecting colors.
  * onClick opens a popover with components to help pick colors
  */
-export default function ColorInput({ label, color, onColorChange }) {
+export default function ColorInput({ label, color, onColorChange }:any) {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<Element | null>(null)
 
@@ -107,13 +107,13 @@ export default function ColorInput({ label, color, onColorChange }) {
  * Creates the ChromePicker and MaterialColorPicker and
  * handles/formats events from ChromePicker
  */
-function ColorPicker({ color, onChangeComplete }) {
+function ColorPicker({ color, onChangeComplete }:any) {
   const [inputValue, setInputValue] = React.useState<string | null>("#fff")
   useEffect(() => {
     setInputValue(color)
   }, [color])
 
-  const handleChange = (colorObject, event) => {
+  const handleChange = (colorObject:any, event:any) => {
     if (colorObject.rgb.a === 1) {
       setInputValue(colorObject.hex)
       return colorObject.hex
@@ -124,9 +124,9 @@ function ColorPicker({ color, onChangeComplete }) {
     }
   }
 
-  const handleChangeComplete = (colorObject, event) => {
+  const handleChangeComplete = (colorObject:any, event:any) => {
     const colorString = handleChange(colorObject, event)
-    onChangeComplete(colorString)
+    onChangeComplete(colorString || undefined)
   }
 
   return (
@@ -135,8 +135,7 @@ function ColorPicker({ color, onChangeComplete }) {
         color={inputValue}
         onChangeComplete={onChangeComplete}
       />
-      <ChromePicker
-        color={inputValue}
+      <ChromePicker color={inputValue ?? "#fff"}
         onChange={handleChange}
         onChangeComplete={handleChangeComplete}
       />

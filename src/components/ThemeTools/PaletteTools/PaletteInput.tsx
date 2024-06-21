@@ -7,13 +7,13 @@ import {
 } from "@mui/material"
 import { useThemeValueInfo } from "../../../state/selectors"
 
-export default function PaletteInput({ label, path }) {
+export default function PaletteInput({ label, path }:any) {
 
   const themeValueInfo = useThemeValueInfo(path)
   const dispatch = useDispatch()
 
   const handleColorChange = useCallback(
-    color => dispatch(setThemeOption(path, color)),
+    (color: any) => dispatch(setThemeOption({ path, value: color })),
     [dispatch]
   )
 

@@ -84,7 +84,7 @@ const useStyles:any = makeStyles((theme: any) =>
   })
 )
 
-export default function MaterialColorPicker({ color, onChangeComplete }) {
+export default function MaterialColorPicker({ color, onChangeComplete }:any) {
   const [hue, setHue] = React.useState("red")
   const [shade, setShade] = React.useState<string | null>(null)
   const classes = useStyles()

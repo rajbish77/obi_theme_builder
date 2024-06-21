@@ -68,9 +68,9 @@ const useStyles:any = makeStyles((theme: Theme) =>
   })
 )
 
-function ThemeThumbnail({ themeOptions, large = false }) {
+function ThemeThumbnail({ themeOptions, large = false }:any) {
   const classes = useStyles()
-  const [themeObject, setThemeObject] = useState({})
+  const [themeObject, setThemeObject] = useState<Theme>()
 
   useEffect(() => setThemeObject(createTheme(themeOptions)), [themeOptions])
 

@@ -111,7 +111,7 @@ export const useSaveKey = (editorRef: EditorRefType, onSave: Function) => {
     const actionBinding = editorRef.current?.addAction({
       id: "save-editor-contents",
       label: "Save Editor Theme Contents",
-      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
       contextMenuGroupId: "navigation",
       contextMenuOrder: 1,
       run: () => onSave(),
