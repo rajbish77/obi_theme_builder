@@ -58,7 +58,7 @@ const LoginForm = () => {
       } else {
         showError("Error", response?.statusMessage);
       };
-      
+
       if (publisherData === "Y") {
         navigate('/publisher-dashboard', { replace: true });
       } else if (editorData === "Y") {

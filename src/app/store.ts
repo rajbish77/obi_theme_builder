@@ -3,11 +3,14 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import loginSlice from "../slices/logIn-slice";
 import authSlice from "../slices/authSlice";
+import editorSlice from "../slices/editor/editorSlice";
+
 
 
 const rootReducter = combineReducers({
   logIn: loginSlice,
   auth: authSlice,
+  editor: editorSlice,
 });
 
 const persistConfig = {
