@@ -3,10 +3,10 @@ import * as monaco from "monaco-editor"
 import { EditorRefType } from "../types"
 // custom theme config
 import { useDispatch, useSelector } from "react-redux"
-import { updateEditorState } from "src/state/editor/actions"
-import { saveEditorToTheme } from "src/state/editor/actions"
-import { RootState } from "src/state/types"
-import { verbose } from "src/utils"
+import { updateEditorState } from "../../../slices/editor/editorSlice"
+import { saveEditorToTheme } from "../../../slices/editor/editorSlice"
+import { RootState } from "../../../slices/types"
+import { verbose } from "../../../utils"
 
 /**
  * Transpile the editor and return any semantic or syntactic
@@ -111,7 +111,7 @@ export const useSaveKey = (editorRef: EditorRefType, onSave: Function) => {
     const actionBinding = editorRef.current?.addAction({
       id: "save-editor-contents",
       label: "Save Editor Theme Contents",
-      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
       contextMenuGroupId: "navigation",
       contextMenuOrder: 1,
       run: () => onSave(),

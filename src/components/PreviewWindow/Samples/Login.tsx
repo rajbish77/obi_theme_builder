@@ -5,18 +5,18 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { PRIVILIGES_TYPE, PrivilegeType, THEMEEDITOR, THEMEPUBLISHER } from '../commonConstant';
-import { showError } from '../components/Swal';
+import { PRIVILIGES_TYPE, PrivilegeType, THEMEEDITOR, THEMEPUBLISHER } from '../../../commonConstant';
+import { showError } from '../../Swal';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from "react-select";
 // import { getAuthorizedLogin } from '../apicalls';
-import Loader from '../Loader';
-import { HandleAPIError } from '../commonFunction';
-import { setLogIn } from '../slices/logInPage';
-import { login, clearAuth, auth, userName } from "../slices/logIn-slice"
-import { RootState } from '../app/store';
+import Loader from '../../../Loader';
+import { HandleAPIError } from '../../../commonFunction';
+import { setLogIn } from '../../../slices/logInPage';
+import { login, clearAuth, auth, userName } from "../../../slices/logIn-slice"
+import { RootState } from '../../../app/store';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 const LoginForm = () => {
   const md5 = require('md5');

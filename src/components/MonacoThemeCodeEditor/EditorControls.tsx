@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "src/state/types";
+import { RootState } from "../../slices/types";
 import { Button } from "react-bootstrap";
-import { updateTheme } from "src/apicalls";
-import Loader from "src/components/PreviewWindow/Samples/Loader";
-import { editorThemeState, loadSavedTheme, updateTheme as updateThemeAction } from "../../slices/editor/editorSlice";
-import { defaultThemeOptions } from "../../slices/editor/editorSlice";
+import { updateTheme } from "../../apicalls";
+// import Loader from "src/components/PreviewWindow/Samples/Loader";
 import { myMessageFunction, showConfirm, showError, showSuccess } from "../Swal";
-import { HandleAPIError } from "src/commonFunction";
-import { UpdateTheme } from "src/types";
+import { HandleAPIError } from "../../commonFunction";
+import { UpdateTheme } from "../../types";
+import { defaultThemeOptions } from "../../siteTheme";
+import { editorThemeState, loadSavedTheme } from "../../state/themeSlice";
+import Loader from "../PreviewWindow/Samples/Loader";
 
 function EditorControls() {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const id = useSelector((state: RootState) => state.editor.id);
+  const id = useSelector((state: RootState) => state.id);
   const auth = useSelector((state: RootState) => state.auth);
-  const editorThemeState = useSelector((state: RootState) => state.editor);
+  const editorState = useSelector((state: RootState) => state.editorThemeState);
   const affiliateTheme = useSelector((state: RootState) => state.editor.themeInput); // Assuming this should be `state.editor.affiliateTheme`
   const themeOptions = useSelector((state: RootState) => state.editor.themeInput); // Assuming this should be `state.editor.themeOptions`
 
@@ -24,7 +25,7 @@ function EditorControls() {
       setLoading(true);
       const response = await updateTheme(request);
       if (response?.status === 0) {
-        dispatch(editorThemeState());
+        dispatch(editorThemeState(true));
         if (request.action === "PR") {
           showSuccess("Success", "Raise publish request successfully");
         } else {
@@ -69,7 +70,7 @@ function EditorControls() {
         showSuccess("Success", "Theme reset successfully");
       }
     } catch (error) {
-      showError("Error", error.message);
+      HandleAPIError(error);
     } finally {
       setLoading(false);
     }
@@ -79,19 +80,19 @@ function EditorControls() {
     try {
       let confirmed = await showConfirm("Confirm", "Are you sure you want to discard the changes?");
       if (confirmed.isConfirmed) {
-        dispatch(editorThemeState()); // Dispatch action from `editorSlice`
-        dispatch(loadSavedTheme(affiliateTheme)); // Dispatch action from `editorSlice`
+        dispatch(editorThemeState(true)); // Dispatch action from `editorSlice`
+        dispatch(loadSavedTheme(defaultThemeOptions)); // Dispatch action from `editorSlice`
         showSuccess("Success", "Changes discarded successfully");
       }
     } catch (error) {
-      showError("Error", error.message);
+      HandleAPIError(error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleDiscardAndresetChange = async () => {
-    if (editorThemeState) {
+    if (editorState) {
       discardChanges();
     } else {
       resetTheme();
@@ -132,7 +133,7 @@ function EditorControls() {
                 onClick={handleDiscardAndresetChange}
                 size="sm"
               >
-                {editorThemeState ? "Discard Changes" : "Reset Theme"}
+                {editorState ? "Discard Changes" : "Reset Theme"}
               </Button>
             </div>
           </>

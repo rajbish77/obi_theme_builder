@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 import * as monaco from "monaco-editor"
-import { files as muiTypeFiles } from "src/muiTypeStrings"
+import { files as muiTypeFiles } from "../../../muiTypeStrings"
 import { EditorRefType, MutableEditorRefType } from "../types"
 // custom theme config
-import monokai from "src/components/MonacoThemeCodeEditor/monaco-themes/monokai"
+import monokai from "../../../components/MonacoThemeCodeEditor/monaco-themes/monokai"
 import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
+import { RootState } from "../../../slices/types"
 
 const editorOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
   language: "typescript",

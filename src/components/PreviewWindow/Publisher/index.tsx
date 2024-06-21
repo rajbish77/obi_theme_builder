@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 // import DataTable, { TableColumn } from 'react-data-table-component';
 import { Button, Card, CardBody, Col, Container, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
-import { showConfirm, showError, showReject, showSuccess } from '../../components/Swal';
-import { getPublishRequests, updateTheme } from '../../apicalls';
-import { HandleAPIError } from '../../commonFunction';
-import Loader from '../../Loader';
-import { PREVIEW_URL } from '../../commonConstant';
+import { showConfirm, showError, showReject, showSuccess } from '../../Swal';
+import { getPublishRequests, updateTheme } from '../../../apicalls';
+import { HandleAPIError } from '../../../commonFunction';
+import Loader from '../../../Loader';
+import { PREVIEW_URL } from '../../../commonConstant';
 import { createColumnHelper } from '@tanstack/react-table';
-import { CustomTable } from '../../components/CommonComponent/Table';
+import { CustomTable } from '../../CommonComponent/Table';
 
 interface DataRow {
   affiliateid: number;

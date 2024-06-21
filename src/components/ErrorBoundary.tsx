@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography"
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/material/styles';
 import { useDispatch } from "react-redux"
-import { resetSiteData } from "../state/action"
+import { resetSiteData } from "../state/themeSlice"
 
 const useStyles: any = makeStyles({
   errorRoot: {

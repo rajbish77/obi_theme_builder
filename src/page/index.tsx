@@ -1,19 +1,19 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react"
-import { makeStyles, Theme } from "@mui/material/styles"
+import { makeStyles, Theme, ThemeOptions } from "@mui/material/styles"
 import Layout from "../components/Layout"
 // import MainWindow from "src/components/MainWindow"
 import ThemeConfigDrawer from "../components/ThemeConfigDrawer"
 import ErrorBoundary from "../components/ErrorBoundary"
 import Header from "../components/Header";
-import LoginForm from "../PreviewWindow/Login";
+import LoginForm from "../components/PreviewWindow/Samples/Login";
 import { AuthState } from "../slices/types";
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
-import PublisherListing from "../PreviewWindow/Publisher/index";
+import PublisherListing from "../components/PreviewWindow/Publisher/index";
 import { getEditorLoginStatus, getPublisherLoginStatus } from "../commonFunction";
 
-const useStyles: any = makeStyles((theme: Theme) => ({
+const useStyles: any = makeStyles((theme: ThemeOptions) => ({
   appRoot: {
     display: "flex",
     height: "100vh",

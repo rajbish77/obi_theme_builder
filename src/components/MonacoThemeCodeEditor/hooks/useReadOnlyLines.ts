@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import * as monaco from "monaco-editor"
 import { EditorRefType } from "../types"
-import { verbose } from "src/utils"
+import { verbose } from "../../../utils"
 
 // number of lines from the top and bottom of the
 // code in the editor that should be considered read only
@@ -48,9 +48,9 @@ export default function useReadOnlyLines(editorRef: EditorRefType) {
           monaco.KeyCode.PageDown,
         ]
         const eventIsPaste =
-          event.ctrlKey && event.keyCode === monaco.KeyCode.KEY_V
+          event.ctrlKey && event.keyCode === monaco.KeyCode.KeyV
         const eventIsCut =
-          event.ctrlKey && event.keyCode === monaco.KeyCode.KEY_X
+          event.ctrlKey && event.keyCode === monaco.KeyCode.KeyX
 
         if (
           eventIsPaste ||

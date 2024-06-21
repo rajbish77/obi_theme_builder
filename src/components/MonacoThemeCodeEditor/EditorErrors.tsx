@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
+import { RootState } from "../../slices/types"
 import clsx from "clsx"
+import * as monaco from "monaco-editor"
 import {
   Snackbar,
   IconButton,
@@ -10,12 +11,13 @@ import {
   createStyles,
   Collapse,
   Divider,
-} from "@material-ui/core"
-import Alert from "@material-ui/lab/Alert"
-import CloseIcon from "@material-ui/icons/Close"
-import ExpandLessIcon from "@material-ui/icons/ExpandLess"
+} from "@mui/material"
+import Alert from "@mui/material/Alert"
+import CloseIcon from '@mui/icons-material/Close';
+import ExpandLessIcon from "@mui/icons-material/ExpandLess"
+import { languages } from "monaco-editor"
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles:any = makeStyles((theme: any) =>
   createStyles({
     root: {
       position: "absolute",
@@ -54,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-const EditorErrors = ({ editorRef }) => {
+const EditorErrors: React.FC<{ editorRef: React.RefObject<monaco.editor.IStandaloneCodeEditor> }> = ({ editorRef }) => {
   const classes = useStyles()
   const errors = useSelector((state: RootState) => state.editor.errors)
   const [open, setOpen] = useState(true)
@@ -77,11 +79,11 @@ const EditorErrors = ({ editorRef }) => {
     }
   }, [errors])
 
-  const getErrorString = error => {
+  const getErrorString = (error : any) => {
     if (!error.start) {
       return error.messageText
     }
-    const pos = model?.getPositionAt(error.start)
+    const pos:any = model?.getPositionAt(error.start)
     return `Line ${pos.lineNumber}:${pos.column}. ${
       error.messageText.messageText ?? error.messageText
     }`
@@ -101,7 +103,7 @@ const EditorErrors = ({ editorRef }) => {
 
   const alertAction = (
     <IconButton onClick={handleClose} size="small">
-      <CloseIcon />
+      <CloseIcon/>
     </IconButton>
   )
 

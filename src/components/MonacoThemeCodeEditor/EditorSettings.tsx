@@ -1,12 +1,12 @@
 import React from "react"
-import Tooltip from "@material-ui/core/Tooltip"
-import IconButton from "@material-ui/core/IconButton"
-import SettingsIcon from "@material-ui/icons/Settings"
-import Popover from "@material-ui/core/Popover"
+import Tooltip from "@mui/material/Tooltip"
+import IconButton from "@mui/material/IconButton"
+import SettingsIcon from "@mui/icons-material/Settings"
+import Popover from "@mui/material/Popover"
 import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
-import { useUpdateEditorState } from "src/state/editor/actions"
-import Checkbox from "@material-ui/core/Checkbox"
+import { RootState } from "../../slices/types"
+import { useUpdateEditorState } from "../../slices/editor/editorSlice"
+import Checkbox from "@mui/material/Checkbox"
 import {
   makeStyles,
   Theme,
@@ -16,15 +16,15 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   ListSubheader,
-} from "@material-ui/core"
+} from "@mui/material"
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles:any = makeStyles((theme: any) =>
   createStyles({
     formControl: {
       margin: theme.spacing(3),
     },
     popoverPaper: {
-      // backgroundColor: theme.palette.background.default,
+      backgroundColor: theme.palette.background.default,
     },
     settingsList: {
       minWidth: 320,

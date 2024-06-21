@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { RootState } from "src/state/types"
+import { RootState } from "../../../slices/types"
 
 import { EditorRefType } from "../types"
-import { useUpdateEditorState } from "src/state/editor/actions"
-import { ThemeValueChangeEvent } from "src/components/ThemeTools/events"
+import { useUpdateEditorState } from "../../../slices/editor/editorSlice"
+import { ThemeValueChangeEvent } from "../../../components/ThemeTools/events"
 
 export default function useEditorStateSync(editorRef: EditorRefType) {
   useSyncToStore(editorRef)

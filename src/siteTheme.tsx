@@ -75,9 +75,9 @@ const customThemeProperties = ({
     }
 })
 
-export const defaultTheme: Theme = createTheme()
+export const defaultTheme: ThemeOptions = createTheme()
 
-export const themeConfig: ThemeOptions = {
+export const themeConfig: any = {
     palette: {
         mode: "dark",
         primary: {
