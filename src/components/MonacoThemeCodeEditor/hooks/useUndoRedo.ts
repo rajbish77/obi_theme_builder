@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux"
 import {
   useUpdateEditorState,
   updateVersionStates,
-} from "src/state/editor/actions"
-import { RootState } from "src/state/types"
-import { verbose } from "src/utils"
+} from "../../../slices/editor/editorSlice"
+import { RootStateType } from "../../../slices/types"
+import { verbose } from "../../../utils"
 
 export default function useUndoRedo(editorRef: EditorRefType) {
   const updateEditorState = useUpdateEditorState()

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { showConfirm, showError } from "./components/Swal";
-import { fetchAffiliate, loadSavedTheme, logOutSate } from "./state/action";
+import { fetchAffiliate, loadSavedTheme, logOutState } from "./state/themeSlice";
 import { Affiliate, Auth } from "./slices/types";
 import { store } from "./app/store";
 
@@ -20,7 +20,7 @@ export async function logout(dispatch: any) {
   );
   if (confirmed.isConfirmed) {
     // dispatch(loadSavedTheme(defaultThemeOptions));
-    dispatch(logOutSate());
+    dispatch(logOutState());
   }
 }
 

@@ -1,32 +1,33 @@
-import { useEffect, useCallback } from "react"
-import * as monaco from "monaco-editor"
-import { EditorRefType } from "../types"
-// custom theme config
-import { useDispatch, useSelector } from "react-redux"
-import { updateEditorState } from "src/state/editor/actions"
-import { saveEditorToTheme } from "src/state/editor/actions"
-import { RootState } from "src/state/types"
-import { verbose } from "src/utils"
+import { useEffect, useCallback } from 'react';
+import * as monaco from 'monaco-editor';
+import { EditorRefType } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateEditorState, saveEditorToTheme } from '../../../slices/editor/editorSlice';
+import { RootStateType } from '../../../slices/types';
+import { RootState, AppDispatch  } from '../../../app/store';
+import { verbose } from '../../../utils';
+
+interface EmitOutput {
+  outputFiles: Array<{ name: string; text: string }>;
+}
 
 /**
  * Transpile the editor and return any semantic or syntactic
  * errors as well as the emitted code
  * @param editorRef - ref of the monaco-editor
- * @returns [semanticDiagnostics: Diagnostic[], syntacticDiagnostics: Diagnostic[], emittedOutput: any]
+ * @returns [semanticDiagnostics: monaco.languages.typescript.Diagnostic[], syntacticDiagnostics: monaco.languages.typescript.Diagnostic[], emittedOutput: EmitOutput]
  */
-async function validateInput(editorRef: EditorRefType) {
-  // get the JS output of the typescript inside the code editor
-  const model = editorRef.current?.getModel()
-  if (!model) return [null, null, null]
-  const worker = await monaco.languages.typescript.getTypeScriptWorker()
-  const proxy = await worker(model.uri)
+async function validateInput(editorRef: EditorRefType): Promise<[monaco.languages.typescript.Diagnostic[], monaco.languages.typescript.Diagnostic[], EmitOutput | null]> {
+  const model = editorRef.current?.getModel();
+  if (!model) return [[], [], null];
+  const worker = await monaco.languages.typescript.getTypeScriptWorker();
+  const proxy = await worker(model.uri);
 
-  // get the current semantic errors, and the emitted output
   return await Promise.all([
     proxy.getSemanticDiagnostics(model.uri.toString()),
     proxy.getSyntacticDiagnostics(model.uri.toString()),
     proxy.getEmitOutput(model.uri.toString()),
-  ])
+  ]) as [monaco.languages.typescript.Diagnostic[], monaco.languages.typescript.Diagnostic[], EmitOutput];
 }
 
 /**
@@ -36,15 +37,15 @@ async function validateInput(editorRef: EditorRefType) {
  */
 async function formatInput(editorRef: EditorRefType) {
   try {
-    await editorRef.current?.getAction("editor.action.formatDocument").run()
-    return true
+    const action = editorRef.current?.getAction('editor.action.formatDocument');
+    if (action) {
+      await action.run();
+      return true;
+    }
   } catch (err) {
-    verbose(
-      "MonacoThemeCodeEditor/hooks/useSave -> formatInput: Error formatting document",
-      err
-    )
+    verbose('MonacoThemeCodeEditor/hooks/useSave -> formatInput: Error formatting document', err);
   }
-  return false
+  return false;
 }
 
 /**
@@ -55,48 +56,29 @@ async function formatInput(editorRef: EditorRefType) {
  * @returns Function that handles saving code editor contents
  */
 export default function useSave(editorRef: EditorRefType) {
-  const formatOnSave = useSelector(
-    (state: RootState) => state.editor.formatOnSave
-  )
-  const dispatch = useDispatch()
+  const formatOnSave = useSelector((state: RootStateType) => state.editor.formatOnSave);
+  const dispatch = useDispatch<AppDispatch>();
   const handleSave = useCallback(async () => {
-    // clear existing errors first
-    dispatch(updateEditorState({ errors: [] }))
+    dispatch(updateEditorState({ errors: [] }));
 
-    // format document if required
-    if (formatOnSave) await formatInput(editorRef)
+    if (formatOnSave) await formatInput(editorRef);
 
-    const [
-      semanticDiagnostics,
-      syntacticDiagnostics,
-      emittedOutput,
-    ] = await validateInput(editorRef)
+    const [semanticDiagnostics, syntacticDiagnostics, emittedOutput] = await validateInput(editorRef);
 
-    // if there are semantic errors, prevent saving, else save to redux store
-    const errors = [...syntacticDiagnostics, ...semanticDiagnostics]
+    const errors = [...(syntacticDiagnostics ?? []), ...(semanticDiagnostics ?? [])];
     if (errors.length > 0) {
-      // handle errors
-      dispatch(
-        updateEditorState({
-          errors,
-        })
-      )
-    } else {
-      dispatch(saveEditorToTheme(emittedOutput.outputFiles[0].text))
-      // update the saved version
-      dispatch(
-        updateEditorState({
-          savedVersion: editorRef.current
-            ?.getModel()
-            ?.getAlternativeVersionId(),
-        })
-      )
+      dispatch(updateEditorState({ errors }));
+    } else if (emittedOutput && emittedOutput.outputFiles.length > 0) {
+      dispatch(saveEditorToTheme(emittedOutput.outputFiles[0].text));
+      dispatch(updateEditorState({
+        savedVersion: editorRef.current?.getModel()?.getAlternativeVersionId(),
+      }));
     }
-  }, [dispatch, formatOnSave])
+  }, [dispatch, formatOnSave, editorRef]);
 
-  useSaveKey(editorRef, handleSave)
+  useSaveKey(editorRef, handleSave);
 
-  return handleSave
+  return handleSave;
 }
 
 /**
@@ -107,28 +89,26 @@ export default function useSave(editorRef: EditorRefType) {
  */
 export const useSaveKey = (editorRef: EditorRefType, onSave: Function) => {
   useEffect(() => {
-    // save key action in the monaco editor
     const actionBinding = editorRef.current?.addAction({
-      id: "save-editor-contents",
-      label: "Save Editor Theme Contents",
-      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
-      contextMenuGroupId: "navigation",
+      id: 'save-editor-contents',
+      label: 'Save Editor Theme Contents',
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
+      contextMenuGroupId: 'navigation',
       contextMenuOrder: 1,
       run: () => onSave(),
-    })
+    });
 
-    // global save key listener
     const handleGlobalSave = (event: KeyboardEvent) => {
-      if (event.ctrlKey && event.code == "KeyS") {
-        event.preventDefault()
-        onSave()
+      if (event.ctrlKey && event.code === 'KeyS') {
+        event.preventDefault();
+        onSave();
       }
-    }
-    window.addEventListener("keydown", handleGlobalSave)
+    };
+    window.addEventListener('keydown', handleGlobalSave);
 
     return () => {
-      actionBinding?.dispose()
-      window.removeEventListener("keydown", handleGlobalSave)
-    }
-  }, [onSave])
-}
+      actionBinding?.dispose();
+      window.removeEventListener('keydown', handleGlobalSave);
+    };
+  }, [onSave, editorRef]);
+};

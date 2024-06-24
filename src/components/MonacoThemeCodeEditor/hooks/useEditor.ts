@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 import * as monaco from "monaco-editor"
-import { files as muiTypeFiles } from "src/muiTypeStrings"
+import { files as muiTypeFiles } from "../../../muiTypeStrings"
 import { EditorRefType, MutableEditorRefType } from "../types"
 // custom theme config
-import monokai from "src/components/MonacoThemeCodeEditor/monaco-themes/monokai"
+import monokai from "../../../components/MonacoThemeCodeEditor/monaco-themes/monokai"
 import { useSelector } from "react-redux"
-import { RootState } from "src/state/types"
+import { RootStateType } from "../../../slices/types"
 
 const editorOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
   language: "typescript",
@@ -31,7 +31,7 @@ const languageCompilerOptions: monaco.languages.typescript.CompilerOptions = {
 }
 
 export default function useEditor(editorRef: MutableEditorRefType) {
-  const themeInput = useSelector((state: RootState) => state.editor.themeInput)
+  const themeInput = useSelector((state: RootStateType) => state.editor.themeInput)
   useEffect(() => {
     // set the editor theme
     monaco.editor.defineTheme(

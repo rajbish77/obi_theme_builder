@@ -1,14 +1,27 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import JSON5 from 'json5';
-import { ThemeOptions } from '@material-ui/core';
+import { ThemeOptions } from '@mui/material';
 import { EditorState, EditorStateOptions } from './types';
 import { parseEditorOutput } from './parser';
+import { defaultThemeOptions } from '../../siteTheme';
+import { useDispatch } from 'react-redux'; // Import useDispatch from react-redux
+import { useCallback } from 'react'; // Import useCallback from react
 
 const stringify = (themeOptions: ThemeOptions) => {
   return `let theme: ${JSON5.stringify(themeOptions, null, 2)};`;
 };
 
-const initialState: EditorState = {
+// Export the hook directly
+export const useUpdateEditorState = () => {
+  const dispatch = useDispatch();
+  return useCallback(
+    (editorState: EditorStateOptions) =>
+      dispatch(updateEditorState(editorState)),
+    [dispatch]
+  );
+};
+
+export const initialState: EditorState = {
   themeInput: stringify(defaultThemeOptions),
   initialVersion: 0,
   currentVersion: 0,
@@ -27,7 +40,7 @@ export const saveEditorToTheme = createAsyncThunk(
     try {
       const themeOptions = parseEditorOutput(code);
       return themeOptions;
-    } catch (err) {
+    } catch (err:any) {
       return rejectWithValue(`Error while JSON5 parsing code: ${err.message}`);
     }
   }
@@ -73,6 +86,10 @@ const editorSlice = createSlice({
         state.errors.push({
           category: 1,
           messageText: action.payload as string,
+          code: 0,
+          file: undefined,
+          start: undefined,
+          length: undefined
         });
       });
   }

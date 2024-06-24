@@ -74,10 +74,11 @@ const customThemeProperties = ({
         },
     }
 })
+export const defaultTheme: ThemeOptions = createTheme()
 
-export const defaultTheme: Theme = createTheme()
+export const themeWithDefaults = createTheme(defaultThemeOptions);
 
-export const themeConfig: ThemeOptions = {
+export const themeConfig: any = {
     palette: {
         mode: "dark",
         primary: {
@@ -99,7 +100,7 @@ export const themeConfig: ThemeOptions = {
                 root: {
                     border: "1px solid rgba(255, 255, 255, .125)",
                     boxShadow: "none",
-                    transition: defaultTheme.transitions.create("margin-left"),
+                    transition: themeWithDefaults.transitions.create("margin-left"),
                     "&:not(:last-child)": {
                         borderBottom: 0,
                     },

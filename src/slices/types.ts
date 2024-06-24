@@ -1,13 +1,38 @@
-// import { Theme, ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
+import { Theme, ThemeOptions } from "@mui/material/styles"
 // import { withStyles, createTheme } from '@material-ui/core/styles';
-// import { EditorState } from "./editor/types"
+import { EditorState } from "./editor/types"
+
+export interface RootStateType {
+  editor: EditorState
+  themeId: string
+  id?:number | null
+  themeObject: Theme
+  themeOptions: ThemeOptions
+  // savedThemes: Record<string, SavedTheme>
+  loadedFonts: Set<string>
+  activeTab: string
+  themeConfigOpen: boolean
+  auth: Auth
+  affiliate: Affiliate
+  editorThemeState: boolean
+  affiliateTheme: ThemeOptions
+  savedThemes: {
+    [themeId: string]: {
+      id: string;
+      name: string;
+      themeOptions: ThemeOptions;
+      fonts: string[];
+      lastUpdated: string;
+    };
+  };
+}
 
 export interface AuthState {
-  // editor: EditorState
+  editor: EditorState
   themeId: string;
   id?: number | null;
-  // themeObject: Theme
-  // themeOptions: ThemeOptions
+  themeObject: Theme
+  themeOptions: ThemeOptions
   savedThemes: Record<string, SavedTheme>;
   loadedFonts: Set<string>;
   activeTab: string;
@@ -15,7 +40,7 @@ export interface AuthState {
   auth: Auth;
   affiliate: Affiliate;
   editorThemeState: boolean;
-  // affiliateTheme: ThemeOptions
+  affiliateTheme: ThemeOptions
 }
 
 export interface IUser {
@@ -68,7 +93,7 @@ export type Auth = {
 export type SavedTheme = {
   id: string;
   name: string;
-  // themeOptions: ThemeOptions
+  themeOptions: ThemeOptions
   fonts: string[];
   lastUpdated: string;
 };

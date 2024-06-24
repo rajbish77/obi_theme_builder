@@ -1,7 +1,7 @@
 import React from "react"
 import Drawer from "@mui/material/Drawer"
 import Grid from "@mui/material/Grid"
-import { makeStyles, useTheme } from "@mui/material/styles"
+import { Theme, ThemeOptions, makeStyles, useTheme } from "@mui/material/styles"
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector, useDispatch } from "react-redux"
 import { AuthState } from "../slices/types"
@@ -43,8 +43,8 @@ const ThemeConfigDrawer = () => {
   const open = useSelector((state: AuthState) => state.themeConfigOpen)
   const dispatch = useDispatch()
 
-  const theme = useTheme()
-  const permanent = useMediaQuery(theme.breakpoints.up("sm"))
+  const theme = useTheme<Theme>()
+  const permanent = useMediaQuery(theme.breakpoints!.up("sm"))
 
   return (
     <Drawer
@@ -63,7 +63,7 @@ const ThemeConfigDrawer = () => {
         wrap="nowrap"
         className={classes.drawerContainer}
       >
-         <Grid item className={classes.editorWrapper}>
+        <Grid item className={classes.editorWrapper}>
           {/* Use themeId as key so that editor is torn down and rebuilt with new theme */}
           {/* <MonacoThemeCodeEditor key={themeId} /> */}
         </Grid>

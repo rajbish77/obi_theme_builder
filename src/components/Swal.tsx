@@ -3,8 +3,8 @@ import { Auth } from "../slices/types";
 import MySwal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
 import "bootstrap/dist/css/bootstrap.min.css";
-import SwalTitleComponent from "./Samples/SwalTitleComponent";
-import SwalHtmlComponent from "./Samples/SwalHtmlComponent";
+import SwalTitleComponent from "./PreviewWindow/Samples/SwalTitleComponent";
+import SwalHtmlComponent from "./PreviewWindow/Samples/SwalHtmlComponent";
 import { faCircleCheck, faCircleInfo, faCircleXmark, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

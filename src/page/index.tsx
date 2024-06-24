@@ -1,14 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect } from "react";
-import { makeStyles, Theme } from "@mui/material/styles";
-import Layout from "../components/Layout";
-import ErrorBoundary from "../components/ErrorBoundary";
+import React, { useEffect, useState } from "react"
+import { makeStyles, Theme, ThemeOptions } from "@mui/material/styles"
+import Layout from "../components/Layout"
+// import MainWindow from "src/components/MainWindow"
+import ThemeConfigDrawer from "../components/ThemeConfigDrawer"
+import ErrorBoundary from "../components/ErrorBoundary"
 import Header from "../components/Header";
-import LoginForm from "../PreviewWindow/Login";
-import { useSelector, useDispatch } from "react-redux";
-import PublisherListing from "../PreviewWindow/Publisher";
-// import EditorDashboard from "../PreviewWindow/EditorDashboard"; // Assuming you have this component
+import LoginForm from "../components/PreviewWindow/Samples/Login";
 import { AuthState } from "../slices/types";
+import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux';
+import PublisherListing from "../components/PreviewWindow/Publisher/index";
 import { getEditorLoginStatus, getPublisherLoginStatus } from "../commonFunction";
 
 const useStyles: any = makeStyles((theme: Theme) => ({

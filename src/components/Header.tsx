@@ -9,7 +9,7 @@ import {
 import { makeStyles } from '@mui/material/styles';
 import { Button, Col, Row, Dropdown } from "react-bootstrap"
 import { useDispatch } from "react-redux"
-import { affiliateTheme, loadSavedTheme, setAffiliateId } from "../state/action"
+import { affiliateTheme, loadSavedTheme, setAffiliateId } from "../state/themeSlice"
 import { useSelector } from "react-redux"
 import { AuthState } from "../slices/types"
 import { defaultThemeOptions } from "../siteTheme"
@@ -23,7 +23,7 @@ import { faUser, faRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
-const useStyles:any = makeStyles((theme: Theme) => ({
+const useStyles:any = makeStyles((theme:any) => ({
   title: {
     fontSize: theme.typography.h6.fontSize,
     lineHeight: theme.typography.h6.fontSize,
