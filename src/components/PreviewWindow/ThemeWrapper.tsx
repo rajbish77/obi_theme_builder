@@ -1,48 +1,40 @@
-import React, { useEffect, useState } from "react"
-import { ThemeProvider, Theme, makeStyles } from "@mui/material/styles"
-import { useSelector } from "react-redux"
-import { RootStateType } from "../../slices/types"
-import Paper from "@mui/material/Paper"
+import React from "react";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../../slices/types";
+import { ThemeProvider, Theme } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import styled from "styled-components";
 
+// Define the styled components using styled-components
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const Container = styled(Paper)`
+  background-color: ${(props) => props.theme.palette.background.default};
+  width: 100%;
+  height: 100%;
+`;
+
+// Define the interface for props
 interface ThemeWrapperProps {
-  children: React.ReactNode | React.ReactNodeArray
+  children: React.ReactNode | React.ReactNodeArray;
 }
 
-/**
- *
- * Wraps example content in the dynamically controlled theme
- * set by the theme editor sidebar
- */
-const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
-  const themeObject = useSelector((state: RootStateType) => state.themeObject)
+// ThemeWrapper component
+const ThemeWrapper: React.FC<ThemeWrapperProps> = ({ children }) => {
+  const themeObject = useSelector((state: RootStateType) => state.themeObject);
 
   return (
     <ThemeProvider theme={themeObject}>
-      <ThemeContainer>{children}</ThemeContainer>
+      <Wrapper>
+        <Container elevation={0} square>
+          {children}
+        </Container>
+      </Wrapper>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-const useStyles: any = makeStyles((theme: Theme) => ({
-  themeContainer: {
-    backgroundColor: theme.palette.background.default,
-    width: "100%",
-    height: "100%",
-  },
-}))
-
-/**
- *
- * CssBa
- *
- */
-const ThemeContainer = ({ children }: ThemeWrapperProps) => {
-  const classes = useStyles()
-  return (
-    <Paper className={classes.themeContainer} elevation={0} square>
-      {children}
-    </Paper>
-  )
-}
-
-export default ThemeWrapper
+export default ThemeWrapper;

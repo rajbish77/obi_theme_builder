@@ -3,37 +3,32 @@ import {
   TextField,
   InputAdornment,
   Popover,
-  makeStyles,
-  Theme,
-  createStyles,
+  styled,
 } from "@mui/material"
 import { ChromePicker } from "react-color"
 import MaterialColorPicker from "./MaterialColorPicker"
 import { colorFromString } from "./utils"
 import { ThemeValueChangeEvent } from "../../components/ThemeTools/events"
 
-const useStyles:any = makeStyles((theme: Theme) =>
-  createStyles({
-    popoverPaper: {
-      display: "flex",
-      flexDirection: "column",
-      borderRadius: 0,
-      alignItems: "center",
-    },
-    colorSampleAdornment: {
-      width: "1em",
-      height: "1em",
-      border: "1px solid grey",
-    },
-  })
-)
+// Define styled components
+const PopoverPaper = styled('div')({
+  display: "flex",
+  flexDirection: "column",
+  borderRadius: 0,
+  alignItems: "center",
+});
+
+const ColorSampleAdornment = styled('div')(({ theme }) => ({
+  width: "1em",
+  height: "1em",
+  border: "1px solid grey",
+}));
 
 /**
  * The base TextField input for selecting colors.
  * onClick opens a popover with components to help pick colors
  */
 export default function ColorInput({ label, color, onColorChange }:any) {
-  const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<Element | null>(null)
 
   const handleOpenPopover = (event: React.MouseEvent) => {
@@ -64,8 +59,7 @@ export default function ColorInput({ label, color, onColorChange }:any) {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <div
-                className={classes.colorSampleAdornment}
+              <ColorSampleAdornment
                 style={{
                   backgroundColor: color,
                 }}
@@ -92,7 +86,7 @@ export default function ColorInput({ label, color, onColorChange }:any) {
           horizontal: "center",
         }}
         PaperProps={{
-          className: classes.popoverPaper,
+          component: PopoverPaper,
         }}
         disableAutoFocus
         disableEnforceFocus

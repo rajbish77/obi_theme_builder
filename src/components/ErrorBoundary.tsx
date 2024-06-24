@@ -1,32 +1,27 @@
-import React, { useCallback } from "react"
-import Typography from "@mui/material/Typography"
+import React, { useCallback } from "react";
+import Typography from "@mui/material/Typography";
 import Button from '@mui/material/Button';
-import { makeStyles } from '@mui/material/styles';
-import { useDispatch } from "react-redux"
-import { resetSiteData } from "../state/themeSlice"
+import { styled } from '@mui/material/styles';
+import { useDispatch } from "react-redux";
+import { resetSiteData } from "../state/themeSlice";
 
-const useStyles: any = makeStyles({
-  errorRoot: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    height: "100vh",
-    overflowY: "auto",
-  },
+// Create a styled component using styled from @mui/material/styles
+const ErrorRoot = styled('div')({
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  height: "100vh",
+  overflowY: "auto",
 });
 
 const ErrorBoundaryWithStyles = (props: { children: React.ReactNode }) => {
-  const classes = useStyles();
-  return <ErrorBoundary classes={classes} {...props} />;
+  return <ErrorBoundary {...props} />;
 };
 
 export default ErrorBoundaryWithStyles;
 
 interface ErrorBoundaryProps {
-  classes: {
-    errorRoot: string;
-  };
   children: React.ReactNode;
 }
 
@@ -43,19 +38,19 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
   static getDerivedStateFromError(error: Error) {
     // Update state so the next render will show the fallback UI.
-    return { hasError: true, error: error }
+    return { hasError: true, error: error };
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // You can also log the error to an error reporting service
-    console.log("Caught Error", error)
+    console.log("Caught Error", error);
   }
 
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return (
-        <div className={this.props.classes.errorRoot}>
+        <ErrorRoot>
           <Typography variant="h2">
             Something went wrong, causing the app to crash
           </Typography>
@@ -74,20 +69,20 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
             site
           </Typography>
           <ClearStorageButton />
-        </div>
-      )
+        </ErrorRoot>
+      );
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }
 
 const ClearStorageButton = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleClick = useCallback(() => {
-    dispatch(resetSiteData())
-    location.reload()
-  }, [dispatch])
+    dispatch(resetSiteData());
+    location.reload();
+  }, [dispatch]);
 
   return (
     <Button
@@ -98,5 +93,5 @@ const ClearStorageButton = () => {
     >
       Reset Site Data
     </Button>
-  )
-}
+  );
+};

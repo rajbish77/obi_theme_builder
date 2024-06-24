@@ -1,53 +1,38 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import Home from "./Samples/Home";
 import PreviewWrapper from "./PreviewWrapper";
 import Header from "./Samples/Header";
 import Footer from "./Samples/Footer";
 import Navigationbar from "./Samples/NavigationBar";
-import { createTheme, makeStyles, Theme } from '@mui/material/styles';
-
-// Define the extended Palette interface
-declare module '@mui/material/styles' {
-    interface Palette {
-        body?: {
-            backgroundColor?: string;
-        };
-    }
-}
+import { createTheme, Theme } from "@mui/material/styles";
+import styled from "styled-components";
 
 // Create MUI theme
 const theme = createTheme({
-    palette: {
-        body: {
-            backgroundColor: '#f0f0f0', // Example color
-        },
+  palette: {
+    body: {
+      backgroundColor: "#f0f0f0", // Example color
     },
+  },
 });
 
-// Define component styles
-const useStyles: any = makeStyles((theme: Theme) => ({
-    background: {
-        backgroundColor: theme.palette.body?.backgroundColor,
-    }
-}));
+// Define styled component for background
+const Background = styled.div`
+  background-color: ${(props) => props.theme.palette.body?.backgroundColor};
+`;
 
-// interface PreviewWindowProps {
-//     children: ReactNode;
-// }
-
+// Component definition
 const PreviewWindow: React.FC = () => {
-    const classes = useStyles();
-
-    return (
-        <PreviewWrapper>
-            <div className={classes.background}>
-                <Header />
-                <Navigationbar />
-                <Home />
-                <Footer />
-            </div>
-        </PreviewWrapper>
-    );
+  return (
+    <PreviewWrapper>
+      <Background>
+        <Header />
+        <Navigationbar />
+        <Home />
+        <Footer />
+      </Background>
+    </PreviewWrapper>
+  );
 };
 
 export default PreviewWindow;

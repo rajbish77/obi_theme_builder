@@ -1,79 +1,63 @@
-import React from "react"
-import Drawer from "@mui/material/Drawer"
-import Grid from "@mui/material/Grid"
-import { Theme, ThemeOptions, makeStyles, useTheme } from "@mui/material/styles"
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useSelector, useDispatch } from "react-redux"
-import { AuthState } from "../slices/types"
-// import ThemeTools from "./ThemTool/ThemeTools"
-// import MonacoThemeCodeEditor from "src/components/MonacoThemeCodeEditor"
+import React from "react";
+import Drawer from "@mui/material/Drawer";
+import Grid from "@mui/material/Grid";
+import { useTheme, styled } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useSelector, useDispatch } from "react-redux";
+import { AuthState } from "../slices/types";
 
-const drawerWidth: React.CSSProperties["width"] = 300
+const drawerWidth = 300;
 
-const useStyles: any = makeStyles({
-  drawer: {
-    width: drawerWidth,
-    height: "100vh",
-    maxWidth: "90vw",
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    overflowY: "visible",
-    // zIndex: zIndex.drawer + 2,
-    maxWidth: "90vw",
-  },
-  editorWrapper: {
-    flexGrow: 1,
-    minHeight: "30vh",
-    maxHeight: "50vh",
-    height: "100%",
-  },
-  controlsWrapper: {
-    minHeight: "30vh",
-    height: "100%",
-  },
-  drawerContainer: {
-    height: "100vh",
-  },
-})
+const StyledDrawer = styled(Drawer)({
+  width: drawerWidth,
+  height: "100vh",
+  maxWidth: "90vw",
+});
+
+const StyledDrawerPaper = styled("div")(({ theme }) => ({
+  width: drawerWidth,
+  overflowY: "visible",
+  maxWidth: "90vw",
+}));
+
+const StyledGridContainer = styled(Grid)({
+  height: "100vh",
+});
+
+const StyledGridItem = styled(Grid)(({ theme }) => ({
+  minHeight: "30vh",
+  height: "100%",
+}));
 
 const ThemeConfigDrawer = () => {
-  const classes = useStyles()
-  const themeId = useSelector((state: AuthState) => state.themeId)
-  const open = useSelector((state: AuthState) => state.themeConfigOpen)
-  const dispatch = useDispatch()
+  const theme = useTheme();
+  const dispatch = useDispatch();
+  const themeId = useSelector((state: AuthState) => state.themeId);
+  const open = useSelector((state: AuthState) => state.themeConfigOpen);
 
-  const theme = useTheme<Theme>()
-  const permanent = useMediaQuery(theme.breakpoints!.up("sm"))
+  const permanent = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
-    <Drawer
+    <StyledDrawer
       variant={permanent ? "permanent" : "temporary"}
       anchor="right"
-      className={classes.drawer}
-      classes={{
-        paper: classes.drawerPaper,
-      }}
       open={open}
       onClose={() => dispatch({ type: "TOGGLE_THEME_CONFIG" })}
     >
-      <Grid
-        container
-        direction="column"
-        wrap="nowrap"
-        className={classes.drawerContainer}
-      >
-        <Grid item className={classes.editorWrapper}>
-          {/* Use themeId as key so that editor is torn down and rebuilt with new theme */}
-          {/* <MonacoThemeCodeEditor key={themeId} /> */}
-        </Grid>
-        
-        <Grid item className={classes.controlsWrapper}>
-          {/* <ThemeTools /> */}
-        </Grid>
-      </Grid>
-    </Drawer>
-  )
-}
+      <StyledDrawerPaper>
+        <StyledGridContainer container direction="column" wrap="nowrap">
+          <StyledGridItem item>
+            {/* Use themeId as key so that editor is torn down and rebuilt with new theme */}
+            {/* <MonacoThemeCodeEditor key={themeId} /> */}
+          </StyledGridItem>
 
-export default ThemeConfigDrawer
+          <StyledGridItem item>
+            {/* <ThemeTools /> */}
+          </StyledGridItem>
+        </StyledGridContainer>
+      </StyledDrawerPaper>
+    </StyledDrawer>
+  );
+};
+
+export default ThemeConfigDrawer;

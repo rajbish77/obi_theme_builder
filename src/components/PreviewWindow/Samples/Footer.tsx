@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import styled from "styled-components";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -14,67 +15,70 @@ import {
   faYoutubeSquare,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { makeStyles } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../../../slices/types";
 
-const useStyles:any = makeStyles((theme: { typography: { fontFamily: any; }; palette: { footer: { backgroundcolor: any; textcolor: { primary: { textcolor: any; }; secondary: { textcolor: any; }; }; }; }; }) => ({
-  font: {
-    fontFamily: theme.typography.fontFamily
-  },
-  background: {
-    backgroundColor: theme.palette.footer.backgroundcolor,
-  },
-  primarytextColor: {
-    color: theme.palette.footer.textcolor.primary.textcolor,
-  },
-  secondarytextColor: {
-    color: `${theme.palette.footer.textcolor.secondary.textcolor} !important`,
-  },
-}))
+// Define styled components
+const StyledFooter = styled.div`
+  background-color: ${(props) => props.theme.palette.footer.backgroundcolor};
+`;
+
+const StyledLink = styled.a`
+  color: ${(props) => props.theme.palette.footer.textcolor.primary.textcolor};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+`;
+
+const StyledSecondaryText = styled.span`
+  color: ${(props) =>
+    props.theme.palette.footer.textcolor.secondary.textcolor} !important;
+  font-family: ${(props) => props.theme.typography.fontFamily};
+`;
 
 const Footer = () => {
-  const classes = useStyles()
+  const directionIsRTL = useSelector(
+    (state: RootStateType) => state.themeOptions.direction === "rtl"
+  );
+
   return (
-    <div className={classes.background}>
+    <StyledFooter>
       <Container>
         <Row className="d-flex justify-content-center py-3">
-          <Col md={1} className="d-flex justify-content-center px-0"> 
-            <a href="/" className={`${classes.primarytextColor} ${classes.font}`}>
-              Home
-            </a>
+          <Col md={1} className="d-flex justify-content-center px-0">
+            <StyledLink href="/">Home</StyledLink>
           </Col>
           <Col md={1} className="d-flex justify-content-center px-0">
-            <a href="https://www.vipattractions.com/page/career" className={`${classes.primarytextColor} ${classes.font}`}>
+            <StyledLink href="https://www.vipattractions.com/page/career">
               Career
-            </a>
+            </StyledLink>
           </Col>
           <Col md={1} className="d-flex justify-content-center px-0">
-            <a href="https://www.vipattractions.com/page/terms" className={`${classes.primarytextColor} ${classes.font}`}>
+            <StyledLink href="https://www.vipattractions.com/page/terms">
               Terms of use
-            </a>
+            </StyledLink>
           </Col>
           <Col md={2} className="d-flex justify-content-center text-center px-0">
-            <a href="https://www.vipattractions.com/page/cancellation-policy" className={`${classes.primarytextColor} ${classes.font}`}>
+            <StyledLink href="https://www.vipattractions.com/page/cancellation-policy">
               Cancellation Policy
-            </a>
+            </StyledLink>
           </Col>
           <Col md={1} className="d-flex justify-content-center px-0">
-            <a href="https://www.vipattractions.com/page/privacy" className={`${classes.primarytextColor} ${classes.font}`}>
+            <StyledLink href="https://www.vipattractions.com/page/privacy">
               Privacy
-            </a>
+            </StyledLink>
           </Col>
           <Col md={1} className="d-flex justify-content-center px-0">
-            <a href="https://www.vipattractions.com/page/contact" className={`${classes.primarytextColor} ${classes.font}`}>
+            <StyledLink href="https://www.vipattractions.com/page/contact">
               Contact
-            </a>
+            </StyledLink>
           </Col>
         </Row>
         <Row className="d-flex justify-content-center py-3">
           <Col md={4} className="">
             <Row>
               <Col className="p-1 d-flex justify-content-center">
-                <span className={`${classes.primarytextColor} ${classes.font}`}>
+                <StyledLink>
                   Get your lounge booking app
-                </span>
+                </StyledLink>
               </Col>
             </Row>
             <Row>
@@ -117,9 +121,9 @@ const Footer = () => {
           <Col md={4} className="">
             <Row>
               <Col className="p-1 d-flex justify-content-center">
-                <span className={`${classes.primarytextColor} ${classes.font}`}>
+                <StyledLink>
                   Download the app for guide to explore Jamaica
-                </span>
+                </StyledLink>
               </Col>
             </Row>
             <Row>
@@ -150,7 +154,7 @@ const Footer = () => {
                       <FontAwesomeIcon
                         icon={faFacebookSquare}
                         size={"2xl"}
-                        className={`${classes.primarytextColor} ${classes.font}`}
+                        className="primarytextColor font"
                         style={{
                           padding: "2px",
                         }}
@@ -162,7 +166,7 @@ const Footer = () => {
                       <FontAwesomeIcon
                         icon={faTwitterSquare}
                         size={"2xl"}
-                        className={`${classes.primarytextColor} ${classes.font}`}
+                        className="primarytextColor font"
                         style={{   
                           padding: "2px",
                         }}
@@ -174,7 +178,7 @@ const Footer = () => {
                       <FontAwesomeIcon
                         icon={faPinterestSquare}
                         size={"2xl"}
-                        className={`${classes.primarytextColor} ${classes.font}`}
+                        className="primarytextColor font"
                         style={{ 
                           padding: "2px",
                         }}
@@ -186,7 +190,7 @@ const Footer = () => {
                       <FontAwesomeIcon
                         icon={faInstagramSquare}
                         size={"2xl"}
-                        className={`${classes.primarytextColor} ${classes.font}`}
+                        className="primarytextColor font"
                         style={{
                           padding: "2px",
                         }}
@@ -198,7 +202,7 @@ const Footer = () => {
                       <FontAwesomeIcon
                         icon={faYoutubeSquare}
                         size={"2xl"}
-                        className={`${classes.primarytextColor} ${classes.font}`}
+                        className="primarytextColor font"
                         style={{
                           padding: "2px",
                         }}
@@ -212,14 +216,13 @@ const Footer = () => {
         </Row>
         <Row>
           <Col className="mb-3 d-flex justify-content-center ">
-            <span className={`${classes.secondarytextColor} ${classes.font}`}>
-              &copy; {new Date().getFullYear()}{" "}
-                Club Mobay All rights reserved
-            </span>
+            <StyledSecondaryText>
+              &copy; {new Date().getFullYear()} Club Mobay All rights reserved
+            </StyledSecondaryText>
           </Col>
         </Row>
       </Container>
-    </div>
+    </StyledFooter>
   );
 };
 

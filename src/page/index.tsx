@@ -1,80 +1,75 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from "react"
-import { makeStyles, Theme, ThemeOptions } from "@mui/material/styles"
-import Layout from "../components/Layout"
-// import MainWindow from "src/components/MainWindow"
-import ThemeConfigDrawer from "../components/ThemeConfigDrawer"
-import ErrorBoundary from "../components/ErrorBoundary"
+import React, { useEffect } from "react";
+import { Theme } from "@mui/material/styles";
+import styled from "@mui/material/styles/styled";
+import Layout from "../components/Layout";
+import ThemeConfigDrawer from "../components/ThemeConfigDrawer";
+import ErrorBoundary from "../components/ErrorBoundary";
 import Header from "../components/Header";
 import LoginForm from "../components/PreviewWindow/Samples/Login";
 import { AuthState } from "../slices/types";
-import { useSelector } from "react-redux";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import PublisherListing from "../components/PreviewWindow/Publisher/index";
 import { getEditorLoginStatus, getPublisherLoginStatus } from "../commonFunction";
 
-const useStyles: any = makeStyles((theme: Theme) => ({
-  appRoot: {
-    display: "flex",
-    height: "100vh",
-  },
-  headerNavAndMain: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    minWidth: 0,
-  },
-  navAndMain: {
-    flex: 1,
-    display: "flex",
-    minHeight: 0,
-  },
-  main: {
-    minWidth: 0,
-    minHeight: 0,
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-  },
-  header: {
-    [theme.breakpoints.up("md")]: {
-      position: "static",
-    },
-  },
-}));
+// Styled components
+const AppRoot = styled("div")({
+  display: "flex",
+  height: "100vh",
+});
+
+const HeaderNavAndMain = styled("div")({
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  minWidth: 0,
+});
+
+const NavAndMain = styled("div")({
+  flex: 1,
+  display: "flex",
+  minHeight: 0,
+});
+
+const Main = styled("main")({
+  minWidth: 0,
+  minHeight: 0,
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+});
 
 const IndexPage = () => {
-  const classes = useStyles();
   const auth = useSelector((state: AuthState) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {}, [dispatch]);
 
   const Publisher = () => (
-    <div className={classes.headerNavAndMain}>
+    <HeaderNavAndMain>
       <Header />
-      <div className={classes.navAndMain}>
-        <main className={`${classes.main}`}>
+      <NavAndMain>
+        <Main>
           <PublisherListing />
-        </main>
-      </div>
+        </Main>
+      </NavAndMain>
       <div className="footer-class"></div>
-    </div>
+    </HeaderNavAndMain>
   );
 
   const Editor = () => (
-    <div className={classes.appRoot}>
+    <AppRoot>
       <ErrorBoundary>
-        <div className={classes.headerNavAndMain}>
+        <HeaderNavAndMain>
           <Header />
-          <div className={classes.navAndMain}>
-            <main className={classes.main}>
+          <NavAndMain>
+            <Main>
               {/* <EditorDashboard />  */}
-            </main>
-          </div>
-        </div>
+            </Main>
+          </NavAndMain>
+        </HeaderNavAndMain>
       </ErrorBoundary>
-    </div>
+    </AppRoot>
   );
 
   return (

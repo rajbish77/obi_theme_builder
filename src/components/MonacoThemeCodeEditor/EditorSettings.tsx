@@ -1,49 +1,45 @@
-import React from "react"
-import Tooltip from "@mui/material/Tooltip"
-import IconButton from "@mui/material/IconButton"
-import SettingsIcon from "@mui/icons-material/Settings"
-import Popover from "@mui/material/Popover"
-import { useSelector } from "react-redux"
-import { RootStateType } from "../../slices/types"
-import { useUpdateEditorState } from "../../slices/editor/editorSlice"
-import Checkbox from "@mui/material/Checkbox"
+import React from "react";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import SettingsIcon from "@mui/icons-material/Settings";
+import Popover from "@mui/material/Popover";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../../slices/types";
+import { useUpdateEditorState } from "../../slices/editor/editorSlice";
+import Checkbox from "@mui/material/Checkbox";
+import { styled } from "@mui/material/styles";
 import {
-  makeStyles,
-  Theme,
-  createStyles,
   List,
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
   ListSubheader,
-} from "@mui/material"
+} from "@mui/material";
 
-const useStyles:any = makeStyles((theme: any) =>
-  createStyles({
-    formControl: {
-      margin: theme.spacing(3),
-    },
-    popoverPaper: {
-      backgroundColor: theme.palette.background.default,
-    },
-    settingsList: {
-      minWidth: 320,
-    },
-  })
-)
+// Create styled components using styled from @mui/material/styles
+const FormControl = styled('div')(({ theme }) => ({
+  margin: theme.spacing(3),
+}));
+
+const PopoverPaper = styled('div')(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+}));
+
+const SettingsList = styled(List)(({ theme }) => ({
+  minWidth: 320,
+}));
 
 const EditorButton = () => {
-  const classes = useStyles()
-  const [anchorEl, setAnchorEl] = React.useState<Element | null>(null)
+  const [anchorEl, setAnchorEl] = React.useState<Element | null>(null);
 
   const handleOpen = (event: React.MouseEvent) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
-    setAnchorEl(null)
-  }
-  const open = Boolean(anchorEl)
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
 
   return (
     <>
@@ -64,32 +60,32 @@ const EditorButton = () => {
           vertical: "top",
           horizontal: "right",
         }}
-        PaperProps={{
-          className: classes.popoverPaper,
-        }}
+        // PaperProps={{
+        //   className: PopoverPaper,
+        // }}
       >
         <EditorSettings />
       </Popover>
     </>
-  )
-}
-export default EditorButton
+  );
+};
+
+export default EditorButton;
 
 const EditorSettings = () => {
-  const classes = useStyles()
   const formatOnSave = useSelector(
     (state: RootStateType) => state.editor.formatOnSave
-  )
+  );
   const outputTypescript = useSelector(
     (state: RootStateType) => state.editor.outputTypescript
-  )
-  const updateEditor = useUpdateEditorState()
-  const toggleFormatOnSave = () => updateEditor({ formatOnSave: !formatOnSave })
+  );
+  const updateEditor = useUpdateEditorState();
+  const toggleFormatOnSave = () => updateEditor({ formatOnSave: !formatOnSave });
   const toggleOutputTypescript = () =>
-    updateEditor({ outputTypescript: !outputTypescript })
+    updateEditor({ outputTypescript: !outputTypescript });
 
   return (
-    <List dense className={classes.settingsList}>
+    <SettingsList dense>
       <ListSubheader>Editor Settings</ListSubheader>
       <ListItem button onClick={toggleFormatOnSave}>
         <ListItemText
@@ -119,6 +115,6 @@ const EditorSettings = () => {
           />
         </ListItemSecondaryAction>
       </ListItem>
-    </List>
-  )
-}
+    </SettingsList>
+  );
+};

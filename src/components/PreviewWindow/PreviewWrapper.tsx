@@ -1,97 +1,81 @@
-import React, {ReactNode } from "react"
-import { makeStyles, Theme, createStyles } from "@mui/material/styles"
-import Paper from '@mui/material/Paper';
-import { useSelector } from "react-redux"
-import { RootStateType } from "../../slices/types"
-import ThemeWrapper from "./ThemeWrapper"
+import React, { ReactNode } from "react";
+import { useSelector } from "react-redux";
+import Paper from "@mui/material/Paper";
+import { RootStateType } from "../../slices/types";
+import ThemeWrapper from "./ThemeWrapper";
+import styled from "styled-components";
 
-const useStyles: any = makeStyles((theme: Theme) =>
-  createStyles({
-    previewWrapper: {
-      height: "100%",
-      position: "relative",
-    },
-    letterBox: {
-      backgroundColor: "#212121",
-      height: "100%",
-    },
-  })
-)
+// Styled components for PreviewWrapper
+const PreviewWrapperContainer = styled.div`
+  height: 100%;
+  position: relative;
+`;
+
+const LetterBox = styled.div`
+  background-color: #212121;
+  height: 100%;
+`;
+
+// Styled component for PreviewBackground
+const PreviewArea = styled(Paper)`
+  background-color: ${(props) => props.theme.palette.background.default};
+  max-width: none;
+  height: 100%;
+  overflow-y: scroll;
+  margin: auto;
+  position: relative;
+  &.xs {
+    max-width: 375px;
+  }
+  &.sm {
+    max-width: 650px;
+  }
+  &.md {
+    max-width: 1000px;
+  }
+`;
 
 interface PreviewWrapperProps {
-    children: ReactNode;
-  }
+  children: ReactNode;
+}
 
 /**
  * Wraps children in ThemeWrapper and creates a letterbox around the component
  */
 const PreviewWrapper: React.FC<PreviewWrapperProps> = ({ children }) => {
-  const classes = useStyles()
-
   return (
-    <>
-      <div className={`${classes.previewWrapper}`}>
-        {/* <PreviewSizeControls /> */}
-        <ThemeWrapper>
-          <div className={classes.letterBox}>
-            <PreviewBackground>{children}</PreviewBackground>
-          </div>
-        </ThemeWrapper>
-      </div>
-    </>
-  )
-}
+    <PreviewWrapperContainer>
+      {/* <PreviewSizeControls /> */}
+      <ThemeWrapper>
+        <LetterBox>
+          <PreviewBackground>{children}</PreviewBackground>
+        </LetterBox>
+      </ThemeWrapper>
+    </PreviewWrapperContainer>
+  );
+};
 
-export default PreviewWrapper
-
-const useBackgroundStyles: any = makeStyles((theme: Theme) =>
-  createStyles({
-    previewArea: {
-      backgroundColor: theme.palette.background.default,
-      maxWidth: "none",
-      height: "100%",
-      overflowY: "scroll",
-      margin: "auto",
-      position: "relative", // for FAB positioning
-      "&.xs": {
-        maxWidth: 375,
-      },
-      "&.sm": {
-        maxWidth: 650,
-      },
-      "&.md": {
-        maxWidth: 1000,
-      },
-    },
-    xs: {},
-    sm: {},
-    md: {},
-    lg: {},
-    xl: {},
-  })
-)
+// Component remains the same, no change in logic
 
 /**
  * Creates a Paper component with a backgroundColor of `palette.background.default`
  * adds 'rtl' as a className if required by the theme to enable RTL styles.
  */
 const PreviewBackground: React.FC<PreviewWrapperProps> = ({ children }) => {
-  const classes = useBackgroundStyles()
-
-  // if the theme has `direction` set to 'rtl', then add 'rtl' as a classname
-  // to the Paper component, so that RTL styles will be enabled
   const directionIsRTL = useSelector(
     (state: RootStateType) => state.themeOptions.direction === "rtl"
-  )
+  );
 
   return (
-    <Paper
+    <PreviewArea
       elevation={8}
       square
-      className={`${classes.previewArea}`}
+      className={directionIsRTL ? "previewArea rtl" : "previewArea"}
       dir={directionIsRTL ? "rtl" : ""}
     >
       {children}
-    </Paper>
-  )
-}
+    </PreviewArea>
+  );
+};
+
+export default PreviewWrapper;

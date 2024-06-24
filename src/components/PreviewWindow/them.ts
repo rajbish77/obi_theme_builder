@@ -1,11 +1,11 @@
 import { createTheme, Theme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
-    interface Palette {
-        body?: {
-            backgroundColor?: string;
-        };
-    }
+    // interface Palette {
+    //     body?: {
+    //         backgroundColor?: string;
+    //     };
+    // }
     interface PaletteOptions {
         body?: {
             backgroundColor?: string;

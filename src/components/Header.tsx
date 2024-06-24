@@ -1,50 +1,49 @@
-import PropTypes, { any } from "prop-types"
-import React, { useState } from "react"
+import PropTypes from "prop-types"
+import React, { useState, useEffect } from "react"
 import {
   Typography,
-  Theme,
   IconButton,
   Hidden,
+  styled
 } from "@mui/material"
-import { makeStyles } from '@mui/material/styles';
 import { Button, Col, Row, Dropdown } from "react-bootstrap"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { affiliateTheme, loadSavedTheme, setAffiliateId } from "../state/themeSlice"
-import { useSelector } from "react-redux"
 import { AuthState } from "../slices/types"
 import { defaultThemeOptions } from "../siteTheme"
 import Loader from "../Loader"
 import BrushIcon from '@mui/icons-material/Brush';
 import { getaffiliates } from "../apicalls"
-import { useEffect } from "react"
 import { showError } from "./Swal"
 import { HandleAPIError, _getAffiliate, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
 import { faUser, faRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
-const useStyles:any = makeStyles((theme:any) => ({
-  title: {
-    fontSize: theme.typography.h6.fontSize,
-    lineHeight: theme.typography.h6.fontSize,
-    fontFamily: theme.typography.fontFamily
-  },
-  version: {
-    fontSize: theme.typography.caption.fontSize,
-    lineHeight: theme.typography.caption.fontSize,
-    fontWeight: 700,
-  },
-  toolbar: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  navAppBar: {
-    justifyContent: "space-between",
-    flexDirection: "row",
-    backgroundColor: "#000",
-    tectColor: "#fff"
-  },
-}))
+// Define styled components
+const Title = styled(Typography)(({ theme }) => ({
+  fontSize: theme.typography.h6.fontSize,
+  lineHeight: theme.typography.h6.fontSize,
+  fontFamily: theme.typography.fontFamily
+}));
+
+const Version = styled(Typography)(({ theme }) => ({
+  fontSize: theme.typography.caption.fontSize,
+  lineHeight: theme.typography.caption.fontSize,
+  fontWeight: 700,
+}));
+
+const Toolbar = styled('div')({
+  display: "flex",
+  justifyContent: "space-between",
+});
+
+const NavAppBar = styled('div')({
+  justifyContent: "space-between",
+  flexDirection: "row",
+  backgroundColor: "#000",
+  color: "#fff"
+});
 
 interface AffiliateItem {
   id: number;
@@ -53,7 +52,6 @@ interface AffiliateItem {
 
 const Header = () => {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const [showDropdown, setShowDropdown] = useState(false);
   const [loading, setLoading] = useState(false)
   const auth = useSelector((state: AuthState) => state.auth);
@@ -137,21 +135,13 @@ const Header = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if(AffiliateData.length !== undefined){
-  //     handleOnSearch("", "");
-  //   }
-  // }, [AffiliateData]);
-
-  const handleOnHover = (result: any) => {
-  }
+  const handleOnHover = (result: any) => {}
 
   const handleOnSelect = (item: any) => {
     getAffililateTheme(item?.id)
   }
 
-  const handleOnFocus = () => {
-  }
+  const handleOnFocus = () => {}
 
   const formatResult = (item: any) => {
     return (
@@ -165,9 +155,9 @@ const Header = () => {
     return (
       <>
         <Col md={"8"} className="d-flex justify-content-start align-items-center">
-          <Typography variant="h6" className={`${classes.title} fw-semibold text-dark align-items-center mx-2`}>
+          <Title variant="h6" className="fw-semibold text-dark align-items-center mx-2">
             Select Affiliate:
-          </Typography>
+          </Title>
           <div style={styleObj} className="py-1">
             <ReactSearchAutocomplete
               items={searchResult}
@@ -203,12 +193,13 @@ const Header = () => {
   const publisherHeader = () => {
     return (
       <Col md={"6"} className="d-flex justify-content-start">
-        <h3 className={`align-items-center text-dark mx-2 .fs-1 fw-bold mb-0`}>
+        <h3 className="align-items-center text-dark mx-2 .fs-1 fw-bold mb-0">
           Theme-Builder
         </h3>
       </Col>
     );
   }
+  
   return (
     <>
       <Loader loading={loading} />
@@ -229,7 +220,6 @@ const Header = () => {
                 />
               </Dropdown.Toggle>
               <Dropdown.Menu className=" " style={{ zIndex: 1023 }}>
-                {/* <Dropdown.Item disabled className="text-dark">{getPublisherLoginStatus(auth) ? "Publisher " : "Editor "}</Dropdown.Item> */}
                 <Dropdown.Item disabled className="text-dark">{auth.userName}</Dropdown.Item>
                 <Dropdown.Item className="bg-danger text-white" onClick={() => { logout(dispatch) }}>Logout</Dropdown.Item>
               </Dropdown.Menu>

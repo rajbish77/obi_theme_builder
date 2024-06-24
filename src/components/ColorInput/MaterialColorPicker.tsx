@@ -1,12 +1,10 @@
 import React, { useEffect } from "react"
 import * as colors from "@mui/material/colors"
 import {
-  makeStyles,
-  Theme,
-  createStyles,
   Tooltip,
   Collapse,
 } from "@mui/material"
+import { styled } from "@mui/material/styles"
 
 import {
   decomposeColor,
@@ -67,27 +65,22 @@ const paletteWidth = 400
 const colorTypeWidth = paletteWidth / muiHues.length
 const colorStrengthWidth = paletteWidth / muiShades.length
 
-const useStyles:any = makeStyles((theme: any) =>
-  createStyles({
-    paletteContainer: {
-      display: "flex",
-      flexDirection: "row",
-      height: "1.5em",
-      "&$colorType": {
-        alignItems: "flex-end",
-      },
-    },
-    colorType: {},
-    colorItem: {
-      transition: theme.transitions.create("height"),
-    },
-  })
-)
+const PaletteContainer = styled("div")({
+  display: "flex",
+  flexDirection: "row",
+  height: "1.5em",
+  "&.colorType": {
+    alignItems: "flex-end",
+  },
+})
 
-export default function MaterialColorPicker({ color, onChangeComplete }:any) {
+const ColorItem = styled("div")(({ theme }) => ({
+  transition: theme.transitions.create("height"),
+}))
+
+export default function MaterialColorPicker({ color, onChangeComplete }: any) {
   const [hue, setHue] = React.useState("red")
   const [shade, setShade] = React.useState<string | null>(null)
-  const classes = useStyles()
 
   useEffect(() => {
     // if incoming color maps to a Material UI color, change the input to match
@@ -132,7 +125,7 @@ export default function MaterialColorPicker({ color, onChangeComplete }:any) {
   return (
     <div>
       <div>
-        <div className={`${classes.paletteContainer} ${classes.colorType}`}>
+        <PaletteContainer className="colorType">
           {muiHues.map(c => (
             <Tooltip
               title={c}
@@ -141,19 +134,18 @@ export default function MaterialColorPicker({ color, onChangeComplete }:any) {
               TransitionComponent={Collapse}
               arrow
             >
-              <div
+              <ColorItem
                 style={{
                   height: hue === c ? "1.5em" : "1em",
                   width: colorTypeWidth,
                   backgroundColor: (colors as any)[c]["500"],
                 }}
-                className={classes.colorItem}
                 onClick={() => setHue(c)}
               />
             </Tooltip>
           ))}
-        </div>
-        <div className={classes.paletteContainer}>
+        </PaletteContainer>
+        <PaletteContainer>
           {muiShades.map(s => (
             <Tooltip
               title={s}
@@ -162,13 +154,12 @@ export default function MaterialColorPicker({ color, onChangeComplete }:any) {
               TransitionComponent={Collapse}
               arrow
             >
-              <div
+              <ColorItem
                 style={{
                   height: shade === s ? "1.5em" : "1em",
                   width: colorStrengthWidth,
                   backgroundColor: (colors as any)[hue ?? "red"][s],
                 }}
-                className={classes.colorItem}
                 onClick={() => {
                   setShade(s)
                   onChangeComplete((colors as any)[hue ?? "red"][s])
@@ -176,7 +167,7 @@ export default function MaterialColorPicker({ color, onChangeComplete }:any) {
               />
             </Tooltip>
           ))}
-        </div>
+        </PaletteContainer>
       </div>
     </div>
   )

@@ -1,38 +1,42 @@
 import React, { useCallback } from "react";
 import {
-  makeStyles,
   Theme,
   createStyles,
   Typography,
   Switch,
 } from "@mui/material";
+import styled from "@mui/material/styles/styled";
 import { useDispatch } from "react-redux";
 import { setThemeOption } from "../../../state/themeSlice";
 import { useThemeValue } from "../../../state/selectors";
 import { ThemeValueChangeEvent } from "../events";
 
-const useStyles:any = makeStyles((theme: Theme) =>
-  createStyles({
-    inputRoot: {
-      display: "flex",
-      alignItems: "center",
-    },
-    switchBase: {
-      color: "#fff",
-      // "&$checked": {
-      //   color: "#212121",
-      // },
-      // "&$checked + $track": {
-      //   backgroundColor: "#303030",
-      // },
-    },
-    checked: {},
-    track: {},
-  })
-);
+const InputRoot = styled("div")({
+  display: "flex",
+  alignItems: "center",
+});
+
+// Define a type for the custom props that Typography will accept
+interface StyledTypographyProps {
+  isDark: boolean; // Define isDark prop
+}
+
+// Use styled function with the defined props
+const StyledTypography = styled(Typography)<StyledTypographyProps>(({ theme, isDark }) => ({
+  color: isDark ? theme.palette.text.secondary : theme.palette.text.primary,
+  marginRight: theme.spacing(1), // Adjust margin as needed
+}));
+
+const StyledSwitch = styled(Switch)(({ theme }) => ({
+  "& .MuiSwitch-switchBase.Mui-checked": {
+    color: "#fff", // Adjust color when switch is checked
+  },
+  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+    backgroundColor: "#303030", // Adjust background color of the track when switch is checked
+  },
+}));
 
 export default function ThemeTypeInput() {
-  const classes = useStyles();
   const themeIsDark = useThemeValue("palette.type") === "dark";
   const dispatch = useDispatch();
 
@@ -43,29 +47,18 @@ export default function ThemeTypeInput() {
   }, [dispatch, themeIsDark]);
 
   return (
-    <div className={classes.inputRoot}>
-      <Typography
-        variant="body2"
-        color={themeIsDark ? "textSecondary" : "textPrimary"}
-      >
+    <InputRoot>
+      <StyledTypography variant="body2" isDark={themeIsDark}>
         Light
-      </Typography>
-      <Switch
+      </StyledTypography>
+      <StyledSwitch
         checked={themeIsDark}
-        onClick={toggleThemeType}
-        classes={{
-          switchBase: classes.switchBase,
-          checked: classes.checked,
-          track: classes.track,
-        }}
+        onChange={toggleThemeType}
         color="default"
       />
-      <Typography
-        variant="body2"
-        color={!themeIsDark ? "textSecondary" : "textPrimary"}
-      >
+      <StyledTypography variant="body2" isDark={!themeIsDark}>
         Dark
-      </Typography>
-    </div>
+      </StyledTypography>
+    </InputRoot>
   );
 }

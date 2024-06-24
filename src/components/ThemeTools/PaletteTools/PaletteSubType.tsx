@@ -1,83 +1,83 @@
-import React from "react"
+import React from "react";
 import {
   Accordion,
   AccordionSummary,
   Typography,
-  makeStyles,
-  createStyles,
   AccordionDetails,
-  Theme,
-} from "@mui/material"
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import PaletteInput from "./PaletteInput"
-import { useThemeValue } from "../../../state/selectors"
-
-const useStyles:any = makeStyles((theme: any) =>
-  createStyles({
-    title: {
-      textTransform: "capitalize",
-    },
-    accordionDetails: {
-      flexDirection: "column",
-      "&> *": {
-        marginBottom: theme.spacing(2),
-      },
-    },
-    thumbnailContainer: {
-      display: "flex",
-      alignSelf: "stretch",
-    },
-    colorThumbnail: {
-      height: "100%",
-      width: 15,
-      marginLeft: 4,
-      border: "1px solid grey",
-    },
-  })
-)
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import PaletteInput from "./PaletteInput";
+import { useThemeValue } from "../../../state/selectors";
+import styled from "@mui/material/styles/styled";
 
 interface PaletteSubTypeProps {
-  title: string
-  path: string
-  paletteValues: [string, string][] // [name, path]
+  title: string;
+  path: string;
+  paletteValues: [string, string][]; // [name, path]
 }
 
-export default function PaletteSubType({
+const AccordionWrapper = styled(Accordion)({
+  marginBottom: "1rem",
+});
+
+const AccordionSummaryWrapper = styled(AccordionSummary)(({ theme }) => ({
+  "& .MuiTypography-body2": {
+    textTransform: "capitalize",
+  },
+}));
+
+const AccordionDetailsWrapper = styled(AccordionDetails)({
+  flexDirection: "column",
+  "& > *": {
+    marginBottom: "1rem",
+  },
+});
+
+const ColorThumbnailContainer = styled("div")({
+  display: "flex",
+  alignSelf: "stretch",
+});
+
+const ColorThumbnail = styled("div")(({ theme }) => ({
+  height: "100%",
+  width: 15,
+  marginLeft: 4,
+  border: `1px solid ${theme.palette.divider}`,
+}));
+
+const PaletteSubType: React.FC<PaletteSubTypeProps> = ({
   title,
   path,
   paletteValues,
-}: PaletteSubTypeProps) {
-  const classes = useStyles()
-  const themeValues = useThemeValue(path)
+}) => {
+  const themeValues = useThemeValue(path);
 
   return (
-    <>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.title} variant="body2">
-            {title}
-          </Typography>
-          {/* <div className={classes.thumbnailContainer}>
-            {paletteValues.map(([name, subPath]) => (
-              <div
-                key={name}
-                className={classes.colorThumbnail}
-                style={{ backgroundColor: themeValues?.[subPath] }}
-              />
-            ))}
-          </div> */}
-        </AccordionSummary>
-        <AccordionDetails className={classes.accordionDetails}>
+    <AccordionWrapper>
+      <AccordionSummaryWrapper expandIcon={<ExpandMoreIcon />}>
+        <Typography variant="body2">{title}</Typography>
+        {/* Uncomment to display color thumbnails */}
+        {/* <ColorThumbnailContainer>
           {paletteValues.map(([name, subPath]) => (
-            <PaletteInput
-              key={`${title}-${name}`}
-              label={name}
-              path={`${path}.${subPath}`}
-              // className="py-3"
+            <ColorThumbnail
+              key={name}
+              style={{ backgroundColor: themeValues?.[subPath] }}
             />
           ))}
-        </AccordionDetails>
-      </Accordion>
-    </>
-  )
-}
+        </ColorThumbnailContainer> */}
+      </AccordionSummaryWrapper>
+      <AccordionDetailsWrapper>
+        {paletteValues.map(([name, subPath]) => (
+          <PaletteInput
+            key={`${title}-${name}`}
+            label={name}
+            path={`${path}.${subPath}`}
+            // className="py-3"
+          />
+        ))}
+      </AccordionDetailsWrapper>
+    </AccordionWrapper>
+  );
+};
+
+export default PaletteSubType;
