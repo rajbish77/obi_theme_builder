@@ -1,33 +1,33 @@
 import React from 'react';
 import {
-  makeStyles,
   Theme,
   createStyles,
 } from "@mui/material/styles";
-import PreviewWindow from "./index";
+import { styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveTab } from "../../slices/editor/editorWindoSlive";
-import { AuthState } from "../../slices/types";
+import { setActiveTab } from "../slices/editor/editorWindoSlive";
+import { AuthState } from "../slices/types";
+import PreviewWindow from './PreviewWindow/PreviewWindow';
 
-const useStyles: any = makeStyles((theme: Theme) => createStyles({
-    mainWindow: {
-      overflowY: "auto",
-      height: "100%",
-    },
-    navAppBar: {
-      justifyContent: "space-between",
-      flexDirection: "row",
-    },
-    componentsTabRoot: {
-      backgroundColor: "#fff", // ensures transparent colors show properly
-    },
-    tabs: {
-      flexGrow: 1,
-    },
-    tabFlexContainer: {
-      justifyContent: "center",
-    },
-  })
+const useStyles: any = styled((theme: Theme) => createStyles({
+  mainWindow: {
+    overflowY: "auto",
+    height: "100%",
+  },
+  navAppBar: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+  componentsTabRoot: {
+    backgroundColor: "#fff", // ensures transparent colors show properly
+  },
+  tabs: {
+    flexGrow: 1,
+  },
+  tabFlexContainer: {
+    justifyContent: "center",
+  },
+})
 );
 
 export const previewTabId = "preview-tab";
@@ -43,7 +43,7 @@ const MainWindow = () => {
   return (
     <>
       <div className={classes.mainWindow}>
-        {activeTab === "preview" && <PreviewWindow />}
+      {activeTab === "preview" && <PreviewWindow />}
       </div>
     </>
   );

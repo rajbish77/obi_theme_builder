@@ -4,7 +4,7 @@ import ProtectedRoute from "../auth/protected-router";
 import LoginForm from "../components/PreviewWindow/Samples/Login";
 // import PostLoginLayout from "../post-login-layout";
 import PublisherListing from "../components/PreviewWindow/Publisher";
-import MainWindow from "../components/PreviewWindow/MainWindow";
+import MainWindow from "../components/MainWindow";
 
 export const router = createBrowserRouter([
   {

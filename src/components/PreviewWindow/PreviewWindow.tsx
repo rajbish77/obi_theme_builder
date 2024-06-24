@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Home from "./Samples/Home";
-import PreviewWrapper from "./index";
+import PreviewWrapper from "./PreviewWrapper";
 import Header from "./Samples/Header";
 import Footer from "./Samples/Footer";
 import Navigationbar from "./Samples/NavigationBar";
@@ -31,11 +31,11 @@ const useStyles: any = makeStyles((theme: Theme) => ({
     }
 }));
 
-interface PreviewWindowProps {
-    children: ReactNode;
-}
+// interface PreviewWindowProps {
+//     children: ReactNode;
+// }
 
-const PreviewWindow: React.FC<PreviewWindowProps> = ({ children }) => {
+const PreviewWindow: React.FC = () => {
     const classes = useStyles();
 
     return (
