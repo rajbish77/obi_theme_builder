@@ -15,7 +15,7 @@ export const defaultThemeOptions: ThemeOptions = {
     },
 };
 
-const customThemeProperties = ({
+export const customThemeProperties = ({
     header: {
         backgroundcolor: "#212529",
         textcolor: "#fff",
@@ -34,6 +34,7 @@ const customThemeProperties = ({
     body: {
         backgroundcolor: "#fff",
         textcolor: "#000",
+
     },
     button: {
         primary: {
@@ -73,11 +74,11 @@ const customThemeProperties = ({
         },
     }
 })
-export const defaultTheme: ThemeOptions = createTheme()
+export const defaultTheme: Theme = createTheme()
 
 export const themeWithDefaults = createTheme(defaultThemeOptions);
 
-export const themeConfig: any = {
+export const themeConfig: ThemeOptions = {
     palette: {
         mode: "dark",
         primary: {
@@ -162,4 +163,4 @@ export const themeConfig: any = {
 
 }
 
-export default createTheme({ ...defaultThemeOptions, ...customThemeProperties })
+export default createTheme(themeConfig)

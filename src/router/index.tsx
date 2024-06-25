@@ -5,11 +5,12 @@ import LoginForm from "../components/PreviewWindow/Samples/Login";
 // import PostLoginLayout from "../post-login-layout";
 import PublisherListing from "../components/PreviewWindow/Publisher";
 import MainWindow from "../components/MainWindow";
+import ThemeConfigDrawer from "../components/ThemeConfigDrawer";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainWindow />,
+    element: <ThemeConfigDrawer />,
 
     // element: <LoginForm />,
     children: [

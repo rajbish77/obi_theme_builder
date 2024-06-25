@@ -17,7 +17,7 @@ function EditorControls() {
   const id = useSelector((state: RootStateType) => state.id);
   const auth = useSelector((state: RootStateType) => state.auth);
   const editorState = useSelector((state: RootStateType) => state.editorThemeState);
-  const affiliateTheme = useSelector((state: RootStateType) => state.themeOptions); // Assuming this should be `state.editor.affiliateTheme`
+  const affiliateTheme = useSelector((state: RootStateType) => state.affiliateTheme); // Assuming this should be `state.editor.affiliateTheme`
   const themeOptions = useSelector((state: RootStateType) => state.themeOptions); // Assuming this should be `state.editor.themeOptions`
 
   const updateThemeApi = async (request: UpdateTheme) => {
@@ -81,7 +81,7 @@ function EditorControls() {
       let confirmed = await showConfirm("Confirm", "Are you sure you want to discard the changes?");
       if (confirmed.isConfirmed) {
         dispatch(editorThemeState(true)); // Dispatch action from `editorSlice`
-        dispatch(loadSavedTheme(defaultThemeOptions)); // Dispatch action from `editorSlice`
+        dispatch(loadSavedTheme(affiliateTheme)); // Dispatch action from `editorSlice`
         showSuccess("Success", "Changes discarded successfully");
       }
     } catch (error) {

@@ -5,6 +5,7 @@ import { useTheme, styled } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSelector, useDispatch } from "react-redux";
 import { AuthState } from "../slices/types";
+import MonacoThemeCodeEditor from "./MonacoThemeCodeEditor";
 
 const drawerWidth = 300;
 
@@ -48,7 +49,7 @@ const ThemeConfigDrawer = () => {
         <StyledGridContainer container direction="column" wrap="nowrap">
           <StyledGridItem item>
             {/* Use themeId as key so that editor is torn down and rebuilt with new theme */}
-            {/* <MonacoThemeCodeEditor key={themeId} /> */}
+            <MonacoThemeCodeEditor key={themeId} />
           </StyledGridItem>
 
           <StyledGridItem item>

@@ -9,7 +9,7 @@ import {
 import { Button, Col, Row, Dropdown } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { affiliateTheme, loadSavedTheme, setAffiliateId } from "../state/themeSlice"
-import { AuthState } from "../slices/types"
+import { AuthState, RootStateType } from "../slices/types"
 import { defaultThemeOptions } from "../siteTheme"
 import Loader from "../Loader"
 import BrushIcon from '@mui/icons-material/Brush';
@@ -55,7 +55,7 @@ const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [loading, setLoading] = useState(false)
   const auth = useSelector((state: AuthState) => state.auth);
-  const AffiliateData: any = useSelector((state: AuthState) => state.affiliate);
+  const AffiliateData: any = useSelector((state: RootStateType) => state.affiliate);
   const [searchResult, setSearchResult] = useState<AffiliateItem[]>([]);
 
   const styleObj = {

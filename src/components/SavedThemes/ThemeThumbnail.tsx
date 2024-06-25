@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Theme, createTheme, styled } from "@mui/material";
+import { Theme, ThemeOptions, createTheme, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 const RootContainer = styled('div')(({ theme, large }: { theme: Theme, large: boolean }) => ({
@@ -78,7 +78,7 @@ const FabIcon = styled(AddIcon)(({ theme }: { theme: Theme }) => ({
 }));
 
 interface ThemeThumbnailProps {
-  themeOptions: Theme;
+  themeOptions: ThemeOptions;
   large?: boolean;
 }
 

@@ -11,6 +11,7 @@ import { AuthState } from "../slices/types";
 import { useSelector, useDispatch } from "react-redux";
 import PublisherListing from "../components/PreviewWindow/Publisher/index";
 import { getEditorLoginStatus, getPublisherLoginStatus } from "../commonFunction";
+import MainWindow from "../components/MainWindow";
 
 // Styled components
 const AppRoot = styled("div")({
@@ -64,7 +65,7 @@ const IndexPage = () => {
           <Header />
           <NavAndMain>
             <Main>
-              {/* <EditorDashboard />  */}
+              <MainWindow/>
             </Main>
           </NavAndMain>
         </HeaderNavAndMain>
@@ -74,14 +75,13 @@ const IndexPage = () => {
 
   return (
     <>
-      {auth.auth ? (
-        <Layout>
-          {getPublisherLoginStatus(auth) && <Publisher />}
-          {getEditorLoginStatus(auth) && <Editor />}
-        </Layout>
-      ) : (
-        <LoginForm />
-      )}
+      {(auth.auth === true) ?
+        (<Layout>
+          {getPublisherLoginStatus(auth) && Publisher()}
+          {getEditorLoginStatus(auth) && Editor()}
+        </Layout>)
+        : <LoginForm />
+      }
     </>
   );
 };
