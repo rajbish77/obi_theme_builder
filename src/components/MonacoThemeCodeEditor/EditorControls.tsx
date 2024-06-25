@@ -17,8 +17,8 @@ function EditorControls() {
   const id = useSelector((state: RootStateType) => state.id);
   const auth = useSelector((state: RootStateType) => state.auth);
   const editorState = useSelector((state: RootStateType) => state.editorThemeState);
-  const affiliateTheme = useSelector((state: RootStateType) => state.editor.themeInput); // Assuming this should be `state.editor.affiliateTheme`
-  const themeOptions = useSelector((state: RootStateType) => state.editor.themeInput); // Assuming this should be `state.editor.themeOptions`
+  const affiliateTheme = useSelector((state: RootStateType) => state.themeOptions); // Assuming this should be `state.editor.affiliateTheme`
+  const themeOptions = useSelector((state: RootStateType) => state.themeOptions); // Assuming this should be `state.editor.themeOptions`
 
   const updateThemeApi = async (request: UpdateTheme) => {
     try {

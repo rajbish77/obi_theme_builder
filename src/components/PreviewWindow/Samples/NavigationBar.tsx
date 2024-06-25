@@ -28,11 +28,11 @@ interface SubmenuItem {
 }
 
 const StyledNavbar = styled(Navbar)(({ theme }) => ({
-  backgroundColor: theme.palette.navbar.backgroundcolor,
+  backgroundColor: theme.palette.navbar?.backgroundcolor,
 }));
 
 const StyledNav = styled(Nav)(({ theme }) => ({
-  color: theme.palette.navbar.textcolor,
+  color: theme.palette.navbar?.textcolor,
 }));
 
 const Navigationbar = () => {

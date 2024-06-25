@@ -10,26 +10,26 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 const StyledDiv = styled("div")(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily,
-  backgroundColor: theme.palette.body.backgroundColor,
+  fontFamily: theme.typography?.fontFamily,
+  backgroundColor: theme.palette.body?.backgroundColor,
 }));
 
 const StyledSection = styled("section")(({ theme }) => ({
-  backgroundColor: theme.palette.body.backgroundColor,
-  color: theme.palette.body.textcolor,
+  backgroundColor: theme.palette.body?.backgroundColor,
+  color: theme.palette.body?.textcolor,
   textAlign: "center",
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  backgroundColor: `${theme.palette.button.primary.background} !important`,
-  color: `${theme.palette.button.primary.color} !important`,
-  border: `1px solid ${theme.palette.button.primary.border} !important`,
-  boxShadow: `0 3px 1px -2px ${theme.palette.button.primary.boxshadow}, 0 2px 2px 0 ${theme.palette.button.primary.boxshadow}, 0 1px 5px 0 ${theme.palette.button.primary.boxshadow} !important`,
+  backgroundColor: `${theme.palette.button?.primary.background} !important`,
+  color: `${theme.palette.button?.primary.color} !important`,
+  border: `1px solid ${theme.palette.button?.primary.border} !important`,
+  boxShadow: `0 3px 1px -2px ${theme.palette.button?.primary.boxshadow}, 0 2px 2px 0 ${theme.palette.button?.primary.boxshadow}, 0 1px 5px 0 ${theme.palette.button?.primary.boxshadow} !important`,
   '&:hover': {
-    backgroundColor: `${theme.palette.button.primary.hoverbackground} !important`,
-    color: `${theme.palette.button.primary.hovercolor} !important`,
-    border: `1px solid ${theme.palette.button.primary.border} !important`,
-    boxShadow: `2px 2px 4px 1px ${theme.palette.button.primary.boxhovershadow}, 2px 2px 4px 1px ${theme.palette.button.primary.boxhovershadow}, 2px 2px 4px 1px ${theme.palette.button.primary.boxhovershadow}, 2px 2px 4px 1px ${theme.palette.button.primary.boxhovershadow} !important`,
+    backgroundColor: `${theme.palette.button?.primary.hoverbackground} !important`,
+    color: `${theme.palette.button?.primary.hovercolor} !important`,
+    border: `1px solid ${theme.palette.button?.primary.border} !important`,
+    boxShadow: `2px 2px 4px 1px ${theme.palette.button?.primary.boxhovershadow}, 2px 2px 4px 1px ${theme.palette.button?.primary.boxhovershadow}, 2px 2px 4px 1px ${theme.palette.button?.primary.boxhovershadow}, 2px 2px 4px 1px ${theme.palette.button?.primary.boxhovershadow} !important`,
   },
 }));
 

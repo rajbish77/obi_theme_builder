@@ -1,9 +1,9 @@
 import React from 'react';
 import { styled } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveTab } from '../slices/editor/editorWindoSlive';
 import { RootStateType } from '../slices/types';
 import PreviewWindow from './PreviewWindow/PreviewWindow';
+import { setActiveTab } from '../slices/editor/editorWindowSlice';
 
 // Styled component for MainWindow
 const MainWindowContainer = styled('div')({
@@ -16,7 +16,7 @@ const MainWindowContainer = styled('div')({
     flexDirection: "row",
   },
   componentsTabRoot: {
-    backgroundColor: "#fff", // ensures transparent colors show properly
+    backgroundColor: "#000", // ensures transparent colors show properly
   },
   tabs: {
     flexGrow: 1,
@@ -38,7 +38,8 @@ const MainWindow = () => {
 
   return (
     <MainWindowContainer>
-      {activeTab === previewTabId && <PreviewWindow />}
+      <PreviewWindow/>
+      {/* {activeTab === previewTabId && <PreviewWindow />} */}
       {/* {activeTab === componentsTabId && <ComponentsTab />}
       {activeTab === savedThemesTabId && <SavedThemesTab />} */}
     </MainWindowContainer>

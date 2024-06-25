@@ -52,7 +52,7 @@ const LoginForm = () => {
       };
 
       const response = await getAuthorizedLogin(request);
-      if (response.status === 0) {
+      if (response.status === 2) {
         dispatch(login(userName));
         dispatch(login(privilege));
       } else {

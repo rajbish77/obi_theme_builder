@@ -34,7 +34,6 @@ const customThemeProperties = ({
     body: {
         backgroundcolor: "#fff",
         textcolor: "#000",
-
     },
     button: {
         primary: {

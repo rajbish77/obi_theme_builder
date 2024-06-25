@@ -4,7 +4,8 @@ import { persistReducer, persistStore } from "redux-persist";
 import loginSlice from "../slices/logIn-slice";
 import authSlice from "../slices/authSlice";
 import editorSlice from "../slices/editor/editorSlice";
-import editorWindoSlive from "../slices/editor/editorWindoSlive";
+import themeSlice from "../state/themeSlice";
+import editorWindowSlice from "../slices/editor/editorWindowSlice";
 
 
 
@@ -12,7 +13,8 @@ const rootReducter = combineReducers({
   logIn: loginSlice,
   auth: authSlice,
   editor: editorSlice,
-  editorWindo: editorWindoSlive
+  editorWindow: editorWindowSlice,
+  theme: themeSlice,
 });
 
 const persistConfig = {

@@ -117,6 +117,7 @@ const Header = () => {
   useEffect(() => {
     if ((AffiliateData.length === undefined)) {
       fetchAffiliateApi();
+      console.log(AffiliateData)
     }
     if (AffiliateData.length !== undefined) {
       handleOnSearch("", "");

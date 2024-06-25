@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { RootStateType, PreviewSize, Affiliate, Auth } from '../slices/types';
-import { createTheme, ThemeOptions } from '@mui/material';
+import { createTheme, ThemeOptions } from '@mui/material/styles';
 import { generateThemeId, isSetEq, setByPath } from '../utils';
 import { defaultThemeOptions } from '../siteTheme';
 import { TypographyOptions } from '@mui/material/styles/createTypography';

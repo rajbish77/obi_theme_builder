@@ -20,23 +20,23 @@ import { RootStateType } from "../../../slices/types";
 
 // Define styled components
 const StyledFooter = styled.div`
-  background-color: ${(props) => props.theme.palette.footer.backgroundcolor};
+  background-color: ${(props) => props.theme.palette.footer?.backgroundcolor};
 `;
 
 const StyledLink = styled.a`
-  color: ${(props) => props.theme.palette.footer.textcolor.primary.textcolor};
-  font-family: ${(props) => props.theme.typography.fontFamily};
+  color: ${(props) => props.theme.palette.footer?.textcolor.primary.textcolor};
+  font-family: ${(props) => props.theme.typography?.fontFamily};
 `;
 
 const StyledSecondaryText = styled.span`
   color: ${(props) =>
-    props.theme.palette.footer.textcolor.secondary.textcolor} !important;
-  font-family: ${(props) => props.theme.typography.fontFamily};
+    props.theme.palette.footer?.textcolor.secondary.textcolor} !important;
+  font-family: ${(props) => props.theme.typography?.fontFamily};
 `;
 
 const Footer = () => {
   const directionIsRTL = useSelector(
-    (state: RootStateType) => state.themeOptions.direction === "rtl"
+    (state: RootStateType) => state.themeOptions?.direction === "rtl"
   );
 
   return (
