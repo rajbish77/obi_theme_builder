@@ -1,11 +1,17 @@
 const path = require('path');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js',
+    'ts.worker': 'monaco-editor/esm/vs/language/typescript/ts.worker.js',
+    'json.worker': 'monaco-editor/esm/vs/language/json/json.worker.js',
+    'css.worker': 'monaco-editor/esm/vs/language/css/css.worker.js',
+    'html.worker': 'monaco-editor/esm/vs/language/html/html.worker.js',
+  },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'public/monaco-workers'),
+    publicPath: '/monaco-workers/',
   },
   module: {
     rules: [
@@ -14,21 +20,11 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
         },
       },
     ],
   },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 9000,
-  },
-  plugins: [
-    new MonacoWebpackPlugin({
-      languages: ['javascript', 'typescript', 'json', 'css', 'html'],
-    }),
-  ],
 };

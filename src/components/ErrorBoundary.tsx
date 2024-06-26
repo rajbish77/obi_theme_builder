@@ -81,7 +81,7 @@ const ClearStorageButton = () => {
   const dispatch = useDispatch();
   const handleClick = useCallback(() => {
     dispatch(resetSiteData());
-    location.reload();
+    // location.reload();
   }, [dispatch]);
 
   return (

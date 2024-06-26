@@ -46,42 +46,44 @@ const IndexPage = () => {
 
   useEffect(() => {}, [dispatch]);
 
-  const Publisher = () => (
-    <HeaderNavAndMain>
-      <Header />
-      <NavAndMain>
-        <Main>
-          <PublisherListing />
-        </Main>
-      </NavAndMain>
-      <div className="footer-class"></div>
-    </HeaderNavAndMain>
-  );
+  // const Publisher = () => (
+  //   <HeaderNavAndMain>
+  //     <Header />
+  //     <NavAndMain>
+  //       <Main>
+  //         <PublisherListing />
+  //       </Main>
+  //     </NavAndMain>
+  //     <div className="footer-class"></div>
+  //   </HeaderNavAndMain>
+  // );
 
   const Editor = () => (
     <AppRoot>
       <ErrorBoundary>
         <HeaderNavAndMain>
-          <Header />
+          {/* <Header /> */}
           <NavAndMain>
             <Main>
               <MainWindow/>
             </Main>
           </NavAndMain>
         </HeaderNavAndMain>
+        <ThemeConfigDrawer/>
       </ErrorBoundary>
     </AppRoot>
   );
 
   return (
     <>
-      {(auth.auth === true) ?
+    <Editor/>
+      {/* {(auth.auth === true) ?
         (<Layout>
           {getPublisherLoginStatus(auth) && Publisher()}
           {getEditorLoginStatus(auth) && Editor()}
         </Layout>)
         : <LoginForm />
-      }
+      } */}
     </>
   );
 };

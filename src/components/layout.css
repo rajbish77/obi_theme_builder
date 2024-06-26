@@ -1,0 +1,124 @@
+/* root element needs to expand to full height */
+#___gatsby {
+  height: 100%;
+  background-color: #ffffff;
+  font-family: "Poppins" !important;
+}
+
+:root {
+  --tw-gradient-to: #a78bfa;
+  --tw-gradient-from: #4f46e5;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(79, 70, 229, 0));
+
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+
+  --tw-border-opacity: 1;
+}
+
+/* Set body height to view port height, let child elements handle scroll */
+body {
+  /* height: 100vh;
+ 
+  overflow: hidden; */
+  height: 100%;
+  background-color: #ffffff;
+}
+
+code {
+  font-size: 1rem;
+  background-color: #f0f0f0;
+  padding: 2px 4px;
+  color: #1f1f1f;
+}
+
+.sc-cPiKLX{
+  padding: 10px!important;
+  margin-bottom: 5px!important;
+  opacity: 1!important;
+}
+
+.kWrBeZ,.joCucS{
+  display: none;
+}
+
+.purple-gradient {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: 250ms;
+  border: 0;
+  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.purple-gradient:hover {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: 250ms;
+  border-color: #4f46e5;
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-gradient-to: #8b5cf6;
+  --tw-gradient-from: #4338ca;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(67, 56, 202, 0));
+}
+
+.my-class{
+  overflow: hidden;
+}
+
+.sc-imWYAI {
+ padding-right: 0 !important;
+}
+
+.custom-class{
+  margin: 0.1rem !important;
+}
+
+.my-actions {
+  margin: 2em 2em 0;
+}
+
+.order-1 {
+  order: 1;
+}
+
+.order-2 {
+  order: 2;
+}
+
+.left-gap {
+  margin-left: auto;
+}
+
+.footer-class {
+ background-color: #ffffff;
+ height: 150px;
+}
+
+.error {
+  border: 1px solid red;
+  border-radius: 3px;
+}
+.errormessage {
+  color: red;
+  padding-top: 5px;
+}
+
+.rounded-input>.wrapper {
+  border-radius: 0.375rem !important;
+}
+
+.bg-grey {
+  background-color: rgb(236,236,236);
+}
+
+.btn-grey {
+  background-color: #959595 !important;
+  border: #959595 !important;
+}

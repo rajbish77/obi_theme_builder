@@ -4,8 +4,9 @@ import Grid from "@mui/material/Grid";
 import { useTheme, styled } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSelector, useDispatch } from "react-redux";
-import { AuthState } from "../slices/types";
+import { AuthState, RootStateType } from "../slices/types";
 import MonacoThemeCodeEditor from "./MonacoThemeCodeEditor";
+import ThemeTools from "./ThemeTools/ThemeTools";
 
 const drawerWidth = 300;
 
@@ -33,7 +34,7 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
 const ThemeConfigDrawer = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const themeId = useSelector((state: AuthState) => state.themeId);
+  const themeId = useSelector((state: RootStateType) => state.themeId);
   const open = useSelector((state: AuthState) => state.themeConfigOpen);
 
   const permanent = useMediaQuery(theme.breakpoints.up("sm"));
@@ -53,7 +54,7 @@ const ThemeConfigDrawer = () => {
           </StyledGridItem>
 
           <StyledGridItem item>
-            {/* <ThemeTools /> */}
+            <ThemeTools />
           </StyledGridItem>
         </StyledGridContainer>
       </StyledDrawerPaper>
