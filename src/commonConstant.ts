@@ -1,4 +1,4 @@
-export let VIPER_URL = "https://nigeriauat.reliablesoftjm.com/";
+export let VIPER_URL = "https://nigeriadev.reliablesoftjm.com/";
 export const PREVIEW_URL = "https://obi.reliablesoftjm.com/";
 // http://obireact.mentem.in
 

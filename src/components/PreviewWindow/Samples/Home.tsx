@@ -9,27 +9,45 @@ import visamaster from "../../../images/visa-master-card.png";
 import { Link } from "react-router-dom";
 import React from "react";
 
+const theme = {
+  typography: {
+    fontFamily: "Arial, sans-serif",
+  },
+  palette: {
+    background: {
+      default: "#f5f5f5",
+    },
+    text: {
+      primary: "#333333",
+    },
+    primary: {
+      main: "#007bff",
+      contrastText: "#ffffff",
+    },
+  },
+};
+
 const StyledDiv = styled("div")(({ theme }) => ({
-  fontFamily: theme.typography?.fontFamily,
-  backgroundColor: theme.palette.body?.backgroundColor,
+  fontFamily: theme.typography.fontFamily,
+  backgroundColor: theme.palette.background.default,
 }));
 
 const StyledSection = styled("section")(({ theme }) => ({
-  backgroundColor: theme.palette.body?.backgroundColor,
-  color: theme.palette.body?.textcolor,
+  backgroundColor: theme.palette.background.default,
+  color: theme.palette.text.primary,
   textAlign: "center",
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  backgroundColor: `${theme.palette.button?.primary.background} !important`,
-  color: `${theme.palette.button?.primary.color} !important`,
-  border: `1px solid ${theme.palette.button?.primary.border} !important`,
-  boxShadow: `0 3px 1px -2px ${theme.palette.button?.primary.boxshadow}, 0 2px 2px 0 ${theme.palette.button?.primary.boxshadow}, 0 1px 5px 0 ${theme.palette.button?.primary.boxshadow} !important`,
+  backgroundColor: `${theme.palette.primary.main} !important`,
+  color: `${theme.palette.primary.contrastText} !important`,
+  border: `1px solid ${theme.palette.primary.main} !important`,
+  boxShadow: `0 3px 1px -2px ${theme.palette.primary.main}, 0 2px 2px 0 ${theme.palette.primary.main}, 0 1px 5px 0 ${theme.palette.primary.main} !important`,
   '&:hover': {
-    backgroundColor: `${theme.palette.button?.primary.hoverbackground} !important`,
-    color: `${theme.palette.button?.primary.hovercolor} !important`,
-    border: `1px solid ${theme.palette.button?.primary.border} !important`,
-    boxShadow: `2px 2px 4px 1px ${theme.palette.button?.primary.boxhovershadow}, 2px 2px 4px 1px ${theme.palette.button?.primary.boxhovershadow}, 2px 2px 4px 1px ${theme.palette.button?.primary.boxhovershadow}, 2px 2px 4px 1px ${theme.palette.button?.primary.boxhovershadow} !important`,
+    backgroundColor: `${theme.palette.primary.dark} !important`,
+    color: `${theme.palette.primary.contrastText} !important`,
+    border: `1px solid ${theme.palette.primary.main} !important`,
+    boxShadow: `2px 2px 4px 1px ${theme.palette.primary.main}, 2px 2px 4px 1px ${theme.palette.primary.main}, 2px 2px 4px 1px ${theme.palette.primary.main}, 2px 2px 4px 1px ${theme.palette.primary.main} !important`,
   },
 }));
 

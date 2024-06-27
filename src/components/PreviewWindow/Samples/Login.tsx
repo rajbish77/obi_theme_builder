@@ -13,7 +13,7 @@ import { getAuthorizedLogin } from '../../../apicalls';
 import Loader from '../../../Loader';
 import { HandleAPIError } from '../../../commonFunction';
 import { setLogIn } from '../../../slices/logInPage';
-import { login, clearAuth, auth, userName, publisher, editor } from "../../../slices/logIn-slice"
+import logInSlice, { login } from "../../../slices/logIn-slice"
 import { RootState } from '../../../app/store';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
@@ -22,11 +22,15 @@ const LoginForm = () => {
   const md5 = require('md5');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const authData = useAppSelector(auth);
   const [displayPassword, setDisplayPassword] = useState(false);
   const loading = useAppSelector((state) => state.logIn.loading);
-  const publisherData = useAppSelector(publisher);
-  const editorData = useAppSelector(editor);
+  const userName = useAppSelector((state)=> state.logIn.userName)
+  const auth = useAppSelector((state)=> state.logIn.auth)
+  const publicer = useAppSelector((state)=> state.logIn.privilege)
+
+  // console.log(userName)
+  // console.log(auth)
+  // console.log(publicer)
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -36,6 +40,40 @@ const LoginForm = () => {
       label: Yup.string().required("Privilege Type is required"),
     }).required("Privilege Type is required"),
   });
+
+  // const handleSubmit = async (values: any) => {
+  //   const { username, password, previligesType } = values;
+
+  //   let userName = username.trim();
+  //   let passWord = password.trim();
+  //   let privilege = previligesType.value;
+
+  //   try {
+  //     const request = {
+  //       username: userName,
+  //       password: md5(passWord),
+  //       privilege,
+  //     };
+
+  //     const response = await getAuthorizedLogin(request);
+  //     if (response.status === 2) {
+  //       dispatch(login(userName));
+  //       dispatch(login(privilege));
+  //     } else {
+  //       showError("Error", response?.statusMessage);
+  //     };
+
+  //     if (publisherData === "Y") {
+  //       navigate('/publisher-dashboard', { replace: true });
+  //     } else if (editorData === "Y") {
+  //       navigate('/editor-dashboard', { replace: true });
+  //     } else {
+  //       navigate('/');
+  //     }
+  //   } catch (error) {
+  //     HandleAPIError(error);
+  //   }
+  // };
 
   const handleSubmit = async (values: any) => {
     const { username, password, previligesType } = values;
@@ -53,18 +91,10 @@ const LoginForm = () => {
 
       const response = await getAuthorizedLogin(request);
       if (response.status === 2) {
-        dispatch(login(userName));
         dispatch(login(privilege));
+        dispatch(login(username));
       } else {
         showError("Error", response?.statusMessage);
-      };
-
-      if (publisherData === "Y") {
-        navigate('/publisher-dashboard', { replace: true });
-      } else if (editorData === "Y") {
-        navigate('/editor-dashboard', { replace: true });
-      } else {
-        navigate('/');
       }
     } catch (error) {
       HandleAPIError(error);

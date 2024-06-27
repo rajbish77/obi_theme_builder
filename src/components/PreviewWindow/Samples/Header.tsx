@@ -15,10 +15,55 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Select from "react-select";
 import Tooltip from "react-bootstrap/Tooltip";
-import { Theme } from "@mui/material";
+import { createTheme, Theme, ThemeProvider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { OverlayTrigger } from "react-bootstrap";
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    header: {
+      backgroundcolor: string;
+      textcolor: string;
+      button: {
+        background: string;
+        color: string;
+        border: string;
+        hoverbackground: string;
+        hovercolor: string;
+      };
+    };
+  }
+  interface PaletteOptions {
+    header?: {
+      backgroundcolor?: string;
+      textcolor?: string;
+      button?: {
+        background?: string;
+        color?: string;
+        border?: string;
+        hoverbackground?: string;
+        hovercolor?: string;
+      };
+    };
+  }
+}
+
+const theme = createTheme({
+  palette: {
+    header: {
+      backgroundcolor: '#3f51b5',
+      textcolor: '#fff',
+      button: {
+        background: '#3f51b5',
+        color: '#fff',
+        border: '#3f51b5',
+        hoverbackground: '#303f9f',
+        hovercolor: '#fff',
+      },
+    },
+  },
+});
 
 interface Country {
   value: string;
@@ -94,117 +139,114 @@ const Header = () => {
   }));
 
   return (
-    <StyledNavbar expand="lg">
-      <div className="container-xxl d-block">
-        <Row className="justify-content-around align-items-center">
-          {/* Weather */}
-          <Col lg={"auto"} md={12}>
-            <Row>
-              <Col lg={"auto"} md={12} className="m-p-0">
-                <Navbar.Text className="d-flex justify-content-center">
-                  <div className="d-flex p-1">
-                    <FontAwesomeIcon
-                      icon={faCloudSun}
-                      className="pe-2"
-                    />
-                    <span>MOBAY: 24 °C</span>
-                  </div>
-                  <div className="d-flex p-1">
-                    <FontAwesomeIcon
-                      icon={faCloudSun}
-                      className="pe-2"
-                    />
-                    <span>KINGSTON: 27 °C</span>
-                  </div>
-                </Navbar.Text>
-              </Col>
-            </Row>
-          </Col>
+    <ThemeProvider theme={theme}>
+      <StyledNavbar expand="lg">
+        <div className="container-xxl d-block">
+          <Row className="justify-content-around align-items-center">
+            <Col lg={"auto"} md={12}>
+              <Row>
+                <Col lg={"auto"} md={12} className="m-p-0">
+                  <Navbar.Text className="d-flex justify-content-center">
+                    <div className="d-flex p-1">
+                      <FontAwesomeIcon
+                        icon={faCloudSun}
+                        className="pe-2"
+                      />
+                      <span>MOBAY: 24 °C</span>
+                    </div>
+                    <div className="d-flex p-1">
+                      <FontAwesomeIcon
+                        icon={faCloudSun}
+                        className="pe-2"
+                      />
+                      <span>KINGSTON: 27 °C</span>
+                    </div>
+                  </Navbar.Text>
+                </Col>
+              </Row>
+            </Col>
 
-          {/* Social Icons */}
-          <Col lg={"auto"} md={12}>
-            <Row className="justify-content-center">
-              <Col lg={"auto"} md={12}>
-                <Navbar.Text className="d-flex">
-                  <a href="/" title="Facebook" target="_blank" rel="noreferrer">
-                    <FontAwesomeIcon
-                      icon={faFacebookSquare}
-                      size={"2x"}
-                      className="me-2"
-                    />
-                  </a>
-                  <a href="/" title="Twitter" target="_blank" rel="noreferrer">
-                    <FontAwesomeIcon
-                      icon={faTwitterSquare}
-                      size={"2x"}
-                      className="me-2"
-                    />
-                  </a>
-                </Navbar.Text>
-              </Col>
-            </Row>
-          </Col>
+            <Col lg={"auto"} md={12}>
+              <Row className="justify-content-center">
+                <Col lg={"auto"} md={12}>
+                  <Navbar.Text className="d-flex">
+                    <a href="/" title="Facebook" target="_blank" rel="noreferrer">
+                      <FontAwesomeIcon
+                        icon={faFacebookSquare}
+                        size={"2x"}
+                        className="me-2"
+                      />
+                    </a>
+                    <a href="/" title="Twitter" target="_blank" rel="noreferrer">
+                      <FontAwesomeIcon
+                        icon={faTwitterSquare}
+                        size={"2x"}
+                        className="me-2"
+                      />
+                    </a>
+                  </Navbar.Text>
+                </Col>
+              </Row>
+            </Col>
 
-          {/* Contact Info */}
-          <Col lg={"auto"} md={12}>
-            <Row className="align-items-center">
-              <Col lg={"auto"} md={12}>
-                <Navbar.Text className="d-flex align-items-center">
-                  <a href="/" title="" target="_blank" rel="noreferrer">
-                    <FontAwesomeIcon
-                      icon={faSquarePhone}
-                      size={"2x"}
-                      className="me-2"
-                    />
-                  </a>
-                  <p className="m-0">
-                    Contact Us: USA +1-876-619-1565 | CA 954-837-6290
-                  </p>
-                </Navbar.Text>
-              </Col>
-            </Row>
-          </Col>
+            <Col lg={"auto"} md={12}>
+              <Row className="align-items-center">
+                <Col lg={"auto"} md={12}>
+                  <Navbar.Text className="d-flex align-items-center">
+                    <a href="/" title="" target="_blank" rel="noreferrer">
+                      <FontAwesomeIcon
+                        icon={faSquarePhone}
+                        size={"2x"}
+                        className="me-2"
+                      />
+                    </a>
+                    <p className="m-0">
+                      Contact Us: USA +1-876-619-1565 | CA 954-837-6290
+                    </p>
+                  </Navbar.Text>
+                </Col>
+              </Row>
+            </Col>
 
-          {/* Cart Icon and Market Dropdown */}
-          <Col lg={"auto"} md={12}>
-            <Row className="align-items-center">
-              <Col lg={"auto"} md={12}>
-                <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center my-2">
-                  {renderCartIcon()}
-                  <Col md="auto">
-                    <Select
-                      defaultValue={country_name_with_flag[0]}
-                      options={country_name_with_flag}
-                      onChange={(d) => { }}
-                    />
-                  </Col>
-                </Navbar.Collapse>
-              </Col>
-            </Row>
-          </Col>
+            <Col lg={"auto"} md={12}>
+              <Row className="align-items-center">
+                <Col lg={"auto"} md={12}>
+                  <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center my-2">
+                    {renderCartIcon()}
+                    <Col md="auto">
+                      <Select
+                        defaultValue={country_name_with_flag[0]}
+                        options={country_name_with_flag}
+                        onChange={(d) => { }}
+                      />
+                    </Col>
+                  </Navbar.Collapse>
+                </Col>
+              </Row>
+            </Col>
 
-          {/* Login Buttons */}
-          <Col lg={"auto"} md={12}>
-            <Row className="align-items-center">
-              <Col lg={"auto"} md={12}>
-                <Navbar.Collapse className="justify-content-center" id="basic-navbar-nav">
-                  <Link to="/" className="text-decoration-none">
-                    <StyledButton>
-                      SUBSCRIBER LOGIN
-                    </StyledButton>
-                  </Link>
-                  <Link to="/" className="mx-1 text-decoration-none">
-                    <StyledButton variant="success">
-                      PARTNER LOGIN
-                    </StyledButton>
-                  </Link>
-                </Navbar.Collapse>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </div>
-    </StyledNavbar>
+            <Col lg={"auto"} md={12}>
+              <Row className="align-items-center">
+                <Col lg={"auto"} md={12}>
+                  <Navbar.Collapse className="justify-content-center" id="basic-navbar-nav">
+                    <Link to="/" className="text-decoration-none">
+                      <StyledButton>
+                        SUBSCRIBER LOGIN
+                      </StyledButton>
+                    </Link>
+                    <Link to="/" className="mx-1 text-decoration-none">
+                      <StyledButton variant="success">
+                        PARTNER LOGIN
+                      </StyledButton>
+                    </Link>
+                  </Navbar.Collapse>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </div>
+      </StyledNavbar>
+    </ThemeProvider>
   );
 };
 

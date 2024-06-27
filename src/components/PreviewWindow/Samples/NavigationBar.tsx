@@ -10,7 +10,7 @@ import {
   menuFeedback,
   menuGetUpdateFlightDetailsLink,
 } from "./menuItems";
-import { styled } from "@mui/material/styles";
+import { createTheme, styled } from "@mui/material/styles"
 
 interface MenuItem {
   key: string;
@@ -26,6 +26,30 @@ interface SubmenuItem {
   url?: string;
   target?: string;
 }
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    navbar: {
+      backgroundcolor: string;
+      textcolor: string;
+    };
+  }
+  interface PaletteOptions {
+    navbar?: {
+      backgroundcolor?: string;
+      textcolor?: string;
+    };
+  }
+}
+
+const theme = createTheme({
+  palette: {
+    navbar: {
+      backgroundcolor: '#333',
+      textcolor: '#fff',
+    },
+  },
+});
 
 const StyledNavbar = styled(Navbar)(({ theme }) => ({
   backgroundColor: theme.palette.navbar?.backgroundcolor,

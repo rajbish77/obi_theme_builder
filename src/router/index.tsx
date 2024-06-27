@@ -6,11 +6,13 @@ import LoginForm from "../components/PreviewWindow/Samples/Login";
 import PublisherListing from "../components/PreviewWindow/Publisher";
 import MainWindow from "../components/MainWindow";
 import ThemeConfigDrawer from "../components/ThemeConfigDrawer";
+import MainWindoPropes from "../components/MainWindoPropes";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <ThemeConfigDrawer />,
+    element: <MainWindoPropes />,
+      // element: <PublisherListing />,
 
     // element: <LoginForm />,
     children: [

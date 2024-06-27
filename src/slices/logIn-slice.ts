@@ -2,11 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import AuthApi from "../Api Work/auth-api";
 import { RootState } from "../app/store";
-import UserApi from "../Api Work/user-api";
 import { _post } from "../configs/api-config";
 import { Auth } from "./types";
+import { VIPER_CONST } from "../commonConstant";
 
 const initialState: Auth = {
   auth: false,
@@ -29,7 +28,7 @@ const login = createAsyncThunk(
         status: number;
         statusMessage: string;
         data: Auth;
-      }>("getauthorizedlogin", data);
+      }>(`${VIPER_CONST.base_url}getauthorizedlogin`, data);
 
       if (!response) {
         throw new Error("No response from API");

@@ -55,7 +55,7 @@ const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [loading, setLoading] = useState(false)
   const auth = useSelector((state: AuthState) => state.auth);
-  const AffiliateData: any = useSelector((state: RootStateType) => state.affiliate);
+  const AffiliateData = useSelector((state: RootStateType) => state.affiliate) || [];
   const [searchResult, setSearchResult] = useState<AffiliateItem[]>([]);
 
   const styleObj = {
@@ -115,18 +115,17 @@ const Header = () => {
   }
 
   useEffect(() => {
-    if ((AffiliateData.length === undefined)) {
+    if (!Array.isArray(AffiliateData) || AffiliateData.length === 0) {
       fetchAffiliateApi();
-      console.log(AffiliateData)
     }
-    if (AffiliateData.length !== undefined) {
-      handleOnSearch("", "");
+    if (Array.isArray(AffiliateData) && AffiliateData.length > 0) {
+      handleOnSearch(AffiliateData);
     }
   }, [AffiliateData]);
 
   const handleOnSearch = (string?: any, results?: any) => {
     const searchTerm = string?.toLowerCase();
-    if (AffiliateData) {
+    if (Array.isArray(AffiliateData)) {
       const filteredResults = AffiliateData?.filter((item: AffiliateItem) =>
         item?.name?.toLowerCase()?.includes(searchTerm)
       );
@@ -157,7 +156,7 @@ const Header = () => {
       <>
         <Col md={"8"} className="d-flex justify-content-start align-items-center">
           <Title variant="h6" className="fw-semibold text-dark align-items-center mx-2">
-            Select Affiliate:
+            Select Affiliate
           </Title>
           <div style={styleObj} className="py-1">
             <ReactSearchAutocomplete
@@ -241,3 +240,4 @@ Header.defaultProps = {
 }
 
 export default Header
+

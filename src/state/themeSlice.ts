@@ -211,23 +211,23 @@ const themeSlice = createSlice({
     resetSiteData: (state) => {
       return initialState;
     },
-    logInState: (state:any, action: PayloadAction<{ loginType: any; userName: string }>) => {
-      if (action.payload.loginType === THEMEEDITOR) {
-        state.auth = {
-          auth: true,
-          editor: "Y",
-          publisher: "N",
-          userName: action.payload.userName,
-        };
-      } else if (action.payload.loginType === THEMEPUBLISHER) {
-        state.auth = {
-          auth: true,
-          editor: "N",
-          publisher: "Y",
-          userName: action.payload.userName,
-        };
-      }
-    },
+    // logInState: (state:any, action: PayloadAction<{ loginType: any; userName: string }>) => {
+    //   if (action.payload.loginType === THEMEEDITOR) {
+    //     state.auth = {
+    //       auth: true,
+    //       editor: "Y",
+    //       publisher: "N",
+    //       userName: action.payload.userName,
+    //     };
+    //   } else if (action.payload.loginType === THEMEPUBLISHER) {
+    //     state.auth = {
+    //       auth: true,
+    //       editor: "N",
+    //       publisher: "Y",
+    //       userName: action.payload.userName,
+    //     };
+    //   }
+    // },
     logOutState: (state) => {
       state.auth = {...state.auth,...initialAuthState };
       state.id = null;
@@ -256,7 +256,7 @@ export const {
   loadSavedTheme,
   setActiveTab,
   resetSiteData,
-  logInState,
+  // logInState,
   logOutState,
   fetchAffiliate,
   affiliateTheme,
