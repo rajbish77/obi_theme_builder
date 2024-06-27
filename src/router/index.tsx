@@ -6,34 +6,39 @@ import LoginForm from "../components/PreviewWindow/Samples/Login";
 import PublisherListing from "../components/PreviewWindow/Publisher";
 import MainWindow from "../components/MainWindow";
 import ThemeConfigDrawer from "../components/ThemeConfigDrawer";
-import MainWindoPropes from "../components/MainWindoPropes";
+import IndexPage from "../page";
+import PaletteInput from "../components/ThemeTools/PaletteTools/PaletteInput";
+import { enableMapSet } from "immer";
+import PaletteSubType from "../components/ThemeTools/PaletteTools/PaletteSubType";
+import PaletteTools from "../components/ThemeTools/PaletteTools/PaletteTools";
+
+enableMapSet();
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainWindoPropes />,
-      // element: <PublisherListing />,
-
-    // element: <LoginForm />,
-    children: [
-      {
-        // path: "",
-        // element: (
-        //   <ProtectedRoute>
-        //     <PostLoginLayout />
-        //   </ProtectedRoute>
-        // ),
-        children: [
-          // {
-          //   path: "/publisher-dashboard",
-          //   element: <PublisherListing />,
-          // },
-          // {
-          //   path: "/editor-dashboard",
-          //   element: <MainWindow />,
-          // },
-        ],
-      },
-    ],
+    // element: <MainWindow />,
+    // element: <PaletteTools />
+    element: <LoginForm />,
+    // children: [
+    //   {
+    //     path: "",
+    //     element: (
+    //       <ProtectedRoute>
+    //         <PostLoginLayout />
+    //       </ProtectedRoute>
+    //     ),
+    //     children: [
+    //       {
+    //         path: "/publisher-dashboard",
+    //         element: <PublisherListing />,
+    //       },
+    //       {
+    //         path: "/editor-dashboard",
+    //         element: <MainWindow />,
+    //       },
+    //     ],
+    //   },
+    // ],
   },
 ]);

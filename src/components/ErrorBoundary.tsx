@@ -74,9 +74,9 @@ export default withStyles(styles)(ErrorBoundary)
 const ClearStorageButton: React.FC = () => {
   const dispatch = useDispatch()
   const handleClick = useCallback(() => {
-    dispatch(resetSiteData())
-    // location.reload()
-  }, [dispatch])
+    dispatch(resetSiteData());
+    // location.reload();
+  }, [dispatch]);
 
   return (
     <Button

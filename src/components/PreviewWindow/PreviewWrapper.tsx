@@ -1,27 +1,59 @@
 import React from "react";
-import ThemeWrapper from "./ThemeWrapper";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../../slices/types";
+import ThemeWrapper from "./ThemeWrapper";
+import { Paper } from "@mui/material";
 
+// Styled components for PreviewWrapper
 const PreviewWrapperContainer = styled.div`
-  /* your styles here */
+  height: 100%;
+  position: relative;
 `;
 
 const LetterBox = styled.div`
-  /* your styles here */
+  background-color: #212121;
+  height: 100%;
 `;
 
-const PreviewBackground = styled.div`
-  /* your styles here */
+// Styled component for PreviewBackground
+const PreviewBackgroundPaper = styled(Paper)`
+  && {
+    background-color: theme.palette.background.default};
+    max-width: none;
+    height: 100%;
+    overflow-y: scroll;
+    margin: auto;
+    position: relative;
+    &.xs {
+      max-width: 375px;
+    }
+    &.sm {
+      max-width: 650px;
+    }
+    &.md {
+      max-width: 1000px;
+    }
+  }
 `;
 
-interface PreviewWrapperProps {
+interface PreviewBackgroundProps {
   children: React.ReactNode;
 }
 
-const PreviewWrapper: React.FC<PreviewWrapperProps> = ({ children }) => {
+const PreviewBackground = ({ children }: PreviewBackgroundProps) => {
+  const themeOptions = useSelector((state: RootStateType) => state.themeOptions);
+  const directionIsRTL = themeOptions?.direction === "rtl";
+
   return (
+    <PreviewBackgroundPaper elevation={8} square dir={directionIsRTL ? "rtl" : ""}>
+      {children}
+    </PreviewBackgroundPaper>
+  );
+};
+
+const PreviewWrapper: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {  return (
     <PreviewWrapperContainer>
-      {/* <PreviewSizeControls /> */}
       <ThemeWrapper>
         <LetterBox>
           <PreviewBackground>{children}</PreviewBackground>

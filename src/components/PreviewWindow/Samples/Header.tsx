@@ -73,19 +73,19 @@ interface Country {
 const FLAG_URL = "https://nigeria.reliablesoftjm.com/images/flags/";
 
 const StyledNavbar = styled(Navbar)(({ theme }) => ({
-  backgroundColor: theme.palette.header?.backgroundcolor,
-  color: theme.palette.header?.textcolor,
+  backgroundColor: theme.palette.header?.backgroundcolor || 'inherit',
+  color: theme.palette.header?.textcolor || 'inherit',
   fontFamily: theme.typography.fontFamily,
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.header?.button.background,
-  color: theme.palette.header?.button.color,
-  border: `1px solid ${theme.palette.header?.button.border}`,
+  backgroundColor: theme.palette.header?.button?.background || 'inherit',
+  color: theme.palette.header?.button?.color || 'inherit',
+  border: `1px solid ${theme.palette.header?.button?.border || 'transparent'}`,
   '&:hover': {
-    backgroundColor: theme.palette.header?.button.hoverbackground,
-    color: theme.palette.header?.button.hovercolor,
-    border: `1px solid ${theme.palette.header?.button.border}`,
+    backgroundColor: theme.palette.header?.button?.hoverbackground || 'inherit',
+    color: theme.palette.header?.button?.hovercolor || 'inherit',
+    border: `1px solid ${theme.palette.header?.button?.border || 'transparent'}`,
   },
 }));
 
