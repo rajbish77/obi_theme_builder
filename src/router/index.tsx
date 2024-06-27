@@ -11,13 +11,14 @@ import PaletteInput from "../components/ThemeTools/PaletteTools/PaletteInput";
 import { enableMapSet } from "immer";
 import PaletteSubType from "../components/ThemeTools/PaletteTools/PaletteSubType";
 import PaletteTools from "../components/ThemeTools/PaletteTools/PaletteTools";
+import MainWindoPropes from "../components/MainWindoPropes";
 
 enableMapSet();
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    // element: <MainWindow />,
+    // element: <MainWindoPropes />
     // element: <PaletteTools />
     element: <LoginForm />,
     // children: [
