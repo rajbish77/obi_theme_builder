@@ -4,14 +4,13 @@ import { ThemeOptions } from '@mui/material';
 import { EditorState, EditorStateOptions } from './types';
 import { parseEditorOutput } from './parser';
 import { defaultThemeOptions } from '../../siteTheme';
-import { useDispatch } from 'react-redux'; // Import useDispatch from react-redux
-import { useCallback } from 'react'; // Import useCallback from react
+import { useDispatch } from 'react-redux';
+import { useCallback } from 'react';
 
 const stringify = (themeOptions: ThemeOptions) => {
   return `let theme: ${JSON5.stringify(themeOptions, null, 2)};`;
 };
 
-// Export the hook directly
 export const useUpdateEditorState = () => {
   const dispatch = useDispatch();
   return useCallback(
@@ -53,15 +52,6 @@ const editorSlice = createSlice({
     updateEditorState: (state, action: PayloadAction<EditorStateOptions>) => {
       return { ...state, ...action.payload };
     },
-    updateTheme: (state, action: PayloadAction<ThemeOptions>) => {
-      state.themeInput = stringify(action.payload);
-    },
-    addNewTheme: (state, action: PayloadAction<{ themeOptions: ThemeOptions }>) => {
-      state.themeInput = stringify(action.payload.themeOptions);
-    },
-    loadTheme: (state, action: PayloadAction<ThemeOptions>) => {
-      state.themeInput = stringify(action.payload);
-    },
     updateVersionStates: (state, action: PayloadAction<number>) => {
       const nextVersionId = action.payload;
       const { initialVersion, lastVersion, currentVersion } = state;
@@ -76,30 +66,11 @@ const editorSlice = createSlice({
       }
       state.currentVersion = nextVersionId;
     }
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(saveEditorToTheme.fulfilled, (state, action) => {
-        state.themeInput = stringify(action.payload);
-      })
-      .addCase(saveEditorToTheme.rejected, (state, action) => {
-        state.errors.push({
-          category: 1,
-          messageText: action.payload as string,
-          code: 0,
-          file: undefined,
-          start: undefined,
-          length: undefined
-        });
-      });
   }
 });
 
 export const {
   updateEditorState,
-  updateTheme,
-  addNewTheme,
-  loadTheme,
   updateVersionStates
 } = editorSlice.actions;
 

@@ -5,8 +5,8 @@ import storage from "redux-persist/lib/storage";
 import AuthApi from "../Api Work/auth-api";
 import { RootState } from "../app/store";
 import UserApi from "../Api Work/user-api";
-import { _post } from "../configs/api-config";
 import { Auth } from "./types";
+import { _post } from "../Api Work/base-api";
 
 const initialState: Auth = {
   auth: false,

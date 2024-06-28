@@ -13,7 +13,7 @@ export default function PaletteInput({ label, path }: { label: string, path: str
   const dispatch = useDispatch()
 
   const handleColorChange = useCallback(
-    (color: any) => dispatch(setThemeOption({ path, value: color })),
+    (color:string) => dispatch(setThemeOption({ path, value: color })),
     [dispatch]
   )
 

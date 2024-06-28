@@ -4,6 +4,7 @@ import {
   InputAdornment,
   Popover,
   styled,
+  Theme,
 } from "@mui/material"
 import { ChromePicker } from "react-color"
 import MaterialColorPicker from "./MaterialColorPicker"
@@ -11,12 +12,12 @@ import { colorFromString } from "./utils"
 import { ThemeValueChangeEvent } from "../../components/ThemeTools/events"
 
 // Define styled components
-const PopoverPaper = styled('div')({
+const PopoverPaper = styled('div')((theme:Theme) =>({
   display: "flex",
   flexDirection: "column",
   borderRadius: 0,
   alignItems: "center",
-});
+}));
 
 const ColorSampleAdornment = styled('div')(({ theme }) => ({
   width: "1em",
@@ -97,10 +98,6 @@ export default function ColorInput({ label, color, onColorChange }:any) {
   )
 }
 
-/**
- * Creates the ChromePicker and MaterialColorPicker and
- * handles/formats events from ChromePicker
- */
 function ColorPicker({ color, onChangeComplete }:any) {
   const [inputValue, setInputValue] = React.useState<string | null>("#fff")
   useEffect(() => {

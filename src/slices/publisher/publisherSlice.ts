@@ -1,0 +1,72 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
+import { PublishersResponse, Publish } from "./types";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import PubApi from "../../Api Work/pub-api";
+import { VIPER_CONST } from "../../commonConstant";
+
+const publish = createAsyncThunk(
+  "publisher",
+  async (_, thunkApi) => {
+    let body = {
+      username: VIPER_CONST.alwaysOnUsername,
+      sessionid: VIPER_CONST.alwaysOnSessionid,
+      failstatus: 0,
+      request: {}
+    };
+    console.log(`Request body:`, body);
+    try {
+      const response: PublishersResponse = await PubApi.PublishReq(body);
+      console.log(`API Response:`, response);
+      return thunkApi.fulfillWithValue(response);
+    } catch (error: any) {
+      console.error("No response:", error);
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+type PInitialState = {
+    publisher: { data: Publish[] | null };
+    loading: boolean;
+    auth: boolean;
+};
+
+const initialState: PInitialState = {
+    publisher: {
+        data: null,
+    },
+    loading: false,
+    auth: true,
+};
+
+const PublisherSlice = createSlice({
+    name: "Get Publisher Data",
+    initialState,
+    reducers: {
+        clearAuth: (state) => initialState,
+    },
+    extraReducers: (builder) => {
+        builder.addCase(publish.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(publish.fulfilled, (state, action) => {
+            state.loading = false;
+            state.auth = true;
+            console.log("Fulfilled action payload:", action.payload);
+            const response = action.payload as PublishersResponse;
+            state.publisher.data = response.data.themes || null;
+        });
+        builder.addCase(publish.rejected, (state) => {
+            state.loading = false;
+        });
+    },
+});
+
+export const { clearAuth } = PublisherSlice.actions;
+
+export { publish };
+
+export const auth = (state: RootState) => state.publish.auth;
+export const loading = (state: RootState) => state.publish.loading;
+export default PublisherSlice.reducer;

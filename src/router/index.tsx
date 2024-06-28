@@ -17,9 +17,10 @@ enableMapSet();
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <IndexPage />,
+    // element: <IndexPage />,
     // element: <PaletteTools />
     // element: <LoginForm />,
+    element: <PublisherListing />,
     // children: [
     //   {
     //     path: "",

@@ -42,7 +42,7 @@ const ColorThumbnail = styled("div")(({ theme }) => ({
   height: "100%",
   width: 15,
   marginLeft: 4,
-  border: `1px solid ${theme.palette.divider}`,
+  // border: `1px solid ${theme.palette.divider}`,
 }));
 
 const PaletteSubType: React.FC<PaletteSubTypeProps> = ({
@@ -57,14 +57,14 @@ const PaletteSubType: React.FC<PaletteSubTypeProps> = ({
       <AccordionSummaryWrapper expandIcon={<ExpandMoreIcon />}>
         <Typography variant="body2">{title}</Typography>
         {/* Uncomment to display color thumbnails */}
-        <ColorThumbnailContainer>
+        {/* <ColorThumbnailContainer>
           {paletteValues.map(([name, subPath]) => (
             <ColorThumbnail
               key={name}
               style={{ backgroundColor: themeValues?.[subPath] }}
             />
           ))}
-        </ColorThumbnailContainer>
+        </ColorThumbnailContainer> */}
       </AccordionSummaryWrapper>
       <AccordionDetailsWrapper>
         {paletteValues.map(([name, subPath]) => (
