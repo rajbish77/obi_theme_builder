@@ -12,11 +12,11 @@ import Select from "react-select";
 import { getAuthorizedLogin } from '../../../apicalls';
 import Loader from '../../../Loader';
 import { HandleAPIError } from '../../../commonFunction';
-import { setLogIn } from '../../../slices/logInPage';
 import logInSlice, { login } from "../../../slices/logIn-slice"
 import { RootState } from '../../../app/store';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useRadioGroup } from '@mui/material';
 
 const LoginForm = () => {
   const md5 = require('md5');
@@ -24,11 +24,8 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [displayPassword, setDisplayPassword] = useState(false);
   const loading = useAppSelector((state) => state.logIn.loading);
-  const userName = useAppSelector((state)=> state.logIn.userName)
-  const auth = useAppSelector((state)=> state.logIn.auth)
-  const publicer = useAppSelector((state)=> state.logIn.privilege)
+  const useData = useAppSelector((state) => state.logIn)
 
-  // console.log(userName)
   // console.log(auth)
   // console.log(publicer)
 
@@ -41,41 +38,9 @@ const LoginForm = () => {
     }).required("Privilege Type is required"),
   });
 
-  // const handleSubmit = async (values: any) => {
-  //   const { username, password, previligesType } = values;
-
-  //   let userName = username.trim();
-  //   let passWord = password.trim();
-  //   let privilege = previligesType.value;
-
-  //   try {
-  //     const request = {
-  //       username: userName,
-  //       password: md5(passWord),
-  //       privilege,
-  //     };
-
-  //     const response = await getAuthorizedLogin(request);
-  //     if (response.status === 2) {
-  //       dispatch(login(userName));
-  //       dispatch(login(privilege));
-  //     } else {
-  //       showError("Error", response?.statusMessage);
-  //     };
-
-  //     if (publisherData === "Y") {
-  //       navigate('/publisher-dashboard', { replace: true });
-  //     } else if (editorData === "Y") {
-  //       navigate('/editor-dashboard', { replace: true });
-  //     } else {
-  //       navigate('/');
-  //     }
-  //   } catch (error) {
-  //     HandleAPIError(error);
-  //   }
-  // };
-
   const handleSubmit = async (values: any) => {
+    // console.log(useData)
+
     const { username, password, previligesType } = values;
 
     let userName = username.trim();
@@ -86,16 +51,22 @@ const LoginForm = () => {
       const request = {
         username: userName,
         password: md5(passWord),
-        privilege,
+        privilege: privilege,
       };
+      await dispatch(login(request)).unwrap();
 
-      const response = await getAuthorizedLogin(request);
-      if (response.status === 2) {
-        dispatch(login(privilege));
-        dispatch(login(username));
+      const getDataon = await useData
+
+      // console.log(getDataon)
+
+      if (getDataon.publisher === "Y") {
+        navigate('/publisher-dashboard', { replace: true });
+      } else if (getDataon.editor === "Y") {
+        navigate('/editor-dashboard', { replace: true });
       } else {
-        showError("Error", response?.statusMessage);
+        navigate('/');
       }
+
     } catch (error) {
       HandleAPIError(error);
     }

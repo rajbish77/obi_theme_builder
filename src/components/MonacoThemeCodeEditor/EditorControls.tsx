@@ -45,7 +45,7 @@ function EditorControls() {
     const request = {
       affiliateid: id,
       action: "PR",
-      username: auth.userName,
+      username: auth.username,
       theme: JSON.stringify(themeOptions), // Use `themeOptions` from Redux state
     };
     updateThemeApi(request);
@@ -55,7 +55,7 @@ function EditorControls() {
     const request = {
       affiliateid: id,
       action: "S",
-      username: auth.userName,
+      username: auth.username,
       theme: JSON.stringify(themeOptions), // Use `themeOptions` from Redux state
     };
     updateThemeApi(request);

@@ -17,10 +17,11 @@ const initialAuthState: Auth = {
   auth: false,
   editor: "",
   publisher: "",
-  userName: "",
+  username: "",
   loading: false,
   error: null,
-  privilege: "",
+  status: null,
+  statusMessage: ""
 };
 
 const breakpoints = createBreakpoints({

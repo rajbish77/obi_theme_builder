@@ -12,7 +12,7 @@ const appAxios = axios.create({
 });
 
 appAxios.interceptors.request.use((conf) => {
-  const user = store.getState().logIn; // Access the entire logIn state
+  const user = store.getState().logIn;
   if (user.auth) {
     conf.headers = {
       ...conf.headers,

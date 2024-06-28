@@ -65,14 +65,9 @@ export interface IUser {
   };
 }
 export interface IAuth {
-  tokens: null | {
-    accessTokens: string;
-    getData: string;
-    editor: string;
-    publisher: string;
-    userName: string;
-  };
-  data: null | IUser;
+  userEmail: string,
+  auth: boolean,
+  privilege: string,
 }
 export interface IUpdateUserPayload {
   editor: string;
@@ -84,10 +79,11 @@ export type Auth = {
   auth: boolean;
   editor: string;
   publisher: string;
-  userName: string;
+  username: string;
   loading: boolean;
   error: string | null;
-  privilege: string
+  status: number | null;
+  statusMessage: string;
 };
 
 export type SavedTheme = {
@@ -106,3 +102,8 @@ export type Affiliate = {
   id: number | null;
   name: string | null;
 };
+
+export interface LoginPayload {
+  userName: string;
+  privilege: string;
+}

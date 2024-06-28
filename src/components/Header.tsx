@@ -220,7 +220,7 @@ const Header = () => {
                 />
               </Dropdown.Toggle>
               <Dropdown.Menu className=" " style={{ zIndex: 1023 }}>
-                <Dropdown.Item disabled className="text-dark">{auth.userName}</Dropdown.Item>
+                <Dropdown.Item disabled className="text-dark">{auth.username}</Dropdown.Item>
                 <Dropdown.Item className="bg-danger text-white" onClick={() => { logout(dispatch) }}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
