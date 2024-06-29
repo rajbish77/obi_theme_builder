@@ -6,7 +6,6 @@ import Paper from "@mui/material/Paper";
 import styled, { DefaultTheme } from "styled-components";
 import { RootState } from "../../app/store";
 
-// Define the styled components using styled-components
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -18,7 +17,6 @@ const Container = styled(Paper)`
   height: 100%;
 `;
 
-// Define the interface for props
 interface ThemeWrapperProps {
   children: React.ReactNode | React.ReactNodeArray;
 }

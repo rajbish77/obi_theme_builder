@@ -19,27 +19,27 @@ export const router = createBrowserRouter([
   {
     path: "/",
     // element: <MainWindoPropes />
-    // element: <PaletteTools />
-    element: <LoginForm />,
-    children: [
-      {
+    element: <PublisherListing />
+    // element: <LoginForm />,
+    // children: [
+    //   {
         // path: "",
         // element: (
         //   <ProtectedRoute>
         //     <PostLoginLayout />
         //   </ProtectedRoute>
         // ),
-        children: [
-          {
-            path: "/publisher-dashboard",
-            element: <PublisherListing />,
-          },
-          {
-            path: "/editor-dashboard",
-            element: <MainWindow />,
-          },
-        ],
-      },
-    ],
+        // children: [
+        //   {
+        //     path: "/publisher-dashboard",
+        //     element: <PublisherListing />,
+        //   },
+        //   {
+        //     path: "/editor-dashboard",
+        //     element: <MainWindow />,
+        //   },
+        // ],
+    //   },
+    // ],
   },
 ]);

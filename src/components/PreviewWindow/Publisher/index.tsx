@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from 'react'
-// import DataTable, { TableColumn } from 'react-data-table-component';
-import { Button, Card, CardBody, Col, Container, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
-import { showConfirm, showError, showReject, showSuccess } from '../../Swal';
-import { getPublishRequests, updateTheme } from '../../../apicalls';
-import { HandleAPIError } from '../../../commonFunction';
-import Loader from '../../../Loader';
-import { PREVIEW_URL } from '../../../commonConstant';
+import React, { useEffect, useState } from 'react';
+import { Button, Card, CardBody, Container } from "react-bootstrap";
 import { createColumnHelper } from '@tanstack/react-table';
 import { CustomTable } from '../../CommonComponent/Table';
-
-interface DataRow {
-  affiliateid: number;
-  distributorname: string;
-  name: string;
-  entryby: string;
-  entrydate: string;
-}
+import Loader from '../../../Loader';
+import { PREVIEW_URL, VIPER_CONST } from '../../../commonConstant';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { publish } from '../../../slices/publisher/publisherSlice';
+import { showConfirm, showError, showReject, showSuccess } from '../../Swal';
+import { updateTheme } from '../../../apicalls';
+import { HandleAPIError } from '../../../commonFunction';
 
 function PublisherListing(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const getPublisher = useAppSelector((state) => state.publish.publisher);
+  const [tmp, setTmp] = useState(0);
+  const [loading,setLoading] = useState(false);
 
   const columnHelper = createColumnHelper();
   const COLUMNS = [
@@ -50,7 +47,6 @@ function PublisherListing(): JSX.Element {
     columnHelper.accessor("view", {
       cell: (info) => (
         <div style={{ textAlign: "center" }}>
-
           <Button
             onClick={() => handlePreviewButtonClick(info.row.original)}
             size='sm'
@@ -79,16 +75,13 @@ function PublisherListing(): JSX.Element {
     }),
   ];
 
-  const [publishRequests, setPublishRequests] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [tmp, settmp] = useState(0);
-
   const handlePreviewButtonClick = (row: any) => {
+
     window.open(`${PREVIEW_URL}affiliate/${row?.affiliateid}?preview=true`, "_blank");
   }
 
   const handlePublishButtonClick = async (row: any) => {
-    let confirmed = await showConfirm("Confirm", "Are you sure, want to publish the theme?");
+    let confirmed = await showConfirm("Confirm", "Are you sure you want to publish the theme?");
     if (confirmed.isConfirmed) {
       try {
         setLoading(true);
@@ -106,7 +99,7 @@ function PublisherListing(): JSX.Element {
         HandleAPIError(error);
       } finally {
         setLoading(false);
-        settmp(tmp + 1);
+        setTmp(tmp + 1);
       }
     }
   }
@@ -131,30 +124,14 @@ function PublisherListing(): JSX.Element {
         HandleAPIError(error);
       } finally {
         setLoading(false);
-        settmp(tmp + 1);
+        setTmp(tmp + 1);
       }
-    }
-  }
-
-  const getPublishRequest = async () => {
-    try {
-      setLoading(true);
-      const response = await getPublishRequests();
-      if (response?.status === 0) {
-        setPublishRequests(response?.data?.themes);
-      } else {
-        showError("Error", response?.statusMessage);
-      }
-    } catch (error) {
-      HandleAPIError(error);
-    } finally {
-      setLoading(false);
     }
   }
 
   useEffect(() => {
-    getPublishRequest();
-  }, [tmp])
+    dispatch(publish());
+  }, [dispatch, tmp]);
 
   return (
     <>
@@ -163,17 +140,15 @@ function PublisherListing(): JSX.Element {
         <h3 className='text-center py-2 text-black my-4 underline'><u>Publish Request</u></h3>
         <Card className='shadow mt-4'>
           <CardBody className='p-4'>
-            {/* <DataTable columns={columns} data={publishRequests} pagination striped /> */}
             <CustomTable
               columns={COLUMNS}
-              data={publishRequests}
+              data={getPublisher.data || []}
               noDataMessage={"No Data Available"}
             />
           </CardBody>
         </Card>
       </Container>
     </>
-
   );
 }
 

@@ -1,4 +1,4 @@
-import { VIPER_CONST } from "./commonConstant";
+import { PREVIEW_URL, VIPER_CONST } from "./commonConstant";
 import { LoginRequest, UpdateTheme } from "./types";
 
 export async function getaffiliates(data: any) {
@@ -55,32 +55,32 @@ export async function updateTheme(data: UpdateTheme) {
   }
 }
 
-export async function getPublishRequests() {
-  let body = {
-    username: VIPER_CONST.alwaysOnUsername,
-    sessionid: VIPER_CONST.alwaysOnSessionid,
-    failstatus: 0,
-    request: {},
-  };
+// export async function getPublishRequests() {
+//   let body = {
+//     username: VIPER_CONST.alwaysOnUsername,
+//     sessionid: VIPER_CONST.alwaysOnSessionid,
+//     failstatus: 0,
+//     request: {},
+//   };
 
-  console.log(`Request For ${VIPER_CONST.base_url}getpublishrequests`, body);
-  try {
-    const response = fetch(`${VIPER_CONST.base_url}getpublishrequests`, {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
+//   console.log(`Request For ${VIPER_CONST.base_url}getpublishrequests`, body);
+//   try {
+//     const response = fetch(`${VIPER_CONST.base_url}getpublishrequests`, {
+//       method: "POST",
+//       body: JSON.stringify(body),
+//     });
 
-    const responseData = (await response).json();
-    console.log(
-      `Response For ${VIPER_CONST.base_url}getpublishrequests`,
-      await responseData
-    );
+//     const responseData = (await response).json();
+//     console.log(
+//       `Response For ${VIPER_CONST.base_url}getpublishrequests`,
+//       await responseData
+//     );
 
-    return responseData;
-  } catch (error) {
-    return error;
-  }
-}
+//     return responseData;
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
 export async function getAuthorizedLogin(data: LoginRequest) {
   let body = {

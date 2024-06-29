@@ -6,6 +6,7 @@ import authSlice from "../slices/authSlice";
 import editorSlice from "../slices/editor/editorSlice";
 import themeSlice from "../state/themeSlice";
 import editorWindowSlice from "../slices/editor/editorWindowSlice";
+import publisherSlice from "../slices/publisher/publisherSlice";
 
 
 
@@ -15,6 +16,7 @@ const rootReducter = combineReducers({
   editor: editorSlice,
   editorWindow: editorWindowSlice,
   theme: themeSlice,
+  publish: publisherSlice,
 });
 
 const persistConfig = {
