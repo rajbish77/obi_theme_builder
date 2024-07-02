@@ -35,21 +35,85 @@ declare module '@mui/material/styles' {
     };
   }
   interface PaletteOptions {
+    header:{
+      backgroundcolor?: string;
+      textcolor?: string;
+      button:{
+        background?: string;
+        color?: string;
+        border?: string;
+        hoverbackground?: string;
+        hovercolor?: string;
+      } 
+    };
     navbar?: {
       backgroundcolor?: string;
       textcolor?: string;
     };
+    body?: {
+      backgroundcolor?: string;
+      textcolor?: string;
+    };
+    button?: {
+      primary?: {
+        background?: string;
+        color?: string;
+        border?: string;
+        boxshadow?: string;
+        hoverbackground?: string;
+        hovercolor?: string;
+        hoverborder?: string;
+        boxhovershadow?: string;
+      },
+      secondary?: {
+        background?: string;
+        color?: string;
+        hoverbackground?: string;
+        hovercolor?: string;
+      }
+    };
+    card?: {
+      backgroundcolor?: string;
+      textcolor?: string;
+    };
+    subfooter?: {
+      backgroundcolor?: string;
+      textcolor?: string;
+    },
+    footer?: {
+      backgroundcolor?: string;
+      textcolor?: {
+        primary?: {
+          textcolor?: string;
+        },
+        secondary?: {
+          textcolor?: string;
+        }
+      },
+    }
+  }
+
+  interface PaletteOptions {
+    palette? : {
+      type? : string;
+      primary? : {
+        main? : string;
+      },
+      secondary: {
+        main: string;
+      },
+    },
   }
 }
 
-const theme = createTheme({
-  palette: {
-    navbar: {
-      backgroundcolor: '#333',
-      textcolor: '#fff',
-    },
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     navbar: {
+//       backgroundcolor: '#333',
+//       textcolor: '#fff',
+//     },
+//   },
+// });
 
 const StyledNavbar = styled(Navbar)(({ theme }) => ({
   backgroundColor: theme.palette.navbar?.backgroundcolor,

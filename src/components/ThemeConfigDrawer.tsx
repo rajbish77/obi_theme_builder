@@ -50,11 +50,11 @@ const ThemeConfigDrawer = () => {
         <StyledGridContainer container direction="column" wrap="nowrap">
           <StyledGridItem item>
             {/* Use themeId as key so that editor is torn down and rebuilt with new theme */}
-            <MonacoThemeCodeEditor key={themeId} />
+            <MonacoThemeCodeEditor key={themeId} /> {/* Nave Top button */}
           </StyledGridItem>
 
           <StyledGridItem item>
-            <ThemeTools />
+            <ThemeTools /> {/*Nave Bottom*/}
           </StyledGridItem>
         </StyledGridContainer>
       </StyledDrawerPaper>

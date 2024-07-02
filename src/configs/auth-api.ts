@@ -1,5 +1,5 @@
 import { VIPER_CONST } from "../commonConstant";
-import { IAuth } from "../slices/types";
+import { Auth, body, IAuth } from "../slices/types";
 import * as BaseApi from "./api-config";
 
 class PubApiService {
@@ -13,17 +13,8 @@ class PubApiService {
    * @returns Token
    */
   public async login(
-    body: {
-      username: string;
-      sessionid: string;
-      failstatus: number;
-      request: {
-          username: string;
-          password: string;
-          privilege: string;
-      };
-  }
-  ): Promise<IAuth | undefined> {
+    body: body
+  ): Promise<Auth | undefined> {
     return BaseApi._post(this.url("getauthorizedlogin"),  body);
   }
 }

@@ -2,21 +2,22 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import loginSlice from "../slices/logIn-slice";
-import authSlice from "../slices/authSlice";
 import editorSlice from "../slices/editor/editorSlice";
 import themeSlice from "../state/themeSlice";
 import editorWindowSlice from "../slices/editor/editorWindowSlice";
 import publisherSlice from "../slices/publisher/publisherSlice";
-
+import buttonSlice from "../slices/publisher/buttonFunctionSlice";
+import rejButtonSlice from "../slices/publisher/buttonFunctionRej"
 
 
 const rootReducter = combineReducers({
   logIn: loginSlice,
-  auth: authSlice,
   editor: editorSlice,
   editorWindow: editorWindowSlice,
   theme: themeSlice,
   publish: publisherSlice,
+  buttonWork: buttonSlice, // button function work
+  rejuctButton: rejButtonSlice
 });
 
 const persistConfig = {

@@ -41,9 +41,9 @@ const login = createAsyncThunk(
 
     console.log(`Request For ${VIPER_CONST.base_url}getauthorizedlogin`, body);
     try {
-      const responseData = await AuthApi.login(body);
+      const user = await AuthApi.login(body);
 
-      // const responseData = await user;
+      const responseData = await user;
 
       console.log(
         `Response For ${VIPER_CONST.base_url}getauthorizedlogin`,
@@ -68,18 +68,14 @@ const loginSlice = createSlice({
     });
     builder.addCase(login.fulfilled, (state, action) => {
       state.loading = false;
-      state.status = action?.payload?.status;
-      state.statusMessage = action?.payload?.statusMessage;
-      if (action?.payload?.status === 0) {
+      state.status = action?.payload?.status ?? null;
+      state.statusMessage = action?.payload?.statusMessage ?? "";
+      if (action?.payload?.status === 2) {
         state.auth = true;
         state.editor = action?.payload?.privilege === "THEMEEDITOR" ? "Y" : "N";
         state.publisher = action?.payload?.privilege === "THEMEPUBLISHER" ? "Y" : "N";
         state.username = action?.payload?.username;
       }
-      state.auth = true;
-        // state.editor = action?.payload?.privilege === "THEMEEDITOR" ? "Y" : "N";
-        // state.publisher = action?.payload?.privilege === "THEMEPUBLISHER" ? "Y" : "N";
-        // state.username = action?.payload?.username;
     });
     builder.addCase(login.rejected, (state, action) => {
       state.loading = false;

@@ -64,7 +64,7 @@ const LoginForm = () => {
       } else if (getDataon.editor === "Y") {
         navigate('/editor-dashboard', { replace: true });
       } else {
-        navigate('/');
+        showError("Error", getDataon?.statusMessage)
       }
 
     } catch (error) {

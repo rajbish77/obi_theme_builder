@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import Typography from "@mui/material/Typography";
 import { Theme, styled } from "@mui/material/styles";
 
-const ToolPanelRoot = styled("div")(( { theme: Theme }) => ({
+const ToolPanelRoot = styled("div")(({ theme: Theme }) => ({
   backgroundColor: "#212121",
   flexGrow: 1,
   overflowX: "hidden",
@@ -15,12 +15,14 @@ const ToolPanelTitle = styled("div")(({ theme }: { theme: Theme }) => ({
   paddingRight: 16,
   borderBottom: `1px solid ${theme.palette.divider}`,
   borderTop: "1px solid grey",
+  color: "white"
 }));
 
 const ToolPanelContent = styled("div")({
   flex: 1,
   overflowY: "auto",
   overflowX: "hidden",
+  backgroundColor: "black"
 });
 
 export const toolPanelId = "theme-tool-panel";
@@ -34,9 +36,15 @@ function ToolPanel({ panelTitle, children }: ToolPanelProps) {
   return (
     <ToolPanelRoot id={toolPanelId}>
       <ToolPanelTitle>
-        <Typography variant="overline">{panelTitle}</Typography>
+        <Typography variant="overline">
+          {panelTitle}
+        </Typography>
+        {/* this is panel title */}
       </ToolPanelTitle>
-      <ToolPanelContent>{children}</ToolPanelContent>
+      <ToolPanelContent>
+        {children}
+      </ToolPanelContent>
+      {/* this is colour change */}
     </ToolPanelRoot>
   );
 }

@@ -20,39 +20,45 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { OverlayTrigger } from "react-bootstrap";
 
-declare module '@mui/material/styles' {
-  interface Palette {
-    header: {
-      backgroundcolor: string;
-      textcolor: string;
-      button: {
-        background: string;
-        color: string;
-        border: string;
-        hoverbackground: string;
-        hovercolor: string;
-      };
-    };
-  }
-  interface PaletteOptions {
-    header?: {
-      backgroundcolor?: string;
-      textcolor?: string;
-      button?: {
-        background?: string;
-        color?: string;
-        border?: string;
-        hoverbackground?: string;
-        hovercolor?: string;
-      };
-    };
-  }
+// declare module '@mui/material/styles' {
+//   interface Palette {
+//     header: {
+//       backgroundcolor: string;
+//       textcolor: string;
+//       button: {
+//         background: string;
+//         color: string;
+//         border: string;
+//         hoverbackground: string;
+//         hovercolor: string;
+//       };
+//     };
+//   }
+//   interface PaletteOptions {
+//     header?: {
+//       backgroundcolor?: string;
+//       textcolor?: string;
+//       button?: {
+//         background?: string;
+//         color?: string;
+//         border?: string;
+//         hoverbackground?: string;
+//         hovercolor?: string;
+//       };
+//     };
+//   }
+// }
+
+const styleObj = {
+  color: "black",
+  zIndex: 1021,
+  width: "230px",
 }
 
 const theme = createTheme({
   palette: {
     header: {
-      backgroundcolor: '#3f51b5',
+      backgroundcolor: 'red',
       textcolor: '#fff',
       button: {
         background: '#3f51b5',
@@ -96,13 +102,23 @@ const Header = () => {
     </Tooltip>
   );
 
-  const renderFontAwesomeCartIcon = () => (
-    <FontAwesomeIcon
-      icon={faCartShopping}
-      size="2xl"
-      className="text-light pe-3"
-    />
-  );
+  // const renderFontAwesomeCartIcon = () => (
+  //   <FontAwesomeIcon
+  //     icon={faCartShopping}
+  //     size="2xl"
+  //     className="text-light pe-3"
+  //   />
+  // );
+
+  const renderFontAwesomeCartIcon = () => {
+    return (
+      <FontAwesomeIcon
+        icon={faCartShopping}
+        size="2xl"
+        className={`${classes.textColor} pe-3`}
+      />
+    )
+  }
 
   const renderCartIcon = () => (
     <div className="cart position-relative">

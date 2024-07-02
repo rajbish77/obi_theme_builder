@@ -62,7 +62,7 @@ const toolPanels: Array<{
 
 const ThemeTools = () => {
   const [bottomNavIndex, setBottomNavIndex] = useState(0);
-
+  console.log(bottomNavIndex)
   const currentTool = toolPanels[bottomNavIndex];
 
   return (
@@ -86,6 +86,7 @@ const ThemeTools = () => {
           />
         ))}
       </ThemeToolsBottomNavBar>
+      {/* platter design */}
     </ThemeToolsRoot>
   );
 };

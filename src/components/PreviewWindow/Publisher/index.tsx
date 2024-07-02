@@ -9,12 +9,16 @@ import { publish } from '../../../slices/publisher/publisherSlice';
 import { showConfirm, showError, showReject, showSuccess } from '../../Swal';
 import { updateTheme } from '../../../apicalls';
 import { HandleAPIError } from '../../../commonFunction';
+import { publishButton } from '../../../slices/publisher/buttonFunctionSlice';
+import { rejectButton } from '../../../slices/publisher/buttonFunctionRej';
 
 function PublisherListing(): JSX.Element {
   const dispatch = useAppDispatch();
   const getPublisher = useAppSelector((state) => state.publish.publisher);
   const [tmp, setTmp] = useState(0);
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const useData = useAppSelector((state) => state.buttonWork)
+  const useDataRej = useAppSelector((state) => state.rejuctButton)
 
   const columnHelper = createColumnHelper();
   const COLUMNS = [
@@ -84,47 +88,53 @@ function PublisherListing(): JSX.Element {
     let confirmed = await showConfirm("Confirm", "Are you sure you want to publish the theme?");
     if (confirmed.isConfirmed) {
       try {
-        setLoading(true);
-        const request = {
-          "affiliateid": row?.affiliateid,
-          "action": "P"
+        const request: { affiliateid: any, action: string } = {
+          affiliateid: row?.affiliateid,
+          action: "P"
         }
-        const response = await updateTheme(request);
-        if (response?.status === 0) {
+
+        await dispatch(publishButton(request)).unwrap();
+
+        const getData = await useData;
+
+        console.log(getData)
+
+        if (getData?.status === 0) {
           showSuccess("Success", "Theme published successfully");
         } else {
-          showError("Error", response?.statusMessage);
+          showError("Error", getData?.statusMessage)
         }
       } catch (error) {
         HandleAPIError(error);
-      } finally {
-        setLoading(false);
-        setTmp(tmp + 1);
       }
     }
   }
 
   const handleRejectButtonClick = async (row: any) => {
     let confirmed = await showReject("Remarks", row?.entryby, row.distributorname);
+
     if (confirmed.isConfirmed) {
       try {
-        setLoading(true);
-        const request = {
-          "affiliateid": row?.affiliateid,
-          "action": "R",
-          "message": confirmed?.value
+
+        const requestReject: { affiliateid: any, action: string, message: any } = {
+          affiliateid: row?.affiliateid,
+          action: "R",
+          message: confirmed?.value
         }
-        const response = await updateTheme(request);
-        if (response?.status === 0) {
+
+        await dispatch(rejectButton(requestReject)).unwrap();
+
+        const getData = await useDataRej;
+
+        console.log(getData)
+
+        if (getData?.status === 0) {
           showSuccess("Success", "Publish request rejected!");
         } else {
-          showError("Error", response?.statusMessage);
+          showError("Error", getData?.statusMessage);
         }
       } catch (error) {
         HandleAPIError(error);
-      } finally {
-        setLoading(false);
-        setTmp(tmp + 1);
       }
     }
   }

@@ -1,21 +1,21 @@
-import { Theme, ThemeOptions } from "@mui/material/styles"
+import { Theme, ThemeOptions } from "@mui/material/styles";
 // import { withStyles, createTheme } from '@material-ui/core/styles';
-import { EditorState } from "./editor/types"
+import { EditorState } from "./editor/types";
 
 export interface RootStateType {
-  editor: EditorState
-  themeId: string
-  id?:number | null
-  themeObject: Theme
-  themeOptions: ThemeOptions
+  editor: EditorState;
+  themeId: string;
+  id?: number | null;
+  themeObject: Theme;
+  themeOptions: ThemeOptions;
   // savedThemes: Record<string, SavedTheme>
-  loadedFonts: Set<string>
-  activeTab: string
-  themeConfigOpen: boolean
-  auth: Auth
-  affiliate: Affiliate
-  editorThemeState: boolean
-  affiliateTheme: ThemeOptions
+  loadedFonts: Set<string>;
+  activeTab: string;
+  themeConfigOpen: boolean;
+  auth: Auth;
+  affiliate: Affiliate;
+  editorThemeState: boolean;
+  affiliateTheme: ThemeOptions;
   savedThemes: {
     [themeId: string]: {
       id: string;
@@ -28,11 +28,11 @@ export interface RootStateType {
 }
 
 export interface AuthState {
-  editor: EditorState
+  editor: EditorState;
   themeId: string;
   id?: number | null;
-  themeObject: Theme
-  themeOptions: ThemeOptions
+  themeObject: Theme;
+  themeOptions: ThemeOptions;
   savedThemes: Record<string, SavedTheme>;
   loadedFonts: Set<string>;
   activeTab: string;
@@ -40,7 +40,7 @@ export interface AuthState {
   auth: Auth;
   affiliate: Affiliate;
   editorThemeState: boolean;
-  affiliateTheme: ThemeOptions
+  affiliateTheme: ThemeOptions;
 }
 
 export interface IUser {
@@ -65,9 +65,9 @@ export interface IUser {
   };
 }
 export interface IAuth {
-  userEmail: string,
-  auth: boolean,
-  privilege: string,
+  userEmail: string;
+  auth: boolean;
+  privilege: string;
 }
 export interface IUpdateUserPayload {
   editor: string;
@@ -89,7 +89,7 @@ export type Auth = {
 export type SavedTheme = {
   id: string;
   name: string;
-  themeOptions: ThemeOptions
+  themeOptions: ThemeOptions;
   fonts: string[];
   lastUpdated: string;
 };
@@ -106,4 +106,62 @@ export type Affiliate = {
 export interface LoginPayload {
   userName: string;
   privilege: string;
+}
+
+export interface Requestpublish {
+  affiliateid: any;
+  action: string;
+  status: number | null;
+  statusMessage: string;
+}
+
+export interface body {
+  username: string;
+  sessionid: string;
+  failstatus: number;
+  request: {
+    username?: string;
+    password?: string;
+    privilege?: string;
+  };
+}
+
+export interface buttonBody {
+  username: string;
+  sessionid: string;
+  failstatus: number;
+  request: {
+    affiliateid: any;
+    action: string;
+    message?: any;
+  };
+}
+
+
+export interface Palette {
+  header: {
+    backgroundcolor: string;
+    textcolor: string;
+    button: {
+      background: string;
+      color: string;
+      border: string;
+      hoverbackground: string;
+      hovercolor: string;
+    };
+  };
+}
+
+export interface PaletteOptions {
+  header?: {
+    backgroundcolor?: string;
+    textcolor?: string;
+    button?: {
+      background?: string;
+      color?: string;
+      border?: string;
+      hoverbackground?: string;
+      hovercolor?: string;
+    };
+  };
 }

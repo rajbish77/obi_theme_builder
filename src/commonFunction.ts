@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
 import { showConfirm, showError } from "./components/Swal";
 import { fetchAffiliate, loadSavedTheme, logOutState } from "./state/themeSlice";
 import { Affiliate, Auth } from "./slices/types";
-import { store } from "./app/store";
+import { store } from "./app/store"
 
 
 export function HandleAPIError(error: any) {

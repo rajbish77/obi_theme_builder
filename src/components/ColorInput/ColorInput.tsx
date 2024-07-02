@@ -86,9 +86,9 @@ export default function ColorInput({ label, color, onColorChange }:any) {
           vertical: "bottom",
           horizontal: "center",
         }}
-        PaperProps={{
-          component: PopoverPaper,
-        }}
+        // PaperProps={{
+        //   component: PopoverPaper,
+        // }}
         disableAutoFocus
         disableEnforceFocus
       >
@@ -102,7 +102,7 @@ function ColorPicker({ color, onChangeComplete }:any) {
   const [inputValue, setInputValue] = React.useState<string | null>("#fff")
   useEffect(() => {
     setInputValue(color)
-  }, [color])
+  }, [color]);
 
   const handleChange = (colorObject:any, event:any) => {
     if (colorObject.rgb.a === 1) {

@@ -17,12 +17,15 @@ interface PaletteSubTypeProps {
 }
 
 const AccordionWrapper = styled(Accordion)({
-  marginBottom: "1rem",
+  // marginBottom: "1rem",
+  border: "1px solid rgba(255, 255, 255, .125)",
+  backgroundColor: "#424242",
 });
 
 const AccordionSummaryWrapper = styled(AccordionSummary)(({ theme }) => ({
   "& .MuiTypography-body2": {
     textTransform: "capitalize",
+    color : "white",
   },
 }));
 
@@ -56,15 +59,6 @@ const PaletteSubType: React.FC<PaletteSubTypeProps> = ({
     <AccordionWrapper>
       <AccordionSummaryWrapper expandIcon={<ExpandMoreIcon />}>
         <Typography variant="body2">{title}</Typography>
-        {/* Uncomment to display color thumbnails */}
-        {/* <ColorThumbnailContainer>
-          {paletteValues.map(([name, subPath]) => (
-            <ColorThumbnail
-              key={name}
-              style={{ backgroundColor: themeValues?.[subPath] }}
-            />
-          ))}
-        </ColorThumbnailContainer> */}
       </AccordionSummaryWrapper>
       <AccordionDetailsWrapper>
         {paletteValues.map(([name, subPath]) => (

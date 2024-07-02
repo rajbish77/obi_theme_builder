@@ -1,17 +1,14 @@
 import { VIPER_CONST } from "../commonConstant";
 import { Publish, PublishersResponse } from "../slices/publisher/types";
 import * as BaseApi from "../configs/api-config";
+import { body } from "../slices/types";
 
 class PubApiService {
   private url = (action: string) => VIPER_CONST.base_url + action;
 
   public async PublishReq(
-    body: {
-    username: string,
-    sessionid: string,
-    failstatus: number,
-    request: {} ;
-  }): Promise<PublishersResponse | undefined> {
+    body: body
+  ): Promise<PublishersResponse | undefined> {
     return BaseApi._post(this.url("getpublishrequests"), body);
   }
 }

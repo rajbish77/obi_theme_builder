@@ -2,196 +2,140 @@ import { createTheme, ThemeOptions, Theme } from '@mui/material/styles';
 
 export const defaultThemeOptions: ThemeOptions = {
   palette: {
-    mode: 'dark',
-    primary: {
-      main: '#90caf9',
+    header:{
+      backgroundcolor:"#212526",
+      textcolor:"#fff",
+      button:{
+        background:"#fff",
+        color:"#000",
+        border:"#000",
+        hoverbackground: "#000",
+        hovercolor:"#fff"
+      } 
     },
-    secondary: {
-      main: '#f48fb1',
+    navbar:{
+      backgroundcolor:"#f5f5f5",
+      textcolor:"#000",
     },
-    background: {
-      default: '#212529',
-      paper: '#ffffff',
+    body:{
+      backgroundcolor:"#bb5858",
+      textcolor:"#000",
     },
-    text: {
-      primary: '#ffffff',
-      secondary: '#000000',
-    },
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#9f004f',
-          color: '#fff',
-          border: '1px solid #ccc',
-          boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-          '&:hover': {
-            backgroundColor: '#fff',
-            color: '#9f004f',
-            borderColor: '#ccc',
-            boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
-          },
-        },
+    button:{
+      primary:{
+        background:"#9f004f",
+        color:"#fff",
+        border: "#ccc",
+        boxshadow:"#fff",
+        hoverbackground: "#fff",
+        hovercolor:"#9f004f",
+        hoverborder:"#ccc",
+        boxhovershadow: "#ccc",
       },
+      secondary:{
+        background:"#6e7881",
+        color:"#fff",
+        hoverbackground: "#fff",
+        hovercolor:"#000"
+      }
     },
-    MuiAccordion: {
-      styleOverrides: {
-        root: {
-          border: '1px solid rgba(255, 255, 255, .125)',
-          boxShadow: 'none',
-          transition: 'margin-left 0.3s',
-          '&:not(:last-child)': {
-            borderBottom: 0,
-          },
-          '&:before': {
-            display: 'none',
-          },
-          '&.Mui-expanded': {
-            margin: 'auto',
-          },
-          '&.Mui-disabled': {
-            marginLeft: 32,
-          },
+    card:{
+      backgroundcolor:"#ffffff",
+      textcolor:"#000",
+    },
+    subfooter:{
+      backgroundcolor:"#f0f0f0",
+      textcolor:"#000000",
+    },
+    footer:{
+      backgroundcolor:"#212529",
+      textcolor:{
+        primary:{
+          textcolor: "#fff"
         },
+        secondary:{
+          textcolor: "#fff"
+        }
       },
-    },
-    MuiAccordionSummary: {
-      styleOverrides: {
-        root: {
-          borderBottom: '1px solid rgba(255, 255, 255, .125)',
-          minHeight: 56,
-          '&.Mui-expanded': {
-            minHeight: 56,
-          },
-        },
-        content: {
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          '&.Mui-expanded': {
-            margin: '12px 0',
-          },
-        },
-      },
-    },
-    MuiAccordionDetails: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#212121',
-        },
-      },
-    },
-    MuiDrawer: {
-      styleOverrides: {
-        docked: {
-          '& .MuiPaper-root': {
-            position: 'static',
-          },
-        },
-      },
-    },
-    MuiPopover: {
-      styleOverrides: {
-        paper: {
-          backgroundColor: '#000',
-        },
-      },
-    },
+    }
   },
 };
 
 export const defaultTheme: Theme = createTheme();
 
-export const themeConfig: ThemeOptions = {
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#90caf9',
-    },
-    secondary: {
-      main: '#f48fb1',
-    },
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#9f004f',
-          color: '#fff',
-          border: '1px solid #ccc',
-          boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-          '&:hover': {
-            backgroundColor: '#fff',
-            color: '#9f004f',
-            borderColor: '#ccc',
-            boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
-          },
-        },
-      },
-    },
-    MuiAccordion: {
-      styleOverrides: {
-        root: {
-          border: '1px solid rgba(255, 255, 255, .125)',
-          boxShadow: 'none',
-          transition: 'margin-left 0.3s',
-          '&:not(:last-child)': {
-            borderBottom: 0,
-          },
-          '&:before': {
-            display: 'none',
-          },
-          '&.Mui-expanded': {
-            margin: 'auto',
-          },
-          '&.Mui-disabled': {
-            marginLeft: 32,
-          },
-        },
-      },
-    },
-    MuiAccordionSummary: {
-      styleOverrides: {
-        root: {
-          borderBottom: '1px solid rgba(255, 255, 255, .125)',
-          minHeight: 56,
-          '&.Mui-expanded': {
-            minHeight: 56,
-          },
-        },
-        content: {
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          '&.Mui-expanded': {
-            margin: '12px 0',
-          },
-        },
-      },
-    },
-    MuiAccordionDetails: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#212121',
-        },
-      },
-    },
-    MuiDrawer: {
-      styleOverrides: {
-        docked: {
-          '& .MuiPaper-root': {
-            position: 'static',
-          },
-        },
-      },
-    },
-    MuiPopover: {
-      styleOverrides: {
-        paper: {
-          backgroundColor: '#000',
-        },
-      },
-    },
-  },
-};
+// export const themeConfig: ThemeOptions = {
+//   palette: {
+//     type: "dark",
+//     primary: {
+//       main: "#90caf9",
+//     },
+//     secondary: {
+//       main: "#f48fb1",
+//     },
+//   },
+//   props: {
+//     MuiAccordion: {
+//       square: true,
+//       TransitionProps: {
+//         unmountOnExit: true,
+//       },
+//     },
+//   },
+//   overrides: {
+//     MuiAccordion: {
+//       root: {
+//         border: "1px solid rgba(255, 255, 255, .125)",
+//         boxShadow: "none",
+//         transition: defaultTheme.transitions.create("margin-left"),
+//         "&:not(:last-child)": {
+//           borderBottom: 0,
+//         },
+//         "&:before": {
+//           display: "none",
+//         },
+//         "&$expanded": {
+//           margin: "auto",
+//         },
+//         "&$disabled": {
+//           marginLeft: 32,
+//         },
+//       },
+//     },
+//     MuiAccordionSummary: {
+//       root: {
+//         borderBottom: "1px solid rgba(255, 255, 255, .125)",
+//         minHeight: 56,
+//         "&$expanded": {
+//           minHeight: 56,
+//         },
+//       },
+//       content: {
+//         alignItems: "center",
+//         justifyContent: "space-between",
+//         "&$expanded": {
+//           margin: "12px 0",
+//         },
+//       },
+//     },
+//     MuiAccordionDetails: {
+//       root: {
+//         backgroundColor: "#212121",
+//       },
+//     },
+//     MuiDrawer: {
+//       docked: {
+//         "& $paper": {
+//           position: "static",
+//         },
+//       },
+//       paper: {},
+//     },
+//     MuiPopover: {
+//       paper: {
+//         backgroundColor: "#000",
+//       },
+//     },
+//   },
+// }; 
 
-export default createTheme(themeConfig);
+export default createTheme(defaultThemeOptions);
