@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
-// import { Link } from "gatsby"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { PRIVILIGES_TYPE, PrivilegeType, THEMEEDITOR, THEMEPUBLISHER } from '../../../commonConstant';
+import { PRIVILIGES_TYPE, PrivilegeType } from '../../../commonConstant';
 import { showError } from '../../Swal';
-import { useDispatch, useSelector } from 'react-redux';
 import Select from "react-select";
-import { getAuthorizedLogin } from '../../../apicalls';
 import Loader from '../../../Loader';
 import { HandleAPIError } from '../../../commonFunction';
-import logInSlice, { login } from "../../../slices/logIn-slice"
-import { RootState } from '../../../app/store';
+import { login } from "../../../slices/logIn-slice"
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { useRadioGroup } from '@mui/material';
 
 const LoginForm = () => {
   const md5 = require('md5');
@@ -25,9 +20,6 @@ const LoginForm = () => {
   const [displayPassword, setDisplayPassword] = useState(false);
   const loading = useAppSelector((state) => state.logIn.loading);
   const useData = useAppSelector((state) => state.logIn)
-
-  // console.log(auth)
-  // console.log(publicer)
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -39,7 +31,6 @@ const LoginForm = () => {
   });
 
   const handleSubmit = async (values: any) => {
-    // console.log(useData)
 
     const { username, password, previligesType } = values;
 
@@ -56,8 +47,6 @@ const LoginForm = () => {
       await dispatch(login(request)).unwrap();
 
       const getDataon = await useData
-
-      // console.log(getDataon)
 
       if (getDataon.publisher === "Y") {
         navigate('/publisher-dashboard', { replace: true });

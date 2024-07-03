@@ -106,14 +106,6 @@ declare module '@mui/material/styles' {
   }
 }
 
-// const theme = createTheme({
-//   palette: {
-//     navbar: {
-//       backgroundcolor: '#333',
-//       textcolor: '#fff',
-//     },
-//   },
-// });
 
 const StyledNavbar = styled(Navbar)(({ theme }) => ({
   backgroundColor: theme.palette.navbar?.backgroundcolor,

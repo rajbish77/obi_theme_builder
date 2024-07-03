@@ -15,7 +15,7 @@ import Loader from "../Loader"
 import BrushIcon from '@mui/icons-material/Brush';
 import { getaffiliates } from "../apicalls"
 import { showError } from "./Swal"
-import { HandleAPIError, _getAffiliate, GetEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
+import { HandleAPIError, _getAffiliate, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
 import { faUser, faRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
@@ -206,12 +206,12 @@ const Header = () => {
       <div className="px-3 bg-grey shadow">
         <Row className="align-items-center py-3">
           {/* Editor header */}
-          {GetEditorLoginStatus(auth) && editorHeader()}
+          {getEditorLoginStatus(auth) && editorHeader()}
 
           {/* Publisher header */}
           {getPublisherLoginStatus(auth) && publisherHeader()}
 
-          <Col md={GetEditorLoginStatus(auth) ? "2" : "6"} className="d-flex justify-content-end">
+          <Col md={getEditorLoginStatus(auth) ? "2" : "6"} className="d-flex justify-content-end">
             <Dropdown show={showDropdown} onToggle={(isOpen) => setShowDropdown(isOpen)} className="dropdown-center">
               <Dropdown.Toggle variant="secondary" id="dropdown-basic" className="shadow-lg btn-grey">
                 <FontAwesomeIcon

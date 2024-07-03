@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 
 const stringify = (themeOptions: ThemeOptions) => {
-  return `let theme: ${JSON5.stringify(themeOptions, null, 2)};`;
+  return `let theme: ${JSON5.stringify(themeOptions, null, 2)}`;
 };
 
 export const useUpdateEditorState = () => {
