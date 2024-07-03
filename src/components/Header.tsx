@@ -16,6 +16,7 @@ import BrushIcon from '@mui/icons-material/Brush';
 import { getaffiliates } from "../apicalls"
 import { showError } from "./Swal"
 import { HandleAPIError, _getAffiliate, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
+import { HandleAPIError, _getAffiliate, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
 import { faUser, faRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';

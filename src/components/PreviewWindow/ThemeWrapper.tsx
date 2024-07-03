@@ -33,6 +33,9 @@ const ThemeWrapper: React.FC<ThemeWrapperProps> = ({ children }) => {
   // Provide a default theme if themeObject is undefined
   const defaultTheme = createTheme({
     palette: {
+      header:{
+        button: {}
+      },
       background: {
         default: '#ffffff',
       },

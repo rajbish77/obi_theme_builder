@@ -9,24 +9,6 @@ import visamaster from "../../../images/visa-master-card.png";
 import { Link } from "react-router-dom";
 import React from "react";
 
-const theme = {
-  typography: {
-    fontFamily: "Arial, sans-serif",
-  },
-  palette: {
-    background: {
-      default: "#f5f5f5",
-    },
-    text: {
-      primary: "#333333",
-    },
-    primary: {
-      main: "#007bff",
-      contrastText: "#ffffff",
-    },
-  },
-};
-
 const StyledDiv = styled("div")(({ theme }) => ({
   fontFamily: theme.typography.fontFamily,
   backgroundColor: theme.palette.background.default,
@@ -43,12 +25,12 @@ const StyledButton = styled(Button)(({ theme }) => ({
   color: `${theme.palette.primary.contrastText} !important`,
   border: `1px solid ${theme.palette.primary.main} !important`,
   boxShadow: `0 3px 1px -2px ${theme.palette.primary.main}, 0 2px 2px 0 ${theme.palette.primary.main}, 0 1px 5px 0 ${theme.palette.primary.main} !important`,
-  '&:hover': {
-    backgroundColor: `${theme.palette.primary.dark} !important`,
-    color: `${theme.palette.primary.contrastText} !important`,
-    border: `1px solid ${theme.palette.primary.main} !important`,
-    boxShadow: `2px 2px 4px 1px ${theme.palette.primary.main}, 2px 2px 4px 1px ${theme.palette.primary.main}, 2px 2px 4px 1px ${theme.palette.primary.main}, 2px 2px 4px 1px ${theme.palette.primary.main} !important`,
-  },
+  // '&:hover': {
+  //   backgroundColor: `${theme.palette.primary.dark} !important`,
+  //   color: `${theme.palette.primary.contrastText} !important`,
+  //   border: `1px solid ${theme.palette.primary.main} !important`,
+  //   boxShadow: `2px 2px 4px 1px ${theme.palette.primary.main}, 2px 2px 4px 1px ${theme.palette.primary.main}, 2px 2px 4px 1px ${theme.palette.primary.main}, 2px 2px 4px 1px ${theme.palette.primary.main} !important`,
+  // },
 }));
 
 function Home() {
