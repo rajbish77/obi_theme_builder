@@ -71,7 +71,7 @@ export default function MainWindoPropes() {
         <AppRoot>
             <ErrorBoundary>
                 <HeaderNavAndMain>
-                    {/* <Header /> */}
+                    <Header />
                     <NavAndMain>
                         <Main>
                             <MainWindow /> {/* body */}

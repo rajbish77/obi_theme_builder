@@ -15,10 +15,12 @@ import Loader from "../Loader"
 import BrushIcon from '@mui/icons-material/Brush';
 import { getaffiliates } from "../apicalls"
 import { showError } from "./Swal"
-import { HandleAPIError, _getAffiliate, GetEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
+import { HandleAPIError, _getAffiliate, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
 import { faUser, faRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
+import { useAppSelector } from "../app/hooks";
+import { affiliate } from "../slices/affiliateTheme"
 
 // Define styled components
 const Title = styled(Typography)(({ theme }) => ({
@@ -57,6 +59,7 @@ const Header = () => {
   const auth = useSelector((state: AuthState) => state.auth);
   const AffiliateData = useSelector((state: RootStateType) => state.affiliate) || [];
   const [searchResult, setSearchResult] = useState<AffiliateItem[]>([]);
+  const dataEdiPubl = useAppSelector((state) => state.logIn)
 
   const styleObj = {
     color: "black",
@@ -64,50 +67,50 @@ const Header = () => {
     width: "270px",
   }
 
-  const fetchAffiliateApi = async () => {
+ const fetchAffiliateApi = async () => {
     try {
-      setLoading(true);
       const data = {
         themebuilder: "Y"
       }
-      const response = await getaffiliates(data);
-      if (response?.status === 0) {
-        _getAffiliate(response?.data,)
-      } else {
-        showError("Error", response?.statusMessage);
-      }
+      dispatch(affiliate(data))
+
+      // const response = await getaffiliates(data);
+      // if (response?.status === 0) {
+      //   _getAffiliate(response?.data)   
+      // } else {
+      //   showError("Error",response?.statusMessage);
+      // }
     } catch (error) {
       HandleAPIError(error)
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   const getAffililateTheme = async (id?: number) => {
-    let affiliateId = id ? id : 1;
-    dispatch(setAffiliateId(`${affiliateId}`))
+    // let affiliateId = id ? id : 1;
+    let affiliateId = 1;
+    console.log("affiliateID", affiliateId)
+    // dispatch(setAffiliateId(`${affiliateId}`))
     const request = {
       affiliateid: affiliateId
     }
     if (affiliateId !== null) {
       try {
-        setLoading(true);
-        const response = await getaffiliates(request);
-        if (response?.status === 0) {
-          if (response?.data?.affiliates[0]?.theme?.preview === '') {
-            dispatch(loadSavedTheme(defaultThemeOptions))
-          } else {
-            const themeOptions = JSON.parse(response?.data?.affiliates[0]?.theme?.preview);
-            dispatch(loadSavedTheme(themeOptions));
-            dispatch(affiliateTheme(themeOptions));
-          }
-        } else {
-          dispatch(loadSavedTheme(defaultThemeOptions))
-        }
+        dispatch(affiliate(request))
+
+        // const response = await getaffiliates(request);
+        // if (response?.status === 0) {
+        //   if (response?.data?.affiliates[0]?.theme?.preview === '') {
+        //     dispatch(loadSavedTheme(defaultThemeOptions))
+        //   } else {
+        //     const themeOptions = JSON.parse(response?.data?.affiliates[0]?.theme?.preview);
+        //     dispatch(loadSavedTheme(themeOptions));
+        //     dispatch(affiliateTheme(themeOptions));
+        //   }
+        // } else {
+        //   dispatch(loadSavedTheme(defaultThemeOptions))
+        // }
       } catch (error) {
         HandleAPIError(error)
-      } finally {
-        setLoading(false);
       }
     } else {
       dispatch(loadSavedTheme(defaultThemeOptions))
@@ -135,13 +138,13 @@ const Header = () => {
     }
   };
 
-  const handleOnHover = (result: any) => {}
+  const handleOnHover = (result: any) => { }
 
   const handleOnSelect = (item: any) => {
     getAffililateTheme(item?.id)
   }
 
-  const handleOnFocus = () => {}
+  const handleOnFocus = () => { }
 
   const formatResult = (item: any) => {
     return (
@@ -199,19 +202,27 @@ const Header = () => {
       </Col>
     );
   }
-  
+
+  const getdataofHeader = () => {
+    if (dataEdiPubl.auth === true && dataEdiPubl.editor === "Y") {
+      return editorHeader();
+    } else if (dataEdiPubl.auth === true && dataEdiPubl.publisher === "Y") {
+      return publisherHeader();
+    }
+    return null;
+  };
+
   return (
     <>
       <Loader loading={loading} />
       <div className="px-3 bg-grey shadow">
         <Row className="align-items-center py-3">
-          {/* Editor header */}
-          {GetEditorLoginStatus(auth) && editorHeader()}
 
-          {/* Publisher header */}
-          {getPublisherLoginStatus(auth) && publisherHeader()}
+          {getdataofHeader()}
 
-          <Col md={GetEditorLoginStatus(auth) ? "2" : "6"} className="d-flex justify-content-end">
+          <Col
+            // md={getEditorLoginStatus(auth) ? "2" : "6"}
+            className="d-flex justify-content-end">
             <Dropdown show={showDropdown} onToggle={(isOpen) => setShowDropdown(isOpen)} className="dropdown-center">
               <Dropdown.Toggle variant="secondary" id="dropdown-basic" className="shadow-lg btn-grey">
                 <FontAwesomeIcon
@@ -220,7 +231,7 @@ const Header = () => {
                 />
               </Dropdown.Toggle>
               <Dropdown.Menu className=" " style={{ zIndex: 1023 }}>
-                <Dropdown.Item disabled className="text-dark">{auth.username}</Dropdown.Item>
+                <Dropdown.Item disabled className="text-dark">{dataEdiPubl.username}</Dropdown.Item>
                 <Dropdown.Item className="bg-danger text-white" onClick={() => { logout(dispatch) }}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

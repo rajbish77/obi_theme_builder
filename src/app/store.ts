@@ -8,16 +8,20 @@ import editorWindowSlice from "../slices/editor/editorWindowSlice";
 import publisherSlice from "../slices/publisher/publisherSlice";
 import buttonSlice from "../slices/publisher/buttonFunctionSlice";
 import rejButtonSlice from "../slices/publisher/buttonFunctionRej"
+import affiliateSlice from "../slices/affiliateTheme"
+import commonWork from "../slices/commonSlice";
 
 
 const rootReducter = combineReducers({
-  logIn: loginSlice,
+  logIn: loginSlice, // Login api work slice
   editor: editorSlice,
   editorWindow: editorWindowSlice,
   theme: themeSlice,
-  publish: publisherSlice,
-  buttonWork: buttonSlice, // button function work
-  rejuctButton: rejButtonSlice
+  publish: publisherSlice, // Publicer api work slice
+  buttonWork: buttonSlice, // button publicer function work slice
+  rejuctButton: rejButtonSlice, // button rejuct function work slice
+  affiliateData : affiliateSlice, // affiliate api work slice
+  affiliate: commonWork
 });
 
 const persistConfig = {

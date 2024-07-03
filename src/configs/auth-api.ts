@@ -2,7 +2,7 @@ import { VIPER_CONST } from "../commonConstant";
 import { Auth, body, IAuth } from "../slices/types";
 import * as BaseApi from "./api-config";
 
-class PubApiService {
+class LoginApiService {
   private url = (action: string) => VIPER_CONST.base_url + action;
 
   /**
@@ -18,5 +18,5 @@ class PubApiService {
     return BaseApi._post(this.url("getauthorizedlogin"),  body);
   }
 }
-const AuthApi = new PubApiService();
+const AuthApi = new LoginApiService();
 export default AuthApi;

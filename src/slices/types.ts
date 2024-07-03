@@ -1,6 +1,7 @@
 import { Theme, ThemeOptions } from "@mui/material/styles";
 // import { withStyles, createTheme } from '@material-ui/core/styles';
 import { EditorState } from "./editor/types";
+import { StringHeaderIdentifier } from "@tanstack/react-table";
 
 export interface RootStateType {
   editor: EditorState;
@@ -131,12 +132,11 @@ export interface buttonBody {
   sessionid: string;
   failstatus: number;
   request: {
-    affiliateid: any;
+    affiliateid: number;
     action: string;
-    message?: any;
+    message?: StringHeaderIdentifier;
   };
 }
-
 
 export interface Palette {
   header: {
@@ -164,4 +164,25 @@ export interface PaletteOptions {
       hovercolor?: string;
     };
   };
+}
+
+export interface affilateBody {
+  username: string;
+  sessionid: string;
+  failstatus: number;
+  request: {
+    affiliateid?: number;
+  };
+}
+
+export interface affilateRequest {
+  // affiliatename: number | null;
+  themebuilder: string;
+  loading: boolean;
+  error: string | null;
+}
+
+export interface AffiliateItem {
+  id: number;
+  name: string;
 }

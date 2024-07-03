@@ -35,17 +35,17 @@ declare module '@mui/material/styles' {
     };
   }
   interface PaletteOptions {
-    header:{
-      backgroundcolor?: string;
-      textcolor?: string;
-      button:{
-        background?: string;
-        color?: string;
-        border?: string;
-        hoverbackground?: string;
-        hovercolor?: string;
-      } 
-    };
+    // header: {
+    //   backgroundcolor?: string;
+    //   textcolor?: string;
+    //   button: {
+    //     background?: string;
+    //     color?: string;
+    //     border?: string;
+    //     hoverbackground?: string;
+    //     hovercolor?: string;
+    //   }
+    // };
     navbar?: {
       backgroundcolor?: string;
       textcolor?: string;
@@ -94,10 +94,10 @@ declare module '@mui/material/styles' {
   }
 
   interface PaletteOptions {
-    palette? : {
-      type? : string;
-      primary? : {
-        main? : string;
+    palette?: {
+      type?: string;
+      primary?: {
+        main?: string;
       },
       secondary: {
         main: string;

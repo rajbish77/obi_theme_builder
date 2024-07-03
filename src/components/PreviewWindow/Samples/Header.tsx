@@ -20,34 +20,34 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { OverlayTrigger } from "react-bootstrap";
 
-// declare module '@mui/material/styles' {
-//   interface Palette {
-//     header: {
-//       backgroundcolor: string;
-//       textcolor: string;
-//       button: {
-//         background: string;
-//         color: string;
-//         border: string;
-//         hoverbackground: string;
-//         hovercolor: string;
-//       };
-//     };
-//   }
-//   interface PaletteOptions {
-//     header?: {
-//       backgroundcolor?: string;
-//       textcolor?: string;
-//       button?: {
-//         background?: string;
-//         color?: string;
-//         border?: string;
-//         hoverbackground?: string;
-//         hovercolor?: string;
-//       };
-//     };
-//   }
-// }
+declare module '@mui/material/styles' {
+  interface Palette {
+    header: {
+      backgroundcolor: string;
+      textcolor: string;
+      button: {
+        background: string;
+        color: string;
+        border: string;
+        hoverbackground: string;
+        hovercolor: string;
+      };
+    };
+  }
+  interface PaletteOptions {
+    header?: {
+      backgroundcolor?: string;
+      textcolor?: string;
+      button?: {
+        background?: string;
+        color?: string;
+        border?: string;
+        hoverbackground?: string;
+        hovercolor?: string;
+      };
+    };
+  }
+}
 
 const styleObj = {
   color: "black",
@@ -115,7 +115,8 @@ const Header = () => {
       <FontAwesomeIcon
         icon={faCartShopping}
         size="2xl"
-        className={`${classes.textColor} pe-3`}
+        // className={`${classes.textColor} pe-3`}
+        className="text-light pe-3"
       />
     )
   }
@@ -155,7 +156,7 @@ const Header = () => {
   }));
 
   return (
-    <ThemeProvider theme={theme}>
+    // <ThemeProvider theme={theme}>
       <StyledNavbar expand="lg">
         <div className="container-xxl d-block">
           <Row className="justify-content-around align-items-center">
@@ -262,7 +263,7 @@ const Header = () => {
           </Row>
         </div>
       </StyledNavbar>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 };
 
