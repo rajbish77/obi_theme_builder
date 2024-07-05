@@ -8,8 +8,8 @@ import editorWindowSlice from "../slices/editor/editorWindowSlice";
 import publisherSlice from "../slices/publisher/publisherSlice";
 import buttonSlice from "../slices/publisher/buttonFunctionSlice";
 import rejButtonSlice from "../slices/publisher/buttonFunctionRej"
-import affiliateSlice from "../slices/affiliateTheme"
 import commonWork from "../slices/commonSlice";
+import affiliateTheme from "../slices/affiliateTheme";
 
 
 const rootReducter = combineReducers({
@@ -20,8 +20,8 @@ const rootReducter = combineReducers({
   publish: publisherSlice, // Publicer api work slice
   buttonWork: buttonSlice, // button publicer function work slice
   rejuctButton: rejButtonSlice, // button rejuct function work slice
-  affiliateData : affiliateSlice, // affiliate api work slice
-  affiliate: commonWork
+  affiliateData : affiliateTheme, // affiliate api work slice
+  affiliate: commonWork,
 });
 
 const persistConfig = {

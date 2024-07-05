@@ -1,7 +1,25 @@
 import { Theme, ThemeOptions } from "@mui/material/styles";
-// import { withStyles, createTheme } from '@material-ui/core/styles';
 import { EditorState } from "./editor/types";
 import { StringHeaderIdentifier } from "@tanstack/react-table";
+
+export interface AffiliateDataResponse {
+  affiliateid: number;
+  affiliatename: string;
+  callbackurl: string;
+  distributorid: string;
+  languageid: string;
+  marketid: string;
+  status: string;
+}
+
+export interface AffiliateState {
+  themebuilder: string;
+  loading: boolean;
+  error: string | undefined;
+  data: AffiliateDataResponse | null;
+  id: number | null;
+  name: string | null;
+}
 
 export interface RootStateType {
   editor: EditorState;
@@ -9,12 +27,11 @@ export interface RootStateType {
   id?: number | null;
   themeObject: Theme;
   themeOptions: ThemeOptions;
-  // savedThemes: Record<string, SavedTheme>
   loadedFonts: Set<string>;
   activeTab: string;
   themeConfigOpen: boolean;
   auth: Auth;
-  affiliate: Affiliate;
+  affiliate: AffiliateState;
   editorThemeState: boolean;
   affiliateTheme: ThemeOptions;
   savedThemes: {
@@ -39,37 +56,33 @@ export interface AuthState {
   activeTab: string;
   themeConfigOpen: boolean;
   auth: Auth;
-  affiliate: Affiliate;
+  affiliate: AffiliateState;
   editorThemeState: boolean;
   affiliateTheme: ThemeOptions;
 }
 
 export interface IUser {
-  // editor: EditorState
   themeId: string;
   id?: number | null;
-  // themeObject: Theme
-  // themeOptions: ThemeOptions
   savedThemes: Record<string, SavedTheme>;
   loadedFonts: Set<string>;
   activeTab: string;
   themeConfigOpen: boolean;
   auth: Auth;
-  affiliate: Affiliate;
+  affiliate: AffiliateState;
   editorThemeState: boolean;
-  // affiliateTheme: ThemeOptions
   __v?: number;
   updatedBy: {
     id?: number | null;
-    // firstName: string;
-    // lastName: string;
   };
 }
+
 export interface IAuth {
   userEmail: string;
   auth: boolean;
   privilege: string;
 }
+
 export interface IUpdateUserPayload {
   editor: string;
   publisher: string;
@@ -176,13 +189,13 @@ export interface affilateBody {
 }
 
 export interface affilateRequest {
-  // affiliatename: number | null;
   themebuilder: string;
   loading: boolean;
   error: string | null;
+  data?: string; 
 }
 
 export interface AffiliateItem {
-  id: number;
-  name: string;
+  id: number|null;
+  name: string|null;
 }

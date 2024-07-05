@@ -64,7 +64,7 @@ const Main = styled("main")({
     flexDirection: "column",
 });
 
-export default function MainWindoPropes() {
+export default function MainWindowProps() {
     // const classes = useStyles;
 
     return (
@@ -78,7 +78,7 @@ export default function MainWindoPropes() {
                         </Main>
                     </NavAndMain>
                 </HeaderNavAndMain>
-                <ThemeConfigDrawer /> {/* Nave Bar */}
+                <ThemeConfigDrawer />
             </ErrorBoundary>
         </AppRoot>
     )

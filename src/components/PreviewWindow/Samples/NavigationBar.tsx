@@ -150,17 +150,17 @@ declare module '@mui/material/styles' {
     };
   }
   interface PaletteOptions {
-    // header: {
-    //   backgroundcolor?: string;
-    //   textcolor?: string;
-    //   button: {
-    //     background?: string;
-    //     color?: string;
-    //     border?: string;
-    //     hoverbackground?: string;
-    //     hovercolor?: string;
-    //   }
-    // };
+    header: {
+      backgroundcolor?: string;
+      textcolor?: string;
+      button: {
+        background?: string;
+        color?: string;
+        border?: string;
+        hoverbackground?: string;
+        hovercolor?: string;
+      }
+    };
     navbar?: {
       backgroundcolor?: string;
       textcolor?: string;

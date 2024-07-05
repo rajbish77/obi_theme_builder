@@ -6,7 +6,7 @@ import PaletteTools from "./PaletteTools/PaletteTools";
 import PaletteIcon from "@mui/icons-material/Palette";
 import ToolPanel from "./ToolPanel";
 
-const themeToolsBottomNavBarHeight = "56px"; // Adjust as needed
+const themeToolsBottomNavBarHeight = "56px";
 
 const ThemeToolsRoot = styled("div")(({ theme }: { theme: Theme }) => ({
   display: "flex",
@@ -62,7 +62,6 @@ const toolPanels: Array<{
 
 const ThemeTools = () => {
   const [bottomNavIndex, setBottomNavIndex] = useState(0);
-  console.log(bottomNavIndex)
   const currentTool = toolPanels[bottomNavIndex];
 
   return (
@@ -86,7 +85,6 @@ const ThemeTools = () => {
           />
         ))}
       </ThemeToolsBottomNavBar>
-      {/* platter design */}
     </ThemeToolsRoot>
   );
 };
