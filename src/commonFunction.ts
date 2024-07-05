@@ -1,8 +1,9 @@
 import { showConfirm, showError } from "./components/Swal";
-import { fetchAffiliate, loadSavedTheme, logOutState } from "./state/themeSlice";
+import { fetchAffiliate, loadSavedTheme } from "./state/themeSlice";
 import { Affiliate, Auth } from "./slices/types";
-import { store } from "./app/store"
-
+import { store } from "./app/store";
+import { logOut } from "./slices/logIn-slice";
+import { useAppDispatch } from "./app/hooks";
 
 export function HandleAPIError(error: any) {
   if (error?.code === "ERR_NETWORK") {
@@ -12,14 +13,14 @@ export function HandleAPIError(error: any) {
   }
 }
 
-export async function logout(dispatch: any) {
+export async function logout(authData: any) {
+  const dispatch = useAppDispatch()
   let confirmed = await showConfirm(
     "Confirm",
     "Are you sure, you want to logout?"
   );
   if (confirmed.isConfirmed) {
-    // dispatch(loadSavedTheme(defaultThemeOptions));
-    dispatch(logOutState());
+    dispatch(logOut(authData));
   }
 }
 

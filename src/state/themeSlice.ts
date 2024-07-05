@@ -129,10 +129,10 @@ const themeSlice = createSlice({
     //     };
     //   }
     // },
-    logOutState: (state) => {
-      state.auth = {...state.auth,...initialAuthState };
-      state.id = null;
-    },
+    // logOutState: (state) => {
+    //   state.auth = {...state.auth,...initialAuthState };
+    //   state.id = null;
+    // },
     fetchAffiliate: (state:any, action: PayloadAction<AffiliateItem[]>) => {
       state.affiliate = action.payload;
     },
@@ -152,7 +152,7 @@ export const {
   setActiveTab,
   resetSiteData,
   // logInState,
-  logOutState,
+  // logOutState,
   fetchAffiliate,
   affiliateTheme,
   editorThemeState,

@@ -39,7 +39,7 @@ const rootReducter = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["logIn", "affiliateData" , "affiliateName", "affiliateid"],
+  whitelist: ["logIn", "affiliateData" , "affiliateName"],
   // transforms:[selectDataTransform]
 };
 

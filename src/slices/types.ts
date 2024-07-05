@@ -205,7 +205,7 @@ export interface affilatiRequestId {
 }
 
 export interface affilateRequest {
-  affiliateid: number;
+  affiliateid: number | null;
   affiliatename: string;
   loading: boolean;
   error: string | null;

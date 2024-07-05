@@ -63,10 +63,7 @@ const Header = () => {
   const [searchResult, setSearchResult] = useState<AffiliateItem[]>([]);
   const loading = useAppSelector((state) => state.affiliateName.loading);
 
-  // const details = affiliateNameData.map((affiliate: AffiliateItem) => ({
-  //   affiliateid: affiliate.affiliateid,
-  //   affiliatename: affiliate.affiliatename
-  // }));
+  console.log(dataEdiPubl);
 
 
   const styleObj = {
@@ -245,7 +242,7 @@ const Header = () => {
               </Dropdown.Toggle>
               <Dropdown.Menu className=" " style={{ zIndex: 1023 }}>
                 <Dropdown.Item disabled className="text-dark">{dataEdiPubl.username}</Dropdown.Item>
-                <Dropdown.Item className="bg-danger text-white" onClick={() => { logout(dispatch) }}>Logout</Dropdown.Item>
+                <Dropdown.Item className="bg-danger text-white" onClick={() => { logout(dataEdiPubl) }}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Col>

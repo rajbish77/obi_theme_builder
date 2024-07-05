@@ -5,7 +5,7 @@ import PublisherListing from './PreviewWindow/Publisher';
 
 
 const AppRoot = styled("div")({
-    display: "flex",
+    display: "block",
     height: "100vh",
 });
 
@@ -34,7 +34,7 @@ export default function PublisherProps() {
     return (
         <>
             <AppRoot>
-                {/* <Header /> */}
+                <Header />
                 <NavAndMain>
                     <Main>
                         <PublisherListing />

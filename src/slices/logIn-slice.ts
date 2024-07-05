@@ -34,9 +34,7 @@ const login = createAsyncThunk(
 
     console.log(`Request For ${VIPER_CONST.base_url}getauthorizedlogin`, body);
     try {
-      const user = await AuthApi.login(body);
-
-      const responseData = await user;
+      const responseData = await AuthApi.login(body);
 
       console.log(
         `Response For ${VIPER_CONST.base_url}getauthorizedlogin`,
@@ -77,10 +75,14 @@ const loginSlice = createSlice({
   },
   reducers: {
     clearAuth: (state) => initialState,
+
+    logOut: (state, action) =>{
+      
+    }
   },
 });
 
 export { login };
 
-export const { clearAuth } = loginSlice.actions;
+export const { clearAuth, logOut } = loginSlice.actions;
 export default loginSlice.reducer;

@@ -1,12 +1,28 @@
-import { Navigate } from "react-router-dom";
-import { useAppSelector } from "../app/hooks";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAppSelector } from '../app/hooks';
 
-export default function ProtectedRoute({ children }: { children: any }) {
-    let user
-    // const user = useAppSelector((s) => s.auth.user);
-    if (!user) {
-        return <Navigate to={"/login"} />;
-    } else {
-        return children;
-    }
+interface ProtectedRouteProps {
+  children: JSX.Element;
+  allowedRole: 'publisher' | 'editor';
+}
+
+export default function ProtectedRoute({ children, allowedRole }: ProtectedRouteProps) {
+  const auth = useAppSelector((state) => state.logIn.auth);
+  const publisher = useAppSelector((state) => state.logIn.publisher);
+  const editor = useAppSelector((state) => state.logIn.editor);
+
+  if (!auth) {
+    return <Navigate to="/" />;
+  }
+
+  if (allowedRole === 'publisher' && publisher !== 'Y') {
+    return <Navigate to="/publisher-dashboard" />;
+  }
+
+  if (allowedRole === 'editor' && editor !== 'Y') {
+    return <Navigate to="/editor-dashboard" />;
+  }
+
+  return children;
 }

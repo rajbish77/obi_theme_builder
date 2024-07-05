@@ -20,51 +20,6 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { OverlayTrigger } from "react-bootstrap";
 
-declare module '@mui/material/styles' {
-  interface Palette {
-    header: {
-      backgroundcolor: string;
-      textcolor: string;
-      button: {
-        background: string;
-        color: string;
-        border: string;
-        hoverbackground: string;
-        hovercolor: string;
-      };
-    };
-  }
-  interface PaletteOptions {
-    header?: {
-      backgroundcolor?: string;
-      textcolor?: string;
-      button?: {
-        background?: string;
-        color?: string;
-        border?: string;
-        hoverbackground?: string;
-        hovercolor?: string;
-      };
-    };
-  }
-}
-
-const theme = createTheme({
-  palette: {
-    header: {
-      backgroundcolor: 'red',
-      textcolor: '#fff',
-      button: {
-        background: '#3f51b5',
-        color: '#fff',
-        border: '#3f51b5',
-        hoverbackground: '#303f9f',
-        hovercolor: '#fff',
-      },
-    },
-  },
-});
-
 interface Country {
   value: string
   label: JSX.Element | string

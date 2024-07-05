@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import { Button, Card, Form, InputGroup } from "react-bootstrap";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from 'react';
+import { Button, Card, Form, InputGroup } from 'react-bootstrap';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { PRIVILIGES_TYPE, PrivilegeType } from '../../../commonConstant';
 import { showError } from '../../Swal';
-import Select from "react-select";
+import Select from 'react-select';
 import Loader from '../../../Loader';
 import { HandleAPIError } from '../../../commonFunction';
-import { login } from "../../../slices/logIn-slice"
+import { login } from '../../../slices/logIn-slice';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 
 const LoginForm = () => {
   const md5 = require('md5');
@@ -19,19 +19,18 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [displayPassword, setDisplayPassword] = useState(false);
   const loading = useAppSelector((state) => state.logIn.loading);
-  const useData = useAppSelector((state) => state.logIn)
+  const userData = useAppSelector((state) => state.logIn);
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required("Username is required"),
-    password: Yup.string().required("Password is required"),
+    username: Yup.string().required('Username is required'),
+    password: Yup.string().required('Password is required'),
     previligesType: Yup.object().shape({
-      value: Yup.string().required("Privilege Type is required"),
-      label: Yup.string().required("Privilege Type is required"),
-    }).required("Privilege Type is required"),
+      value: Yup.string().required('Privilege Type is required'),
+      label: Yup.string().required('Privilege Type is required'),
+    }).required('Privilege Type is required'),
   });
 
   const handleSubmit = async (values: any) => {
-
     const { username, password, previligesType } = values;
 
     let userName = username.trim();
@@ -46,16 +45,15 @@ const LoginForm = () => {
       };
       await dispatch(login(request)).unwrap();
 
-      const getDataon = await useData
+      const getDataon = await userData;
 
-      if (getDataon.publisher === "Y") {
+      if (getDataon.publisher === 'Y') {
         navigate('/publisher-dashboard', { replace: true });
-      } else if (getDataon.editor === "Y") {
+      } else if (getDataon.editor === 'Y') {
         navigate('/editor-dashboard', { replace: true });
       } else {
-        showError("Error", getDataon?.statusMessage)
+        showError('Error', getDataon?.statusMessage);
       }
-
     } catch (error) {
       HandleAPIError(error);
     }
@@ -79,21 +77,21 @@ const LoginForm = () => {
     <>
       <Loader loading={loading} />
       <section
-        className='d-flex py-5 justify-content-center align-items-center bg-gray-200 min-vw-100 min-vh-100'
-        style={{ backgroundColor: "#e5e7eb" }}
+        className="d-flex py-5 justify-content-center align-items-center bg-gray-200 min-vw-100 min-vh-100"
+        style={{ backgroundColor: '#e5e7eb' }}
       >
-        <Form style={{ width: "24rem" }} onSubmit={formik.handleSubmit}>
+        <Form style={{ width: '24rem' }} onSubmit={formik.handleSubmit}>
           <Card
-            className='shadow-lg bg-white w-100'
-            style={{ borderRadius: '2px', borderTop: "8px solid #4f46e5", padding: "3rem" }}
+            className="shadow-lg bg-white w-100"
+            style={{ borderRadius: '2px', borderTop: '8px solid #4f46e5', padding: '3rem' }}
           >
-            <h3 className='text-center fs-4 fw-bold'>Login</h3>
-            <Card.Body className='p-0'>
-              <Form.Label htmlFor="validationCustomUsername" className='mt-3'>
+            <h3 className="text-center fs-4 fw-bold">Login</h3>
+            <Card.Body className="p-0">
+              <Form.Label htmlFor="validationCustomUsername" className="mt-3">
                 Username
                 <span className="text-danger">*</span>
               </Form.Label>
-              <InputGroup className={formik.touched.username && formik.errors.username ? "error d-flex" : "d-flex"}>
+              <InputGroup className={formik.touched.username && formik.errors.username ? 'error d-flex' : 'd-flex'}>
                 <Form.Control
                   type="text"
                   id="validationCustomUsername"
@@ -103,23 +101,23 @@ const LoginForm = () => {
                   value={formik.values.username}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className={formik.touched.username && formik.errors.username ? "error" : ""}
+                  className={formik.touched.username && formik.errors.username ? 'error' : ''}
                 />
               </InputGroup>
-              {formik.touched.username && formik.errors.username && <div className='errormessage'>{formik.errors.username}</div>}
-              <Form.Label htmlFor="validationCustomPassword" className='mt-3'>
+              {formik.touched.username && formik.errors.username && <div className="errormessage">{formik.errors.username}</div>}
+              <Form.Label htmlFor="validationCustomPassword" className="mt-3">
                 Password
                 <span className="text-danger">*</span>
               </Form.Label>
-              <InputGroup className={formik.touched.password && formik.errors.password ? "error d-flex" : "d-flex"}>
+              <InputGroup className={formik.touched.password && formik.errors.password ? 'error d-flex' : 'd-flex'}>
                 <Form.Control
-                  type={displayPassword ? "text" : "password"}
+                  type={displayPassword ? 'text' : 'password'}
                   placeholder="Password"
                   name="password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className={formik.touched.password && formik.errors.password ? "error" : ""}
+                  className={formik.touched.password && formik.errors.password ? 'error' : ''}
                 />
                 <FontAwesomeIcon
                   icon={displayPassword ? faEye : faEyeSlash}
@@ -127,16 +125,16 @@ const LoginForm = () => {
                   className="icon-color"
                   onClick={togglePassword}
                   style={{
-                    position: "absolute",
+                    position: 'absolute',
                     top: 11,
                     right: 10,
-                    cursor: "pointer",
-                    zIndex: "5",
+                    cursor: 'pointer',
+                    zIndex: '5',
                   }}
                 />
               </InputGroup>
-              {formik.touched.password && formik.errors.password && <div className='errormessage'>{formik.errors.password}</div>}
-              <Form.Label htmlFor="privilegesType" className='mt-3'>
+              {formik.touched.password && formik.errors.password && <div className="errormessage">{formik.errors.password}</div>}
+              <Form.Label htmlFor="privilegesType" className="mt-3">
                 Privilege
                 <span className="text-danger">*</span>
               </Form.Label>
@@ -146,15 +144,15 @@ const LoginForm = () => {
                 id="privilegesType"
                 onBlur={formik.handleBlur}
                 name="previligesType"
-                onChange={(d) => formik.setFieldValue("previligesType", d)}
-                className={formik.touched.previligesType && formik.errors.previligesType ? "error" : ""}
+                onChange={(d) => formik.setFieldValue('previligesType', d)}
+                className={formik.touched.previligesType && formik.errors.previligesType ? 'error' : ''}
               />
-              {formik.touched.previligesType && formik.errors.previligesType && <div className='errormessage'>{formik.errors.previligesType}</div>}
+              {formik.touched.previligesType && formik.errors.previligesType && <div className="errormessage">{formik.errors.previligesType}</div>}
               <Button
-                type='submit'
+                type="submit"
                 size="sm"
-                style={{ marginTop: "2rem", borderColor: '#007bff' }}
-                className='form-control form-control-lg purple-gradient'
+                style={{ marginTop: '2rem', borderColor: '#007bff' }}
+                className="form-control form-control-lg purple-gradient"
               >
                 Login
               </Button>
@@ -164,6 +162,6 @@ const LoginForm = () => {
       </section>
     </>
   );
-}
+};
 
 export default LoginForm;

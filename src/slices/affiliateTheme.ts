@@ -9,7 +9,7 @@ import AuthApi from "../configs/auth-api";
 import AffiApi from "../configs/affiliateTheme-api";
 
 const initialState: affilateRequest = {
-  affiliateid: 0,
+  affiliateid: null,
   affiliatename: "",
   loading: false,
   error: null,
@@ -56,16 +56,15 @@ const affiliateSlice = createSlice({
 
       const affiliates = action.payload.data?.affiliates;
       if (affiliates) {
-        const affiliateData = affiliates[0];
-        state.affiliateid = affiliateData.affiliateid;
-        state.affiliatename = affiliateData.affiliatename;
-        state.live = affiliateData.theme?.live || null;
-        state.preview = affiliateData.theme?.preview || null;
+        state.affiliateid = affiliates.affiliateid ?? null;
+        state.affiliatename = affiliates.affiliatename ?? "";
+        state.live = affiliates.theme?.live || null;
+        state.preview = affiliates.theme?.preview || null;
       };
     });
     builder.addCase(affiliate.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.payload;
+      state.error = typeof action.payload === 'string' ? action.payload : null;
     });
   },
 });
