@@ -144,6 +144,47 @@ export default Navigationbar;
 
 declare module '@mui/material/styles' {
   interface Palette {
+    footer: {
+      backgroundcolor: string;
+      textcolor: {
+        primary: {
+          textcolor: string;
+        };
+        secondary: {
+          textcolor: string;
+        };
+      };
+    };
+    header: {
+      backgroundcolor: string;
+      textcolor: string;
+      button: {
+        background: string;
+        color: string;
+        border: string;
+        hoverbackground: string;
+        hovercolor: string;
+      };
+    };
+    button: {
+      primary: {
+        background: "#007bff",
+        color: "#fff",
+        border: "#007bff",
+        boxshadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px",
+        hoverbackground: "#0069d9",
+        hovercolor: "#fff",
+        boxhovershadow: "rgba(0, 0, 0, 0.25) 0px 2px 5px",
+      },
+    },
+    subfooter: {
+      backgroundcolor: "#f8f9fa",
+      textcolor: "#212529",
+    },
+    body: {
+      backgroundcolor: 'white',
+      textcolor: 'black',
+    },
     navbar: {
       backgroundcolor: string;
       textcolor: string;
