@@ -144,51 +144,65 @@ export default Navigationbar;
 
 declare module '@mui/material/styles' {
   interface Palette {
-    footer: {
-      backgroundcolor: string;
-      textcolor: {
-        primary: {
-          textcolor: string;
-        };
-        secondary: {
-          textcolor: string;
-        };
+      header: {
+        backgroundcolor?: string | undefined;
+        textcolor?: string | undefined;
+        button: {
+          background?: string | undefined;
+          color?: string | undefined;
+          border?: string | undefined;
+          hoverbackground?: string | undefined;
+          hovercolor?: string | undefined;
+        }
       };
-    };
-    header: {
-      backgroundcolor: string;
-      textcolor: string;
+      navbar: {
+        backgroundcolor?: string | undefined;
+        textcolor?: string | undefined;
+      };
+      body: {
+        backgroundcolor?: string | undefined;
+        textcolor?: string | undefined;
+      };
       button: {
-        background: string;
-        color: string;
-        border: string;
-        hoverbackground: string;
-        hovercolor: string;
+        primary: {
+          background: string;
+          color: string;
+          border: string;
+          boxshadow: string;
+          hoverbackground: string;
+          hovercolor: string;
+          hoverborder: string;
+          boxhovershadow: string;
+        },
+        secondary: {
+          background: string;
+          color: string;
+          hoverbackground: string;
+          hovercolor: string;
+        }
       };
-    };
-    button: {
-      primary: {
-        background: "#007bff",
-        color: "#fff",
-        border: "#007bff",
-        boxshadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px",
-        hoverbackground: "#0069d9",
-        hovercolor: "#fff",
-        boxhovershadow: "rgba(0, 0, 0, 0.25) 0px 2px 5px",
+      
+      card: {
+        backgroundcolor: string;
+        textcolor: string;
+      };
+      subfooter: {
+        backgroundcolor: string;
+        textcolor: string;
       },
-    },
-    subfooter: {
-      backgroundcolor: "#f8f9fa",
-      textcolor: "#212529",
-    },
-    body: {
-      backgroundcolor: 'white',
-      textcolor: 'black',
-    },
-    navbar: {
-      backgroundcolor: string;
-      textcolor: string;
-    };
+      footer: {
+        backgroundcolor: string;
+        textcolor: {
+          primary: {
+            textcolor: string;
+          },
+          secondary: {
+            textcolor: string;
+          }
+        },
+      }
+      
+    
   }
   interface PaletteOptions {
     header: {
@@ -247,17 +261,5 @@ declare module '@mui/material/styles' {
         }
       },
     }
-  }
-
-  interface PaletteOptions {
-    palette?: {
-      type?: string;
-      primary?: {
-        main?: string;
-      },
-      secondary: {
-        main: string;
-      },
-    },
   }
 }
