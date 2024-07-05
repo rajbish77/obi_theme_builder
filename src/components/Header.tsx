@@ -16,12 +16,12 @@ import BrushIcon from '@mui/icons-material/Brush';
 import { getaffiliates } from "../apicalls"
 import { showError } from "./Swal"
 import { HandleAPIError, _getAffiliate, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
-import { HandleAPIError, _getAffiliate, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
 import { faUser, faRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
-import { useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { affiliate } from "../slices/affiliateTheme"
+import { affiliateData } from "../slices/affiliateName"
 
 // Define styled components
 const Title = styled(Typography)(({ theme }) => ({
@@ -49,18 +49,25 @@ const NavAppBar = styled('div')({
 });
 
 interface AffiliateItem {
-  id: number;
-  name: string;
+  affiliateid: number;
+  affiliatename: string;
 }
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const affiliateNameData = useAppSelector((state) => state.affiliateName.affiliates)
   const [showDropdown, setShowDropdown] = useState(false);
-  const [loading, setLoading] = useState(false)
   const auth = useSelector((state: AuthState) => state.auth);
   const AffiliateData = useSelector((state: RootStateType) => state.affiliate) || [];
-  const [searchResult, setSearchResult] = useState<AffiliateItem[]>([]);
   const dataEdiPubl = useAppSelector((state) => state.logIn)
+  const [searchResult, setSearchResult] = useState<AffiliateItem[]>([]);
+  const loading = useAppSelector((state) => state.affiliateName.loading);
+
+  // const details = affiliateNameData.map((affiliate: AffiliateItem) => ({
+  //   affiliateid: affiliate.affiliateid,
+  //   affiliatename: affiliate.affiliatename
+  // }));
+
 
   const styleObj = {
     color: "black",
@@ -68,29 +75,21 @@ const Header = () => {
     width: "270px",
   }
 
- const fetchAffiliateApi = async () => {
+  const fetchAffiliateApi = async () => {
     try {
       const data = {
         themebuilder: "Y"
       }
-      dispatch(affiliate(data))
-
-      // const response = await getaffiliates(data);
-      // if (response?.status === 0) {
-      //   _getAffiliate(response?.data)   
-      // } else {
-      //   showError("Error",response?.statusMessage);
-      // }
+      dispatch(affiliateData(data))
     } catch (error) {
       HandleAPIError(error)
-    } 
+    }
   };
 
   const getAffililateTheme = async (id?: number) => {
-    // let affiliateId = id ? id : 1;
-    let affiliateId = 1;
+    let affiliateId = id ? id : 1;
     console.log("affiliateID", affiliateId)
-    // dispatch(setAffiliateId(`${affiliateId}`))
+    dispatch(setAffiliateId(`${affiliateId}`))
     const request = {
       affiliateid: affiliateId
     }
@@ -98,7 +97,6 @@ const Header = () => {
       try {
         dispatch(affiliate(request))
 
-        // const response = await getaffiliates(request);
         // if (response?.status === 0) {
         //   if (response?.data?.affiliates[0]?.theme?.preview === '') {
         //     dispatch(loadSavedTheme(defaultThemeOptions))
@@ -118,31 +116,45 @@ const Header = () => {
     }
   }
 
+  // useEffect(() => {
+  //   // if (!Array.isArray(affiliateNameData) || affiliateNameData.length === 0) {
+  //   //   fetchAffiliateApi();
+  //   // }
+  //   if (affiliateNameData.length > 0) {
+  //     handleOnSearch(affiliateNameData);
+  //   }
+  // }, [affiliateNameData]);
+
   useEffect(() => {
-    if (!Array.isArray(AffiliateData) || AffiliateData.length === 0) {
+    if (affiliateNameData.length === 0) {
       fetchAffiliateApi();
     }
-    if (Array.isArray(AffiliateData) && AffiliateData.length > 0) {
-      handleOnSearch(AffiliateData);
-    }
-  }, [AffiliateData]);
+  }, [affiliateNameData])
 
   const handleOnSearch = (string?: any, results?: any) => {
     const searchTerm = string?.toLowerCase();
-    if (Array.isArray(AffiliateData)) {
-      const filteredResults = AffiliateData?.filter((item: AffiliateItem) =>
-        item?.name?.toLowerCase()?.includes(searchTerm)
-      );
-      setSearchResult(filteredResults?.length > 0 ? filteredResults : [{ id: -1, name: 'Not found' }]);
+    if (affiliateNameData) {
+      let filterdata = affiliateNameData?.filter((item: AffiliateItem) => {
+        return item?.affiliatename?.toLowerCase()?.includes(searchTerm)
+      })
+      filterdata = filterdata.map((item: AffiliateItem) => {
+        return {
+          name: item.affiliatename,
+          id: item.affiliateid
+        };
+      });
+      filterdata = filterdata.slice(0, 6);
+      setSearchResult(filterdata?.length > 0 ? filterdata : [{ id: -1, name: 'Not found' }]);
     } else {
       setSearchResult([]);
-    }
+    };
   };
 
   const handleOnHover = (result: any) => { }
 
   const handleOnSelect = (item: any) => {
     getAffililateTheme(item?.id)
+    
   }
 
   const handleOnFocus = () => { }

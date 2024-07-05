@@ -171,18 +171,114 @@ export interface affilateBody {
   sessionid: string;
   failstatus: number;
   request: {
-    affiliateid?: number;
+    affiliateid?: number | null;
+    themebuilder?: string | null;
+  };
+}
+
+export interface affilatiRequestId {
+  themebuilder?: string | null;
+  live?: any;
+  data: {
+    affiliates?: {
+      affiliateid?: number | null;
+      affiliatename?: string;
+      theme?: {
+        live?: any;
+        preview?: any;
+      };
+    };
   };
 }
 
 export interface affilateRequest {
-  // affiliatename: number | null;
-  themebuilder: string;
+  affiliateid: number;
+  affiliatename: string;
   loading: boolean;
   error: string | null;
+  status: string | null;
+  live: ThemeOptionsType | null;
+  preview: ThemeOptionsType | null;
 }
 
 export interface AffiliateItem {
   id: number;
   name: string;
+}
+
+export interface AffiliateResponse {
+  data: {
+    affiliates: any[];
+  };
+}
+export interface affilateData {
+  affiliates: any;
+  loading: boolean;
+  error: string | null;
+}
+
+export interface ThemeOptionsType {
+  themeOptions: {
+    palette: {
+      header: {
+        backgroundColor: string;
+        textColor: string;
+        button: {
+          buttonBackground: string;
+          buttonColor: string;
+          buttonHoverBackground: string;
+          buttonHoverColor: string;
+        };
+      };
+      navbar: {
+        backgroundColor: string;
+        textColor: string;
+      };
+      body: {
+        backgroundColor: string;
+        textColor: string;
+      };
+      button: {
+        primary: {
+          buttonBackground: string;
+          buttonColor: string;
+          buttonHoverBackground: string;
+          buttonHoverColor: string;
+        };
+        secondary: {
+          buttonBackground: string;
+          buttonColor: string;
+          buttonHoverBackground: string;
+          buttonHoverColor: string;
+        };
+      };
+      card: {
+        backgroundColor: string;
+        textColor: string;
+      };
+      subfooter: {
+        backgroundColor: string;
+        textColor: string;
+      };
+      footer: {
+        backgroundColor: string;
+        textColor: {
+          primary: {
+            textColor: string;
+          };
+          secondary: {
+            textColor: string;
+          };
+        };
+      };
+    };
+    typography?: {
+      fontFamily: string;
+    };
+  };
+}
+
+export type affiliateThym ={
+  live: any;
+  preview: any;
 }

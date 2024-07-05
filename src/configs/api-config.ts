@@ -13,7 +13,7 @@ const appAxios = axios.create({
 
 appAxios.interceptors.request.use((conf) => {
   const user = store.getState().logIn;
-  if (user.auth) {
+  if (user?.auth) {
     conf.headers = {
       ...conf.headers,
       // Authorization: `Bearer ${logIn}`,
@@ -62,6 +62,7 @@ export const _post = async <T>(api: string, data: any, headers: any = null) => {
   } catch (error) {
     console.error(error);
   }
+  
 };
 
 export const _put = async <T>(api: string, data: any, headers: any = null) => {

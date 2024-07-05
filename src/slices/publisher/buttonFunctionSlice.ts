@@ -64,7 +64,7 @@ const rejectButton = createAsyncThunk(
   }
 );
 
-type publishFunction = {
+export type publishFunction = {
   status: number | null;
   statusMessage: string;
   loading: boolean;

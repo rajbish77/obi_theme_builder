@@ -8,13 +8,6 @@ import { Auth } from "./types";
 import { VIPER_CONST } from "../commonConstant";
 import AuthApi from "../configs/auth-api";
 
-interface AuthResponse {
-  status: number;
-  statusMessage: string;
-  privilege: string;
-  username: string;
-}
-
 const initialState: Auth = {
   auth: false,
   editor: "",

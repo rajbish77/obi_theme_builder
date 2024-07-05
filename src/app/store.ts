@@ -1,15 +1,15 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
-import { persistReducer, persistStore } from "redux-persist";
+import { createTransform, persistReducer, persistStore } from "redux-persist";
 import loginSlice from "../slices/logIn-slice";
 import editorSlice from "../slices/editor/editorSlice";
 import themeSlice from "../state/themeSlice";
-import editorWindowSlice from "../slices/editor/editorWindowSlice";
+import editorWindowSlice, { EditorWindowState } from "../slices/editor/editorWindowSlice";
 import publisherSlice from "../slices/publisher/publisherSlice";
 import buttonSlice from "../slices/publisher/buttonFunctionSlice";
-import rejButtonSlice from "../slices/publisher/buttonFunctionRej"
-import affiliateSlice from "../slices/affiliateTheme"
-import commonWork from "../slices/commonSlice";
+import rejButtonSlice from "../slices/publisher/buttonFunctionRej";
+import affiliateSlice from "../slices/affiliateTheme";
+import affiliateName from "../slices/affiliateName";
 
 
 const rootReducter = combineReducers({
@@ -21,13 +21,26 @@ const rootReducter = combineReducers({
   buttonWork: buttonSlice, // button publicer function work slice
   rejuctButton: rejButtonSlice, // button rejuct function work slice
   affiliateData : affiliateSlice, // affiliate api work slice
-  affiliate: commonWork
+  affiliateName: affiliateName, // affiliate name and id
 });
+
+// const selectDataTransform = createTransform(
+//   (inboundState: any, key) => {
+//     // Modify the state you want to persist
+//     if (key === 'affiliateData') {
+//       return {
+//         affiliateId: inboundState.affiliateId,
+//       };
+//     }
+//     return inboundState;
+//   }
+// );
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["logIn"],
+  whitelist: ["logIn", "affiliateData" , "affiliateName", "affiliateid"],
+  // transforms:[selectDataTransform]
 };
 
 const presistReducter = persistReducer(persistConfig, rootReducter);

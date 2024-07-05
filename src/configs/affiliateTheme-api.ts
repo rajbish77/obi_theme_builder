@@ -1,5 +1,5 @@
 import { VIPER_CONST } from "../commonConstant";
-import { affilateBody, affilateRequest } from "../slices/types";
+import { affilateBody,  affilatiRequestId } from "../slices/types";
 import * as BaseApi from "./api-config";
 
 class AffiliateApiService {
@@ -14,7 +14,7 @@ class AffiliateApiService {
    */
   public async affilateData(
     body: affilateBody
-  ): Promise<affilateRequest | undefined> {
+  ): Promise<affilatiRequestId | undefined> {
     return BaseApi._post(this.url("getaffiliates"),  body);
   }
 }

@@ -1,16 +1,69 @@
-import React from "react"
-import Navbar from "react-bootstrap/Navbar"
-import Button from "react-bootstrap/Button"
-import { faCartShopping, faSquarePhone, faCloudSun } from "@fortawesome/free-solid-svg-icons"
-import Row from "react-bootstrap/esm/Row"
-import Col from "react-bootstrap/esm/Col"
-import { faFacebookSquare, faTwitterSquare } from "@fortawesome/free-brands-svg-icons"
-import { Nav, OverlayTrigger } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Tooltip from "react-bootstrap/Tooltip"
-import Select from "react-select"
-import { styled } from "@mui/material/styles"
-import { Link } from "react-router-dom"
+import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import {
+  faCartShopping,
+  faSquarePhone,
+  faCloudSun,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faFacebookSquare,
+  faTwitterSquare,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Select from "react-select";
+import Tooltip from "react-bootstrap/Tooltip";
+import { createTheme, Theme, ThemeProvider } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
+import { OverlayTrigger } from "react-bootstrap";
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    header: {
+      backgroundcolor: string;
+      textcolor: string;
+      button: {
+        background: string;
+        color: string;
+        border: string;
+        hoverbackground: string;
+        hovercolor: string;
+      };
+    };
+  }
+  interface PaletteOptions {
+    header?: {
+      backgroundcolor?: string;
+      textcolor?: string;
+      button?: {
+        background?: string;
+        color?: string;
+        border?: string;
+        hoverbackground?: string;
+        hovercolor?: string;
+      };
+    };
+  }
+}
+
+const theme = createTheme({
+  palette: {
+    header: {
+      backgroundcolor: 'red',
+      textcolor: '#fff',
+      button: {
+        background: '#3f51b5',
+        color: '#fff',
+        border: '#3f51b5',
+        hoverbackground: '#303f9f',
+        hovercolor: '#fff',
+      },
+    },
+  },
+});
 
 interface Country {
   value: string

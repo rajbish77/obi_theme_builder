@@ -1,7 +1,7 @@
 // editorWindowSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface EditorWindowState {
+export interface EditorWindowState {
   activeTab: string;
 }
 
