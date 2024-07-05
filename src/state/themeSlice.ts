@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootStateType, PreviewSize, Affiliate, Auth } from '../slices/types';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootStateType, PreviewSize, AffiliateItem, Auth } from '../slices/types';
 import { createTheme, ThemeOptions } from '@mui/material/styles';
 import { generateThemeId, setByPath } from '../utils';
 import { defaultThemeOptions } from '../siteTheme';
@@ -7,6 +7,7 @@ import { THEMEEDITOR, THEMEPUBLISHER } from '../commonConstant';
 import deepmerge from 'deepmerge';
 import { initialState as editorInitialState } from "../slices/editor/editorSlice";
 import { createBreakpoints } from '@mui/system';
+import AffiApi from '../configs/affiliateTheme-api';
 
 const defaultThemeId = generateThemeId({});
 const initialAuthState: Auth = {
@@ -33,7 +34,7 @@ const breakpoints = createBreakpoints({
 const initialState: RootStateType = {
   id: null,
   editor: editorInitialState,
-  themeId: defaultThemeId,
+  themeId: defaultThemeOptions as string,
   themeOptions: defaultThemeOptions,
   themeObject: createTheme({
     ...defaultThemeOptions,
@@ -52,7 +53,13 @@ const initialState: RootStateType = {
   activeTab: "preview",
   themeConfigOpen: false,
   auth: initialAuthState,
-  affiliate: { id: null, name: null },
+  affiliate: {
+    id: null, name: null,
+    themebuilder: '',
+    loading: false,
+    error: undefined,
+    data: null
+  },
   editorThemeState: false,
   affiliateTheme: defaultThemeOptions
 };
@@ -99,6 +106,12 @@ const themeSlice = createSlice({
     resetSiteData: (state) => {
       return initialState;
     },
+    setThemeId: (state, action: PayloadAction<string>) => {
+      state.themeId = action.payload;
+    },
+    toggleThemeConfig: (state) => {
+      state.themeConfigOpen = !state.themeConfigOpen;
+    },
     // logInState: (state:any, action: PayloadAction<{ loginType: any; userName: string }>) => {
     //   if (action.payload.loginType === THEMEEDITOR) {
     //     state.auth = {
@@ -120,7 +133,7 @@ const themeSlice = createSlice({
       state.auth = {...state.auth,...initialAuthState };
       state.id = null;
     },
-    fetchAffiliate: (state:any, action: PayloadAction<Affiliate[]>) => {
+    fetchAffiliate: (state:any, action: PayloadAction<AffiliateItem[]>) => {
       state.affiliate = action.payload;
     },
     affiliateTheme: (state:any, action: PayloadAction<ThemeOptions>) => {
@@ -143,6 +156,7 @@ export const {
   fetchAffiliate,
   affiliateTheme,
   editorThemeState,
+  setThemeId, toggleThemeConfig,
 } = themeSlice.actions;
 
 export default themeSlice.reducer;

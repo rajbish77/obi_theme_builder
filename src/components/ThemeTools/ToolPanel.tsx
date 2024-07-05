@@ -39,12 +39,10 @@ function ToolPanel({ panelTitle, children }: ToolPanelProps) {
         <Typography variant="overline">
           {panelTitle}
         </Typography>
-        {/* this is panel title */}
       </ToolPanelTitle>
       <ToolPanelContent>
         {children}
       </ToolPanelContent>
-      {/* this is colour change */}
     </ToolPanelRoot>
   );
 }

@@ -11,8 +11,8 @@ import PaletteInput from "../components/ThemeTools/PaletteTools/PaletteInput";
 import { enableMapSet } from "immer";
 import PaletteSubType from "../components/ThemeTools/PaletteTools/PaletteSubType";
 import PaletteTools from "../components/ThemeTools/PaletteTools/PaletteTools";
-import MainWindoPropes from "../components/MainWindoPropes";
-import PublicerPropes from "../components/PublicerPropes";
+import MainWindoPropes from "../components/MainWindowProps";
+import PublicerPropes from "../components/PublisherProps";
 
 enableMapSet();
 
@@ -32,6 +32,14 @@ export const router = createBrowserRouter([
     // ),
     // children: [
     //   {
+    //     path: "/publisher-dashboard",
+    //     element: <PublisherListing />,
+    //   },
+    //   {
+    //     path: "/editor-dashboard",
+    //     element: <MainWindow />,
+    //   },
+    // ],
     //     path: "/publisher-dashboard",
     //     element: <PublisherListing />,
     //   },

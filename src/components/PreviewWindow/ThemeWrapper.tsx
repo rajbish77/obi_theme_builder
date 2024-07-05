@@ -21,16 +21,13 @@ interface ThemeWrapperProps {
   children: React.ReactNode | React.ReactNodeArray;
 }
 
-// Ensure the theme is correctly typed for styled-components
 const castThemeToStyled = (theme: Theme): DefaultTheme => theme as DefaultTheme;
 
 const ThemeWrapper: React.FC<ThemeWrapperProps> = ({ children }) => {
   const themeObject = useSelector((state: RootState) => state.theme.themeObject);
 
-  // Log the theme object for debugging
   console.log("Theme object from Redux:", themeObject);
 
-  // Provide a default theme if themeObject is undefined
   const defaultTheme = createTheme({
     palette: {
       header:{

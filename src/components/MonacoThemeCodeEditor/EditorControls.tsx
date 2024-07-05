@@ -17,8 +17,8 @@ function EditorControls() {
   const id = useSelector((state: RootStateType) => state.id);
   const auth = useSelector((state: RootStateType) => state.auth);
   const editorState = useSelector((state: RootStateType) => state.editorThemeState);
-  const affiliateTheme = useSelector((state: RootStateType) => state.affiliateTheme); // Assuming this should be `state.editor.affiliateTheme`
-  const themeOptions = useSelector((state: RootStateType) => state.themeOptions); // Assuming this should be `state.editor.themeOptions`
+  const affiliateTheme = useSelector((state: RootStateType) => state.affiliateTheme);
+  const themeOptions = useSelector((state: RootStateType) => state.themeOptions);
 
   const updateThemeApi = async (request: UpdateTheme) => {
     try {
@@ -46,7 +46,7 @@ function EditorControls() {
       affiliateid: id,
       action: "PR",
       username: auth.username,
-      theme: JSON.stringify(themeOptions), // Use `themeOptions` from Redux state
+      theme: JSON.stringify(themeOptions), 
     };
     updateThemeApi(request);
   };
@@ -56,7 +56,7 @@ function EditorControls() {
       affiliateid: id,
       action: "S",
       username: auth.username,
-      theme: JSON.stringify(themeOptions), // Use `themeOptions` from Redux state
+      theme: JSON.stringify(themeOptions), 
     };
     updateThemeApi(request);
   };
@@ -66,7 +66,7 @@ function EditorControls() {
       let confirmed = await showConfirm("Confirm", "Are you sure you want to reset the theme?");
       if (confirmed.isConfirmed) {
         setLoading(true);
-        dispatch(loadSavedTheme(defaultThemeOptions)); // Dispatch action from `editorSlice`
+        dispatch(loadSavedTheme(defaultThemeOptions)); 
         showSuccess("Success", "Theme reset successfully");
       }
     } catch (error) {
@@ -80,8 +80,8 @@ function EditorControls() {
     try {
       let confirmed = await showConfirm("Confirm", "Are you sure you want to discard the changes?");
       if (confirmed.isConfirmed) {
-        dispatch(editorThemeState(true)); // Dispatch action from `editorSlice`
-        dispatch(loadSavedTheme(affiliateTheme)); // Dispatch action from `editorSlice`
+        dispatch(editorThemeState(true));
+        dispatch(loadSavedTheme(affiliateTheme));
         showSuccess("Success", "Changes discarded successfully");
       }
     } catch (error) {

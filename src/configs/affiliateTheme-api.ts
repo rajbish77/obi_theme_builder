@@ -4,6 +4,8 @@ import * as BaseApi from "./api-config";
 
 class AffiliateApiService {
   private url = (action: string) => VIPER_CONST.base_url + action;
+  fetchThemeById: any;
+  getAffiliateTheme: any;
 
   /**
    * Login user

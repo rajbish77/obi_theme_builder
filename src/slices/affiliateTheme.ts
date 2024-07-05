@@ -35,13 +35,13 @@ const affiliate = createAsyncThunk(
 
       return thunkApi.fulfillWithValue({ ...responseData, ...datas });
     } catch (error) {
-      throw thunkApi.rejectWithValue(error);
+      return thunkApi.rejectWithValue(error);
     }
   }
 );
 
 const affiliateSlice = createSlice({
-  name: "affiliateData",
+  name: "affiliate",
   initialState,
   reducers: {
     clearAuth: (state) => initialState,
@@ -65,11 +65,11 @@ const affiliateSlice = createSlice({
     });
     builder.addCase(affiliate.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.payload as string;
+      state.error = action.payload;
     });
   },
 });
+export { affiliate };
 
 export const { clearAuth } = affiliateSlice.actions;
 export default affiliateSlice.reducer;
-export { affiliate };

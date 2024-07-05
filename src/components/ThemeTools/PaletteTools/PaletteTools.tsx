@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useEffect } from "react"
 import PaletteSubType from "./PaletteSubType"
 
 export default function PaletteTools() {
+
   return (
     <>
       <PaletteSubType
@@ -33,14 +34,14 @@ export default function PaletteTools() {
           ["Text Color", "textcolor"],
         ]}
       />
-      <PaletteSubType
+      {/* <PaletteSubType
         title="Card"
         path="palette.card"
         paletteValues={[
           ["Background Color", "backgroundcolor"],
           ["Text Color", "textcolor"],
         ]}
-      />
+      /> */}
       <PaletteSubType
         title="Button"
         path="palette.button"

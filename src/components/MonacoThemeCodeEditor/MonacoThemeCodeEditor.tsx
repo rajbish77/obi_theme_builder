@@ -27,7 +27,6 @@ export const codeEditorId = "code-editor";
 const MonacoThemeCodeEditor = () => {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
-  // set up editor and configure options
   useEditor(editorRef);
   useEditorStateSync(editorRef);
   useReadOnlyLines(editorRef);

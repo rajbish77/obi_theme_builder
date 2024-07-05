@@ -30,7 +30,7 @@ const Main = styled("main")({
     flexDirection: "column",
 });
 
-export default function PublicerPropes() {
+export default function PublisherProps() {
     return (
         <>
             <AppRoot>
