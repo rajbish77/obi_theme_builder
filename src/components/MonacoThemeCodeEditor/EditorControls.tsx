@@ -1,62 +1,73 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootStateType } from "../../slices/types";
+import { RootStateType, UpdateTheme } from "../../slices/types";
 import { Button } from "react-bootstrap";
-import { updateTheme } from "../../apicalls";
-// import Loader from "src/components/PreviewWindow/Samples/Loader";
 import { myMessageFunction, showConfirm, showError, showSuccess } from "../Swal";
-import { HandleAPIError } from "../../commonFunction";
-import { UpdateTheme } from "../../types";
-import { defaultThemeOptions } from "../../siteTheme";
-import { editorThemeState, loadSavedTheme } from "../../state/themeSlice";
 import Loader from "../PreviewWindow/Samples/Loader";
+import { updateTheme } from "../../slices/affiliateTheme";
+import { defaultThemeOptions } from "../../siteTheme";
+import { loadSavedTheme, editorThemeState } from "../../state/themeSlice";
+import { HandleAPIError } from "../../commonFunction";
+import { AppDispatch } from "../../app/store";
+import { useAppSelector } from "../../app/hooks";
 
 function EditorControls() {
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const id = useSelector((state: RootStateType) => state.id);
-  const auth = useSelector((state: RootStateType) => state.auth);
   const editorState = useSelector((state: RootStateType) => state.editorThemeState);
   const affiliateTheme = useSelector((state: RootStateType) => state.affiliateTheme);
   const themeOptions = useSelector((state: RootStateType) => state.themeOptions);
+  const loading = useAppSelector((state) => state.affiliateName.loading);
+  const username = useSelector((state: RootStateType) => state.affiliate?.username);
+  console.log(username)
+  const auth = useSelector((state: RootStateType) => state.auth);
+  console.log(auth)
 
   const updateThemeApi = async (request: UpdateTheme) => {
     try {
-      setLoading(true);
-      const response = await updateTheme(request);
-      if (response?.status === 0) {
-        dispatch(editorThemeState(true));
-        if (request.action === "PR") {
-          showSuccess("Success", "Raise publish request successfully");
-        } else {
-          showSuccess("Success", "Theme saved successfully");
-        }
+      const response = await dispatch(updateTheme(request)).unwrap();
+      console.log(response)
+      dispatch(editorThemeState(true));
+      if (request.action === "PR") {
+        showSuccess("Success", "Raise publish request successfully");
       } else {
-        showError("Error", response?.statusMessage);
+        showSuccess("Success", "Theme saved successfully");
       }
     } catch (error) {
-      HandleAPIError(error);
-    } finally {
-      setLoading(false);
+      showError("Error", error as string);
     }
   };
 
-  const saveAndRaiseRequest = async () => {
-    const request = {
-      affiliateid: id,
+  const saveAndRaiseRequest = () => {
+    if (!username) {
+      showError("Error", "Username not found");
+      return;
+    }
+    const request: UpdateTheme = {
       action: "PR",
-      username: auth.username,
-      theme: JSON.stringify(themeOptions), 
+      username: username,
+      theme: {
+        live: {}, // Placeholder or default structure
+        preview: {}, // Placeholder or default structure
+        ...themeOptions, // Spread the existing themeOptions properties
+      },
     };
     updateThemeApi(request);
   };
 
-  const saveTheme = async () => {
-    const request = {
-      affiliateid: id,
+  const saveTheme = () => {
+    if (!username) {
+      showError("Error", "Username not found");
+      return;
+    }
+    const request: UpdateTheme = {
       action: "S",
-      username: auth.username,
-      theme: JSON.stringify(themeOptions), 
+      username: username,
+      theme: {
+        live: {}, // Placeholder or default structure
+        preview: {}, // Placeholder or default structure
+        ...themeOptions, // Spread the existing themeOptions properties
+      },
     };
     updateThemeApi(request);
   };
@@ -65,14 +76,11 @@ function EditorControls() {
     try {
       let confirmed = await showConfirm("Confirm", "Are you sure you want to reset the theme?");
       if (confirmed.isConfirmed) {
-        setLoading(true);
-        dispatch(loadSavedTheme(defaultThemeOptions)); 
+        dispatch(loadSavedTheme(defaultThemeOptions));
         showSuccess("Success", "Theme reset successfully");
       }
     } catch (error) {
       HandleAPIError(error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -86,12 +94,10 @@ function EditorControls() {
       }
     } catch (error) {
       HandleAPIError(error);
-    } finally {
-      setLoading(false);
     }
   };
 
-  const handleDiscardAndresetChange = async () => {
+  const handleDiscardAndresetChange = () => {
     if (editorState) {
       discardChanges();
     } else {
@@ -102,37 +108,25 @@ function EditorControls() {
   const handleChange = async () => {
     let confirmed = await myMessageFunction(auth);
     if (confirmed.isConfirmed) {
-      if (auth?.editor === "Y") {
-        saveAndRaiseRequest();
-      }
+      saveAndRaiseRequest();
     } else if (confirmed.isDenied) {
-      if (auth?.editor === "Y") {
-        saveTheme();
-      }
+      saveTheme();
     }
   };
 
   return (
     <>
       <Loader loading={loading} />
-      <div className={`d-flex justify-content-end p-2`}>
+      <div className="d-flex justify-content-end p-2">
         {id !== null ? (
           <>
             <div className="px-1">
-              <Button
-                className="btn-success shadow-md"
-                onClick={handleChange}
-                size="sm"
-              >
+              <Button className="btn-success shadow-md" onClick={handleChange} size="sm">
                 Save Theme
               </Button>
             </div>
             <div className="px-1">
-              <Button
-                className="btn-secondary shadow-md"
-                onClick={handleDiscardAndresetChange}
-                size="sm"
-              >
+              <Button className="btn-secondary shadow-md" onClick={handleDiscardAndresetChange} size="sm">
                 {editorState ? "Discard Changes" : "Reset Theme"}
               </Button>
             </div>

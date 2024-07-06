@@ -7,21 +7,19 @@ import {
   styled
 } from "@mui/material"
 import { Button, Col, Row, Dropdown } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import { affiliateTheme, loadSavedTheme, setAffiliateId } from "../state/themeSlice"
+import { useSelector } from "react-redux"
+import { loadSavedTheme, setAffiliateId } from "../state/themeSlice"
 import { AuthState, RootStateType } from "../slices/types"
 import { defaultThemeOptions } from "../siteTheme"
 import Loader from "../Loader"
 import BrushIcon from '@mui/icons-material/Brush';
-import { getaffiliates } from "../apicalls"
-import { showError } from "./Swal"
-import { HandleAPIError, _getAffiliate, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
+import { HandleAPIError, _getAffiliate, getEditorLoginStatus, getPublisherLoginStatus, Logout } from "../commonFunction"
 import { faUser, faRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { affiliate } from "../slices/affiliateTheme"
 import { affiliateData } from "../slices/affiliateName"
+import { affiliate } from "../slices/affiliateTheme"
 
 // Define styled components
 const Title = styled(Typography)(({ theme }) => ({
@@ -122,11 +120,11 @@ const Header = () => {
   //   }
   // }, [affiliateNameData]);
 
-  useEffect(() => {
-    if (affiliateNameData.length === 0) {
-      fetchAffiliateApi();
-    }
-  }, [affiliateNameData])
+  // useEffect(() => {
+  //   if (affiliateNameData.length === 0) {
+  //     fetchAffiliateApi();
+  //   }
+  // }, [affiliateNameData])
 
   const handleOnSearch = (string?: any, results?: any) => {
     const searchTerm = string?.toLowerCase();
@@ -228,7 +226,7 @@ const Header = () => {
       <div className="px-3 bg-grey shadow">
         <Row className="align-items-center py-3">
 
-          {getdataofHeader()}
+          {editorHeader()}
 
           <Col
             // md={getEditorLoginStatus(auth) ? "2" : "6"}
@@ -242,7 +240,7 @@ const Header = () => {
               </Dropdown.Toggle>
               <Dropdown.Menu className=" " style={{ zIndex: 1023 }}>
                 <Dropdown.Item disabled className="text-dark">{dataEdiPubl.username}</Dropdown.Item>
-                <Dropdown.Item className="bg-danger text-white" onClick={() => { logout(dataEdiPubl) }}>Logout</Dropdown.Item>
+                <Dropdown.Item className="bg-danger text-white" onClick={() => { Logout(dataEdiPubl) }}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Col>

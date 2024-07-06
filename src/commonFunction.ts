@@ -13,7 +13,7 @@ export function HandleAPIError(error: any) {
   }
 }
 
-export async function logout(authData: any) {
+export async function Logout(authData: any) {
   const dispatch = useAppDispatch()
   let confirmed = await showConfirm(
     "Confirm",

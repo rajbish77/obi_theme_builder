@@ -58,10 +58,12 @@ const initialState: RootStateType = {
     themebuilder: '',
     loading: false,
     error: undefined,
-    data: null
+    data: null,
+    username: null
   },
   editorThemeState: false,
-  affiliateTheme: defaultThemeOptions
+  affiliateTheme: defaultThemeOptions,
+  updateThemeButton: null
 };
 
 const createPreviewMuiTheme = (

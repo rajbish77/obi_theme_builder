@@ -7,7 +7,6 @@ import { PREVIEW_URL, VIPER_CONST } from '../../../commonConstant';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { publish } from '../../../slices/publisher/publisherSlice';
 import { showConfirm, showError, showReject, showSuccess } from '../../Swal';
-import { updateTheme } from '../../../apicalls';
 import { HandleAPIError } from '../../../commonFunction';
 import { publishButton } from '../../../slices/publisher/buttonFunctionSlice';
 import { rejectButton } from '../../../slices/publisher/buttonFunctionRej';

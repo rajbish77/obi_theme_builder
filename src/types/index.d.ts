@@ -62,7 +62,7 @@ type ThemeOptionsType = {
   [];
 };
 
-type TTheme = {
+type Theme = {
   affiliate_id?: number;
   themeOptions: {
     palette: {
@@ -127,13 +127,6 @@ type TTheme = {
 
 type GetTheme = {
   affiliate_id?: number;
-};
-
-type UpdateTheme = {
-  affiliateid: number | null | undefined;
-  action: string;
-  theme?: string;
-  message?: string;
 };
 
 type LoginRequest = {
