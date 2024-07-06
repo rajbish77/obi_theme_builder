@@ -55,13 +55,13 @@ const NavAppBar = styled('div')({
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const affiliateNameData = useAppSelector((state) => state.commonThem.affiliate)
+  const affiliateNameData = useAppSelector((state) => state.commonTheme.affiliate)
   const [showDropdown, setShowDropdown] = useState(false);
   const auth = useSelector((state: AuthState) => state.auth);
   const AffiliateData = useSelector((state: RootStateType) => state.affiliate) || [];
   const dataEdiPubl = useAppSelector((state) => state.logIn)
   const [searchResult, setSearchResult] = useState<Affiliate[]>([]);
-  // const loading = useAppSelector((state) => state.affiliateName.loading);
+  // const loading = useAppSelector((state) => state.affiliateData.loading);
 const affiliateDataID = useAppSelector((state) => state.affiliateData )
 
 console.log(affiliateDataID)
@@ -213,12 +213,10 @@ console.log(affiliateDataID)
 
   return (
     <>
-      {/*   <Loader loading={loading} />*/}
+        {/* <Loader loading={loading} /> */}
       <div className="px-3 bg-grey shadow">
         <Row className="align-items-center py-3">
-
           {getdataofHeader()}
-
           <Col
             // md={getEditorLoginStatus(auth) ? "2" : "6"}
             className="d-flex justify-content-end">

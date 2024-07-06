@@ -318,29 +318,43 @@ export type affiliateThym ={
 
 export interface UpdateThemeData {
   username: string;
-    sessionid: string;
-    failstatus: number;
-    request: {
-        username: string;
-        theme: {
-            live: any;
-            preview: any;
-        };
-    };
+  sessionid: string;
+  failstatus: number;
+  request: UpdateTheme;
 }
 
 export interface UpdateThemeRequest {
+  live: any;
+  preview: any;
   themebuilder: string;
   loading: boolean;
   error: string | null;
-  data?: string; 
+  data?: UpdateThemeResponse;
 }
 
 export interface UpdateTheme {
   action: string;
+  affiliateid: number;
+  theme: string;
+}
+
+export interface UpdateThemeResponse {
   username: string;
-  theme: {
-    live: any;
-    preview: any;
-  };
+  sessionid: string;
+  status: number;
+  statusMessage: string;
+  severity: number;
+  data: {};
+}
+
+export function isValidResponse(response: any): response is UpdateThemeResponse {
+  return (
+    typeof response === "object" &&
+    "username" in response &&
+    "sessionid" in response &&
+    "status" in response &&
+    "statusMessage" in response &&
+    "severity" in response &&
+    "data" in response
+  );
 }

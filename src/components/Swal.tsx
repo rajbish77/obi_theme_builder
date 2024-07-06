@@ -64,13 +64,13 @@ export const showConfirm = (title = "Confirm", message = "Are you sure, you want
   })
 }
 
-export const myMessageFunction = async (auth: Auth) => {
+export const myMessageFunction = async () => {
   let title;
   let message;
   let confirmButtonText;
   let denyButtonText;
   let cancelButtonText;
-
+  const auth = {editor : "Y", publisher : "N"}
   if(auth.editor === "Y" && auth.publisher === "N" ){
     title = "Confirm";
     message = "Are you sure you want to save theme?";

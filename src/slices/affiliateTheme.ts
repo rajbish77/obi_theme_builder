@@ -42,6 +42,7 @@ export const affiliate = createAsyncThunk(
   }
 );
 
+
 const affiliateSlice = createSlice({
   name: "affiliate",
   initialState,
@@ -70,6 +71,8 @@ const affiliateSlice = createSlice({
     });
   },
 });
+
+export const affiliateid = affiliateSlice.actions;
 
 export const { clearAffiliate } = affiliateSlice.actions;
 export default affiliateSlice.reducer;

@@ -36,9 +36,9 @@ const ThemeConfigDrawer = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const themeId = useSelector((state: RootStateType) => state.themeId);
-  console.log(themeId)
+  // console.log(themeId)
   const open = useSelector((state: RootStateType) => state.themeConfigOpen);
-  console.log(open)
+  // console.log(open)
   const permanent = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
