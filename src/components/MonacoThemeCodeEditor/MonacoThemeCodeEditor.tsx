@@ -9,7 +9,6 @@ import EditorControls from "./EditorControls";
 import EditorErrors from "./EditorErrors";
 import { verbose } from "../../utils";
 
-// Create styled components using styled from @mui/material/styles
 const MonacoThemeEditorRoot = styled('div')({
   height: "100%",
   display: "flex",

@@ -114,7 +114,7 @@ function EditorControls() {
 
   return (
     <>
-       <Loader loading={loading} /> 
+       {/* <Loader loading={loading} />  */}
       <div className="d-flex justify-content-end p-2">
         {id !== null ? (
           <>

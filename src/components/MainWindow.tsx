@@ -1,9 +1,9 @@
 import React from 'react';
 import { styled } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootStateType } from '../slices/types';
 import PreviewWindow from './PreviewWindow/PreviewWindow';
 import { setActiveTab } from '../slices/editor/editorWindowSlice';
+import { RootState } from '../app/store';
 
 // Styled component for MainWindow
 const MainWindowContainer = styled('div')({
@@ -33,7 +33,7 @@ export const savedThemesTabId = 'saved-themes-tab';
 
 const MainWindow = () => {
   const dispatch = useDispatch();
-  const activeTab = useSelector((state: RootStateType) => state.activeTab);
+  const activeTab = useSelector((state: RootState) => state.editorWindow.activeTab);
   const setTab = React.useCallback((value: string) => dispatch(setActiveTab(value)), [dispatch]);
 
   return (

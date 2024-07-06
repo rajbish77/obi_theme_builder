@@ -1,10 +1,9 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { RootStateType } from "../../../slices/types"
-
 import { EditorRefType } from "../types"
 import { useUpdateEditorState } from "../../../slices/editor/editorSlice"
 import { ThemeValueChangeEvent } from "../../../components/ThemeTools/events"
+import { RootState } from "../../../app/store"
 
 export default function useEditorStateSync(editorRef: EditorRefType) {
   useSyncToStore(editorRef)
@@ -35,7 +34,7 @@ const useSyncToStore = (editorRef: EditorRefType) => {
  * the code editor is also updated
  */
 const useSyncFromStore = (editorRef: EditorRefType) => {
-  const themeInput = useSelector((state: RootStateType) => state.editor.themeInput)
+  const themeInput = useSelector((state: RootState) => state.editor.themeInput)
   const updateEditorState = useUpdateEditorState()
   useEffect(() => {
     const model = editorRef.current?.getModel()

@@ -189,16 +189,16 @@ const Header = () => {
 
                 <Col lg={"auto"} md={12} className="m-p-0">
                   <Navbar.Collapse className="justify-content-center" id="basic-navbar-nav">
-                    <Link to="/" className="text-decoration-none">
+                    <div className="text-decoration-none">
                       <StyledButton>
                         SUBSCRIBER LOGIN
                       </StyledButton>
-                    </Link>
-                    <Link to="/" className="mx-1 text-decoration-none">
+                    </div>
+                    <div className="mx-1 text-decoration-none">
                       <StyledButton variant="success">
                         PARTNER LOGIN
                       </StyledButton>
-                    </Link>
+                    </div>
                   </Navbar.Collapse>
                 </Col>
               </Row>

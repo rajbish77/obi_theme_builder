@@ -61,10 +61,8 @@ const Header = () => {
   const AffiliateData = useSelector((state: RootStateType) => state.affiliate) || [];
   const dataEdiPubl = useAppSelector((state) => state.logIn)
   const [searchResult, setSearchResult] = useState<Affiliate[]>([]);
-  // const loading = useAppSelector((state) => state.affiliateData.loading);
-const affiliateDataID = useAppSelector((state) => state.affiliateData )
-
-console.log(affiliateDataID)
+  const loading = useAppSelector((state) => state.affiliateData.loading);
+  // const affiliateDataID = useAppSelector((state) => state.affiliateData)
 
   const styleObj = {
     color: "black",
@@ -213,7 +211,7 @@ console.log(affiliateDataID)
 
   return (
     <>
-        {/* <Loader loading={loading} /> */}
+        <Loader loading={loading} />
       <div className="px-3 bg-grey shadow">
         <Row className="align-items-center py-3">
           {getdataofHeader()}

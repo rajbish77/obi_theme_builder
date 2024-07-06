@@ -4,6 +4,7 @@ import { RootStateType } from "../slices/types"
 import { useMemo } from "react"
 import { useSelector } from "react-redux"
 import { ThemeOptions, Theme } from "@mui/material"
+import { RootState } from "../app/store"
 
 /**
  * Return the value of in the theme at the specified path,
@@ -27,8 +28,8 @@ const getThemeValueInfo = (
 const makeThemeValueInfoSelector = () =>
   createSelector(
     (_:any, path: string) => path,
-    (state: RootStateType) => state.themeOptions,
-    (state: RootStateType) => state.themeObject,
+    (state: RootState) => state.theme.themeOptions,
+    (state: RootState) => state.theme.themeObject,
     getThemeValueInfo
   )
 

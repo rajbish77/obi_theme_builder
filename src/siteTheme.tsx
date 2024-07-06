@@ -18,7 +18,7 @@ export const defaultThemeOptions: ThemeOptions = {
       textcolor:"#000",
     },
     body:{
-      backgroundcolor:"#bb5858",
+      backgroundcolor:"#ffffff",
       textcolor:"#000",
     },
     button:{
