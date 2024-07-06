@@ -21,7 +21,7 @@ enableMapSet();
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainWindowProps />,
+    element: <LoginForm />,
   },
   {
     path: '/publisher-dashboard',

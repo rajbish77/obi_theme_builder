@@ -19,6 +19,7 @@ export interface AffiliateState {
   data: AffiliateDataResponse | null;
   id: number | null;
   name: string | null;
+  username: string | null;
 }
 
 export interface RootStateType {
@@ -32,6 +33,7 @@ export interface RootStateType {
   themeConfigOpen: boolean;
   auth: Auth;
   affiliate: AffiliateState;
+  updateThemeButton: UpdateThemeData | null;
   editorThemeState: boolean;
   affiliateTheme: ThemeOptions;
   savedThemes: {
@@ -232,13 +234,13 @@ export interface affilateRequest {
   status: string | null;
   live: ThemeOptionsType | null;
   preview: ThemeOptionsType | null;
+  username: string | null,
 }
 
 export interface AffiliateItem {
   id: number|null;
   name: string|null;
 }
-
 export interface AffiliateResponse {
   data: {
     affiliates: any[];
@@ -314,4 +316,31 @@ export type affiliateThym ={
   preview: any;
 }
 
+export interface UpdateThemeData {
+  username: string;
+    sessionid: string;
+    failstatus: number;
+    request: {
+        username: string;
+        theme: {
+            live: any;
+            preview: any;
+        };
+    };
+}
 
+export interface UpdateThemeRequest {
+  themebuilder: string;
+  loading: boolean;
+  error: string | null;
+  data?: string; 
+}
+
+export interface UpdateTheme {
+  action: string;
+  username: string;
+  theme: {
+    live: any;
+    preview: any;
+  };
+}

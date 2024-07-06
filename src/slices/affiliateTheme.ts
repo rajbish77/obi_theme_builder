@@ -1,24 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { RootState } from "../app/store";
 import { _post } from "../configs/api-config";
 import { affilateRequest } from "./types";
 import { VIPER_CONST } from "../commonConstant";
-import AuthApi from "../configs/auth-api";
 import AffiApi from "../configs/affiliateTheme-api";
+import SaveThemeApi from "../Api Work/saveThemeApi";
 
 const initialState: affilateRequest = {
   affiliateid: null,
   affiliatename: "",
   loading: false,
   error: null,
+  username: "",
   status: null,
   live: null,
   preview: null,
 };
 
-const affiliate = createAsyncThunk(
+export const affiliate = createAsyncThunk(
   "affiliateData",
   async (datas: { affiliateid: number }, thunkApi) => {
     let body = {
@@ -48,7 +46,7 @@ const affiliateSlice = createSlice({
   name: "affiliate",
   initialState,
   reducers: {
-    clearAuth: (state) => initialState,
+    clearAffiliate: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder.addCase(affiliate.pending, (state) => {
@@ -64,15 +62,14 @@ const affiliateSlice = createSlice({
         state.affiliatename = affiliates.affiliatename ?? "";
         state.live = affiliates.theme?.live || null;
         state.preview = affiliates.theme?.preview || null;
-      };
+      }
     });
     builder.addCase(affiliate.rejected, (state, action) => {
       state.loading = false;
-      state.error = typeof action.payload === 'string' ? action.payload : null;
+      state.error = action.payload as string;
     });
   },
 });
-export { affiliate };
 
-export const { clearAuth } = affiliateSlice.actions;
+export const { clearAffiliate } = affiliateSlice.actions;
 export default affiliateSlice.reducer;

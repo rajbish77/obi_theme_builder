@@ -13,7 +13,6 @@ import { Affiliate, AuthState, RootStateType } from "../slices/types"
 import { defaultThemeOptions } from "../siteTheme"
 import Loader from "../Loader"
 import BrushIcon from '@mui/icons-material/Brush';
-import { getaffiliates } from "../apicalls"
 import { showConfirm, showError } from "./Swal"
 import { HandleAPIError, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
 import { faUser, faRotate } from "@fortawesome/free-solid-svg-icons";
@@ -218,7 +217,7 @@ console.log(affiliateDataID)
       <div className="px-3 bg-grey shadow">
         <Row className="align-items-center py-3">
 
-          {editorHeader()}
+          {getdataofHeader()}
 
           <Col
             // md={getEditorLoginStatus(auth) ? "2" : "6"}

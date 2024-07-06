@@ -1,56 +1,56 @@
 import { PREVIEW_URL, VIPER_CONST } from "./commonConstant";
-import { LoginRequest, UpdateTheme } from "./types";
+// import { LoginRequest, UpdateTheme } from "./types";
 
-export async function getaffiliates(data: any) {
-  let body = {
-    username: VIPER_CONST.alwaysOnUsername,
-    sessionid: VIPER_CONST.alwaysOnSessionid,
-    failstatus: 0,
-    request: data,
-  };
+// export async function getaffiliates(data: any) {
+//   let body = {
+//     username: VIPER_CONST.alwaysOnUsername,
+//     sessionid: VIPER_CONST.alwaysOnSessionid,
+//     failstatus: 0,
+//     request: data,
+//   };
 
-  console.log(`Request For ${VIPER_CONST.base_url}getaffiliates`, body);
-  try {
-    const response = fetch(`${VIPER_CONST.base_url}getaffiliates`, {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
+//   console.log(`Request For ${VIPER_CONST.base_url}getaffiliates`, body);
+//   try {
+//     const response = fetch(`${VIPER_CONST.base_url}getaffiliates`, {
+//       method: "POST",
+//       body: JSON.stringify(body),
+//     });
 
-    const responseData = (await response).json();
-    console.log(
-      `Response For ${VIPER_CONST.base_url}getaffiliates`,
-      await responseData
-    );
+//     const responseData = (await response).json();
+//     console.log(
+//       `Response For ${VIPER_CONST.base_url}getaffiliates`,
+//       await responseData
+//     );
 
-    return responseData;
-  } catch (error) {
-    return error;
-  }
-}
+//     return responseData;
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
-export async function updateTheme(data: UpdateTheme) {
-  let body = {
-    username: VIPER_CONST.alwaysOnUsername,
-    sessionid: VIPER_CONST.alwaysOnSessionid,
-    failstatus: 0,
-    request: data,
-  };
+// export async function updateTheme(data: UpdateTheme) {
+//   let body = {
+//     username: VIPER_CONST.alwaysOnUsername,
+//     sessionid: VIPER_CONST.alwaysOnSessionid,
+//     failstatus: 0,
+//     request: data,
+//   };
 
-  console.log(`Request For ${VIPER_CONST.base_url}updatetheme`, body);
-  try {
-    const response = fetch(`${VIPER_CONST.base_url}updatetheme`, {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
+//   console.log(`Request For ${VIPER_CONST.base_url}updatetheme`, body);
+//   try {
+//     const response = fetch(`${VIPER_CONST.base_url}updatetheme`, {
+//       method: "POST",
+//       body: JSON.stringify(body),
+//     });
 
-    const responseData = (await response).json();
-    console.log(
-      `Response For ${VIPER_CONST.base_url}updatetheme`,
-      await responseData
-    );
+//     const responseData = (await response).json();
+//     console.log(
+//       `Response For ${VIPER_CONST.base_url}updatetheme`,
+//       await responseData
+//     );
 
-    return responseData;
-  } catch (error) {
-    return error;
-  }
-}
+//     return responseData;
+//   } catch (error) {
+//     return error;
+//   }
+// }
