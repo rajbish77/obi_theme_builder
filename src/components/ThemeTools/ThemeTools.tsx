@@ -17,7 +17,8 @@ const ThemeToolsBottomNavBar = styled(BottomNavigation)(({ theme }: { theme: The
   backgroundColor: "#212121",
   borderTop: "1px solid",
   borderTopColor: theme.palette.divider,
-  width: `calc(100% - 1px)`,
+  width: "100%",
+  height: "70px"
 }));
 
 const SelectedBottomNavigationAction = styled(BottomNavigationAction)(({ theme }: { theme: Theme }) => ({

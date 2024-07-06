@@ -12,7 +12,6 @@ export default function PaletteInput({ label, path }: { label: string; path: str
 
   const handleColorChange = useCallback(
     (color: string) => {
-      console.log(path)
       dispatch(setThemeOption({ path, value: color }));
     },
     [dispatch, path]

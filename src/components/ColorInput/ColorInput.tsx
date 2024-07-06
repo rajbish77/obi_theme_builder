@@ -103,12 +103,11 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ color, onChangeComplete }) =>
 
   useEffect(() => {
     setInputValue(color);
-    console.log(color)
   }, [color]);
 
   const handleChangeComplete = (colorObject: any) => {
     const newColor = colorObject.hex;
-    console.log("Color selected:", newColor); // Debugging log
+    // console.log("Color selected:", newColor); // Debugging log
     onChangeComplete(newColor);
   };
 
@@ -118,7 +117,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ color, onChangeComplete }) =>
       <ChromePicker
         color={inputValue ?? "#fff"}
         onChange={(colorObject) => {
-          console.log("Color changing:", colorObject.hex); // Debugging log
+          // console.log("Color changing:", colorObject.hex); // Debugging log
           setInputValue(colorObject.hex);
         }}
         onChangeComplete={handleChangeComplete}
