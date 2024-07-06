@@ -22,6 +22,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { affiliate } from "../slices/affiliateTheme"
 import { affiliateData } from "../slices/affiliateName"
 import { logOut } from "../slices/logIn-slice"
+import { setPreview } from "../slices/Common Slice/preview"
 
 // Define styled components
 const Title = styled(Typography)(({ theme }) => ({
@@ -55,16 +56,14 @@ const NavAppBar = styled('div')({
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const affiliateNameData = useAppSelector((state) => state.commonThem.affiliate)
+  const affiliateNameData = useAppSelector((state) => state.fetchAffiliate.affiliate)
   const [showDropdown, setShowDropdown] = useState(false);
   const auth = useSelector((state: AuthState) => state.auth);
-  const AffiliateData = useSelector((state: RootStateType) => state.affiliate) || [];
   const dataEdiPubl = useAppSelector((state) => state.logIn)
   const [searchResult, setSearchResult] = useState<Affiliate[]>([]);
   // const loading = useAppSelector((state) => state.affiliateName.loading);
-const affiliateDataID = useAppSelector((state) => state.affiliateData )
+  const affiliateDataID = useAppSelector((state) => state.affiliateData);
 
-console.log(affiliateDataID)
 
   const styleObj = {
     color: "black",
@@ -85,25 +84,29 @@ console.log(affiliateDataID)
 
   const getAffililateTheme = async (id?: number) => {
     let affiliateId = id ? id : 1;
-    console.log("affiliateID", affiliateId)
     dispatch(setAffiliateId(`${affiliateId}`))
 
     const request = {
       affiliateid: affiliateId
     }
 
-    console.log(request)
 
     if (affiliateId !== null) {
       try {
-        dispatch(affiliate(request))
+        await dispatch(affiliate(request)).unwrap();
       } catch (error) {
         HandleAPIError(error)
-      }
+      };
     } else {
       dispatch(loadSavedTheme(defaultThemeOptions))
-    }
-  }
+    };
+  };
+
+  useEffect(() => {
+    if(affiliateDataID.status == "0" ){
+      dispatch(setPreview(affiliateDataID.preview));
+    };
+  }, [affiliateDataID])
 
 
   useEffect(() => {
@@ -127,8 +130,8 @@ console.log(affiliateDataID)
       let filterdata = affiliateNameData?.filter((item: Affiliate) => {
         return item?.name?.toLowerCase()?.includes(searchTerm)
       })
-      
-      filterdata = filterdata.slice(0, 10);
+
+      filterdata = filterdata.slice(0, 100);
       setSearchResult(filterdata?.length > 0 ? filterdata : [{ id: -1, name: 'Not found' }]);
     } else {
       setSearchResult([]);
@@ -138,7 +141,6 @@ console.log(affiliateDataID)
   const handleOnHover = (result: any) => { }
 
   const handleOnSelect = (item: any) => {
-    console.log(item)
     getAffililateTheme(item?.id)
 
   }

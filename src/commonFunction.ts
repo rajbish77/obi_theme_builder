@@ -4,7 +4,7 @@ import { Affiliate, Auth } from "./slices/types";
 import { store } from "./app/store";
 import { logOut } from "./slices/logIn-slice";
 import { useAppDispatch } from "./app/hooks";
-import { fetchAffiliate } from "./slices/commonSlice";
+import { fetchAffiliate } from "./slices/Common Slice/fetchAffiliate";
 
 export function HandleAPIError(error: any) {
   if (error?.code === "ERR_NETWORK") {

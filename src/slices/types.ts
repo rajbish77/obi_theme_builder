@@ -210,6 +210,7 @@ export interface requestType {
 }
 
 export interface affilatiRequestId {
+  status?: number | null
   themebuilder?: string | null;
   live?: any;
   data: {
@@ -234,7 +235,6 @@ export interface affilateRequest {
   status: string | null;
   live: ThemeOptionsType | null;
   preview: ThemeOptionsType | null;
-  username: string | null,
 }
 
 export interface AffiliateItem {

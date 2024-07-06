@@ -64,6 +64,8 @@ const ThemeTools = () => {
   const [bottomNavIndex, setBottomNavIndex] = useState(0);
   const currentTool = toolPanels[bottomNavIndex];
 
+  console.log(bottomNavIndex)
+
   return (
     <ThemeToolsRoot>
       <ToolPanel panelTitle={currentTool.label}>

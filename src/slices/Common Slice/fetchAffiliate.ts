@@ -4,8 +4,8 @@ const initialState = {
     affiliate: [],
 };
 
-const common = createSlice({
-    name: "commonSlice",
+const affiliate = createSlice({
+    name: "Fetch Affiliate Slice",
     initialState,
     reducers: {
         fetchAffiliate: (state:any, action) => {
@@ -15,5 +15,5 @@ const common = createSlice({
 });
 
 
-export const {fetchAffiliate} = common.actions;
-export default common.reducer
+export const {fetchAffiliate} = affiliate.actions;
+export default affiliate.reducer

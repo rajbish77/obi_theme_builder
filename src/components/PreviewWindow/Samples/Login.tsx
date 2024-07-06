@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Form, InputGroup } from 'react-bootstrap';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -43,21 +43,26 @@ const LoginForm = () => {
         password: md5(passWord),
         privilege: privilege,
       };
+
       await dispatch(login(request)).unwrap();
-
-      const getDataon = await userData;
-
-      if (getDataon.publisher === 'Y') {
-        navigate('/publisher-dashboard', { replace: true });
-      } else if (getDataon.editor === 'Y') {
-        navigate('/editor-dashboard', { replace: true });
-      } else {
-        showError('Error', getDataon?.statusMessage);
-      }
     } catch (error) {
       HandleAPIError(error);
     }
   };
+
+
+  useEffect(()=>{
+    // console.log(userData, "Hy");
+      
+    if (userData.publisher === 'Y') {
+      navigate('/publisher-dashboard', { replace: true });
+    } else if (userData.editor === 'Y') {
+      navigate('/editor-dashboard', { replace: true });
+    } 
+    // else {
+    //   showError('Error', userData?.statusMessage);
+    // }
+  }, [userData])
 
   const formik = useFormik({
     initialValues: {
