@@ -37,7 +37,7 @@ function ToolPanel({ panelTitle, children }: ToolPanelProps) {
     <ToolPanelRoot id={toolPanelId}>
       <ToolPanelTitle>
         <Typography variant="overline">
-          {panelTitle}
+          {/* {panelTitle} */}
         </Typography>
       </ToolPanelTitle>
       <ToolPanelContent>

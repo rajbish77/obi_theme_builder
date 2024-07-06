@@ -10,6 +10,7 @@ import buttonSlice from "../slices/publisher/buttonFunctionSlice";
 import rejButtonSlice from "../slices/publisher/buttonFunctionRej";
 import affiliateSlice from "../slices/affiliateTheme";
 import affiliateName from "../slices/affiliateName";
+import commonSlice from "../slices/commonSlice";
 
 
 const rootReducter = combineReducers({
@@ -22,6 +23,7 @@ const rootReducter = combineReducers({
   rejuctButton: rejButtonSlice, // button rejuct function work slice
   affiliateData : affiliateSlice, // affiliate api work slice
   affiliateName: affiliateName, // affiliate name and id
+  commonThem: commonSlice, // this is common Slice 
 });
 
 // const selectDataTransform = createTransform(
@@ -39,7 +41,7 @@ const rootReducter = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["logIn", "affiliateData" , "affiliateName"],
+  whitelist: ["logIn", "affiliateData" , "fetchAffiliate" , "commonThem" ],
   // transforms:[selectDataTransform]
 };
 

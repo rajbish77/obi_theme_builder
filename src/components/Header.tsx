@@ -9,19 +9,20 @@ import {
 import { Button, Col, Row, Dropdown } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { affiliateTheme, loadSavedTheme, setAffiliateId } from "../state/themeSlice"
-import { AuthState, RootStateType } from "../slices/types"
+import { Affiliate, AuthState, RootStateType } from "../slices/types"
 import { defaultThemeOptions } from "../siteTheme"
 import Loader from "../Loader"
 import BrushIcon from '@mui/icons-material/Brush';
 import { getaffiliates } from "../apicalls"
-import { showError } from "./Swal"
-import { HandleAPIError, _getAffiliate, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
+import { showConfirm, showError } from "./Swal"
+import { HandleAPIError, getEditorLoginStatus, getPublisherLoginStatus, logout } from "../commonFunction"
 import { faUser, faRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { affiliate } from "../slices/affiliateTheme"
 import { affiliateData } from "../slices/affiliateName"
+import { logOut } from "../slices/logIn-slice"
 
 // Define styled components
 const Title = styled(Typography)(({ theme }) => ({
@@ -48,23 +49,23 @@ const NavAppBar = styled('div')({
   color: "#fff"
 });
 
-interface AffiliateItem {
-  affiliateid: number;
-  affiliatename: string;
-}
+// interface AffiliateItem {
+//   affiliateid: number;
+//   affiliatename: string;
+// }
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const affiliateNameData = useAppSelector((state) => state.affiliateName.affiliates)
+  const affiliateNameData = useAppSelector((state) => state.commonThem.affiliate)
   const [showDropdown, setShowDropdown] = useState(false);
   const auth = useSelector((state: AuthState) => state.auth);
   const AffiliateData = useSelector((state: RootStateType) => state.affiliate) || [];
   const dataEdiPubl = useAppSelector((state) => state.logIn)
-  const [searchResult, setSearchResult] = useState<AffiliateItem[]>([]);
-  const loading = useAppSelector((state) => state.affiliateName.loading);
+  const [searchResult, setSearchResult] = useState<Affiliate[]>([]);
+  // const loading = useAppSelector((state) => state.affiliateName.loading);
+const affiliateDataID = useAppSelector((state) => state.affiliateData )
 
-  console.log(dataEdiPubl);
-
+console.log(affiliateDataID)
 
   const styleObj = {
     color: "black",
@@ -87,24 +88,16 @@ const Header = () => {
     let affiliateId = id ? id : 1;
     console.log("affiliateID", affiliateId)
     dispatch(setAffiliateId(`${affiliateId}`))
+
     const request = {
       affiliateid: affiliateId
     }
+
+    console.log(request)
+
     if (affiliateId !== null) {
       try {
         dispatch(affiliate(request))
-
-        // if (response?.status === 0) {
-        //   if (response?.data?.affiliates[0]?.theme?.preview === '') {
-        //     dispatch(loadSavedTheme(defaultThemeOptions))
-        //   } else {
-        //     const themeOptions = JSON.parse(response?.data?.affiliates[0]?.theme?.preview);
-        //     dispatch(loadSavedTheme(themeOptions));
-        //     dispatch(affiliateTheme(themeOptions));
-        //   }
-        // } else {
-        //   dispatch(loadSavedTheme(defaultThemeOptions))
-        // }
       } catch (error) {
         HandleAPIError(error)
       }
@@ -113,34 +106,30 @@ const Header = () => {
     }
   }
 
-  // useEffect(() => {
-  //   // if (!Array.isArray(affiliateNameData) || affiliateNameData.length === 0) {
-  //   //   fetchAffiliateApi();
-  //   // }
-  //   if (affiliateNameData.length > 0) {
-  //     handleOnSearch(affiliateNameData);
-  //   }
-  // }, [affiliateNameData]);
 
   useEffect(() => {
     if (affiliateNameData.length === 0) {
       fetchAffiliateApi();
     }
+    if (affiliateNameData.length > 0) {
+      handleOnSearch(affiliateNameData);
+    }
   }, [affiliateNameData])
 
   const handleOnSearch = (string?: any, results?: any) => {
+
+    if (typeof string !== 'string') {
+      setSearchResult([]);
+      return;
+    }
+
     const searchTerm = string?.toLowerCase();
     if (affiliateNameData) {
-      let filterdata = affiliateNameData?.filter((item: AffiliateItem) => {
-        return item?.affiliatename?.toLowerCase()?.includes(searchTerm)
+      let filterdata = affiliateNameData?.filter((item: Affiliate) => {
+        return item?.name?.toLowerCase()?.includes(searchTerm)
       })
-      filterdata = filterdata.map((item: AffiliateItem) => {
-        return {
-          name: item.affiliatename,
-          id: item.affiliateid
-        };
-      });
-      filterdata = filterdata.slice(0, 6);
+      
+      filterdata = filterdata.slice(0, 10);
       setSearchResult(filterdata?.length > 0 ? filterdata : [{ id: -1, name: 'Not found' }]);
     } else {
       setSearchResult([]);
@@ -150,8 +139,9 @@ const Header = () => {
   const handleOnHover = (result: any) => { }
 
   const handleOnSelect = (item: any) => {
+    console.log(item)
     getAffililateTheme(item?.id)
-    
+
   }
 
   const handleOnFocus = () => { }
@@ -224,11 +214,11 @@ const Header = () => {
 
   return (
     <>
-      <Loader loading={loading} />
+      {/*   <Loader loading={loading} />*/}
       <div className="px-3 bg-grey shadow">
         <Row className="align-items-center py-3">
 
-          {getdataofHeader()}
+          {editorHeader()}
 
           <Col
             // md={getEditorLoginStatus(auth) ? "2" : "6"}

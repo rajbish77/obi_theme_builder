@@ -33,6 +33,10 @@ const affiliate = createAsyncThunk(
       const responseData = await AffiApi.affilateData(body);
       console.log(`Response For ${VIPER_CONST.base_url}getaffiliates`, responseData);
 
+      console.log( "changes", responseData?.data?.affiliates)
+      // console.log( "id", responseData?.data?.affiliates[0].affiliateid)
+
+
       return thunkApi.fulfillWithValue({ ...responseData, ...datas });
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -54,7 +58,7 @@ const affiliateSlice = createSlice({
     builder.addCase(affiliate.fulfilled, (state, action) => {
       state.loading = false;
 
-      const affiliates = action.payload.data?.affiliates;
+      const affiliates = action.payload.data?.affiliates?.[0];
       if (affiliates) {
         state.affiliateid = affiliates.affiliateid ?? null;
         state.affiliatename = affiliates.affiliatename ?? "";

@@ -76,9 +76,13 @@ const loginSlice = createSlice({
   reducers: {
     clearAuth: (state) => initialState,
 
-    logOut: (state, action) =>{
-      
-    }
+    logOut: (state, action) => {
+      state.auth = false;
+      state.editor = "N";
+      state.publisher = "N";
+      state.username = "";
+      state.status = null;
+    },
   },
 });
 

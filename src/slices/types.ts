@@ -189,17 +189,37 @@ export interface affilateBody {
   };
 }
 
+export interface affilateDataBody {
+  username: string;
+  sessionid: string;
+  failstatus: number;
+  request: {
+    themebuilder?: string | null;
+  };
+}
+
+export interface requestType {
+  affiliateid?: number | null;
+  affiliatename?: string;
+  theme?: {
+    live?: any;
+    preview?: any;
+  };
+}
+
 export interface affilatiRequestId {
   themebuilder?: string | null;
   live?: any;
   data: {
+    affiliates?: requestType[];
+  };
+}
+
+export interface affilatiDataRequest {
+  data: {
     affiliates?: {
       affiliateid?: number | null;
       affiliatename?: string;
-      theme?: {
-        live?: any;
-        preview?: any;
-      };
     };
   };
 }
@@ -226,8 +246,6 @@ export interface AffiliateResponse {
 }
 export interface affilateData {
   affiliates: any;
-  loading: boolean;
-  error: string | null;
 }
 
 export interface ThemeOptionsType {

@@ -1,9 +1,10 @@
 import { showConfirm, showError } from "./components/Swal";
-import { fetchAffiliate, loadSavedTheme } from "./state/themeSlice";
+import { loadSavedTheme } from "./state/themeSlice";
 import { Affiliate, Auth } from "./slices/types";
 import { store } from "./app/store";
 import { logOut } from "./slices/logIn-slice";
 import { useAppDispatch } from "./app/hooks";
+import { fetchAffiliate } from "./slices/commonSlice";
 
 export function HandleAPIError(error: any) {
   if (error?.code === "ERR_NETWORK") {
@@ -13,20 +14,19 @@ export function HandleAPIError(error: any) {
   }
 }
 
-export async function logout(authData: any) {
-  const dispatch = useAppDispatch()
+export async function logout(data: any) {
   let confirmed = await showConfirm(
     "Confirm",
     "Are you sure, you want to logout?"
   );
-  if (confirmed.isConfirmed) {
-    dispatch(logOut(authData));
+  if (confirmed?.isConfirmed) {
+    store.dispatch(logOut(data));
   }
 }
 
 export async function _getAffiliate(response: any) {
   let newData: Affiliate[] = [];
-  response.affiliates.forEach((data: any) => {
+  response.forEach((data: any) => {
     let newAffiliate = {
       id: data.affiliateid,
       name: data.affiliatename,

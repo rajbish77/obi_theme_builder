@@ -51,10 +51,10 @@ const ThemeConfigDrawer = () => {
       <StyledDrawerPaper>
         <StyledGridContainer container direction="column" wrap="nowrap">
           <StyledGridItem item>
-            <MonacoThemeCodeEditor key={themeId} />
+            <MonacoThemeCodeEditor key={themeId} /> {/* top button */}
           </StyledGridItem>
           <StyledGridItem item>
-            <ThemeTools />
+            <ThemeTools /> {/* this is text */}
           </StyledGridItem>
         </StyledGridContainer>
       </StyledDrawerPaper>

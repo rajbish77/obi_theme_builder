@@ -4,16 +4,14 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { RootState } from "../app/store";
 import { _post } from "../configs/api-config";
-import { affilateData } from "./types";
+import { affilateData, Affiliate } from "./types";
 import { VIPER_CONST } from "../commonConstant";
-import AuthApi from "../configs/auth-api";
-import AffiApi from "../configs/affiliateTheme-api";
+import AffData from "../configs/affiliateApi";
+import { _getAffiliate } from "../commonFunction";
 
 
 const initialState: affilateData = {
   affiliates: [],
-  loading: false,
-  error: null,
 };
 
 const affiliateData = createAsyncThunk(
@@ -27,7 +25,11 @@ const affiliateData = createAsyncThunk(
     };
 
     try {
-      const responseData = await AffiApi.affilateData(body);
+      const responseData = await AffData.affilate(body);
+
+      const idName = responseData?.data?.affiliates
+      
+      await _getAffiliate(idName)
 
       return thunkApi.fulfillWithValue({ ...responseData, ...data });
     } catch (error) {
@@ -40,17 +42,8 @@ const affiliateIdData = createSlice({
   name: "affiliateData",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(affiliateData.pending, (state, action) => {
-      state.loading = true;
-      state.error = null;
-    });
     builder.addCase(affiliateData.fulfilled, (state, action) => {
-      state.loading = false;
       state.affiliates = action.payload.data?.affiliates;
-    });
-    builder.addCase(affiliateData.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload as string;
     });
   },
   reducers: {
