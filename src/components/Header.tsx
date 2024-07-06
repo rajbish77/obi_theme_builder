@@ -128,7 +128,7 @@ console.log(affiliateDataID)
         return item?.name?.toLowerCase()?.includes(searchTerm)
       })
       
-      filterdata = filterdata.slice(0, 10);
+      filterdata = filterdata.slice(0, 100);
       setSearchResult(filterdata?.length > 0 ? filterdata : [{ id: -1, name: 'Not found' }]);
     } else {
       setSearchResult([]);

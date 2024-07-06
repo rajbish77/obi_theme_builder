@@ -1,12 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { RootState } from "../app/store";
-import { _post } from "../configs/api-config";
+import AuthApi from "../configs/auth-api";
 import { Auth } from "./types";
 import { VIPER_CONST } from "../commonConstant";
-import AuthApi from "../configs/auth-api";
 
 const initialState: Auth = {
   auth: false,
@@ -19,74 +14,71 @@ const initialState: Auth = {
   statusMessage: "",
 };
 
-const login = createAsyncThunk(
+export const login = createAsyncThunk(
   "auth/login",
-  async (
-    data: { username: string; password: string; privilege: string },
-    thunkApi
-  ) => {
-    let body = {
+  async (data: { username: string; password: string; privilege: string }, thunkApi) => {
+    const body = {
       username: VIPER_CONST.alwaysOnUsername,
       sessionid: VIPER_CONST.alwaysOnSessionid,
       failstatus: 0,
       request: data,
     };
 
-    console.log(`Request For ${VIPER_CONST.base_url}getauthorizedlogin`, body);
     try {
       const responseData = await AuthApi.login(body);
-
-      console.log(
-        `Response For ${VIPER_CONST.base_url}getauthorizedlogin`,
-        responseData
-      );
-
-      // console.log(responseData.status);
       return thunkApi.fulfillWithValue({ ...responseData, ...data });
     } catch (error) {
-      throw thunkApi.rejectWithValue(error);
+      return thunkApi.rejectWithValue(error);
     }
   }
 );
 
 const loginSlice = createSlice({
-  name: "Login auth",
+  name: "auth",
   initialState,
-  extraReducers: (builder) => {
-    builder.addCase(login.pending, (state, action) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.loading = false;
-      state.status = action?.payload?.status ?? null;
-      state.statusMessage = action?.payload?.statusMessage ?? "";
-      if (action?.payload?.status === 2) {
-        state.auth = true;
-        state.editor = action?.payload?.privilege === "THEMEEDITOR" ? "Y" : "N";
-        state.publisher = action?.payload?.privilege === "THEMEPUBLISHER" ? "Y" : "N";
-        state.username = action?.payload?.username;
-      }
-    });
-    builder.addCase(login.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload as string;
-    });
-  },
   reducers: {
     clearAuth: (state) => initialState,
-
-    logOut: (state, action) => {
+    logOut: (state) => {
       state.auth = false;
       state.editor = "N";
       state.publisher = "N";
       state.username = "";
       state.status = null;
+      state.statusMessage = "";
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.loading = false;
+        state.status = action.payload?.status ?? null;
+        state.statusMessage = action.payload?.statusMessage ?? "";
+        if (action.payload?.status === 2) {
+          state.auth = true;
+          state.editor = action.payload?.privilege === "THEMEEDITOR" ? "Y" : "N";
+          state.publisher = action.payload?.privilege === "THEMEPUBLISHER" ? "Y" : "N";
+          state.username = action.payload?.username;
+        } else {
+          state.auth = false;
+          state.editor = "N";
+          state.publisher = "N";
+          state.username = "";
+        }
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+        state.auth = false;
+        state.editor = "N";
+        state.publisher = "N";
+        state.username = "";
+      });
+  },
 });
-
-export { login };
 
 export const { clearAuth, logOut } = loginSlice.actions;
 export default loginSlice.reducer;

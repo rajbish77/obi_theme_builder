@@ -33,9 +33,9 @@ const LoginForm = () => {
   const handleSubmit = async (values: any) => {
     const { username, password, previligesType } = values;
 
-    let userName = username.trim();
-    let passWord = password.trim();
-    let privilege = previligesType.value;
+    const userName = username.trim();
+    const passWord = password.trim();
+    const privilege = previligesType.value;
 
     try {
       const request = {
@@ -43,16 +43,18 @@ const LoginForm = () => {
         password: md5(passWord),
         privilege: privilege,
       };
-      await dispatch(login(request)).unwrap();
 
-      const getDataon = await userData;
+      // Dispatch login action and wait for it to complete
 
-      if (getDataon.publisher === 'Y') {
+      // Check user roles and navigate accordingly
+      if (userData.publisher === 'Y') {
         navigate('/publisher-dashboard', { replace: true });
-      } else if (getDataon.editor === 'Y') {
+      } else if (userData.editor === 'Y') {
         navigate('/editor-dashboard', { replace: true });
       } else {
-        showError('Error', getDataon?.statusMessage);
+        showError('Error', userData.statusMessage);
+      await dispatch(login(request)).unwrap();
+
       }
     } catch (error) {
       HandleAPIError(error);
