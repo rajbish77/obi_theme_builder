@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import * as monaco from 'monaco-editor';
 import { useSelector } from 'react-redux';
-import { RootStateType } from '../../../slices/types';
 import { files as muiTypeFiles } from '../../../muiTypeStrings';
 import { EditorRefType, MutableEditorRefType } from '../types';
 import monokai from '../../../components/MonacoThemeCodeEditor/monaco-themes/monokai';
 import { Plugin } from 'prettier';
+import { RootState } from '../../../app/store';
 
 window.MonacoEnvironment = {
   getWorkerUrl: function (moduleId, label) {
@@ -49,7 +49,7 @@ const languageCompilerOptions: monaco.languages.typescript.CompilerOptions = {
 };
 
 export default function useEditor(editorRef: MutableEditorRefType) {
-  const themeInput = useSelector((state: RootStateType) => state.editor.themeInput);
+  const themeInput = useSelector((state: RootState) => state.editor.themeInput);
 
   useEffect(() => {
     monaco.editor.defineTheme('monokai', monokai as monaco.editor.IStandaloneThemeData);

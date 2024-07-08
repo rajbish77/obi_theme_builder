@@ -61,8 +61,8 @@ const Header = () => {
   const auth = useSelector((state: AuthState) => state.auth);
   const dataEdiPubl = useAppSelector((state) => state.logIn)
   const [searchResult, setSearchResult] = useState<Affiliate[]>([]);
-  const affiliateDataID = useAppSelector((state) => state.affiliateData);
-
+  const loading = useAppSelector((state) => state.affiliateData.loading);
+  const affiliateDataID = useAppSelector((state) => state.affiliateData)
 
   const styleObj = {
     color: "black",
@@ -213,7 +213,7 @@ const Header = () => {
 
   return (
     <>
-        {/* <Loader loading={loading} /> */}
+        <Loader loading={loading} />
       <div className="px-3 bg-grey shadow">
         <Row className="align-items-center py-3">
           {getdataofHeader()}

@@ -1,21 +1,21 @@
-import React, { useCallback } from "react"
-import ColorInput from "../../../components/ColorInput"
-import { useDispatch } from "react-redux"
-import { setThemeOption } from "../../../state/themeSlice"
-import {
-  Grid,
-} from "@mui/material"
-import { useThemeValueInfo } from "../../../state/selectors"
+import React, { useCallback } from "react";
+import ColorInput from "../../../components/ColorInput";
+import { useDispatch } from "react-redux";
+import { setThemeOption } from "../../../state/themeSlice";
+import { Grid } from "@mui/material";
+import { useThemeValueInfo } from "../../../state/selectors";
 
-export default function PaletteInput({ label, path }: { label: string, path: string }) {
-
-  const themeValueInfo = useThemeValueInfo(path)
-  const dispatch = useDispatch()
+export default function PaletteInput({ label, path }: { label: string; path: string }) {
+  const themeValueInfo = useThemeValueInfo(path);
+  // console.log(themeValueInfo)
+  const dispatch = useDispatch();
 
   const handleColorChange = useCallback(
-    (color:string) => dispatch(setThemeOption({ path, value: color })),
-    [dispatch]
-  )
+    (color: string) => {
+      dispatch(setThemeOption({ path, value: color }));
+    },
+    [dispatch, path]
+  );
 
   return (
     <Grid container justifyContent="space-between" alignItems="flex-end">
@@ -27,5 +27,5 @@ export default function PaletteInput({ label, path }: { label: string, path: str
         />
       </Grid>
     </Grid>
-  )
+  );
 }

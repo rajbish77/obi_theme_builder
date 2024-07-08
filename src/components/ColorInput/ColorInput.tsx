@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, MouseEvent, ClipboardEvent } from "react";
 import { TextField, InputAdornment, Popover, styled, Theme } from "@mui/material";
 import { ChromePicker } from "react-color";
 import MaterialColorPicker from "./MaterialColorPicker";
@@ -25,9 +25,14 @@ interface ColorInputProps {
 }
 
 const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) => {
-  const [anchorEl, setAnchorEl] = React.useState<Element | null>(null);
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+  const [internalColor, setInternalColor] = useState<string>(color);
 
-  const handleOpenPopover = (event: React.MouseEvent) => {
+  useEffect(() => {
+    setInternalColor(color);
+  }, [color]);
+
+  const handleOpenPopover = (event: MouseEvent) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -36,7 +41,7 @@ const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) 
     document.dispatchEvent(ThemeValueChangeEvent());
   };
 
-  const handlePaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
+  const handlePaste = (event: ClipboardEvent<HTMLDivElement>) => {
     const pastedText = event.clipboardData.getData("text");
     const parsedColor = colorFromString(pastedText);
     if (parsedColor) {
@@ -54,15 +59,16 @@ const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) 
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <ColorSampleAdornment style={{ backgroundColor: color }} />
+              <ColorSampleAdornment style={{ backgroundColor: internalColor }} />
             </InputAdornment>
           ),
         }}
         InputLabelProps={{ shrink: true }}
         size="small"
         className="py-3"
-        value={color}
+        value={internalColor}
         onPaste={handlePaste}
+        onChange={(e) => onColorChange(e.target.value)} // Handle manual input changes
       />
       <Popover
         open={popoverOpen}
@@ -79,7 +85,9 @@ const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) 
         disableAutoFocus
         disableEnforceFocus
       >
-        <ColorPicker color={color} onChangeComplete={onColorChange} />
+        <PopoverPaper>
+          <ColorPicker color={internalColor} onChangeComplete={onColorChange} />
+        </PopoverPaper>
       </Popover>
     </div>
   );
@@ -90,15 +98,16 @@ interface ColorPickerProps {
   onChangeComplete: (color: string) => void;
 }
 
-function ColorPicker({ color, onChangeComplete }: ColorPickerProps) {
-  const [inputValue, setInputValue] = React.useState<string | null>(color);
+const ColorPicker: React.FC<ColorPickerProps> = ({ color, onChangeComplete }) => {
+  const [inputValue, setInputValue] = useState<string | null>(color);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setInputValue(color);
   }, [color]);
 
   const handleChangeComplete = (colorObject: any) => {
     const newColor = colorObject.hex;
+    // console.log("Color selected:", newColor); // Debugging log
     onChangeComplete(newColor);
   };
 
@@ -107,7 +116,10 @@ function ColorPicker({ color, onChangeComplete }: ColorPickerProps) {
       <MaterialColorPicker color={inputValue} onChangeComplete={handleChangeComplete} />
       <ChromePicker
         color={inputValue ?? "#fff"}
-        onChange={(colorObject) => setInputValue(colorObject.hex)}
+        onChange={(colorObject) => {
+          // console.log("Color changing:", colorObject.hex); // Debugging log
+          setInputValue(colorObject.hex);
+        }}
         onChangeComplete={handleChangeComplete}
       />
     </>

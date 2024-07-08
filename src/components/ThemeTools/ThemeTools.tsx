@@ -6,8 +6,6 @@ import PaletteTools from "./PaletteTools/PaletteTools";
 import PaletteIcon from "@mui/icons-material/Palette";
 import ToolPanel from "./ToolPanel";
 
-const themeToolsBottomNavBarHeight = "56px";
-
 const ThemeToolsRoot = styled("div")(({ theme }: { theme: Theme }) => ({
   display: "flex",
   flexDirection: "column",
@@ -16,21 +14,27 @@ const ThemeToolsRoot = styled("div")(({ theme }: { theme: Theme }) => ({
 }));
 
 const ThemeToolsBottomNavBar = styled(BottomNavigation)(({ theme }: { theme: Theme }) => ({
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: "#212121",
   borderTop: "1px solid",
   borderTopColor: theme.palette.divider,
-  width: `calc(100% - 1px)`,
-  height: themeToolsBottomNavBarHeight,
+  width: "100%",
+  height: "70px"
 }));
 
 const SelectedBottomNavigationAction = styled(BottomNavigationAction)(({ theme }: { theme: Theme }) => ({
   "&.Mui-selected": {
     backgroundColor: "#212121",
-    "& .MuiBottomNavigationAction-wrapper": {
+    "& .MuiBottomNavigationAction-label": {
+      color: "#fff",
+    },
+    "& .MuiSvgIcon-root": {
       color: "#fff",
     },
   },
-  "& .MuiBottomNavigationAction-wrapper": {
+  "& .MuiBottomNavigationAction-label": {
+    color: theme.palette.text.disabled,
+  },
+  "& .MuiSvgIcon-root": {
     color: theme.palette.text.disabled,
   },
 }));

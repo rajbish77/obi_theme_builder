@@ -16,7 +16,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
-import { RootStateType } from "../../../slices/types";
+import { RootState } from "../../../app/store";
 
 // Define styled components
 const StyledFooter = styled.div`
@@ -36,7 +36,7 @@ const StyledSecondaryText = styled.span`
 
 const Footer = () => {
   const directionIsRTL = useSelector(
-    (state: RootStateType) => state.themeOptions?.direction === "rtl"
+    (state: RootState) => state.theme.themeOptions?.direction === "rtl"
   );
 
   return (

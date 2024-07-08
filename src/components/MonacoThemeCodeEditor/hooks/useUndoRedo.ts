@@ -5,7 +5,6 @@ import {
   useUpdateEditorState,
   updateVersionStates,
 } from "../../../slices/editor/editorSlice"
-import { RootStateType } from "../../../slices/types"
 import { verbose } from "../../../utils"
 
 export default function useUndoRedo(editorRef: EditorRefType) {

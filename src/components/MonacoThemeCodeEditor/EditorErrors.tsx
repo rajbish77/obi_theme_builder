@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootStateType } from "../../slices/types";
 import * as monaco from "monaco-editor";
 import {
   Snackbar,
@@ -12,6 +11,7 @@ import { styled } from "@mui/material/styles";
 import Alert from "@mui/material/Alert";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { RootState } from "../../app/store";
 
 const PREFIX = "EditorErrors";
 
@@ -65,7 +65,7 @@ const Root = styled("div")(({ theme }) => ({
 }));
 
 const EditorErrors: React.FC<{ editorRef: React.RefObject<monaco.editor.IStandaloneCodeEditor> }> = ({ editorRef }) => {
-  const errors = useSelector((state: RootStateType) => state.editor.errors);
+  const errors = useSelector((state: RootState) => state.editor.errors);
   const [open, setOpen] = useState(true);
   const [expanded, setExpanded] = useState(errors.length < 3); // default open if 1 or 2 errors
   const handleClose = () => setOpen(false);

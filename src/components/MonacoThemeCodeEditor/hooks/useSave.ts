@@ -3,7 +3,6 @@ import * as monaco from 'monaco-editor';
 import { EditorRefType } from '../types';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateEditorState, saveEditorToTheme } from '../../../slices/editor/editorSlice';
-import { RootStateType } from '../../../slices/types';
 import { RootState, AppDispatch  } from '../../../app/store';
 import { verbose } from '../../../utils';
 
@@ -56,7 +55,7 @@ async function formatInput(editorRef: EditorRefType) {
  * @returns Function that handles saving code editor contents
  */
 export default function useSave(editorRef: EditorRefType) {
-  const formatOnSave = useSelector((state: RootStateType) => state.editor.formatOnSave);
+  const formatOnSave = useSelector((state: RootState) => state.editor.formatOnSave);
   const dispatch = useDispatch<AppDispatch>();
   const handleSave = useCallback(async () => {
     dispatch(updateEditorState({ errors: [] }));
