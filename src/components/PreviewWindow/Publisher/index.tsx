@@ -16,8 +16,12 @@ function PublisherListing(): JSX.Element {
   const getPublisher = useAppSelector((state) => state.publish.publisher);
   const [tmp, setTmp] = useState(0);
   const [loading, setLoading] = useState(false);
-  const useData = useAppSelector((state) => state.buttonWork)
-  const useDataRej = useAppSelector((state) => state.rejuctButton)
+  const useData = useAppSelector((state) => state.buttonWork);
+  const useDataRej = useAppSelector((state) => state.rejuctButton);
+
+  // useEffect(() => {
+  //   console.log('useDataRej state:', useDataRej);
+  // }, [useDataRej]);
 
   const columnHelper = createColumnHelper();
   const COLUMNS = [
@@ -79,7 +83,6 @@ function PublisherListing(): JSX.Element {
   ];
 
   const handlePreviewButtonClick = (row: any) => {
-
     window.open(`${PREVIEW_URL}affiliate/${row?.affiliateid}?preview=true`, "_blank");
   }
 
@@ -92,16 +95,13 @@ function PublisherListing(): JSX.Element {
           action: "P"
         }
 
-        await dispatch(publishButton(request)).unwrap();
+        const response = await dispatch(publishButton(request)).unwrap();
+        console.log('Response from publishButton:', response);
 
-        const getData = await useData;
-
-        console.log(getData)
-
-        if (getData?.status === 0) {
+        if (response?.status === 0) {
           showSuccess("Success", "Theme published successfully");
         } else {
-          showError("Error", getData?.statusMessage)
+          showError("Error", useDataRej?.statusMessage);
         }
       } catch (error) {
         HandleAPIError(error);
@@ -114,23 +114,19 @@ function PublisherListing(): JSX.Element {
 
     if (confirmed.isConfirmed) {
       try {
-
         const requestReject: { affiliateid: any, action: string, message: any } = {
           affiliateid: row?.affiliateid,
           action: "R",
           message: confirmed?.value
         }
 
-        await dispatch(rejectButton(requestReject)).unwrap();
+        const response = await dispatch(rejectButton(requestReject)).unwrap();
+        console.log('Response from rejectButton:', response);
 
-        const getData = await useDataRej;
-
-        console.log(getData)
-
-        if (getData?.status === 0) {
+        if (response?.status === 0) {
           showSuccess("Success", "Publish request rejected!");
         } else {
-          showError("Error", getData?.statusMessage);
+          showError("Error", useDataRej?.statusMessage);
         }
       } catch (error) {
         HandleAPIError(error);

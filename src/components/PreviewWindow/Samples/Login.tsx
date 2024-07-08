@@ -44,25 +44,24 @@ const LoginForm = () => {
         privilege: privilege,
       };
 
-      await dispatch(login(request)).unwrap();
+      const response = await dispatch(login(request)).unwrap();
+      // console.log('Response from login:', response);
     } catch (error) {
       HandleAPIError(error);
     }
   };
 
-
-  useEffect(()=>{
-    // console.log(userData, "Hy");
+  useEffect(() => {
+    console.log('userData:', userData);
       
     if (userData.publisher === 'Y') {
       navigate('/publisher-dashboard', { replace: true });
     } else if (userData.editor === 'Y') {
       navigate('/editor-dashboard', { replace: true });
-    } 
-    // else {
-    //   showError('Error', userData?.statusMessage);
-    // }
-  }, [userData])
+    } else if (userData.statusMessage) {
+      showError('Error', userData.statusMessage);
+    }
+  }, [userData, navigate]);
 
   const formik = useFormik({
     initialValues: {

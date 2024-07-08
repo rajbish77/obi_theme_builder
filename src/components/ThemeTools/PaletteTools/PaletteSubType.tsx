@@ -45,6 +45,7 @@ const AccordionDetailsWrapper = styled(AccordionDetails)({
   },
   "& .MuiFormLabel-root": {
     color: "white",
+    top:"15px"
   },
   "& .MuiFormLabel-root.Mui-focused": {
     color: "white",
