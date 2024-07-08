@@ -12,6 +12,7 @@ import affiliateSlice from "../slices/affiliateTheme";
 import affiliateName from "../slices/affiliateName";
 import fetchAffiliate from "../slices/Common Slice/fetchAffiliate";
 import preview from "../slices/Common Slice/preview";
+import updateThemeSlice from "../slices/updateThemeSlice";
 
 
 const rootReducter = combineReducers({
@@ -26,6 +27,7 @@ const rootReducter = combineReducers({
   affiliateName: affiliateName, // affiliate name and id
   fetchAffiliate: fetchAffiliate, // this is fetch Affiliate 
   preview:preview, // this is preview them work
+  updateTheme: updateThemeSlice,
 });
 
 // const selectDataTransform = createTransform(

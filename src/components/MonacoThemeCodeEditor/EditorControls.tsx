@@ -1,72 +1,71 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootStateType, UpdateTheme } from "../../slices/types";
+import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
-import { myMessageFunction, showConfirm, showError, showSuccess } from "../Swal";
 import Loader from "../PreviewWindow/Samples/Loader";
 import { defaultThemeOptions } from "../../siteTheme";
 import { loadSavedTheme, editorThemeState } from "../../state/themeSlice";
+import { myMessageFunction, showConfirm, showError, showSuccess } from "../Swal";
 import { HandleAPIError } from "../../commonFunction";
-import { AppDispatch } from "../../app/store";
 import { useAppSelector } from "../../app/hooks";
+import { updateTheme } from "../../slices/updateThemeSlice";
+import { UpdateTheme, UpdateThemeResponse } from "../../slices/types";
+import { AppDispatch, RootState } from "../../app/store";
 
 function EditorControls() {
   const dispatch = useDispatch<AppDispatch>();
-  const id = useSelector((state: RootStateType) => state.id);
-  const editorState = useSelector((state: RootStateType) => state.editorThemeState);
-  const affiliateTheme = useSelector((state: RootStateType) => state.affiliateTheme);
-  const themeOptions = useSelector((state: RootStateType) => state.themeOptions);
-  // const loading = useAppSelector((state) => state.affiliateName);
-  const username = useSelector((state: RootStateType) => state.affiliate?.username);
-  console.log(username)
-  const auth = useSelector((state: RootStateType) => state.auth);
-  console.log(auth)
+
+  const id = useAppSelector((state: RootState) => state.affiliateName.affiliates[0]?.affiliateid || null);
+  const editorState = useAppSelector((state: RootState) => state.theme.editorThemeState);
+  const affiliateTheme = useAppSelector((state: RootState) => state.theme.affiliateTheme);
+  const themeOptions = useAppSelector((state: RootState) => state.theme.themeOptions);
+  const loading = useAppSelector((state: RootState) => state.affiliateData.loading);
+  // const username = useAppSelector((state: RootState) => state.affiliateData.username);
 
   const updateThemeApi = async (request: UpdateTheme) => {
     try {
-      let response;
-      console.log(response)
-      dispatch(editorThemeState(true));
-      if (request.action === "PR") {
-        showSuccess("Success", "Raise publish request successfully");
+      const response = await dispatch(updateTheme(request));
+      console.log(response);
+  
+      if (updateTheme.rejected.match(response)) {
+        showError("Error", response.error.message ?? "An error occurred");
       } else {
-        showSuccess("Success", "Theme saved successfully");
+        const payload = response.payload as UpdateThemeResponse;
+        console.log(payload);
+        dispatch(editorThemeState(true));
+        if (request.action === "PR") {
+          showSuccess("Success", "Raise publish request successfully");
+        } else {
+          showSuccess("Success", "Theme saved successfully");
+        }
       }
     } catch (error) {
       showError("Error", error as string);
     }
   };
+  
 
   const saveAndRaiseRequest = () => {
-    if (!username) {
-      showError("Error", "Username not found");
+    if (!id) {
+      showError("Error", "Affiliate ID not found");
       return;
     }
     const request: UpdateTheme = {
       action: "PR",
-      username: username,
-      theme: {
-        live: {}, // Placeholder or default structure
-        preview: {}, // Placeholder or default structure
-        ...themeOptions, // Spread the existing themeOptions properties
-      },
+      affiliateid: id,
+      theme: JSON.stringify(themeOptions),
     };
     updateThemeApi(request);
   };
 
   const saveTheme = () => {
-    if (!username) {
-      showError("Error", "Username not found");
+    if (!id) {
+      showError("Error", "Affiliate ID not found");
       return;
     }
     const request: UpdateTheme = {
       action: "S",
-      username: username,
-      theme: {
-        live: {}, // Placeholder or default structure
-        preview: {}, // Placeholder or default structure
-        ...themeOptions, // Spread the existing themeOptions properties
-      },
+      affiliateid: id,
+      theme: JSON.stringify(themeOptions),
     };
     updateThemeApi(request);
   };
@@ -105,7 +104,7 @@ function EditorControls() {
   };
 
   const handleChange = async () => {
-    let confirmed = await myMessageFunction(auth);
+    let confirmed = await myMessageFunction(); // Assuming this function exists
     if (confirmed.isConfirmed) {
       saveAndRaiseRequest();
     } else if (confirmed.isDenied) {
@@ -115,7 +114,7 @@ function EditorControls() {
 
   return (
     <>
-      {/* <Loader loading={loading} /> */}
+       <Loader loading={loading} /> 
       <div className="d-flex justify-content-end p-2">
         {id !== null ? (
           <>

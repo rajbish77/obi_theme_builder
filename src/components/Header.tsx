@@ -61,7 +61,6 @@ const Header = () => {
   const auth = useSelector((state: AuthState) => state.auth);
   const dataEdiPubl = useAppSelector((state) => state.logIn)
   const [searchResult, setSearchResult] = useState<Affiliate[]>([]);
-  // const loading = useAppSelector((state) => state.affiliateName.loading);
   const affiliateDataID = useAppSelector((state) => state.affiliateData);
 
 
@@ -130,7 +129,6 @@ const Header = () => {
       let filterdata = affiliateNameData?.filter((item: Affiliate) => {
         return item?.name?.toLowerCase()?.includes(searchTerm)
       })
-
       filterdata = filterdata.slice(0, 100);
       setSearchResult(filterdata?.length > 0 ? filterdata : [{ id: -1, name: 'Not found' }]);
     } else {
@@ -215,12 +213,10 @@ const Header = () => {
 
   return (
     <>
-      {/*   <Loader loading={loading} />*/}
+        {/* <Loader loading={loading} /> */}
       <div className="px-3 bg-grey shadow">
         <Row className="align-items-center py-3">
-
           {getdataofHeader()}
-
           <Col
             // md={getEditorLoginStatus(auth) ? "2" : "6"}
             className="d-flex justify-content-end">

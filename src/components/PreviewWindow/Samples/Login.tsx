@@ -33,9 +33,9 @@ const LoginForm = () => {
   const handleSubmit = async (values: any) => {
     const { username, password, previligesType } = values;
 
-    let userName = username.trim();
-    let passWord = password.trim();
-    let privilege = previligesType.value;
+    const userName = username.trim();
+    const passWord = password.trim();
+    const privilege = previligesType.value;
 
     try {
       const request = {
