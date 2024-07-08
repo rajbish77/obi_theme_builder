@@ -63,7 +63,7 @@ const initialState: RootStateType = {
   },
   editorThemeState: false,
   affiliateTheme: defaultThemeOptions,
-  updateThemeButton: null
+  updateThemeButton: null,
 };
 
 const createPreviewMuiTheme = (
@@ -84,7 +84,7 @@ const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    setThemeOption: (state:any , action: PayloadAction<{ path: string; value: any }>) => {
+    setThemeOption: (state:any, action: PayloadAction<{ path: string; value: any }>) => {
       state.themeOptions = setByPath(state.themeOptions, action.payload.path, action.payload.value);
       state.themeObject = createPreviewMuiTheme(state.themeOptions, state.previewSize);
       state.editorThemeState = true;
@@ -114,27 +114,6 @@ const themeSlice = createSlice({
     toggleThemeConfig: (state) => {
       state.themeConfigOpen = !state.themeConfigOpen;
     },
-    // logInState: (state:any, action: PayloadAction<{ loginType: any; userName: string }>) => {
-    //   if (action.payload.loginType === THEMEEDITOR) {
-    //     state.auth = {
-    //       auth: true,
-    //       editor: "Y",
-    //       publisher: "N",
-    //       userName: action.payload.userName,
-    //     };
-    //   } else if (action.payload.loginType === THEMEPUBLISHER) {
-    //     state.auth = {
-    //       auth: true,
-    //       editor: "N",
-    //       publisher: "Y",
-    //       userName: action.payload.userName,
-    //     };
-    //   }
-    // },
-    // logOutState: (state) => {
-    //   state.auth = {...state.auth,...initialAuthState };
-    //   state.id = null;
-    // },
     fetchAffiliate: (state:any, action: PayloadAction<AffiliateItem[]>) => {
       state.affiliate = action.payload;
     },
@@ -153,12 +132,11 @@ export const {
   loadSavedTheme,
   setActiveTab,
   resetSiteData,
-  // logInState,
-  // logOutState,
   fetchAffiliate,
   affiliateTheme,
   editorThemeState,
-  setThemeId, toggleThemeConfig,
+  setThemeId,
+  toggleThemeConfig,
 } = themeSlice.actions;
 
 export default themeSlice.reducer;

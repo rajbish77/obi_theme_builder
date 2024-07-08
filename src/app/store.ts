@@ -14,6 +14,7 @@ import fetchAffiliate from "../slices/Common Slice/fetchAffiliate";
 import preview from "../slices/Common Slice/preview";
 import updateThemeSlice from "../slices/updateThemeSlice";
 import live from "../slices/Common Slice/live";
+import defaultThemeSlice from "../slices/Common Slice/defaultThemeSlice";
 
 
 const rootReducter = combineReducers({
@@ -30,6 +31,7 @@ const rootReducter = combineReducers({
   preview: preview, // this is preview them work
   live: live, // this is live them work
   updateTheme: updateThemeSlice,
+  defaultThemeOptions: defaultThemeSlice,
 });
 
 // const selectDataTransform = createTransform(
@@ -47,7 +49,7 @@ const rootReducter = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["logIn", "affiliateData", "fetchAffiliate", "preview" , "live"],
+  whitelist: ["logIn", "affiliateData", "fetchAffiliate", "preview" , "live", "defaultThemeOptions"],
   // transforms:[selectDataTransform]
 };
 

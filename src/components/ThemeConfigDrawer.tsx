@@ -35,8 +35,9 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
 const ThemeConfigDrawer = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const themeId = useSelector((state: RootState) => state.theme.themeId);
-  console.log(themeId)
+  const savedThemes = useSelector((state: RootState) => state.theme.savedThemes);
+  const defaultThemeId = Object.keys(savedThemes)[0];
+  console.log(defaultThemeId)
   const open = useSelector((state: RootState) => state.theme.themeConfigOpen);
   console.log(open)
   const permanent = useMediaQuery(theme.breakpoints.up('sm'));
@@ -51,7 +52,7 @@ const ThemeConfigDrawer = () => {
       <StyledDrawerPaper>
         <StyledGridContainer container direction="column" wrap="nowrap">
           <StyledGridItem item>
-            <MonacoThemeCodeEditor key={themeId} /> {/* top button */}
+            <MonacoThemeCodeEditor key={defaultThemeId} />
           </StyledGridItem>
           <StyledGridItem item>
             <ThemeTools /> {/* this is text */}
