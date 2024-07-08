@@ -63,7 +63,7 @@ const initialState: RootStateType = {
   },
   editorThemeState: false,
   affiliateTheme: defaultThemeOptions,
-  updateThemeButton: null
+  updateThemeButton: null,
 };
 
 const createPreviewMuiTheme = (
@@ -84,7 +84,7 @@ const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    setThemeOption: (state:any , action: PayloadAction<{ path: string; value: any }>) => {
+    setThemeOption: (state:any, action: PayloadAction<{ path: string; value: any }>) => {
       state.themeOptions = setByPath(state.themeOptions, action.payload.path, action.payload.value);
       state.themeObject = createPreviewMuiTheme(state.themeOptions, state.previewSize);
       state.editorThemeState = true;
@@ -94,50 +94,29 @@ const themeSlice = createSlice({
         lastUpdated: new Date().toISOString(),
       };
     },
-    setAffiliateId: (state:any, action: PayloadAction<string>) => {
-      state.id = action.payload;
-    },
-    loadSavedTheme: (state:any, action: PayloadAction<ThemeOptions>) => {
-      state.themeOptions = action.payload;
-      state.themeObject = createPreviewMuiTheme(state.themeOptions, state.previewSize);
-      state.editorThemeState = false;
-    },
-    setActiveTab: (state, action: PayloadAction<string>) => {
-      state.activeTab = action.payload;
-    },
+    // setAffiliateId: (state:any, action: PayloadAction<string>) => {
+    //   state.id = action.payload;
+    // },
+    // loadSavedTheme: (state:any, action: PayloadAction<ThemeOptions>) => {
+    //   state.themeOptions = action.payload;
+    //   state.themeObject = createPreviewMuiTheme(state.themeOptions, state.previewSize);
+    //   state.editorThemeState = false;
+    // },
+    // setActiveTab: (state, action: PayloadAction<string>) => {
+    //   state.activeTab = action.payload;
+    // },
     resetSiteData: (state) => {
       return initialState;
     },
-    setThemeId: (state, action: PayloadAction<string>) => {
-      state.themeId = action.payload;
-    },
+    // setThemeId: (state, action: PayloadAction<string>) => {
+    //   state.themeId = action.payload;
+    // },
     toggleThemeConfig: (state) => {
       state.themeConfigOpen = !state.themeConfigOpen;
     },
-    // logInState: (state:any, action: PayloadAction<{ loginType: any; userName: string }>) => {
-    //   if (action.payload.loginType === THEMEEDITOR) {
-    //     state.auth = {
-    //       auth: true,
-    //       editor: "Y",
-    //       publisher: "N",
-    //       userName: action.payload.userName,
-    //     };
-    //   } else if (action.payload.loginType === THEMEPUBLISHER) {
-    //     state.auth = {
-    //       auth: true,
-    //       editor: "N",
-    //       publisher: "Y",
-    //       userName: action.payload.userName,
-    //     };
-    //   }
+    // fetchAffiliate: (state:any, action: PayloadAction<AffiliateItem[]>) => {
+    //   state.affiliate = action.payload;
     // },
-    // logOutState: (state) => {
-    //   state.auth = {...state.auth,...initialAuthState };
-    //   state.id = null;
-    // },
-    fetchAffiliate: (state:any, action: PayloadAction<AffiliateItem[]>) => {
-      state.affiliate = action.payload;
-    },
     affiliateTheme: (state:any, action: PayloadAction<ThemeOptions>) => {
       state.affiliateTheme = action.payload;
     },
@@ -149,16 +128,15 @@ const themeSlice = createSlice({
 
 export const {
   setThemeOption,
-  setAffiliateId,
-  loadSavedTheme,
-  setActiveTab,
+  // setAffiliateId,
+  // loadSavedTheme,
+  // setActiveTab,
   resetSiteData,
-  // logInState,
-  // logOutState,
-  fetchAffiliate,
+  // fetchAffiliate,
   affiliateTheme,
   editorThemeState,
-  setThemeId, toggleThemeConfig,
+  // setThemeId,
+  toggleThemeConfig,
 } = themeSlice.actions;
 
 export default themeSlice.reducer;

@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import Loader from "../PreviewWindow/Samples/Loader";
 import { defaultThemeOptions } from "../../siteTheme";
-import { loadSavedTheme, editorThemeState } from "../../state/themeSlice";
+import {  editorThemeState, affiliateTheme } from "../../state/themeSlice";
 import { myMessageFunction, showConfirm, showError, showSuccess } from "../Swal";
 import { HandleAPIError } from "../../commonFunction";
 import { useAppSelector } from "../../app/hooks";
 import { updateTheme } from "../../slices/updateThemeSlice";
-import { UpdateTheme, UpdateThemeResponse } from "../../slices/types";
+import { ThemeOptionsType, UpdateTheme, UpdateThemeResponse } from "../../slices/types";
 import { AppDispatch, RootState } from "../../app/store";
 
 function EditorControls() {
@@ -16,7 +16,8 @@ function EditorControls() {
 
   const id = useAppSelector((state: RootState) => state.affiliateName.affiliates[0]?.affiliateid || null);
   const editorState = useAppSelector((state: RootState) => state.theme.editorThemeState);
-  const affiliateTheme = useAppSelector((state: RootState) => state.theme.affiliateTheme);
+  const affiliateThemeData = useAppSelector((state: RootState) => state.theme.affiliateTheme);
+  const affiliateData: any = useAppSelector((state) => state.affiliateData.preview);
   const themeOptions = useAppSelector((state: RootState) => state.theme.themeOptions);
   const loading = useAppSelector((state: RootState) => state.affiliateData.loading);
   // const username = useAppSelector((state: RootState) => state.affiliateData.username);
@@ -74,7 +75,7 @@ function EditorControls() {
     try {
       let confirmed = await showConfirm("Confirm", "Are you sure you want to reset the theme?");
       if (confirmed.isConfirmed) {
-        dispatch(loadSavedTheme(defaultThemeOptions));
+        dispatch(affiliateTheme(defaultThemeOptions));
         showSuccess("Success", "Theme reset successfully");
       }
     } catch (error) {
@@ -87,7 +88,7 @@ function EditorControls() {
       let confirmed = await showConfirm("Confirm", "Are you sure you want to discard the changes?");
       if (confirmed.isConfirmed) {
         dispatch(editorThemeState(true));
-        dispatch(loadSavedTheme(affiliateTheme));
+        dispatch(affiliateTheme(affiliateThemeData));
         showSuccess("Success", "Changes discarded successfully");
       }
     } catch (error) {

@@ -1,5 +1,5 @@
 import { showConfirm, showError } from "./components/Swal";
-import { loadSavedTheme } from "./state/themeSlice";
+// import { loadSavedTheme } from "./state/themeSlice";
 import { Affiliate, Auth } from "./slices/types";
 import { store } from "./app/store";
 import { logOut } from "./slices/logIn-slice";
