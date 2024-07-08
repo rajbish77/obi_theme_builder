@@ -13,6 +13,7 @@ import affiliateName from "../slices/affiliateName";
 import fetchAffiliate from "../slices/Common Slice/fetchAffiliate";
 import preview from "../slices/Common Slice/preview";
 import updateThemeSlice from "../slices/updateThemeSlice";
+import live from "../slices/Common Slice/live";
 
 
 const rootReducter = combineReducers({
@@ -23,10 +24,11 @@ const rootReducter = combineReducers({
   publish: publisherSlice, // Publicer api work slice
   buttonWork: buttonSlice, // button publicer function work slice
   rejuctButton: rejButtonSlice, // button rejuct function work slice
-  affiliateData : affiliateSlice, // affiliate api work slice
+  affiliateData: affiliateSlice, // affiliate api work slice
   affiliateName: affiliateName, // affiliate name and id
   fetchAffiliate: fetchAffiliate, // this is fetch Affiliate 
-  preview:preview, // this is preview them work
+  preview: preview, // this is preview them work
+  live: live, // this is live them work
   updateTheme: updateThemeSlice,
 });
 
@@ -45,7 +47,7 @@ const rootReducter = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["logIn", "affiliateData" , "fetchAffiliate", "preview" ],
+  whitelist: ["logIn", "affiliateData", "fetchAffiliate", "preview" , "live"],
   // transforms:[selectDataTransform]
 };
 

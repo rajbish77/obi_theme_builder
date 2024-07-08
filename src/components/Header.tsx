@@ -23,6 +23,7 @@ import { affiliate } from "../slices/affiliateTheme"
 import { affiliateData } from "../slices/affiliateName"
 import { logOut } from "../slices/logIn-slice"
 import { setPreview } from "../slices/Common Slice/preview"
+import { setlive } from "../slices/Common Slice/live"
 
 // Define styled components
 const Title = styled(Typography)(({ theme }) => ({
@@ -104,6 +105,7 @@ const Header = () => {
   useEffect(() => {
     if(affiliateDataID.status == "0" ){
       dispatch(setPreview(affiliateDataID.preview));
+      dispatch(setlive(affiliateDataID.live));
     };
   }, [affiliateDataID])
 
