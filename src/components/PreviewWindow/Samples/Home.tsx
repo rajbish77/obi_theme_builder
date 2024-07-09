@@ -20,6 +20,8 @@ const SubfooterContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.subfooter.textcolor,
   textAlign: "center",
   padding: theme.spacing(2),
+  maxWidth: "1366px",
+  margin: "25px 0px",
 }));
 
 const Heading = styled('h3')(({ theme }) => ({
