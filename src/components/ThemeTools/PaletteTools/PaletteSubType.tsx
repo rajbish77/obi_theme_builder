@@ -86,8 +86,8 @@ const PaletteSubType: React.FC<PaletteSubTypeProps> = ({
   paletteValues,
 }) => {
 
-  const themeValues = useThemeValue(path);
-  console.log(themeValues)
+  // const themeValues = useThemeValue(path);
+  // console.log(themeValues)
 
   return (
     <AccordionWrapper>

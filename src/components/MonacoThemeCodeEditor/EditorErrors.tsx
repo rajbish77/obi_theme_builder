@@ -56,7 +56,7 @@ const Root = styled("div")(({ theme }) => ({
     fontWeight: theme.typography.fontWeightBold,
   },
   [`& .${classes.expandIcon}`]: {
-    transition: theme.transitions.create("transform"),
+    // transition: theme.transitions.create("transform"),
     "&$expanded": {
       transform: "rotate(180deg)",
     },
@@ -71,7 +71,7 @@ const EditorErrors: React.FC<{ editorRef: React.RefObject<monaco.editor.IStandal
   const handleClose = () => setOpen(false);
   const handleExpand = () => setExpanded(!expanded);
   const model = editorRef?.current?.getModel();
-  console.log(model)
+  // console.log(model)
 
   useEffect(() => {
     if (errors.length > 0) {

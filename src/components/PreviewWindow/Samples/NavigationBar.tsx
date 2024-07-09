@@ -260,6 +260,6 @@ declare module '@mui/material/styles' {
           textcolor?: string;
         }
       },
-    }
+    },
   }
 }
