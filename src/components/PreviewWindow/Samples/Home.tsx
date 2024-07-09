@@ -61,9 +61,9 @@ const Home = () => {
     <StyledDiv>
       <section>
         <Container className="py-4">
-          <h3 className="mb-3 d-flex justify-content-center">
-            <Heading>LOUNGE SERVICES</Heading>
-          </h3>
+          <Heading className="mb-3 d-flex justify-content-center">
+            LOUNGE SERVICES
+          </Heading>
           <Subheading className="my-3 d-flex justify-content-center">
             Please select your product
           </Subheading>
@@ -75,9 +75,9 @@ const Home = () => {
             <Col className="col-md-4 d-flex">
               <Card className="w-100">
                 <StyledDiv className="p-2">
-                <PrimaryButton type="submit" className="w-100">
-                  BOOK ARRIVAL & DEPARTURE
-                </PrimaryButton>
+                  <PrimaryButton type="submit" className="w-100">
+                    BOOK ARRIVAL & DEPARTURE
+                  </PrimaryButton>
                 </StyledDiv>
                 <Card.Img
                   className="img-responsive bottom-block"
@@ -92,9 +92,9 @@ const Home = () => {
                 </CardBody>
                 <Link to="#" className="btn p-0 no-btn-border border-0">
                   <StyledDiv>
-                  <CardFooter>
-                    View Price
-                  </CardFooter>
+                    <CardFooter>
+                      View Price
+                    </CardFooter>
                   </StyledDiv>
                 </Link>
               </Card>
@@ -102,9 +102,9 @@ const Home = () => {
             <Col className="col-md-4 d-flex">
               <Card className="w-100">
                 <StyledDiv className="p-2">
-                <PrimaryButton type="submit" className="w-100">
-                  BOOK ARRIVAL
-                </PrimaryButton>
+                  <PrimaryButton type="submit" className="w-100">
+                    BOOK ARRIVAL
+                  </PrimaryButton>
                 </StyledDiv>
                 <Card.Img
                   className="img-responsive bottom-block"
@@ -119,9 +119,9 @@ const Home = () => {
                 </CardBody>
                 <Link to="#" className="btn p-0 no-btn-border border-0">
                   <StyledDiv>
-                  <CardFooter>
-                    View Price
-                  </CardFooter>
+                    <CardFooter>
+                      View Price
+                    </CardFooter>
                   </StyledDiv>
                 </Link>
               </Card>
@@ -129,9 +129,9 @@ const Home = () => {
             <Col className="col-md-4 d-flex">
               <Card className="w-100">
                 <StyledDiv className="p-2">
-                <PrimaryButton type="submit" className="w-100">
-                  BOOK DEPARTURE
-                </PrimaryButton>
+                  <PrimaryButton type="submit" className="w-100">
+                    BOOK DEPARTURE
+                  </PrimaryButton>
                 </StyledDiv>
                 <Card.Img
                   className="img-responsive bottom-block"
@@ -146,9 +146,9 @@ const Home = () => {
                 </CardBody>
                 <Link to="#" className="btn p-0 no-btn-border border-0">
                   <StyledDiv>
-                  <CardFooter>
-                    View Price
-                  </CardFooter>
+                    <CardFooter>
+                      View Price
+                    </CardFooter>
                   </StyledDiv>
                 </Link>
               </Card>
@@ -165,15 +165,15 @@ const Home = () => {
                 <Col sm={12} md={4} className="offset-md-4">
                   <Heading>LOUNGE SERVICES</Heading>
                   <Subheading>For Priority Pass/ Diners Club</Subheading>
-                  <Subheading><h5 className="my-3">Please select your desired service</h5></Subheading>
+                  <Subheading className="my-3">Please select your desired service</Subheading>
                 </Col>
               </Row>
               <Col className="offset-md-4 col-md-4 d-flex">
                 <Card className="w-100">
                   <StyledDiv className="p-2">
-                  <PrimaryButton type="submit" className="w-100">
-                    PRIORITY PASS/DINERS CLUB BOOK DEPARTURE
-                  </PrimaryButton>
+                    <PrimaryButton type="submit" className="w-100">
+                      PRIORITY PASS/DINERS CLUB BOOK DEPARTURE
+                    </PrimaryButton>
                   </StyledDiv>
                   <Card.Img
                     className="img-responsive bottom-block"
@@ -188,9 +188,9 @@ const Home = () => {
                   </CardBody>
                   <Link to="#" className="btn p-0 no-btn-border border-0">
                     <StyledDiv>
-                    <CardFooter>
-                      View Price
-                    </CardFooter>
+                      <CardFooter>
+                        View Price
+                      </CardFooter>
                     </StyledDiv>
                   </Link>
                 </Card>
@@ -207,15 +207,15 @@ const Home = () => {
               <Row className="text-center">
                 <Col sm={12} md={4} className="offset-md-4">
                   <Subheading>For Digicel Executive Card</Subheading>
-                  <Subheading><h5 className="my-3">Please select your desired service</h5></Subheading>
+                  <Subheading className="my-3" >Please select your desired service</Subheading>
                 </Col>
               </Row>
               <Col className="offset-md-4 col-md-4 d-flex">
                 <Card className="w-100">
-                  <StyledDiv>
-                  <PrimaryButton type="submit" className="my-2 mx-2">
-                    DIGICEL EXECUTIVE CARD BOOK DEPARTURE
-                  </PrimaryButton>
+                  <StyledDiv className="p-2">
+                    <PrimaryButton type="submit" className="w-100">
+                      DIGICEL EXECUTIVE CARD BOOK DEPARTURE
+                    </PrimaryButton>
                   </StyledDiv>
                   <Card.Img
                     className="img-responsive bottom-block"
@@ -230,9 +230,9 @@ const Home = () => {
                   </CardBody>
                   <Link to="#" className="btn p-0 no-btn-border border-0">
                     <StyledDiv>
-                    <CardFooter>
-                      View Price
-                    </CardFooter>
+                      <CardFooter>
+                        View Price
+                      </CardFooter>
                     </StyledDiv>
                   </Link>
                 </Card>
@@ -246,37 +246,37 @@ const Home = () => {
         <Container className="my-4 d-flex justify-content-center">
           <Card style={{ width: "30rem", height: "auto" }}>
             <StyledDiv>
-            <Row>
-              <Col sm={12} md={7}>
-                <CardBody>
-                  <Heading>E-GIFT CARD</Heading>
-                  <CardText>
-                    VIP Attractions e-Gift Card is a perfect gift for any occasion! It acts like a debit card – you choose the service you would like to give and the recipient can redeem it when they are ready to travel.
-                  </CardText>
-                  <Link to="#" className="text-decoration-none">
-                    <PrimaryButton type="submit" className="w-100">
-                      Get Started
-                    </PrimaryButton>
-                  </Link>
-                </CardBody>
-              </Col>
-              <Col sm={12} md={5} className="justify-content-center">
-                <img
-                  src={giftCard1}
-                  height="200"
-                  width="124"
-                  className="p-1 mx-3"
-                  alt="Gift Card"
-                />
-                <img
-                  src={giftCard2}
-                  height="100"
-                  width="147"
-                  className="d-inline-block p-1 mx-3"
-                  alt="Gift Card"
-                />
-              </Col>
-            </Row>
+              <Row>
+                <Col sm={12} md={7}>
+                  <CardBody>
+                    <Heading>E-GIFT CARD</Heading>
+                    <CardText>
+                      VIP Attractions e-Gift Card is a perfect gift for any occasion! It acts like a debit card – you choose the service you would like to give and the recipient can redeem it when they are ready to travel.
+                    </CardText>
+                    <Link to="#" className="text-decoration-none">
+                      <PrimaryButton type="submit" className="w-100">
+                        Get Started
+                      </PrimaryButton>
+                    </Link>
+                  </CardBody>
+                </Col>
+                <Col sm={12} md={5} className="justify-content-center">
+                  <img
+                    src={giftCard1}
+                    height="200"
+                    width="124"
+                    className="p-1 mx-3"
+                    alt="Gift Card"
+                  />
+                  <img
+                    src={giftCard2}
+                    height="100"
+                    width="147"
+                    className="d-inline-block p-1 mx-3"
+                    alt="Gift Card"
+                  />
+                </Col>
+              </Row>
             </StyledDiv>
           </Card>
         </Container>
