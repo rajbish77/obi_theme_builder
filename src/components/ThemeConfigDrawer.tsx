@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Drawer from '@mui/material/Drawer';
 import Grid from '@mui/material/Grid';
 import { useTheme, styled } from '@mui/material/styles';
@@ -37,9 +37,7 @@ const ThemeConfigDrawer = () => {
   const dispatch = useDispatch();
   const savedThemes = useSelector((state: RootState) => state.theme.savedThemes);
   const defaultThemeId = Object.keys(savedThemes)[0];
-  console.log(defaultThemeId)
   const open = useSelector((state: RootState) => state.theme.themeConfigOpen);
-  console.log(open)
   const permanent = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (

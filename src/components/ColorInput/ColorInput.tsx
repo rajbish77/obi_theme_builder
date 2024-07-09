@@ -1,7 +1,6 @@
 import React, { useState, useEffect, MouseEvent, ClipboardEvent } from "react";
 import { TextField, InputAdornment, Popover, styled, Theme } from "@mui/material";
 import { ChromePicker } from "react-color";
-import MaterialColorPicker from "./MaterialColorPicker";
 import { colorFromString } from "./utils";
 import { ThemeValueChangeEvent } from "../../components/ThemeTools/events";
 
@@ -21,7 +20,7 @@ const ColorSampleAdornment = styled('div')(({ theme }: { theme: Theme }) => ({
 interface ColorInputProps {
   label: string;
   color: string;
-  onColorChange: (color: string) => void;
+  onColorChange: (color: string) => void; // Define onColorChange callback
 }
 
 const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) => {
@@ -38,7 +37,7 @@ const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) 
 
   const handleClosePopover = () => {
     setAnchorEl(null);
-    document.dispatchEvent(ThemeValueChangeEvent());
+    document.dispatchEvent(ThemeValueChangeEvent()); // Dispatch theme change event
   };
 
   const handlePaste = (event: ClipboardEvent<HTMLDivElement>) => {
@@ -65,10 +64,12 @@ const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) 
         }}
         InputLabelProps={{ shrink: true }}
         size="small"
-        className="py-3"
         value={internalColor}
         onPaste={handlePaste}
-        onChange={(e) => onColorChange(e.target.value)} // Handle manual input changes
+        onChange={(e) => {
+          setInternalColor(e.target.value);
+          onColorChange(e.target.value);
+        }} // Handle manual input changes
       />
       <Popover
         open={popoverOpen}
@@ -86,44 +87,14 @@ const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) 
         disableEnforceFocus
       >
         <PopoverPaper>
-          <ColorPicker color={internalColor} onChangeComplete={onColorChange} />
+          <ChromePicker color={internalColor} onChangeComplete={(color) => {
+            setInternalColor(color.hex);
+            onColorChange(color.hex);
+          }} />
         </PopoverPaper>
       </Popover>
     </div>
   );
 };
-
-interface ColorPickerProps {
-  color: string;
-  onChangeComplete: (color: string) => void;
-}
-
-const ColorPicker: React.FC<ColorPickerProps> = ({ color, onChangeComplete }) => {
-  const [inputValue, setInputValue] = useState<string | null>(color);
-
-  useEffect(() => {
-    setInputValue(color);
-  }, [color]);
-
-  const handleChangeComplete = (colorObject: any) => {
-    const newColor = colorObject.hex;
-    // console.log("Color selected:", newColor); // Debugging log
-    onChangeComplete(newColor);
-  };
-
-  return (
-    <>
-      <MaterialColorPicker color={inputValue} onChangeComplete={handleChangeComplete} />
-      <ChromePicker
-        color={inputValue ?? "#fff"}
-        onChange={(colorObject) => {
-          // console.log("Color changing:", colorObject.hex); // Debugging log
-          setInputValue(colorObject.hex);
-        }}
-        onChangeComplete={handleChangeComplete}
-      />
-    </>
-  );
-}
 
 export default ColorInput;

@@ -40,7 +40,7 @@ const AccordionSummaryWrapper = styled(AccordionSummary)(({ theme }) => ({
 const AccordionDetailsWrapper = styled(AccordionDetails)({
   flexDirection: "column",
   "& > *": {
-    marginBottom: "1rem",
+    marginBottom: "2rem",
     color: "white",
   },
   "& .MuiFormLabel-root": {
@@ -87,7 +87,8 @@ const PaletteSubType: React.FC<PaletteSubTypeProps> = ({
   paletteValues,
 }) => {
 
-  // const themeValues = useThemeValue(path);
+  const themeValues = useThemeValue(path);
+  console.log(themeValues)
 
   return (
     <AccordionWrapper>
