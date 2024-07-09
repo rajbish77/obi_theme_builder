@@ -74,7 +74,7 @@ const Header = () => {
   console.log(getDataOn)
 
   console.log(affiliateDataID);
-  
+
   const styleObj = {
     color: "black",
     zIndex: 1022,
@@ -99,19 +99,10 @@ const Header = () => {
     const request = {
       affiliateid: affiliateId,
     };
-
+    
     if (affiliateId !== null) {
       try {
         await dispatch(affiliate(request)).unwrap();
-        if (affiliateDataID.status != "0") {
-          if (affiliateDataID.preview === null) {
-            dispatch(affiliateTheme(defaultThemeOptions));
-          } else {
-            const themeObject : any = await affiliateDataID.preview;
-            // dispatch(loadSavedTheme(themeObject));
-            dispatch(affiliateTheme(themeObject));
-          }
-        }
       } catch (error) {
         HandleAPIError(error);
       }
@@ -124,6 +115,15 @@ const Header = () => {
     if (affiliateDataID.status == "0") {
       dispatch(setPreview(affiliateDataID.preview));
       dispatch(setlive(affiliateDataID.live));
+      if (affiliateDataID.preview === null) {
+        console.log("preview data is empty");
+        dispatch(affiliateTheme(defaultThemeOptions));
+      } else {
+        console.log("we have perview data");
+        const themeObject: any = affiliateDataID.preview;
+        // dispatch(loadSavedTheme(themeObject));
+        dispatch(affiliateTheme(themeObject));
+      }
     }
   }, [affiliateDataID]);
 
@@ -293,4 +293,3 @@ Header.defaultProps = {
 };
 
 export default Header;
-

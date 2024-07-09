@@ -18,6 +18,8 @@ function PublisherListing(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const useData = useAppSelector((state) => state.buttonWork);
   const useDataRej = useAppSelector((state) => state.rejuctButton);
+  const loadingRej = useAppSelector((state) => state.rejuctButton.loading);
+  const loadingPublish = useAppSelector((state) => state.buttonWork.loading);
 
   const columnHelper = createColumnHelper();
   const COLUMNS = [
@@ -79,11 +81,8 @@ function PublisherListing(): JSX.Element {
   ];
 
   const handlePreviewButtonClick = (row: any) => {
-    window.open(
-      `${PREVIEW_URL}affiliate/${row?.affiliateid}?preview=true`,
-      "_blank"
-    );
-  };
+    window.open(`${PREVIEW_URL}affiliate/${row?.affiliateid}?preview=true`, "_blank");
+  }
 
   const handlePublishButtonClick = async (row: any) => {
     let confirmed = await showConfirm(
@@ -97,9 +96,14 @@ function PublisherListing(): JSX.Element {
           action: "P",
         };
 
-        await dispatch(publishButton(request)).unwrap();
+        const response = await dispatch(publishButton(request)).unwrap();
+        console.log('Response from publishButton:', response);
 
-        // const getData = await useData;
+        if (response?.status === 0) {
+          showSuccess("Success", "Theme published successfully");
+        } else {
+          showError("Error", useDataRej?.statusMessage);
+        }
       } catch (error) {
         HandleAPIError(error);
       }
@@ -124,19 +128,19 @@ function PublisherListing(): JSX.Element {
 
     if (confirmed.isConfirmed) {
       try {
-        const requestReject: {
-          affiliateid: any;
-          action: string;
-          message: any;
-        } = {
+        const requestReject: { affiliateid: any, action: string, message: any } = {
           affiliateid: row?.affiliateid,
           action: "R",
           message: confirmed?.value,
         };
 
-        await dispatch(rejectButton(requestReject)).unwrap();
-
-        // const getData = await useDataRej;
+        const response = await dispatch(rejectButton(requestReject)).unwrap();
+        console.log('Response from rejectButton:', response);
+        if (response?.status === 0) {
+          showSuccess("Success", "Publish request rejected!");
+        } else {
+          showError("Error", useDataRej?.statusMessage);
+        }
       } catch (error) {
         HandleAPIError(error);
       }
@@ -158,7 +162,8 @@ function PublisherListing(): JSX.Element {
 
   return (
     <>
-      <Loader loading={loading} />
+      <Loader loading={loadingRej} />
+      <Loader loading={loadingPublish} />
       <Container className="py-3 h-100">
         <h3 className="text-center py-2 text-black my-4 underline">
           <u>Publish Request</u>

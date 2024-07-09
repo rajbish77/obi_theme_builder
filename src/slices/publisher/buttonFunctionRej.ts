@@ -82,24 +82,6 @@ const rejButtonSlice = createSlice({
   name: "Login auth",
   initialState,
   extraReducers: (builder) => {
-    // builder.addCase(publishButton.pending, (state, action) => {
-    //   state.loading = true;
-    //   state.error = null;
-    // });
-    // builder.addCase(publishButton.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.auth = true;
-    //   state.status = action?.payload?.status;
-    //   state.statusMessage = action?.payload?.statusMessage;
-    //   if (action?.payload?.status === 0) {
-    //     state.auth = true;
-    //   }
-    // });
-    // builder.addCase(publishButton.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.payload as string;
-    // });
-
     builder.addCase(rejectButton.pending, (state, action) => {
       state.loading = true;
       state.error = null;

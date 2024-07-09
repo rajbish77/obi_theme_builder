@@ -90,7 +90,7 @@ const Home = () => {
                     Enjoy your first and last impression of the beautiful island with Jamaicas Personalized and Expedited Airport Concierge Lounge Services where you RELAX. CONNECT and DISCOVER our gateway to paradise.
                   </CardText>
                 </CardBody>
-                <Link to="/" className="btn p-0 no-btn-border border-0">
+                <Link to="#" className="btn p-0 no-btn-border border-0">
                   <StyledDiv>
                   <CardFooter>
                     View Price
@@ -117,7 +117,7 @@ const Home = () => {
                     Maximize your time in paradise; enjoy personalized escort services with preferential fast track through immigration and customs whilst you access Jamaicas premier arrival lounge where culture meets comfort.
                   </CardText>
                 </CardBody>
-                <Link to="/" className="btn p-0 no-btn-border border-0">
+                <Link to="#" className="btn p-0 no-btn-border border-0">
                   <StyledDiv>
                   <CardFooter>
                     View Price
@@ -144,7 +144,7 @@ const Home = () => {
                     Continue your vacation and enjoy our "happy everafter" with preferential fast track, impressive services and top class amenities of our culturally inspired lounges.
                   </CardText>
                 </CardBody>
-                <Link to="/" className="btn p-0 no-btn-border border-0">
+                <Link to="#" className="btn p-0 no-btn-border border-0">
                   <StyledDiv>
                   <CardFooter>
                     View Price
@@ -186,7 +186,7 @@ const Home = () => {
                       Continue your vacation and enjoy our "happy everafter" with preferential fast track, impressive services and top class amenities of our culturally inspired lounges.
                     </CardText>
                   </CardBody>
-                  <Link to="/" className="btn p-0 no-btn-border border-0">
+                  <Link to="#" className="btn p-0 no-btn-border border-0">
                     <StyledDiv>
                     <CardFooter>
                       View Price
@@ -228,7 +228,7 @@ const Home = () => {
                       Continue your vacation and enjoy our "happy everafter" with preferential fast track, impressive services and top class amenities of our culturally inspired lounges.
                     </CardText>
                   </CardBody>
-                  <Link to="/" className="btn p-0 no-btn-border border-0">
+                  <Link to="#" className="btn p-0 no-btn-border border-0">
                     <StyledDiv>
                     <CardFooter>
                       View Price
@@ -253,7 +253,7 @@ const Home = () => {
                   <CardText>
                     VIP Attractions e-Gift Card is a perfect gift for any occasion! It acts like a debit card – you choose the service you would like to give and the recipient can redeem it when they are ready to travel.
                   </CardText>
-                  <Link to="/" className="text-decoration-none">
+                  <Link to="#" className="text-decoration-none">
                     <PrimaryButton type="submit" className="w-100">
                       Get Started
                     </PrimaryButton>
