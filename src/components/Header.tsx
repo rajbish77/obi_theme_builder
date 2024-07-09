@@ -43,6 +43,14 @@ const NavAppBar = styled("div")({
   color: "#fff",
 });
 
+const LogOutDropdown = styled("div")({
+  width: "33%",
+  position: "relative",
+  zIndex:"99999",
+  display: "flex",
+  justifyContent: "end",
+})
+
 const Header = ({ siteTitle = `` }) => {
   const dispatch = useAppDispatch();
   const affiliateNameData = useAppSelector((state) => state.fetchAffiliate.affiliate);
@@ -186,7 +194,7 @@ const Header = ({ siteTitle = `` }) => {
       <div className="px-3 bg-grey shadow">
         <Row className="align-items-center py-3">
           {getdataofHeader()}
-          <Col className="d-flex justify-content-end">
+          <LogOutDropdown>
             <Dropdown show={showDropdown} onToggle={(isOpen) => setShowDropdown(isOpen)} className="dropdown-center">
               <Dropdown.Toggle variant="secondary" id="dropdown-basic" className="shadow-lg btn-grey">
                 <FontAwesomeIcon icon={faUser} size="sm" />
@@ -205,7 +213,7 @@ const Header = ({ siteTitle = `` }) => {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          </Col>
+          </LogOutDropdown>
         </Row>
       </div>
     </>
