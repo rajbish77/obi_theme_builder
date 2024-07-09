@@ -5,9 +5,8 @@ import { parseEditorOutput } from './parser';
 import { defaultThemeOptions } from '../../siteTheme';
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
-import { ThemeOptions } from '@mui/system';
 import { setByPath } from '../../commonFunction';
-import { createTheme } from '@mui/material';
+import { createTheme, ThemeOptions } from '@mui/material';
 import { PreviewSize } from '../types';
 import deepmerge from 'deepmerge';
 
