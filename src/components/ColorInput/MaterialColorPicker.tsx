@@ -74,14 +74,16 @@ const PaletteContainer = styled("div")({
   },
 })
 
-const ColorItem = styled("div")(({ theme }) => ({
-  transition: theme.transitions.create("height"),
-}))
+
 
 export default function MaterialColorPicker({ color, onChangeComplete }: any) {
   const [hue, setHue] = React.useState("red")
   const [shade, setShade] = React.useState<string | null>(null)
 
+  const ColorItem = styled("div")(({ theme }) => ({
+    transition: theme?.transitions?.create("height"),
+  }))
+  
   useEffect(() => {
     // if incoming color maps to a Material UI color, change the input to match
     if (!color) return
