@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootStateType, PreviewSize, AffiliateItem, Auth } from '../slices/types';
 import { createTheme, ThemeOptions } from '@mui/material/styles';
-import { generateThemeId, setByPath } from '../utils';
+import { generateThemeId } from '../utils';
 import { defaultThemeOptions } from '../siteTheme';
 import { THEMEEDITOR, THEMEPUBLISHER } from '../commonConstant';
 import deepmerge from 'deepmerge';
 import { initialState as editorInitialState } from "../slices/editor/editorSlice";
 import { createBreakpoints } from '@mui/system';
 import AffiApi from '../configs/affiliateTheme-api';
+import { setByPath } from '../commonFunction';
 
 const defaultThemeId = generateThemeId({});
 const initialAuthState: Auth = {
@@ -21,15 +22,15 @@ const initialAuthState: Auth = {
   statusMessage: ""
 };
 
-const breakpoints = createBreakpoints({
-  values: {
-    xs: 0,
-    sm: 600,
-    md: 960,
-    lg: 1280,
-    xl: 1920,
-  },
-});
+// const breakpoints = createBreakpoints({
+//   values: {
+//     xs: 0,
+//     sm: 600,
+//     md: 960,
+//     lg: 1280,
+//     xl: 1920,
+//   },
+// });
 
 const initialState: RootStateType = {
   id: null,
@@ -38,7 +39,6 @@ const initialState: RootStateType = {
   themeOptions: defaultThemeOptions,
   themeObject: createTheme({
     ...defaultThemeOptions,
-    breakpoints,
   }),
   savedThemes: {
     [defaultThemeId]: {
@@ -66,15 +66,15 @@ const initialState: RootStateType = {
   updateThemeButton: null,
 };
 
-const createPreviewMuiTheme = (
+const createMuiTheme = (
   themeOptions: ThemeOptions,
   previewSize: PreviewSize
 ) => {
-  if (!previewSize) return createTheme({ ...themeOptions, breakpoints });
+  if (!previewSize) return createTheme({ ...themeOptions });
 
   return createTheme(
     deepmerge(
-      { breakpoints },
+      {},
       themeOptions
     )
   );
@@ -86,7 +86,7 @@ const themeSlice = createSlice({
   reducers: {
     setThemeOption: (state:any, action: PayloadAction<{ path: string; value: any }>) => {
       state.themeOptions = setByPath(state.themeOptions, action.payload.path, action.payload.value);
-      state.themeObject = createPreviewMuiTheme(state.themeOptions, state.previewSize);
+      state.themeObject = createMuiTheme(state.themeOptions, state.previewSize);
       state.editorThemeState = true;
       state.savedThemes[state.themeId] = {
         ...state.savedThemes[state.themeId],
@@ -99,7 +99,7 @@ const themeSlice = createSlice({
     },
     loadSavedTheme: (state:any, action: PayloadAction<ThemeOptions>) => {
       state.themeOptions = action.payload;
-      state.themeObject = createPreviewMuiTheme(state.themeOptions, state.previewSize);
+      state.themeObject = createMuiTheme(state.themeOptions, state.previewSize);
       state.editorThemeState = false;
     },
     setActiveTab: (state, action: PayloadAction<string>) => {

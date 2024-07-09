@@ -49,15 +49,11 @@ const languageCompilerOptions: monaco.languages.typescript.CompilerOptions = {
 };
 
 export default function useEditor(editorRef: MutableEditorRefType) {
-  const themeInput = useSelector((state: RootState) => state.editor.themeInput);
+  const themeInput = useSelector((state:RootState)=> state.editor.themeInput)
+  console.log(themeInput)
 
   useEffect(() => {
     monaco.editor.defineTheme('monokai', monokai as monaco.editor.IStandaloneThemeData);
-
-    setLanguageDiagnosticOptions();
-    setLanguageCompilerOptions();
-    setPrettierFormatting();
-    setMuiThemeTypeData();
 
     editorRef.current = monaco.editor.create(document.getElementById('container')!, {
       ...editorOptions,
@@ -71,9 +67,7 @@ export default function useEditor(editorRef: MutableEditorRefType) {
       editorRef.current?.getModel()?.dispose();
       editorRef.current?.dispose();
     };
-  }, []);
-
-  useEditorResizeListener(editorRef);
+  }, [themeInput]); // Update when themeInput changes
 }
 
 const setLanguageDiagnosticOptions = () => {

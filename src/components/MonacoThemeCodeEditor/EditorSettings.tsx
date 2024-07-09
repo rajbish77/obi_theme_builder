@@ -15,6 +15,7 @@ import {
   ListItemSecondaryAction,
   ListSubheader,
 } from "@mui/material";
+import { RootState } from "../../app/store";
 
 // Create styled components using styled from @mui/material/styles
 const FormControl = styled('div')(({ theme }) => ({
@@ -74,10 +75,10 @@ export default EditorButton;
 
 const EditorSettings = () => {
   const formatOnSave = useSelector(
-    (state: RootStateType) => state.editor.formatOnSave
+    (state: RootState) => state.editor.formatOnSave
   );
   const outputTypescript = useSelector(
-    (state: RootStateType) => state.editor.outputTypescript
+    (state: RootState) => state.editor.outputTypescript
   );
   const updateEditor = useUpdateEditorState();
   const toggleFormatOnSave = () => updateEditor({ formatOnSave: !formatOnSave });

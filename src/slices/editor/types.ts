@@ -1,6 +1,8 @@
+import { ThemeOptions } from "@mui/system"
 import * as monaco from "monaco-editor"
 export type EditorState = {
   themeInput: string
+  themeOptions: ThemeOptions
   initialVersion: number
   lastVersion: number
   currentVersion: number

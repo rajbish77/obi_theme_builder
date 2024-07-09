@@ -23,10 +23,11 @@ const Container = styled('div')({
 
 export const codeEditorId = "code-editor";
 
-const MonacoThemeCodeEditor = () => {
+const MonacoThemeCodeEditor = ({ themeInput }:any) => {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
-  useEditor(editorRef);
+  useEditor(editorRef); // Pass themeInput to useEditor hook
+
   useEditorStateSync(editorRef);
   useReadOnlyLines(editorRef);
 
@@ -40,7 +41,7 @@ const MonacoThemeCodeEditor = () => {
     <MonacoThemeEditorRoot id="code-editor">
       <EditorControls />
       <Container id="container" />
-      <EditorErrors editorRef={editorRef} />
+      <EditorErrors editorRef={themeInput} />
     </MonacoThemeEditorRoot>
   );
 }

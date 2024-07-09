@@ -6,6 +6,7 @@ import { useThemeValueInfo } from "../../../state/selectors";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { setPreview } from "../../../slices/Common Slice/preview";
 import { setThemeOption } from "../../../state/themeSlice";
+import { setThemeInput } from "../../../slices/editor/editorSlice";
 
 export default function PaletteInput({ label, path }: { label: string; path: string }) {
   const themeValueInfo = useThemeValueInfo(path);
@@ -14,7 +15,7 @@ export default function PaletteInput({ label, path }: { label: string; path: str
 
   const handleColorChange = useCallback(
     (color: string) => {
-      dispatch(setThemeOption({ path, value: color }));
+      dispatch(setThemeInput({ path, value: color }));
       // dispatch(setPreview({ path, value: color }));
     },
     [dispatch, path]
