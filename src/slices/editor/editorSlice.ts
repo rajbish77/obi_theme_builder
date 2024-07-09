@@ -85,19 +85,6 @@ const editorSlice = createSlice({
       }
       state.currentVersion = nextVersionId;
     },
-    setThemeInput: (state:any, action: PayloadAction<{ path: string; value: any }>) => {
-      const { path, value } = action.payload;
-      setByPath(state.themeOptions, path, value);
-      state.themeObject = createMuiTheme(state.themeOptions, state.previewSize);
-      state.editorThemeState = true;
-      // state.savedThemes[state.themeId] = {
-      //   ...state.savedThemes[state.themeId],
-      //   themeOptions: state.themeOptions,
-      //   lastUpdated: new Date().toISOString(),
-      // };
-      state.themeInput = stringify(state.themeOptions);
-      console.log(state.themeInput)
-    },
   },
 });
 
@@ -106,7 +93,6 @@ const editorSlice = createSlice({
 export const {
   updateEditorState,
   updateVersionStates,
-  setThemeInput,
 } = editorSlice.actions;
 
 export default editorSlice.reducer;

@@ -28,6 +28,7 @@ export interface RootStateType {
   id?: number | null;
   themeObject: Theme;
   themeOptions: ThemeOptions;
+  themeInput: string;
   loadedFonts: Set<string>;
   activeTab: string;
   themeConfigOpen: boolean;

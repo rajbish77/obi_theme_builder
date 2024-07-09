@@ -49,7 +49,7 @@ const languageCompilerOptions: monaco.languages.typescript.CompilerOptions = {
 };
 
 export default function useEditor(editorRef: MutableEditorRefType) {
-  const themeInput = useSelector((state:RootState)=> state.editor.themeInput)
+  const themeInput = useSelector((state:RootState)=> state.theme.themeInput)
   console.log(themeInput)
 
   useEffect(() => {

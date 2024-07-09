@@ -2,58 +2,58 @@ import { createTheme, ThemeOptions, Theme } from '@mui/material/styles';
 
 export const defaultThemeOptions: ThemeOptions = {
   palette: {
-    header:{
-      backgroundcolor:"#212529",
-      textcolor:"#fff",
-      button:{
-        background:"#fff",
-        color:"#000",
-        border:"#000",
+    header: {
+      backgroundcolor: "#212529",
+      textcolor: "#fff",
+      button: {
+        background: "#fff",
+        color: "#000",
+        border: "#000",
         hoverbackground: "#000",
-        hovercolor:"#fff"
-      } 
-    },
-    navbar:{
-      backgroundcolor:"#f5f5f5",
-      textcolor:"#000",
-    },
-    body:{
-      backgroundcolor:"#ffffff",
-      textcolor:"#000",
-    },
-    button:{
-      primary:{
-        background:"#9f004f",
-        color:"#fff",
-        border: "#ccc",
-        boxshadow:"#fff",
-        hoverbackground: "#fff",
-        hovercolor:"#9f004f",
-        hoverborder:"#ccc",
-        boxhovershadow: "#ccc",
-      },
-      secondary:{
-        background:"#6e7881",
-        color:"#fff",
-        hoverbackground: "#fff",
-        hovercolor:"#000"
+        hovercolor: "#fff"
       }
     },
-    card:{
-      backgroundcolor:"#ffffff",
-      textcolor:"#000",
+    navbar: {
+      backgroundcolor: "#f5f5f5",
+      textcolor: "#000",
     },
-    subfooter:{
-      backgroundcolor:"#f0f0f0",
-      textcolor:"#000000",
+    body: {
+      backgroundcolor: "#ffffff",
+      textcolor: "#000",
     },
-    footer:{
-      backgroundcolor:"#212529",
-      textcolor:{
-        primary:{
+    button: {
+      primary: {
+        background: "#9f004f",
+        color: "#fff",
+        border: "#ccc",
+        boxshadow: "#fff",
+        hoverbackground: "#fff",
+        hovercolor: "#9f004f",
+        hoverborder: "#ccc",
+        boxhovershadow: "#ccc",
+      },
+      secondary: {
+        background: "#6e7881",
+        color: "#fff",
+        hoverbackground: "#fff",
+        hovercolor: "#000"
+      }
+    },
+    card: {
+      backgroundcolor: "#ffffff",
+      textcolor: "#000",
+    },
+    subfooter: {
+      backgroundcolor: "#f0f0f0",
+      textcolor: "#000000",
+    },
+    footer: {
+      backgroundcolor: "#212529",
+      textcolor: {
+        primary: {
           textcolor: "#fff"
         },
-        secondary:{
+        secondary: {
           textcolor: "#fff"
         }
       },
@@ -61,6 +61,6 @@ export const defaultThemeOptions: ThemeOptions = {
   },
 };
 
-export const defaultTheme: Theme = createTheme();
+export const defaultTheme: Theme = createTheme(defaultThemeOptions);
 
-export default createTheme(defaultThemeOptions);
+export default defaultTheme;

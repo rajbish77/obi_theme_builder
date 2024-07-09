@@ -45,7 +45,6 @@ const AccordionDetailsWrapper = styled(AccordionDetails)({
   },
   "& .MuiFormLabel-root": {
     color: "white",
-    top:"15px"
   },
   "& .MuiFormLabel-root.Mui-focused": {
     color: "white",
@@ -87,8 +86,8 @@ const PaletteSubType: React.FC<PaletteSubTypeProps> = ({
   paletteValues,
 }) => {
 
-  const themeValues = useThemeValue(path);
-  console.log(themeValues)
+  // const themeValues = useThemeValue(path);
+  // console.log(themeValues)
 
   return (
     <AccordionWrapper>

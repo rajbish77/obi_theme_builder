@@ -9,6 +9,11 @@ import { initialState as editorInitialState } from "../slices/editor/editorSlice
 import { createBreakpoints } from '@mui/system';
 import AffiApi from '../configs/affiliateTheme-api';
 import { setByPath } from '../commonFunction';
+import JSON5 from 'json5';
+
+const stringify = (themeOptions: ThemeOptions) => {
+  return `let theme: ${JSON5.stringify(themeOptions, null, 2)}`;
+};
 
 const defaultThemeId = generateThemeId({});
 const initialAuthState: Auth = {
@@ -64,6 +69,7 @@ const initialState: RootStateType = {
   editorThemeState: false,
   affiliateTheme: defaultThemeOptions,
   updateThemeButton: null,
+  themeInput: stringify(defaultThemeOptions),
 };
 
 const createMuiTheme = (
@@ -85,7 +91,9 @@ const themeSlice = createSlice({
   initialState,
   reducers: {
     setThemeOption: (state:any, action: PayloadAction<{ path: string; value: any }>) => {
-      state.themeOptions = setByPath(state.themeOptions, action.payload.path, action.payload.value);
+      const { path, value } = action.payload;
+      setByPath(state.themeOptions, path, value);
+      console.log(state.themeOptions, path, value)
       state.themeObject = createMuiTheme(state.themeOptions, state.previewSize);
       state.editorThemeState = true;
       state.savedThemes[state.themeId] = {
@@ -93,6 +101,8 @@ const themeSlice = createSlice({
         themeOptions: state.themeOptions,
         lastUpdated: new Date().toISOString(),
       };
+      state.themeInput = stringify(state.themeOptions);
+      console.log(state.themeInput)
     },
     setAffiliateId: (state:any, action: PayloadAction<string>) => {
       state.id = action.payload;
