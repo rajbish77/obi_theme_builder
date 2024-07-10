@@ -115,9 +115,7 @@ const themeSlice = createSlice({
     setActiveTab: (state, action: PayloadAction<string>) => {
       state.activeTab = action.payload;
     },
-    resetSiteData: (state) => {
-      return initialState;
-    },
+    resetSiteData: (state) => { localStorage.clear(); },
     // setThemeId: (state, action: PayloadAction<string>) => {
     //   state.themeId = action.payload;
     // },

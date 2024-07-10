@@ -192,7 +192,7 @@ const Header = ({ siteTitle = `` }) => {
     <>
       <Loader loading={loading} />
       <div className="px-3 bg-grey shadow">
-        <Row className="align-items-center py-3">
+        <Row className="align-items-center justify-content-between py-3">
           {getdataofHeader()}
           <LogOutDropdown>
             <Dropdown show={showDropdown} onToggle={(isOpen) => setShowDropdown(isOpen)} className="dropdown-center">

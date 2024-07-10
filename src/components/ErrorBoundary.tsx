@@ -75,7 +75,7 @@ const ClearStorageButton: React.FC = () => {
   const dispatch = useDispatch()
   const handleClick = useCallback(() => {
     dispatch(resetSiteData());
-    // location.reload();
+    window.location.reload();
   }, [dispatch]);
 
   return (
