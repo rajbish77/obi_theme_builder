@@ -3,7 +3,7 @@ import storage from "redux-persist/lib/storage";
 import { createTransform, persistReducer, persistStore } from "redux-persist";
 import loginSlice from "../slices/logIn-slice";
 import editorSlice from "../slices/editor/editorSlice";
-import themeSlice from "../state/themeSlice";
+// import themeSlice from "../state/themeSlice";
 import editorWindowSlice, { EditorWindowState } from "../slices/editor/editorWindowSlice";
 import publisherSlice from "../slices/publisher/publisherSlice";
 import buttonSlice from "../slices/publisher/buttonFunctionSlice";
@@ -15,13 +15,14 @@ import preview from "../slices/Common Slice/preview";
 import updateThemeSlice from "../slices/updateThemeSlice";
 import live from "../slices/Common Slice/live";
 import defaultThemeSlice from "../slices/Common Slice/defaultThemeSlice";
+import themeSlice from "../slices/Common Slice/themeUpdate";
 
 
 const rootReducter = combineReducers({
   logIn: loginSlice, // Login api work slice
   editor: editorSlice,
   editorWindow: editorWindowSlice,
-  theme: themeSlice,
+  // theme: themeSlice,
   publish: publisherSlice, // Publicer api work slice
   buttonWork: buttonSlice, // button publicer function work slice
   rejuctButton: rejButtonSlice, // button rejuct function work slice
@@ -32,24 +33,13 @@ const rootReducter = combineReducers({
   live: live, // this is live them work
   updateTheme: updateThemeSlice,
   defaultThemeOptions: defaultThemeSlice,
+  theme : themeSlice // update the Theme
 });
-
-// const selectDataTransform = createTransform(
-//   (inboundState: any, key) => {
-//     // Modify the state you want to persist
-//     if (key === 'affiliateData') {
-//       return {
-//         affiliateId: inboundState.affiliateId,
-//       };
-//     }
-//     return inboundState;
-//   }
-// );
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["logIn", "affiliateData", "fetchAffiliate", "preview" , "live", "defaultThemeOptions", ""],
+  whitelist: ["logIn", "affiliateData", "fetchAffiliate", "preview" , "live", "defaultThemeOptions", "themeSlice"],
   // transforms:[selectDataTransform]
 };
 

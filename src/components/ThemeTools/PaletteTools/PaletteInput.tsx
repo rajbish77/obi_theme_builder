@@ -5,7 +5,8 @@ import { Grid } from "@mui/material";
 import { useThemeValueInfo } from "../../../state/selectors";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { setPreview } from "../../../slices/Common Slice/preview";
-import { setThemeOption } from "../../../state/themeSlice";
+import { setThemeOption } from "../../../slices/Common Slice/themeUpdate";
+// import { setThemeOption } from "../../../state/themeSlice";
 
 export default function PaletteInput({ label, path }: { label: string; path: string }) {
   const themeValueInfo = useThemeValueInfo(path);

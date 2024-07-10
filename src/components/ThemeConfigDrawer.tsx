@@ -6,7 +6,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useSelector, useDispatch } from 'react-redux';
 import MonacoThemeCodeEditor from './MonacoThemeCodeEditor';
 import ThemeTools from './ThemeTools/ThemeTools';
-import { toggleThemeConfig } from '../state/themeSlice';
+// import { toggleThemeConfig } from '../state/themeSlice';
+import { toggleThemeConfig } from '../slices/Common Slice/themeUpdate';
 import { RootState } from '../app/store';
 
 const drawerWidth = 300;

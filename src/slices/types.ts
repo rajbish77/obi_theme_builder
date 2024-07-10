@@ -23,9 +23,9 @@ export interface AffiliateState {
 }
 
 export interface RootStateType {
+  id?: number | null;
   editor: EditorState;
   themeId: string;
-  id?: number | null;
   themeObject: Theme;
   themeOptions: ThemeOptions;
   themeInput: string;
@@ -46,6 +46,26 @@ export interface RootStateType {
       lastUpdated: string;
     };
   };
+}
+
+export interface ThemeChanges {
+  id: number | null,
+  // themeId: string;
+  themeOptions: ThemeOptions;
+  themeObject: Theme;
+  savedThemes: {
+    [themeId: string]: {
+      id: string;
+      name: string;
+      themeOptions: ThemeOptions;
+      fonts: string[];
+      lastUpdated: string;
+    };
+  };
+  themeConfigOpen: boolean;
+  editorThemeState: boolean;
+  affiliateTheme: ThemeOptions;
+  themeInput: string;
 }
 
 export interface AuthState {

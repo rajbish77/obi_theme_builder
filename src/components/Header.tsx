@@ -16,7 +16,9 @@ import { affiliateData } from "../slices/affiliateName";
 import { logOut } from "../slices/logIn-slice";
 import { setPreview } from "../slices/Common Slice/preview";
 import { setlive } from "../slices/Common Slice/live";
-import { affiliateTheme } from "../state/themeSlice";
+// import { affiliateTheme , loadSavedTheme } from "../state/themeSlice";
+// import { affiliateTheme , loadSavedTheme } from "../slices/Common Slice/themeUpdate";
+import { affiliateTheme , loadSavedTheme } from "../slices/Common Slice/themeUpdate";
 
 // Define styled components
 const Title = styled(Typography)(({ theme }) => ({
@@ -46,9 +48,11 @@ const NavAppBar = styled("div")({
 const LogOutDropdown = styled("div")({
   width: "33%",
   position: "relative",
-  zIndex:"99999",
+  zIndex:"9999",
   display: "flex",
   justifyContent: "end",
+  padding: "0px ",
+  paddingRight:"25px",
 })
 
 const Header = ({ siteTitle = `` }) => {
@@ -191,7 +195,7 @@ const Header = ({ siteTitle = `` }) => {
   return (
     <>
       <Loader loading={loading} />
-      <div className="px-3 bg-grey shadow">
+      <div className="px-3 bg-body-secondary shadow">
         <Row className="align-items-center justify-content-between py-3">
           {getdataofHeader()}
           <LogOutDropdown>

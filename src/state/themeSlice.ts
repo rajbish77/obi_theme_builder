@@ -137,7 +137,7 @@ const themeSlice = createSlice({
 export const {
   setThemeOption,
   // setAffiliateId,
-  // loadSavedTheme,
+  loadSavedTheme,
   // setActiveTab,
   resetSiteData,
   // fetchAffiliate,

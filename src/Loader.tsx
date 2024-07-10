@@ -1,10 +1,17 @@
 import React from "react"
 import Modal from "react-bootstrap/Modal";
 import imageLoaderSrc from "./images/loadingImage.gif";
+import { Typography, styled } from "@mui/material";
 
 interface TProps {
   loading: boolean
 }
+
+const LoadingCss = styled("div")({
+  position: "relative",
+  zIndex:"9999999",
+  textAlign: "center",
+})
 
 function Loader(props: TProps) {
   const { loading } = props;
@@ -19,14 +26,14 @@ function Loader(props: TProps) {
         style={{ zIndex: "9999" }}
       >
         <Modal.Body>
-          <div className="text-center">
+          <LoadingCss>
             <img
               alt="Loading..."
               src={imageLoaderSrc}
               className={"loader-img"}
             />
             <h5 className="text-dark mt-3">Loading...</h5>
-          </div>
+          </LoadingCss>
         </Modal.Body>
       </Modal>
     ) : null

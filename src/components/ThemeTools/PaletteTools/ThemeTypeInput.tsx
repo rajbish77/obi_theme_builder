@@ -7,7 +7,8 @@ import {
 } from "@mui/material";
 import styled from "@mui/material/styles/styled";
 import { useDispatch } from "react-redux";
-import { setThemeOption } from "../../../state/themeSlice";
+// import { setThemeOption } from "../../../state/themeSlice";
+import { setThemeOption } from "../../../slices/Common Slice/themeUpdate";
 import { useThemeValue } from "../../../state/selectors";
 import { ThemeValueChangeEvent } from "../events";
 
