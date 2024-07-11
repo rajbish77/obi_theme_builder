@@ -55,6 +55,11 @@ export default function useEditor(editorRef: MutableEditorRefType) {
   useEffect(() => {
     monaco.editor.defineTheme('monokai', monokai as monaco.editor.IStandaloneThemeData);
 
+    setLanguageDiagnosticOptions()
+    setLanguageCompilerOptions()
+    setPrettierFormatting()
+    setMuiThemeTypeData()
+
     editorRef.current = monaco.editor.create(document.getElementById('container')!, {
       ...editorOptions,
       value: themeInput,
