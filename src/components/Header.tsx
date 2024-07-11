@@ -16,8 +16,6 @@ import { affiliateData } from "../slices/affiliateName";
 import { logOut } from "../slices/logIn-slice";
 import { setPreview } from "../slices/Common Slice/preview";
 import { setlive } from "../slices/Common Slice/live";
-// import { affiliateTheme , loadSavedTheme } from "../state/themeSlice";
-// import { affiliateTheme , loadSavedTheme } from "../slices/Common Slice/themeUpdate";
 import { affiliateTheme , loadSavedTheme } from "../slices/Common Slice/themeUpdate";
 
 // Define styled components
@@ -55,11 +53,10 @@ const LogOutDropdown = styled("div")({
   paddingRight:"25px",
 })
 
-const Header = ({ siteTitle = `` }) => {
+const Header = () => {
   const dispatch = useAppDispatch();
   const affiliateNameData = useAppSelector((state) => state.fetchAffiliate.affiliate);
   const [showDropdown, setShowDropdown] = useState(false);
-  const auth = useSelector((state: AuthState) => state.auth);
   const dataEdiPubl = useAppSelector((state) => state.logIn);
   const [searchResult, setSearchResult] = useState<Affiliate[]>([]);
   const loading = useAppSelector((state) => state.affiliateData.loading);
@@ -110,7 +107,7 @@ const Header = ({ siteTitle = `` }) => {
   useEffect(() => {
     if (affiliateThemeData.status === "0") {
       dispatch(setPreview(affiliateThemeData.preview));
-      dispatch(setlive(affiliateThemeData.live));
+      dispatch(setlive(affiliateThemeData.preview));
       if (affiliateThemeData.preview === null) {
         console.log("preview data is empty");
         dispatch(affiliateTheme(defaultThemeOptions));
@@ -222,10 +219,6 @@ const Header = ({ siteTitle = `` }) => {
       </div>
     </>
   );
-};
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
 };
 
 export default Header;

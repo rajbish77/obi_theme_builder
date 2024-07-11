@@ -14,6 +14,7 @@ const liveWork = createSlice({
   reducers: {
     setlive: (state, action: PayloadAction<any>) => {
       state.live = action.payload;
+      // console.log(action.payload)
     },
   },
 });

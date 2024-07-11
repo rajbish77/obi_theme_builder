@@ -7,6 +7,8 @@ import monokai from '../../../components/MonacoThemeCodeEditor/monaco-themes/mon
 import { Plugin } from 'prettier';
 import { RootState } from '../../../app/store';
 import { useAppDispatch } from '../../../app/hooks';
+import { setPreview } from '../../../slices/Common Slice/preview';
+import { setlive } from '../../../slices/Common Slice/live';
 
 window.MonacoEnvironment = {
   getWorkerUrl: function (moduleId, label) {
@@ -55,7 +57,8 @@ export default function useEditor(editorRef: MutableEditorRefType) {
   useEffect(() => {
 
     monaco.editor.defineTheme('monokai', monokai as monaco.editor.IStandaloneThemeData);
-
+    dispatch(setPreview(themeInput))
+    dispatch(setlive(themeInput))
     setLanguageDiagnosticOptions();
     setLanguageCompilerOptions();
     setPrettierFormatting();

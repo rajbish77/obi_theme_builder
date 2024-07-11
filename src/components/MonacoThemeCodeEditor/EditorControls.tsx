@@ -11,6 +11,7 @@ import { useAppSelector } from "../../app/hooks";
 import { updateTheme } from "../../slices/updateThemeSlice";
 import { ThemeOptionsType, UpdateTheme, UpdateThemeResponse } from "../../slices/types";
 import { AppDispatch, RootState } from "../../app/store";
+import { setPreview } from "../../slices/Common Slice/preview";
 
 function EditorControls() {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,7 +19,6 @@ function EditorControls() {
   const id = useAppSelector((state: RootState) => state.affiliateName.affiliates[0]?.affiliateid || null);
   const editorState = useAppSelector((state: RootState) => state.theme.editorThemeState);
   const affiliateThemeData = useAppSelector((state: RootState) => state.theme.affiliateTheme);
-  const affiliateData: any = useAppSelector((state) => state.affiliateData.preview);
   const themeOptions = useAppSelector((state: RootState) => state.theme.themeOptions);
   const loading = useAppSelector((state: RootState) => state.affiliateData.loading);
   // const username = useAppSelector((state: RootState) => state.affiliateData.username);
