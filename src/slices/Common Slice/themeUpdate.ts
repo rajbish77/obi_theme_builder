@@ -76,7 +76,6 @@ const themeSlice = createSlice({
     //     lastUpdated: new Date().toISOString(),
     //   };
       state.themeInput = stringify(state.themeOptions);
-      console.log(state.themeInput);
     },
     setAffiliateId: (state: any, action: PayloadAction<string>) => {
       state.id = action.payload;
@@ -85,6 +84,7 @@ const themeSlice = createSlice({
       state.themeOptions = JSON.parse(action.payload?? "");
       state.themeObject = createMuiTheme(state.themeOptions, state.previewSize);
       state.editorThemeState = false;
+      state.themeInput = stringify(state.themeOptions);
     },
     resetSiteData: (state) => {
       localStorage.clear();
