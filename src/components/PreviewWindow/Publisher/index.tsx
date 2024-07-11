@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { Button, Card, CardBody, Container } from "react-bootstrap";
-import { createColumnHelper } from "@tanstack/react-table";
-import { CustomTable } from "../../CommonComponent/Table";
-import Loader from "../../../Loader";
-import { PREVIEW_URL, VIPER_CONST } from "../../../commonConstant";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { publish } from "../../../slices/publisher/publisherSlice";
-import { showConfirm, showError, showReject, showSuccess } from "../../Swal";
-import { HandleAPIError } from "../../../commonFunction";
-import { publishButton } from "../../../slices/publisher/buttonFunctionSlice";
-import { rejectButton } from "../../../slices/publisher/buttonFunctionRej";
+import { createColumnHelper } from '@tanstack/react-table';
+import { CustomTable } from '../../CommonComponent/Table';
+import Loader from '../../../Loader';
+import { PREVIEW_URL, VIPER_CONST } from '../../../commonConstant';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { publish } from '../../../slices/publisher/publisherSlice';
+import { showConfirm, showError, showReject, showSuccess } from '../../Swal';
+import { HandleAPIError } from '../../../commonFunction';
+import { publishButton } from '../../../slices/publisher/buttonFunctionSlice';
+import { rejectButton } from '../../../slices/publisher/buttonFunctionRej';
 
 function PublisherListing(): JSX.Element {
   const dispatch = useAppDispatch();
   const getPublisher = useAppSelector((state) => state.publish.publisher);
-  const [tmp, setTmp] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const useData = useAppSelector((state) => state.buttonWork);
+  const [loading, setLoading] = useState(true);
   const useDataRej = useAppSelector((state) => state.rejuctButton);
-  const loadingRej = useAppSelector((state) => state.rejuctButton.loading);
-  const loadingPublish = useAppSelector((state) => state.buttonWork.loading);
 
   const columnHelper = createColumnHelper();
   const COLUMNS = [
@@ -54,22 +50,22 @@ function PublisherListing(): JSX.Element {
         <div style={{ textAlign: "center" }}>
           <Button
             onClick={() => handlePreviewButtonClick(info.row.original)}
-            size="sm"
-            className="custom-class"
+            size='sm'
+            className='custom-class'
           >
             Preview
           </Button>
           <Button
             onClick={() => handlePublishButtonClick(info.row.original)}
-            size="sm"
-            className="custom-class mx-2 btn-success"
+            size='sm'
+            className='custom-class btn-success'
           >
             Publish
           </Button>
           <Button
             onClick={() => handleRejectButtonClick(info.row.original)}
-            size="sm"
-            className="custom-class btn-danger"
+            size='sm'
+            className='custom-class btn-danger'
           >
             Reject
           </Button>
@@ -85,22 +81,20 @@ function PublisherListing(): JSX.Element {
   }
 
   const handlePublishButtonClick = async (row: any) => {
-    let confirmed = await showConfirm(
-      "Confirm",
-      "Are you sure you want to publish the theme?"
-    );
+    let confirmed = await showConfirm("Confirm", "Are you sure you want to publish the theme?");
     if (confirmed.isConfirmed) {
       try {
-        const request: { affiliateid: any; action: string } = {
+        const request: { affiliateid: any, action: string } = {
           affiliateid: row?.affiliateid,
-          action: "P",
-        };
+          action: "P"
+        }
 
         const response = await dispatch(publishButton(request)).unwrap();
         console.log('Response from publishButton:', response);
 
         if (response?.status === 0) {
           showSuccess("Success", "Theme published successfully");
+          dispatch(publish());
         } else {
           showError("Error", useDataRej?.statusMessage);
         }
@@ -108,36 +102,25 @@ function PublisherListing(): JSX.Element {
         HandleAPIError(error);
       }
     }
-  };
-
-  useEffect(() => {
-    if (useData?.status === 0) {
-      console.log(useData);
-      showSuccess("Success", "Theme published successfully");
-    } else {
-      showError("Error", useData?.statusMessage);
-    }
-  }, [useData]);
+  }
 
   const handleRejectButtonClick = async (row: any) => {
-    let confirmed = await showReject(
-      "Remarks",
-      row?.entryby,
-      row.distributorname
-    );
+    let confirmed = await showReject("Remarks", row?.entryby, row.distributorname);
 
     if (confirmed.isConfirmed) {
       try {
         const requestReject: { affiliateid: any, action: string, message: any } = {
           affiliateid: row?.affiliateid,
           action: "R",
-          message: confirmed?.value,
-        };
+          message: confirmed?.value
+        }
 
         const response = await dispatch(rejectButton(requestReject)).unwrap();
         console.log('Response from rejectButton:', response);
+
         if (response?.status === 0) {
           showSuccess("Success", "Publish request rejected!");
+          dispatch(publish());
         } else {
           showError("Error", useDataRej?.statusMessage);
         }
@@ -145,31 +128,25 @@ function PublisherListing(): JSX.Element {
         HandleAPIError(error);
       }
     }
-  };
+  }
 
   useEffect(() => {
-    if (useDataRej?.status === 0) {
-      console.log(useDataRej);
-      showSuccess("Success", "Publish request rejected!");
-    } else {
-      showError("Error", useDataRej?.statusMessage);
-    }
-  }, [useDataRej]);
+    const fetchData = async () => {
+      setLoading(true);
+      await dispatch(publish());
+      setLoading(false);
+    };
+    fetchData();
+  }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(publish());
-  }, [dispatch, tmp]);
 
   return (
     <>
-      <Loader loading={loadingRej} />
-      <Loader loading={loadingPublish} />
-      <Container className="py-3 h-100">
-        <h3 className="text-center py-2 text-black my-4 underline">
-          <u>Publish Request</u>
-        </h3>
-        <Card className="shadow mt-4">
-          <CardBody className="p-4">
+      <Loader loading={loading} />
+      <Container className='py-3 h-100'>
+        <h3 className='text-center py-2 text-black my-4 underline'><u>Publish Request</u></h3>
+        <Card className='shadow mt-4'>
+          <CardBody className='p-4'>
             <CustomTable
               columns={COLUMNS}
               data={getPublisher.data || []}
