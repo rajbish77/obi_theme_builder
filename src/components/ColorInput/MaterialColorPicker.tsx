@@ -81,7 +81,7 @@ export default function MaterialColorPicker({ color, onChangeComplete }: any) {
   const [shade, setShade] = React.useState<string | null>(null)
 
   const ColorItem = styled("div")(({ theme }) => ({
-    transition: theme?.transitions?.create("height"),
+    transition: theme.transitions.create("height"),
   }))
   
   useEffect(() => {

@@ -55,7 +55,18 @@ const PrimaryButton = styled(Button)(({ theme }) => ({
   backgroundColor: `${theme.palette.button.primary.background} !important`,
   color: `${theme.palette.button.primary.color} !important`,
   border: `1px solid ${theme.palette.button.primary.border} !important`,
-  boxShadow: `0 3px 1px -2px ${theme.palette.button.primary.boxshadow}, 0 2px 2px 0 ${theme.palette.button.primary.boxshadow}, 0 1px 5px 0 ${theme.palette.button.primary.boxshadow} !important`,
+  boxShadow: `0 3px 1px -2px ${theme.palette.button.primary.boxshadow}, 
+              0 2px 2px 0 ${theme.palette.button.primary.boxshadow}, 
+              0 1px 5px 0 ${theme.palette.button.primary.boxshadow} !important`,
+  '&:hover': {
+    backgroundColor: `${theme.palette.button.primary.hoverbackground} !important`,
+    color: `${theme.palette.button.primary.hovercolor} !important`,
+    border: `1px solid ${theme.palette.button.primary.hoverborder} !important`,
+    boxShadow: `2px 2px 4px 1px ${theme.palette.button.primary.boxhovershadow}, 
+                2px 2px 4px 1px ${theme.palette.button.primary.boxhovershadow}, 
+                2px 2px 4px 1px ${theme.palette.button.primary.boxhovershadow}, 
+                0 1px 5px 0 ${theme.palette.button.primary.boxhovershadow} !important`,
+  },
 }));
 
 const Home = () => {

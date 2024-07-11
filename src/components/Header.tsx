@@ -63,7 +63,7 @@ const Header = ({ siteTitle = `` }) => {
   const dataEdiPubl = useAppSelector((state) => state.logIn);
   const [searchResult, setSearchResult] = useState<Affiliate[]>([]);
   const loading = useAppSelector((state) => state.affiliateData.loading);
-  const affiliateDataID = useAppSelector((state) => state.affiliateData);
+  const affiliateThemeData = useAppSelector((state) => state.affiliateData);
   const getDataOn = useAppSelector((state) => state.theme.affiliateTheme);
   // console.log("data affiliate header " , getDataOn)
   const dataTheme = useAppSelector( (state) => state.theme.themeOptions);
@@ -106,20 +106,20 @@ const Header = ({ siteTitle = `` }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (affiliateDataID.status === "0") {
-      dispatch(setPreview(affiliateDataID.preview));
-      dispatch(setlive(affiliateDataID.live));
-      if (affiliateDataID.preview === null) {
+    if (affiliateThemeData.status === "0") {
+      dispatch(setPreview(affiliateThemeData.preview));
+      dispatch(setlive(affiliateThemeData.preview));
+      if (affiliateThemeData.preview === null) {
         console.log("preview data is empty");
         dispatch(affiliateTheme(defaultThemeOptions));
       } else {
         console.log("we have perview data");
-        const themeObject: any = affiliateDataID.preview;
+        const themeObject: any = affiliateThemeData.preview;
         dispatch(loadSavedTheme(themeObject));
         dispatch(affiliateTheme(themeObject));
       }
     }
-  }, [affiliateDataID]);
+  }, [affiliateThemeData]);
 
   useEffect(() => {
     if (affiliateNameData.length === 0) {
