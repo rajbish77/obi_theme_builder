@@ -81,8 +81,8 @@ const themeSlice = createSlice({
     setAffiliateId: (state: any, action: PayloadAction<string>) => {
       state.id = action.payload;
     },
-    loadSavedTheme: (state: any, action: PayloadAction<ThemeOptions>) => {
-      state.themeOptions = action.payload;
+    loadSavedTheme: (state: any, action: PayloadAction<string>) => {
+      state.themeOptions = JSON.parse(action.payload?? "");
       state.themeObject = createMuiTheme(state.themeOptions, state.previewSize);
       state.editorThemeState = false;
     },

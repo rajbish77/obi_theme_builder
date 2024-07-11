@@ -117,7 +117,7 @@ const Header = ({ siteTitle = `` }) => {
       } else {
         console.log("we have perview data");
         const themeObject: any = affiliateDataID.preview;
-        // dispatch(loadSavedTheme(themeObject));
+        dispatch(loadSavedTheme(themeObject));
         dispatch(affiliateTheme(themeObject));
       }
     }
