@@ -65,11 +65,9 @@ const Header = ({ siteTitle = `` }) => {
   const loading = useAppSelector((state) => state.affiliateData.loading);
   const affiliateDataID = useAppSelector((state) => state.affiliateData);
   const getDataOn = useAppSelector((state) => state.theme.affiliateTheme);
-  console.log("data affiliate header " , getDataOn)
+  // console.log("data affiliate header " , getDataOn)
   const dataTheme = useAppSelector( (state) => state.theme.themeOptions);
-  console.log("Changes theme", dataTheme);
-  const dataThemeObject = useAppSelector( (state) => state.theme.themeObject);
-  console.log("Changes Object", dataThemeObject);
+  // console.log("Changes theme", dataTheme);
 
   const styleObj = {
     color: "black",
