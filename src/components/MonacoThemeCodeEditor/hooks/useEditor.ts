@@ -6,6 +6,7 @@ import { EditorRefType, MutableEditorRefType } from '../types';
 import monokai from '../../../components/MonacoThemeCodeEditor/monaco-themes/monokai';
 import { Plugin } from 'prettier';
 import { RootState } from '../../../app/store';
+import { useAppDispatch } from '../../../app/hooks';
 
 window.MonacoEnvironment = {
   getWorkerUrl: function (moduleId, label) {
@@ -24,7 +25,6 @@ window.MonacoEnvironment = {
     return '/monaco-workers/editor.worker.js';
   }
 };
-
 
 const editorOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
   language: 'typescript',
@@ -49,16 +49,17 @@ const languageCompilerOptions: monaco.languages.typescript.CompilerOptions = {
 };
 
 export default function useEditor(editorRef: MutableEditorRefType) {
-  const themeInput = useSelector((state:RootState)=> state.theme.themeInput)
-  console.log(themeInput)
+  const dispatch = useAppDispatch();
+  const themeInput = useSelector((state:RootState)=> state.theme.themeInput);
 
   useEffect(() => {
+
     monaco.editor.defineTheme('monokai', monokai as monaco.editor.IStandaloneThemeData);
 
-    setLanguageDiagnosticOptions()
-    setLanguageCompilerOptions()
-    setPrettierFormatting()
-    setMuiThemeTypeData()
+    setLanguageDiagnosticOptions();
+    setLanguageCompilerOptions();
+    setPrettierFormatting();
+    setMuiThemeTypeData();
 
     editorRef.current = monaco.editor.create(document.getElementById('container')!, {
       ...editorOptions,
@@ -72,7 +73,7 @@ export default function useEditor(editorRef: MutableEditorRefType) {
       editorRef.current?.getModel()?.dispose();
       editorRef.current?.dispose();
     };
-  }, [themeInput]); // Update when themeInput changes
+  }, [dispatch, themeInput]);
 }
 
 const setLanguageDiagnosticOptions = () => {
@@ -109,7 +110,6 @@ const setPrettierFormatting = () => {
 const setMuiThemeTypeData = () => {
   for (const fileName in muiTypeFiles) {
     const fakePath = `file:///node_modules/${fileName}`;
-
     monaco.languages.typescript.typescriptDefaults.addExtraLib(muiTypeFiles[fileName], fakePath);
   }
 };

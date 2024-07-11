@@ -34,7 +34,7 @@ const useSyncToStore = (editorRef: EditorRefType) => {
  * the code editor is also updated
  */
 const useSyncFromStore = (editorRef: EditorRefType) => {
-  const themeInput = useSelector((state: RootState) => state.editor.themeInput)
+  const themeInput = useSelector((state: RootState) => state.theme.themeInput)
   const updateEditorState = useUpdateEditorState()
   useEffect(() => {
     const model = editorRef.current?.getModel()
