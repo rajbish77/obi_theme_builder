@@ -94,6 +94,7 @@ const themeSlice = createSlice({
     },
     affiliateTheme: (state: any, action: PayloadAction<ThemeOptions>) => {
       state.affiliateTheme = action.payload;
+      console.log(action.payload)
     },
     editorThemeState: (state, action: PayloadAction<boolean>) => {
       state.editorThemeState = action.payload;

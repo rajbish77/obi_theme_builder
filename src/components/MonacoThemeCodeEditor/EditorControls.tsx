@@ -3,43 +3,36 @@ import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import Loader from "../PreviewWindow/Samples/Loader";
 import { defaultThemeOptions } from "../../siteTheme";
-// import {  editorThemeState, affiliateTheme } from "../../state/themeSlice";
-import {  editorThemeState, affiliateTheme, loadSavedTheme } from "../../slices/Common Slice/themeUpdate";
+import { editorThemeState, affiliateTheme, loadSavedTheme } from "../../slices/Common Slice/themeUpdate";
 import { myMessageFunction, showConfirm, showError, showSuccess } from "../Swal";
 import { HandleAPIError } from "../../commonFunction";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import { updateTheme } from "../../slices/updateThemeSlice";
 import { ThemeOptionsType, UpdateTheme, UpdateThemeResponse } from "../../slices/types";
 import { AppDispatch, RootState } from "../../app/store";
-import { setPreview } from "../../slices/Common Slice/preview";
+import { setPreview } from "../../slices/Common Slice/preview"
 import { affiliate } from "../../slices/affiliateTheme";
 
 function EditorControls() {
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch<AppDispatch>();
 
   const id = useAppSelector((state: RootState) => state.affiliateName.affiliates[0]?.affiliateid || null);
   const editorState = useAppSelector((state: RootState) => state.theme.editorThemeState);
-  // const affiliateThemeData = useAppSelector((state) => state.affiliateData);
-  const affiliateData: any = useAppSelector((state) => state.affiliateData.preview);
-  const affiliateThemeData = useAppSelector((state: RootState) => state.theme.affiliateTheme);
   const themeOptions = useAppSelector((state: RootState) => state.theme.themeOptions);
   const loading = useAppSelector((state: RootState) => state.affiliateData.loading);
-  // const username = useAppSelector((state: RootState) => state.affiliateData.username);
 
   const updateThemeApi = async (request: UpdateTheme) => {
     try {
       const response = await dispatch(updateTheme(request));
-      console.log("Reaponse Data :", response);
-      
+      console.log(response);
+  
       if (updateTheme.rejected.match(response)) {
         showError("Error", response.error.message ?? "An error occurred");
       } else {
-        await dispatch(affiliate({ affiliateid: id }));
-        
+        await dispatch(affiliate({affiliateid: id}))
         const payload = response.payload as UpdateThemeResponse;
-
-        console.log("Data of payload :", payload);
-        await dispatch(editorThemeState(true));
+        console.log(payload);
+        dispatch(editorThemeState(true));
         if (request.action === "PR") {
           showSuccess("Success", "Raise publish request successfully");
         } else {
@@ -50,7 +43,6 @@ function EditorControls() {
       showError("Error", error as string);
     }
   };
-  
 
   const saveAndRaiseRequest = () => {
     if (!id) {
@@ -76,15 +68,13 @@ function EditorControls() {
       theme: JSON.stringify(themeOptions),
     };
     updateThemeApi(request);
-  };  
+  };
 
   const resetTheme = async () => {
     try {
       let confirmed = await showConfirm("Confirm", "Are you sure you want to reset the theme?");
       if (confirmed.isConfirmed) {
-        await dispatch(loadSavedTheme(JSON.stringify(defaultThemeOptions)));
-        console.log(affiliateThemeData)
-        console.log( "default", defaultThemeOptions)
+        dispatch(loadSavedTheme(JSON.stringify(defaultThemeOptions)));
         showSuccess("Success", "Theme reset successfully");
       }
     } catch (error) {
@@ -96,8 +86,9 @@ function EditorControls() {
     try {
       let confirmed = await showConfirm("Confirm", "Are you sure you want to discard the changes?");
       if (confirmed.isConfirmed) {
-        await dispatch(editorThemeState(true));
-        await dispatch(loadSavedTheme(JSON.stringify(affiliateThemeData)));
+        dispatch(editorThemeState(false));
+        dispatch((affiliateTheme(themeOptions)));
+        console.log(affiliateTheme(themeOptions));
         showSuccess("Success", "Changes discarded successfully");
       }
     } catch (error) {

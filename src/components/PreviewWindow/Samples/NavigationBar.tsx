@@ -68,7 +68,7 @@ const Navigationbar = () => {
           <Row className="d-flex justify-content-start align-items-center">
             <Col md={"auto"} className="d-flex pe-0">
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Brand href={"/"} className="ps-1 me-0 ps-md-0">
+              <Navbar.Brand href={"#"} className="ps-1 me-0 ps-md-0">
                 <img
                   src={LOGOS_URL}
                   width={200}
