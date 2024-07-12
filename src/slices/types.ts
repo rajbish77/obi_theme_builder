@@ -225,7 +225,7 @@ export interface requestType {
   affiliateid?: number | null;
   affiliatename?: string;
   theme?: {
-    live?: any;
+    // live?: any;
     preview?: any;
   };
 }
@@ -254,7 +254,7 @@ export interface affilateRequest {
   loading: boolean;
   error: string | null;
   status: string | null;
-  live: ThemeOptionsType | null;
+  // live: ThemeOptionsType | null;
   preview: ThemeOptionsType | null;
 }
 
@@ -333,7 +333,7 @@ export interface ThemeOptionsType {
 }
 
 export type affiliateThym ={
-  live: any;
+  // live: any;
   preview: any;
 }
 
@@ -345,7 +345,7 @@ export interface UpdateThemeData {
 }
 
 export interface UpdateThemeRequest {
-  live: any;
+  // live: any;
   preview: any;
   themebuilder: string;
   loading: boolean;

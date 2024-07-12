@@ -4,7 +4,7 @@ import { VIPER_CONST } from "../commonConstant";
 import SaveThemeApi from "../Api Work/saveThemeApi";
 
 const initialState: UpdateThemeRequest = {
-  live: null,
+  // live: null,
   preview: null,
   themebuilder: "",
   loading: false,

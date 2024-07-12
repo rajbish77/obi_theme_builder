@@ -12,7 +12,7 @@ const initialState: affilateRequest = {
   loading: false,
   error: null,
   status: null,
-  live: null,
+  // live: null,
   preview: null,
 };
 
@@ -55,9 +55,11 @@ const affiliateSlice = createSlice({
       state.status= action.payload.status?.toString() ?? null;
       const affiliates = action.payload.data?.affiliates?.[0];
       if (affiliates) {
+        // console.log(" live " ,affiliates?.theme?.live)
+        console.log(" preview " ,affiliates?.theme?.preview)
         state.affiliateid = affiliates.affiliateid ?? null;
         state.affiliatename = affiliates.affiliatename ?? "";
-        state.live = affiliates.theme?.live || null;
+        // state.live = affiliates.theme?.live || null;
         state.preview = affiliates.theme?.preview || null;
       }
     });

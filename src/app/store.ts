@@ -30,9 +30,9 @@ const rootReducter = combineReducers({
   affiliateName: affiliateName, // affiliate name and id
   fetchAffiliate: fetchAffiliate, // this is fetch Affiliate 
   preview: preview, // this is preview them work
-  live: live, // this is live them work
-  updateTheme: updateThemeSlice,
-  defaultThemeOptions: defaultThemeSlice,
+  // live: live, // this is live them work
+  updateTheme: updateThemeSlice, // this is update api work
+  defaultThemeOptions: defaultThemeSlice, // ???
   theme : themeSlice // update the Theme
 });
 

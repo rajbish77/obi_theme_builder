@@ -37,7 +37,7 @@ const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) 
 
   const handleClosePopover = () => {
     setAnchorEl(null);
-    document.dispatchEvent(ThemeValueChangeEvent()); // Dispatch theme change event
+    document.dispatchEvent(ThemeValueChangeEvent());
   };
 
   const handlePaste = (event: ClipboardEvent<HTMLDivElement>) => {
