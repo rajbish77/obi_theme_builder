@@ -98,7 +98,7 @@ const Header = () => {
         HandleAPIError(error);
       };
     } else {
-      dispatch(affiliateTheme(defaultThemeOptions));
+      dispatch(affiliateTheme((defaultThemeOptions)));
     };
   }, [dispatch]);
 

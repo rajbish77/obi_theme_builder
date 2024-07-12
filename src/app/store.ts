@@ -39,7 +39,7 @@ const rootReducter = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["logIn", "affiliateData", "fetchAffiliate", "preview" , "live", "defaultThemeOptions", "themeSlice"],
+  whitelist: ["logIn", "affiliateData", "fetchAffiliate", "preview" , "live", "defaultThemeOptions"],
   // transforms:[selectDataTransform]
 };
 
