@@ -21,7 +21,6 @@ const SubfooterContainer = styled(Container)(({ theme }) => ({
   textAlign: "center",
   padding: theme.spacing(2),
   maxWidth: "1366px",
-  margin: "25px 0px",
 }));
 
 const Heading = styled('h3')(({ theme }) => ({
@@ -297,7 +296,7 @@ const Home = () => {
 
       <SubfooterContainer fluid="xxl">
         <Row>
-          <Col md="12" className="my-2 p-2">
+          <Col md="12" className=" p-2">
             <p>
               For groups of 25 persons or more, please contact our groups department at +1-876-619-1565 or groups@vipattractions.com. <br />
               You can also reach us via Skype at 954-837-6290

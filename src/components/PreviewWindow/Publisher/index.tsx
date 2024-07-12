@@ -58,7 +58,7 @@ function PublisherListing(): JSX.Element {
           <Button
             onClick={() => handlePublishButtonClick(info.row.original)}
             size='sm'
-            className='custom-class btn-success'
+            className='custom-class mx-2 btn-success'
           >
             Publish
           </Button>
