@@ -54,6 +54,7 @@ const affiliateSlice = createSlice({
       state.loading = false;
       state.status= action.payload.status?.toString() ?? null;
       const affiliates = action.payload.data?.affiliates?.[0];
+      // console.log(affiliates?.theme?.live)
       if (affiliates) {
         // console.log(" live " ,affiliates?.theme?.live)
         console.log(" preview " ,affiliates?.theme?.preview)
