@@ -19,7 +19,21 @@ function EditorControls() {
   const id = useAppSelector((state: RootState) => state.affiliateName.affiliates[0]?.affiliateid || null);
   const editorState = useAppSelector((state: RootState) => state.theme.editorThemeState);
   const themeOptions = useAppSelector((state: RootState) => state.theme.themeOptions);
+  console.log("themeOpting", themeOptions);
+  const affiliateThemeString  = useAppSelector((state) => state.affiliateData?.preview);
   const loading = useAppSelector((state: RootState) => state.affiliateData.loading);
+  console.log("theme update string",typeof(affiliateThemeString))
+  
+  let affiliateThemeData: any;
+  try {
+    if (affiliateThemeString) {
+      affiliateThemeData = JSON.parse(affiliateThemeString);
+    }
+  } catch (error) {
+    console.error("Error parsing affiliateThemeData:", error);
+    affiliateThemeData = null;
+  }
+  console.log("update", affiliateThemeData);
 
   const updateThemeApi = async (request: UpdateTheme) => {
     try {
@@ -86,9 +100,9 @@ function EditorControls() {
     try {
       let confirmed = await showConfirm("Confirm", "Are you sure you want to discard the changes?");
       if (confirmed.isConfirmed) {
-        dispatch(editorThemeState(false));
-        dispatch((affiliateTheme(themeOptions)));
-        console.log(affiliateTheme(themeOptions));
+        await dispatch(editorThemeState(false));
+        await dispatch((loadSavedTheme(JSON.stringify(affiliateThemeData))));
+        console.log(loadSavedTheme(JSON.stringify(affiliateThemeData)));
         showSuccess("Success", "Changes discarded successfully");
       }
     } catch (error) {
