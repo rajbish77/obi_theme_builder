@@ -8,8 +8,8 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { publish } from '../../../slices/publisher/publisherSlice';
 import { showConfirm, showError, showReject, showSuccess } from '../../Swal';
 import { HandleAPIError } from '../../../commonFunction';
-import { publishButton } from '../../../slices/publisher/buttonFunctionSlice';
-import { rejectButton } from '../../../slices/publisher/buttonFunctionRej';
+import { publishButton } from '../../../slices/publisher/publishTheme';
+import { rejectButton } from '../../../slices/publisher/rejectTheme';
 
 function PublisherListing(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -90,7 +90,6 @@ function PublisherListing(): JSX.Element {
         }
 
         const response = await dispatch(publishButton(request)).unwrap();
-        console.log('Response from publishButton:', response);
 
         if (response?.status === 0) {
           showSuccess("Success", "Theme published successfully");
@@ -116,7 +115,6 @@ function PublisherListing(): JSX.Element {
         }
 
         const response = await dispatch(rejectButton(requestReject)).unwrap();
-        console.log('Response from rejectButton:', response);
 
         if (response?.status === 0) {
           showSuccess("Success", "Publish request rejected!");

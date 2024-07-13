@@ -3,12 +3,11 @@ import * as monaco from 'monaco-editor';
 import { useSelector } from 'react-redux';
 import { files as muiTypeFiles } from '../../../muiTypeStrings';
 import { EditorRefType, MutableEditorRefType } from '../types';
-import monokai from '../../../components/MonacoThemeCodeEditor/monaco-themes/monokai';
+import monokai from '../monaco-themes/monokai';
 import { Plugin } from 'prettier';
 import { RootState } from '../../../app/store';
 import { useAppDispatch } from '../../../app/hooks';
-import { setPreview } from '../../../slices/Common Slice/preview';
-import { setlive } from '../../../slices/Common Slice/live';
+import { setPreview } from '../../../slices/commonSlice/preview';
 
 window.MonacoEnvironment = {
   getWorkerUrl: function (moduleId, label) {
@@ -58,7 +57,6 @@ export default function useEditor(editorRef: MutableEditorRefType) {
 
     monaco.editor.defineTheme('monokai', monokai as monaco.editor.IStandaloneThemeData);
     dispatch(setPreview(themeInput))
-    dispatch(setlive(themeInput))
     setLanguageDiagnosticOptions();
     setLanguageCompilerOptions();
     setPrettierFormatting();

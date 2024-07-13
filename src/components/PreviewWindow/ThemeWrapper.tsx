@@ -26,8 +26,6 @@ const castThemeToStyled = (theme: Theme): DefaultTheme => theme as DefaultTheme;
 const ThemeWrapper: React.FC<ThemeWrapperProps> = ({ children }) => {
   const themeObject = useSelector((state: RootState) => state.theme.themeObject);
 
-  // console.log("Theme object from Redux:", themeObject);
-
   const defaultTheme = createTheme({
     palette: {
       header:{

@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { _post } from "../configs/api-config";
-import { affilateRequest } from "./types";
+import { affilateRequest } from "../types";
 import { VIPER_CONST } from "../commonConstant";
-import AffiApi from "../configs/affiliateTheme-api";
-import SaveThemeApi from "../Api Work/saveThemeApi";
+import AffiApi from "../api/affiliate-theme-api";
 import { _getAffiliate } from "../commonFunction";
 
 const initialState: affilateRequest = {
@@ -12,7 +11,6 @@ const initialState: affilateRequest = {
   loading: false,
   error: null,
   status: null,
-  // live: null,
   preview: null,
 };
 
@@ -54,13 +52,9 @@ const affiliateSlice = createSlice({
       state.loading = false;
       state.status= action.payload.status?.toString() ?? null;
       const affiliates = action.payload.data?.affiliates?.[0];
-      // console.log(affiliates?.theme?.live)
       if (affiliates) {
-        // console.log(" live " ,affiliates?.theme?.live)
-        console.log(" preview " ,affiliates?.theme?.preview)
         state.affiliateid = affiliates.affiliateid ?? null;
         state.affiliatename = affiliates.affiliatename ?? "";
-        // state.live = affiliates.theme?.live || null;
         state.preview = affiliates.theme?.preview || null;
       }
     });

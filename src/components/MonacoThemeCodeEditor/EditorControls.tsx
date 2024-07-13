@@ -2,15 +2,15 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import Loader from "../PreviewWindow/Samples/Loader";
-import { defaultThemeOptions } from "../../siteTheme";
-import { editorThemeState, affiliateTheme, loadSavedTheme } from "../../slices/Common Slice/themeUpdate";
+import { defaultThemeOptions } from "../../defaultTheme";
+import { editorThemeState, affiliateTheme, loadSavedTheme } from "../../slices/commonSlice/themeSlice";
 import { myMessageFunction, showConfirm, showError, showSuccess } from "../Swal";
 import { HandleAPIError } from "../../commonFunction";
 import { useAppSelector } from "../../app/hooks";
 import { updateTheme } from "../../slices/updateThemeSlice";
-import { ThemeOptionsType, UpdateTheme, UpdateThemeResponse } from "../../slices/types";
+import { ThemeOptionsType, UpdateTheme, UpdateThemeResponse } from "../../types";
 import { AppDispatch, RootState } from "../../app/store";
-import { setPreview } from "../../slices/Common Slice/preview"
+import { setPreview } from "../../slices/commonSlice/preview"
 import { affiliate } from "../../slices/affiliateTheme";
 
 function EditorControls() {
@@ -21,7 +21,6 @@ function EditorControls() {
   const themeOptions = useAppSelector((state: RootState) => state.theme.themeOptions);
   const affiliateThemeString  = useAppSelector((state: RootState) => state.affiliateData?.preview);
   const loading = useAppSelector((state: RootState) => state.affiliateData.loading);
-  console.log("theme update string",typeof(affiliateThemeString))
   
   let affiliateThemeData: any;
   try {
@@ -36,14 +35,12 @@ function EditorControls() {
   const updateThemeApi = async (request: UpdateTheme) => {
     try {
       const response = await dispatch(updateTheme(request));
-      console.log(response);
   
       if (updateTheme.rejected.match(response)) {
         showError("Error", response.error.message ?? "An error occurred");
       } else {
         await dispatch(affiliate({affiliateid: id}))
         const payload = response.payload as UpdateThemeResponse;
-        console.log(payload);
         dispatch(editorThemeState(true));
         if (request.action === "PR") {
           showSuccess("Success", "Raise publish request successfully");
@@ -100,7 +97,6 @@ function EditorControls() {
       if (confirmed.isConfirmed) {
         await dispatch(editorThemeState(false));
         await dispatch((loadSavedTheme(JSON.stringify(affiliateThemeData))));
-        console.log(loadSavedTheme(JSON.stringify(affiliateThemeData)));
         showSuccess("Success", "Changes discarded successfully");
       }
     } catch (error) {

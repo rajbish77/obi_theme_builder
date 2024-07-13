@@ -1,5 +1,5 @@
 import { VIPER_CONST } from "../commonConstant";
-import { UpdateThemeData, UpdateThemeResponse } from "../slices/types";
+import { UpdateThemeData, UpdateThemeResponse } from "../types";
 import * as BaseApi from "../configs/api-config";
 
 class SaveThemeService {

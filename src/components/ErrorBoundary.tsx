@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { Button, Typography } from "@mui/material"
 // import { resetSiteData } from "../state/themeSlice"
-import { resetSiteData } from "../slices/Common Slice/themeUpdate"
+import { resetSiteData } from "../slices/commonSlice/themeSlice"
 
 interface ErrorBoundaryProps extends WithStyles<typeof styles> {
   children: React.ReactNode;

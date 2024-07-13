@@ -1,10 +1,10 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import ProtectedRoute from "../auth/protected-router";
+import ProtectedRoute from "../auth/protected-route";
 import LoginForm from "../components/PreviewWindow/Samples/Login";
 import { enableMapSet } from "immer";
-import MainWindowProps from "../components/MainWindowProps";
-import PublicerPropes from "../components/PublisherProps";
+import Publisher from "../page/publisher";
+import Editor from "../page/editor";
 
 enableMapSet();
 
@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
     path: '/publisher-dashboard',
     element: (
       <ProtectedRoute allowedRole="publisher">
-        <PublicerPropes />
+        <Publisher/>
       </ProtectedRoute>
     ),
   },
@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
     path: '/editor-dashboard',
     element: (
       <ProtectedRoute allowedRole="editor">
-        <MainWindowProps />
+        <Editor/>
       </ProtectedRoute>
     ),
   },

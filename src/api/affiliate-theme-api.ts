@@ -1,6 +1,6 @@
 import { VIPER_CONST } from "../commonConstant";
-import { affilateBody,  affilatiRequestId } from "../slices/types";
-import * as BaseApi from "./api-config";
+import { affilateBody,  affilatiRequestId } from "../types";
+import * as BaseApi from "../configs/api-config";
 
 class AffiliateApiService {
   private url = (action: string) => VIPER_CONST.base_url + action;

@@ -1,6 +1,6 @@
 import { VIPER_CONST } from "../commonConstant";
-import { Auth, body, IAuth } from "../slices/types";
-import * as BaseApi from "./api-config";
+import { Auth, body, IAuth } from "../types";
+import * as BaseApi from "../configs/api-config";
 
 class LoginApiService {
   private url = (action: string) => VIPER_CONST.base_url + action;

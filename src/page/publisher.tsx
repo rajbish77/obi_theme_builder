@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/system';
-import Header from './Header';
-import PublisherListing from './PreviewWindow/Publisher';
+import Header from '../components/Header';
+import PublisherListing from '../components/PreviewWindow/Publisher';
 
 
 const AppRoot = styled("div")({
@@ -30,7 +30,7 @@ const Main = styled("main")({
     flexDirection: "column",
 });
 
-export default function PublisherProps() {
+export default function Publisher() {
     return (
         <>
             <AppRoot>

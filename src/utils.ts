@@ -1,5 +1,5 @@
 import dotProp from "dot-prop-immutable";
-import { RootStateType } from "./slices/types";
+import { RootStateType } from "./types";
 import { createTheme, Theme, ThemeOptions } from "@mui/material/styles";
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 import deepmerge from "deepmerge";

@@ -4,9 +4,9 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { RootState } from "../app/store";
 import { _post } from "../configs/api-config";
-import { affilateData, Affiliate } from "./types";
+import { affilateData, Affiliate } from "../types";
 import { VIPER_CONST } from "../commonConstant";
-import AffData from "../configs/affiliateApi";
+import AffData from "../api/affiliate-api";
 import { _getAffiliate } from "../commonFunction";
 
 

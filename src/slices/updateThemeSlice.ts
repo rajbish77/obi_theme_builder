@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { UpdateTheme, UpdateThemeData, UpdateThemeResponse, UpdateThemeRequest, isValidResponse } from "./types";
+import { UpdateTheme, UpdateThemeData, UpdateThemeResponse, UpdateThemeRequest, isValidResponse } from "../types";
 import { VIPER_CONST } from "../commonConstant";
-import SaveThemeApi from "../Api Work/saveThemeApi";
+import SaveThemeApi from "../api/save-theme-api";
 
 const initialState: UpdateThemeRequest = {
   // live: null,

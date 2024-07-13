@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { PublishersResponse, Publish } from "./types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import PubApi from "../../Api Work/pub-api";
+import PubApi from "../../api/pub-api";
 import { VIPER_CONST } from "../../commonConstant";
 
 const publish = createAsyncThunk(

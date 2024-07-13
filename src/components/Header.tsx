@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Typography, styled } from "@mui/material";
 import { Button, Col, Row, Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Affiliate, AuthState } from "../slices/types";
-import { defaultThemeOptions } from "../siteTheme";
+import { Affiliate, AuthState } from "../types";
+import { defaultThemeOptions } from "../defaultTheme";
 import Loader from "../Loader";
 import { HandleAPIError, logout } from "../commonFunction";
 import { faUser, faRotate } from "@fortawesome/free-solid-svg-icons";
@@ -13,10 +13,8 @@ import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { affiliate } from "../slices/affiliateTheme";
 import { affiliateData } from "../slices/affiliateName";
-import { logOut } from "../slices/logIn-slice";
-import { setPreview } from "../slices/Common Slice/preview";
-import { setlive } from "../slices/Common Slice/live";
-import { affiliateTheme , loadSavedTheme } from "../slices/Common Slice/themeUpdate";
+import { setPreview } from "../slices/commonSlice/preview";
+import { affiliateTheme , loadSavedTheme } from "../slices/commonSlice/themeSlice";
 
 // Define styled components
 const Title = styled(Typography)(({ theme }) => ({
@@ -62,9 +60,7 @@ const Header = () => {
   const loading = useAppSelector((state) => state.affiliateData.loading);
   const affiliateThemeData = useAppSelector((state) => state.affiliateData);
   const getDataOn = useAppSelector((state) => state.theme.affiliateTheme);
-  // console.log("data affiliate header " , getDataOn)
   const dataTheme = useAppSelector( (state) => state.theme.themeOptions);
-  // console.log("Changes theme", dataTheme);
 
   const styleObj = {
     color: "black",
@@ -105,12 +101,9 @@ const Header = () => {
   useEffect(() => {
     if (affiliateThemeData.status === "0") {
       dispatch(setPreview(affiliateThemeData.preview));
-      dispatch(setlive(affiliateThemeData.preview));
       if (affiliateThemeData.preview === null) {
-        console.log("preview data is empty");
         dispatch(affiliateTheme(defaultThemeOptions));
       } else {
-        console.log("we have perview data");
         const themeObject: any = affiliateThemeData.preview;
         dispatch(loadSavedTheme(themeObject));
         dispatch(affiliateTheme(themeObject));

@@ -1,6 +1,6 @@
 import React from "react"
 import Modal from "react-bootstrap/Modal";
-import imageLoaderSrc from "./images/loadingImage.gif";
+import imageLoaderSrc from "./assets/images/loadingImage.gif";
 import { Typography, styled } from "@mui/material";
 
 interface TProps {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Auth } from "../slices/types";
+import { Auth } from "../types";
 import MySwal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
 import "bootstrap/dist/css/bootstrap.min.css";

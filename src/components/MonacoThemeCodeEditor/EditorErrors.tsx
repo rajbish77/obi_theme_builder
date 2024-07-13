@@ -71,7 +71,6 @@ const EditorErrors: React.FC<{ editorRef: React.RefObject<monaco.editor.IStandal
   const handleClose = () => setOpen(false);
   const handleExpand = () => setExpanded(!expanded);
   const model = editorRef?.current?.getModel();
-  // console.log(model)
 
   useEffect(() => {
     if (errors.length > 0) {

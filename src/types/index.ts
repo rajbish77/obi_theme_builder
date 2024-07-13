@@ -1,5 +1,5 @@
 import { Theme, ThemeOptions } from "@mui/material/styles";
-import { EditorState } from "./editor/types";
+import { EditorState } from "../slices/editor/types";
 import { StringHeaderIdentifier } from "@tanstack/react-table";
 
 export interface AffiliateDataResponse {

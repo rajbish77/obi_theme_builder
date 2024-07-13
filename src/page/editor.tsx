@@ -1,10 +1,10 @@
 import React from 'react';
-import MainWindow from './MainWindow';
-import ThemeConfigDrawer from './ThemeConfigDrawer';
-import ErrorBoundary from './ErrorBoundary';
+import MainWindow from '../components/MainWindow';
+import ThemeConfigDrawer from '../components/ThemeConfigDrawer';
+import ErrorBoundary from '../components/ErrorBoundary';
 import { Theme } from '@mui/material';
 import { styled } from '@mui/system';
-import Header from "./Header"
+import Header from "../components/Header"
 
 const AppRoot = styled("div")({
     display: "flex",
@@ -32,7 +32,7 @@ const Main = styled("main")({
     flexDirection: "column",
 });
 
-export default function MainWindowProps() {
+export default function Editor() {
     // const classes = useStyles;
 
     return (

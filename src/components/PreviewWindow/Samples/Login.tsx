@@ -9,7 +9,7 @@ import { showError } from '../../Swal';
 import Select from 'react-select';
 import Loader from '../../../Loader';
 import { HandleAPIError } from '../../../commonFunction';
-import { login } from '../../../slices/logIn-slice';
+import { login } from '../../../slices/auth-slice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 
@@ -45,15 +45,12 @@ const LoginForm = () => {
       };
 
       const response = await dispatch(login(request)).unwrap();
-      // console.log('Response from login:', response);
     } catch (error) {
       HandleAPIError(error);
     }
   };
 
   useEffect(() => {
-    console.log('userData:', userData);
-      
     if (userData.publisher === 'Y') {
       navigate('/publisher-dashboard', { replace: true });
     } else if (userData.editor === 'Y') {

@@ -1,6 +1,6 @@
 import { VIPER_CONST } from "../commonConstant";
-import { buttonBody, IAuth, Requestpublish } from "../slices/types";
-import * as BaseApi from "./api-config";
+import { buttonBody, IAuth, Requestpublish } from "../types";
+import * as BaseApi from "../configs/api-config";
 
 class Publish {
   private url = (action: string) => VIPER_CONST.base_url + action;

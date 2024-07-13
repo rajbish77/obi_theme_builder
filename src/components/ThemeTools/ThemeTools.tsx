@@ -50,19 +50,19 @@ const toolPanels: Array<{
   tools: any;
   id: string;
 }> = [
-  {
-    label: "Palette",
-    icon: <PaletteIcon />,
-    tools: PaletteTools,
-    id: paletteToolsId,
-  },
-  // {
-  //   label: "Typography",
-  //   icon: <TypographyIcon />,
-  //   tools: TypographyTools,
-  //   id: typographyToolsId,
-  // }
-];
+    {
+      label: "Palette",
+      icon: <PaletteIcon />,
+      tools: PaletteTools,
+      id: paletteToolsId,
+    },
+    // {
+    //   label: "Typography",
+    //   icon: <TypographyIcon />,
+    //   tools: TypographyTools,
+    //   id: typographyToolsId,
+    // }
+  ];
 
 const ThemeTools = () => {
   const [bottomNavIndex, setBottomNavIndex] = useState(0);

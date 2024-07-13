@@ -32,9 +32,9 @@ export const componentsTabId = 'components-tab';
 export const savedThemesTabId = 'saved-themes-tab';
 
 const MainWindow = () => {
-  const dispatch = useDispatch();
-  const activeTab = useSelector((state: RootState) => state.editorWindow.activeTab);
-  const setTab = React.useCallback((value: string) => dispatch(setActiveTab(value)), [dispatch]);
+  // const dispatch = useDispatch();
+  // const activeTab = useSelector((state: RootState) => state.editorWindow.activeTab);
+  // const setTab = React.useCallback((value: string) => dispatch(setActiveTab(value)), [dispatch]);
 
   return (
     <MainWindowContainer>

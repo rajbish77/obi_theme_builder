@@ -3,10 +3,10 @@ import styled from "styled-components";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import GoogleQR from "../../../images/GoogleQR.jpg";
-import gplay from "../../../images/gplay.png";
-import itunes from "../../../images/itunes.png";
-import AppleQR from "../../../images/AppleQR.jpg";
+import GoogleQR from "../../../assets/images/GoogleQR.jpg";
+import gplay from "../../../assets/images/gplay.png";
+import itunes from "../../../assets/images/itunes.png";
+import AppleQR from "../../../assets/images/AppleQR.jpg";
 import {
   faFacebookSquare,
   faPinterestSquare,

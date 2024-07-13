@@ -1,7 +1,7 @@
 import { VIPER_CONST } from "../commonConstant";
 import { Publish, PublishersResponse } from "../slices/publisher/types";
 import * as BaseApi from "../configs/api-config";
-import { body } from "../slices/types";
+import { body } from "../types";
 
 class PubApiService {
   private url = (action: string) => VIPER_CONST.base_url + action;

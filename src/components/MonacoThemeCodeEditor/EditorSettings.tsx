@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Popover from "@mui/material/Popover";
 import { useSelector } from "react-redux";
-import { RootStateType } from "../../slices/types";
+import { RootStateType } from "../../types";
 import { useUpdateEditorState } from "../../slices/editor/editorSlice";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";

@@ -1,6 +1,6 @@
 import { createSelector } from "reselect"
 import { getByPath } from "../utils"
-import { RootStateType } from "../slices/types"
+import { RootStateType } from "../types"
 import { useMemo } from "react"
 import { useSelector } from "react-redux"
 import { ThemeOptions, Theme } from "@mui/material"

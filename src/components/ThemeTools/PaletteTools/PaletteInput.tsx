@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import ColorInput from "../../../components/ColorInput";
 import { Grid } from "@mui/material";
-import { useThemeValueInfo } from "../../../state/selectors";
+import { useThemeValueInfo } from "../../../api/selectors";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { setThemeOption } from "../../../slices/Common Slice/themeUpdate";
+import { setThemeOption } from "../../../slices/commonSlice/themeSlice";
 
 export default function PaletteInput({ label, path }: { label: string; path: string }) {
   const themeValueInfo = useThemeValueInfo(path);

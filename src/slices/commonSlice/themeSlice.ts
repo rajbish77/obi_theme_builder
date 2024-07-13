@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PreviewSize, Auth, ThemeChanges } from "../../slices/types";
+import { PreviewSize, Auth, ThemeChanges } from "../../types";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { generateThemeId } from "../../utils";
-import { defaultThemeOptions } from "../../siteTheme";
+import { defaultThemeOptions } from "../../defaultTheme";
 import { THEMEEDITOR, THEMEPUBLISHER } from "../../commonConstant";
 import deepmerge from "deepmerge";
-import { initialState as editorInitialState } from "../../slices/editor/editorSlice";
+import { initialState as editorInitialState } from "../editor/editorSlice";
 import { createBreakpoints } from "@mui/system";
-import AffiApi from "../../configs/affiliateTheme-api";
+import AffiApi from "../../api/affiliate-theme-api";
 import { setByPath } from "../../commonFunction";
 import JSON5 from "json5";
 
@@ -94,7 +94,6 @@ const themeSlice = createSlice({
     },
     affiliateTheme: (state: any, action: PayloadAction<ThemeOptions>) => {
       state.affiliateTheme = action.payload;
-      console.log(action.payload)
     },
     editorThemeState: (state, action: PayloadAction<boolean>) => {
       state.editorThemeState = action.payload;

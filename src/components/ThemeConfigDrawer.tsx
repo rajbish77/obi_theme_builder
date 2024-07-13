@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MonacoThemeCodeEditor from './MonacoThemeCodeEditor';
 import ThemeTools from './ThemeTools/ThemeTools';
 // import { toggleThemeConfig } from '../state/themeSlice';
-import { toggleThemeConfig } from '../slices/Common Slice/themeUpdate';
+import { toggleThemeConfig } from '../slices/commonSlice/themeSlice';
 import { RootState } from '../app/store';
 
 const drawerWidth = 300;

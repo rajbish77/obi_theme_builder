@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles'
-import theme from "../siteTheme"
+import theme from "../defaultTheme"
 import "./layout.css"
 
 const Layout = ({ children }: { children: ReactNode }) => {

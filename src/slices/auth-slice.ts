@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import AuthApi from "../configs/auth-api";
-import { Auth } from "./types";
+import AuthApi from "../api/auth-api";
+import { Auth } from "../types";
 import { VIPER_CONST } from "../commonConstant";
 
 const initialState: Auth = {

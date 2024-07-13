@@ -1,21 +1,19 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { createTransform, persistReducer, persistStore } from "redux-persist";
-import loginSlice from "../slices/logIn-slice";
+import loginSlice from "../slices/auth-slice";
 import editorSlice from "../slices/editor/editorSlice";
 // import themeSlice from "../state/themeSlice";
 import editorWindowSlice, { EditorWindowState } from "../slices/editor/editorWindowSlice";
 import publisherSlice from "../slices/publisher/publisherSlice";
-import buttonSlice from "../slices/publisher/buttonFunctionSlice";
-import rejButtonSlice from "../slices/publisher/buttonFunctionRej";
+import buttonSlice from "../slices/publisher/publishTheme";
+import rejButtonSlice from "../slices/publisher/rejectTheme";
 import affiliateSlice from "../slices/affiliateTheme";
 import affiliateName from "../slices/affiliateName";
-import fetchAffiliate from "../slices/Common Slice/fetchAffiliate";
-import preview from "../slices/Common Slice/preview";
+import fetchAffiliate from "../slices/commonSlice/fetchAffiliate";
+import preview from "../slices/commonSlice/preview";
 import updateThemeSlice from "../slices/updateThemeSlice";
-import live from "../slices/Common Slice/live";
-import defaultThemeSlice from "../slices/Common Slice/defaultThemeSlice";
-import themeSlice from "../slices/Common Slice/themeUpdate";
+import themeSlice from "../slices/commonSlice/themeSlice";
 
 
 const rootReducter = combineReducers({
@@ -30,9 +28,7 @@ const rootReducter = combineReducers({
   affiliateName: affiliateName, // affiliate name and id
   fetchAffiliate: fetchAffiliate, // this is fetch Affiliate 
   preview: preview, // this is preview them work
-  // live: live, // this is live them work
   updateTheme: updateThemeSlice, // this is update api work
-  defaultThemeOptions: defaultThemeSlice, // ???
   theme : themeSlice // update the Theme
 });
 

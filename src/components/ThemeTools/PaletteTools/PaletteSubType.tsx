@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PaletteInput from "./PaletteInput";
-import { useThemeValue } from "../../../state/selectors";
+import { useThemeValue } from "../../../api/selectors";
 import { styled } from "@mui/material/styles";
 
 interface PaletteSubTypeProps {

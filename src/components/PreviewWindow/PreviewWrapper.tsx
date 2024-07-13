@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { RootStateType } from "../../slices/types";
+import { RootStateType } from "../../types";
 import ThemeWrapper from "./ThemeWrapper";
 import { Paper } from "@mui/material";
 

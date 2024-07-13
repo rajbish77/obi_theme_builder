@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import ArrivalProductImg from "../../../images/pic2_resized.jpg";
-import DepartureProductImg from "../../../images/pic3_resized.jpg";
-import BundleProductImg from "../../../images/pic1_resized.jpg";
-import giftCard1 from "../../../images/gift-card-1.png";
-import giftCard2 from "../../../images/gift-card-2.png";
-import visamaster from "../../../images/visa-master-card.png";
+import ArrivalProductImg from "../../../assets/images/pic2_resized.jpg";
+import DepartureProductImg from "../../../assets/images/pic3_resized.jpg";
+import BundleProductImg from "../../../assets/images/pic1_resized.jpg";
+import giftCard1 from "../../../assets/images/gift-card-1.png";
+import giftCard2 from "../../../assets/images/gift-card-2.png";
+import visamaster from "../../../assets/images/visa-master-card.png";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
