@@ -1,6 +1,6 @@
 import React, { useState, useEffect, MouseEvent, ClipboardEvent } from "react";
 import { TextField, InputAdornment, Popover, styled, Theme } from "@mui/material";
-import { ChromePicker } from "react-color";
+import { HexColorPicker } from "react-colorful";
 import { colorFromString } from "./utils";
 import { ThemeValueChangeEvent } from "../../components/ThemeTools/events";
 
@@ -87,10 +87,12 @@ const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) 
         disableEnforceFocus
       >
         <PopoverPaper>
-          <ChromePicker color={internalColor} onChangeComplete={(color) => {
-            setInternalColor(color.hex);
-            onColorChange(color.hex);
-          }} />
+          <div className="bg-white p-1">
+            <HexColorPicker color={internalColor} onChange={(color) => {
+              setInternalColor(color);
+              onColorChange(color);
+            }} />
+          </div>
         </PopoverPaper>
       </Popover>
     </div>
