@@ -19,21 +19,19 @@ function EditorControls() {
   const id = useAppSelector((state: RootState) => state.affiliateName.affiliates[0]?.affiliateid || null);
   const editorState = useAppSelector((state: RootState) => state.theme.editorThemeState);
   const themeOptions = useAppSelector((state: RootState) => state.theme.themeOptions);
-  console.log("themeOpting", themeOptions);
-  const affiliateThemeString  = useAppSelector((state) => state.affiliateData?.preview);
+  const affiliateThemeString  = useAppSelector((state: RootState) => state.affiliateData?.preview);
   const loading = useAppSelector((state: RootState) => state.affiliateData.loading);
   console.log("theme update string",typeof(affiliateThemeString))
   
   let affiliateThemeData: any;
   try {
-    if (affiliateThemeString) {
+    if (typeof affiliateThemeString === "string") {
       affiliateThemeData = JSON.parse(affiliateThemeString);
     }
   } catch (error) {
     console.error("Error parsing affiliateThemeData:", error);
     affiliateThemeData = null;
   }
-  console.log("update", affiliateThemeData);
 
   const updateThemeApi = async (request: UpdateTheme) => {
     try {
