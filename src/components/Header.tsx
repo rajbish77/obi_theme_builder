@@ -154,6 +154,7 @@ const Header = () => {
           showIcon={false}
           placeholder="Search Affiliate"
           className="rounded-input"
+          styling={{ borderRadius: '4px' }}
         />
       </div>
       <Button className="btn-primary btn-sm py-1 mx-2 ms-3 shadow-lg" onClick={fetchAffiliateApi}>

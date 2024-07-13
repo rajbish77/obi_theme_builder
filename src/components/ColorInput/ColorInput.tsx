@@ -9,6 +9,8 @@ const PopoverPaper = styled('div')(({ theme }: { theme: Theme }) => ({
   flexDirection: "column",
   borderRadius: 0,
   alignItems: "center",
+  background: "white",
+  padding: "4px",
 }));
 
 const ColorSampleAdornment = styled('div')(({ theme }: { theme: Theme }) => ({
@@ -87,12 +89,10 @@ const ColorInput: React.FC<ColorInputProps> = ({ label, color, onColorChange }) 
         disableEnforceFocus
       >
         <PopoverPaper>
-          <div className="bg-white p-1">
             <HexColorPicker color={internalColor} onChange={(color) => {
               setInternalColor(color);
               onColorChange(color);
             }} />
-          </div>
         </PopoverPaper>
       </Popover>
     </div>

@@ -88,11 +88,12 @@ function PublisherListing(): JSX.Element {
           affiliateid: row?.affiliateid,
           action: "P"
         }
-
+        setLoading(true);
         const response = await dispatch(publishButton(request)).unwrap();
 
         if (response?.status === 0) {
           showSuccess("Success", "Theme published successfully");
+          setLoading(false);
           dispatch(publish());
         } else {
           showError("Error", useDataRej?.statusMessage);
@@ -113,11 +114,12 @@ function PublisherListing(): JSX.Element {
           action: "R",
           message: confirmed?.value
         }
-
+        setLoading(true);
         const response = await dispatch(rejectButton(requestReject)).unwrap();
 
         if (response?.status === 0) {
           showSuccess("Success", "Publish request rejected!");
+          setLoading(false);
           dispatch(publish());
         } else {
           showError("Error", useDataRej?.statusMessage);
