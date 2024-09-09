@@ -29,13 +29,13 @@ const rootReducter = combineReducers({
   fetchAffiliate: fetchAffiliate, // this is fetch Affiliate 
   preview: preview, // this is preview them work
   updateTheme: updateThemeSlice, // this is update api work
-  theme : themeSlice // update the Theme
+  theme: themeSlice // update the Theme
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["logIn", "affiliateData", "fetchAffiliate", "preview" , "live", "defaultThemeOptions"],
+  whitelist: ["logIn", "affiliateData", "fetchAffiliate", "preview", "live",  "defaultThemeOptions"],
   // transforms:[selectDataTransform]
 };
 

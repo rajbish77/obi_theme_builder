@@ -25,7 +25,7 @@ interface Country {
   label: JSX.Element | string
 }
 
-const FLAG_URL = "https://nigeria.reliablesoftjm.com/images/flags/"
+const FLAG_URL = "https://nigeriadev.reliablesoftjm.com/images/flags/"
 
 const StyledNavbar = styled(Navbar)(({ theme }) => ({
   backgroundColor: theme.palette.header.backgroundcolor,

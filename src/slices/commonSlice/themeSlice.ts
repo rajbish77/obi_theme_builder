@@ -80,12 +80,26 @@ const themeSlice = createSlice({
     setAffiliateId: (state: any, action: PayloadAction<string>) => {
       state.id = action.payload;
     },
-    loadSavedTheme: (state: any, action: PayloadAction<string>) => {
-      state.themeOptions = JSON.parse(action.payload?? "");
+    loadSavedTheme: (state: any, action: PayloadAction<string | object>) => {
+      let themeOptions;
+      try {
+        if (typeof action.payload === "string") {
+          themeOptions = JSON.parse(action.payload);
+        } else if (typeof action.payload === "object") {
+          themeOptions = action.payload; // Already a parsed object, assign directly
+        } else {
+          themeOptions = defaultThemeOptions; // Fallback in case of incorrect data
+        }
+      } catch (error) {
+        console.error("Invalid theme data provided to loadSavedTheme:", error);
+        themeOptions = defaultThemeOptions; // Fallback in case of incorrect data
+      }
+    
+      state.themeOptions = themeOptions;
       state.themeObject = createMuiTheme(state.themeOptions, state.previewSize);
       state.editorThemeState = false;
       state.themeInput = stringify(state.themeOptions);
-    },
+    },    
     resetSiteData: (state) => {
       localStorage.clear();
     },

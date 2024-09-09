@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { _post } from "../configs/api-config";
-import { affilateRequest } from "../types";
+import { affilateRequest, ThemeOptionsType } from "../types";
 import { VIPER_CONST } from "../commonConstant";
 import AffiApi from "../api/affiliate-theme-api";
 import { _getAffiliate } from "../commonFunction";
+import { defaultThemeOptions } from "../defaultTheme";
 
 const initialState: affilateRequest = {
   affiliateid: null,
@@ -41,7 +42,11 @@ const affiliateSlice = createSlice({
   name: "affiliate",
   initialState,
   reducers: {
-    clearAffiliate: (state) => initialState,
+    clearAffiliate: (state) => {
+      state.affiliateid = null;
+      state.affiliatename = "";
+      state.preview = defaultThemeOptions as ThemeOptionsType;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(affiliate.pending, (state) => {
@@ -50,7 +55,7 @@ const affiliateSlice = createSlice({
     });
     builder.addCase(affiliate.fulfilled, (state, action) => {
       state.loading = false;
-      state.status= action.payload.status?.toString() ?? null;
+      state.status = action.payload.status?.toString() ?? null;
       const affiliates = action.payload.data?.affiliates?.[0];
       if (affiliates) {
         state.affiliateid = affiliates.affiliateid ?? null;

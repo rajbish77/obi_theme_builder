@@ -18,7 +18,7 @@ interface SubmenuItem {
   target?: string;
 }
 
-const LOGOS_URL = "https://nigeria.reliablesoftjm.com/images/logos/JAM.png";
+const LOGOS_URL = "https://nigeriadev.reliablesoftjm.com/images/logos/JAM.png";
 
 const StyledNavbar = styled(Navbar)(({ theme }) => ({
   backgroundColor: theme.palette.navbar.backgroundcolor,

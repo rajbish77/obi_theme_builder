@@ -294,7 +294,7 @@ const Home = () => {
         </Container>
       </section>
 
-      <SubfooterContainer fluid="xxl">
+      <SubfooterContainer style={{ maxWidth: "100%" }}>
         <Row>
           <Col md="12" className=" p-2">
             <p>

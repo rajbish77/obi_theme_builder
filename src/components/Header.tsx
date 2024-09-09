@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { affiliate } from "../slices/affiliateTheme";
 import { affiliateData } from "../slices/affiliateName";
 import { setPreview } from "../slices/commonSlice/preview";
-import { affiliateTheme , loadSavedTheme } from "../slices/commonSlice/themeSlice";
+import { affiliateTheme , loadSavedTheme, setAffiliateId } from "../slices/commonSlice/themeSlice";
 
 // Define styled components
 const Title = styled(Typography)(({ theme }) => ({
@@ -61,6 +61,8 @@ const Header = () => {
   const affiliateThemeData = useAppSelector((state) => state.affiliateData);
   const getDataOn = useAppSelector((state) => state.theme.affiliateTheme);
   const dataTheme = useAppSelector( (state) => state.theme.themeOptions);
+  
+  console.log(affiliateThemeData.affiliateid)
 
   const styleObj = {
     color: "black",
@@ -80,8 +82,8 @@ const Header = () => {
   }, [dispatch]);
 
   const getAffililateTheme = useCallback(async (id?: number) => {
-    let affiliateId = id ? id : 1;
-    // dispatch(setAffiliateId(`${affiliateId}`));
+    let affiliateId = id ? id : 0;
+    dispatch(setAffiliateId(`${affiliateId}`));
 
     const request = {
       affiliateid: affiliateId
@@ -97,14 +99,16 @@ const Header = () => {
       dispatch(affiliateTheme((defaultThemeOptions)));
     };
   }, [dispatch]);
+  
+  const themeObject: any = affiliateThemeData.preview;
 
   useEffect(() => {
     if (affiliateThemeData.status === "0") {
       dispatch(setPreview(affiliateThemeData.preview));
       if (affiliateThemeData.preview === null) {
         dispatch(affiliateTheme(defaultThemeOptions));
+        // dispatch(loadSavedTheme(themeObject));
       } else {
-        const themeObject: any = affiliateThemeData.preview;
         dispatch(loadSavedTheme(themeObject));
         dispatch(affiliateTheme(themeObject));
       }

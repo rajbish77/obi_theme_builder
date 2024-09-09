@@ -5,6 +5,9 @@ import { store } from "./app/store";
 import { logOut } from "./slices/auth-slice";
 import { useAppDispatch } from "./app/hooks";
 import { fetchAffiliate } from "./slices/commonSlice/fetchAffiliate";
+import { clearAffiliate } from "./slices/affiliateTheme";
+import { setPreview } from "./slices/commonSlice/preview";
+import { defaultThemeOptions } from "./defaultTheme";
 
 export function HandleAPIError(error: any) {
   if (error?.code === "ERR_NETWORK") {
@@ -21,6 +24,8 @@ export async function logout(data: any) {
   );
   if (confirmed?.isConfirmed) {
     store.dispatch(logOut(data));
+    store.dispatch(clearAffiliate())
+    // store.dispatch(setPreview(""))
   }
 }
 

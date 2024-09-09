@@ -6,8 +6,9 @@ import { EditorRefType, MutableEditorRefType } from '../types';
 import monokai from '../monaco-themes/monokai';
 import { Plugin } from 'prettier';
 import { RootState } from '../../../app/store';
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { setPreview } from '../../../slices/commonSlice/preview';
+import { defaultThemeOptions } from '../../../defaultTheme';
 
 window.MonacoEnvironment = {
   getWorkerUrl: function (moduleId, label) {
@@ -36,6 +37,7 @@ const editorOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
   matchBrackets: 'never',
   lineNumbersMinChars: 3,
   fontSize: 12,
+  readOnly: true,
 };
 
 const languageDiagnosticsOptions: monaco.languages.typescript.DiagnosticsOptions = {
@@ -50,13 +52,18 @@ const languageCompilerOptions: monaco.languages.typescript.CompilerOptions = {
 };
 
 export default function useEditor(editorRef: MutableEditorRefType) {
+  const affiliateThemeData = useAppSelector((state) => state.affiliateData);
   const dispatch = useAppDispatch();
-  const themeInput = useSelector((state:RootState)=> state.theme.themeInput);
+  const themeInput = useSelector((state: RootState) => state.theme.themeInput);
 
   useEffect(() => {
 
     monaco.editor.defineTheme('monokai', monokai as monaco.editor.IStandaloneThemeData);
-    dispatch(setPreview(themeInput))
+    if (affiliateThemeData.affiliateid === null) {
+      dispatch(setPreview(defaultThemeOptions))
+    } else {
+      dispatch(setPreview(themeInput))
+    }
     setLanguageDiagnosticOptions();
     setLanguageCompilerOptions();
     setPrettierFormatting();
